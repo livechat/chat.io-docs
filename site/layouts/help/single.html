@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+  <main>
+
+    <article class="guide">
+      <header class="page-header page-header--clean">
+        <div class="wrapper">
+          <p class="guide__back"><a href="{{ with .Site.GetPage "section" .Section }} {{ .Permalink }} {{ end }}" class="link link--back">back</a></p>
+          <h1>{{ .Title }}</h1>
+          <hr>
+        </div>
+      </header>
+
+      <div class="wrapper">
+        <div class="guide__content">
+          {{ .Content }}
+        </div>
+        <p class="guide__back"><a href="{{ with .Site.GetPage "section" .Section }} {{ .Permalink }} {{ end }}" class="link link--back">back</a></p>
+      </div>
+
+    </article>
+
+  </main>
+
+
+{{ end }}

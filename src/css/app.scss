@@ -1,0 +1,526 @@
+@import "common/variables";
+@import "common/bootstrap";
+@import "layouts/mixins";
+@import "common/global";
+@import "common/typography";
+
+// Old:
+
+$phone: "(min-width: 576px)";
+$tablet: "(min-width: 768px)";
+$desktop: "(min-width: 992px)";
+$large-desktop: "(min-width: 1200px)";
+
+$container: 1200px;
+$spacing: 25px;
+
+
+
+@import "components/nav";
+@import "components/headers";
+@import "components/footer";
+@import "components/hero";
+@import "components/chat";
+
+
+@import "layouts/guides";
+@import "layouts/features";
+@import "layouts/docs";
+
+.table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  border-spacing: 0;
+  border-collapse: collapse;
+    tr {
+      background-color: #fff;
+      border-top: 1px solid #c6cbd1;
+    }
+    tr:nth-child(2n) {
+      background-color: #f6f8fa;
+    }
+    td, th {
+      padding: 6px 13px;
+      border: 1px solid #dfe2e5;
+    }
+}
+
+.highlight {
+  margin-bottom: 16px;
+    pre {
+        padding: 16px;
+        overflow: auto;
+        line-height: 1.45;
+        background-color: #f6f8fa;
+        border-radius: 3px;
+    }
+}
+
+code {
+  padding: 3px;
+  background-color: rgba(27,31,35,0.05);
+  border-radius: 3px;
+}
+
+.col {
+  float: left;
+    &--half {
+      width: 50%;
+    }
+}
+
+form {
+  text-align: center;
+
+  @media #{$tablet} {
+    text-align: left;
+  }
+
+  input {
+    border: none;
+    border-radius: 0;
+    background: none;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 10px;
+    display: inline-block;
+    color: #31374F;
+    -webkit-appearance: none;
+
+    border-radius: 23px;
+    height: 44px;
+    border: 1px solid #31374F;
+    padding: 0 18px;
+
+    @media #{$tablet} {
+      height: 37px;
+      max-width: 250px;
+      margin-right: 10px;
+      margin-bottom: 0;
+      font-size: 14px;
+      padding: 0px 8px;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid #31374F;
+    }
+
+    &::-webkit-input-placeholder {
+      color: #31374F;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  button {
+    margin: 0 auto;
+
+
+    @media #{$tablet} {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+}
+
+form button, .Button {
+  height: 46px;
+  border: none;
+  border-radius: 23px;
+  color: #ffffff;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 46px;
+  display: inline-block;
+  background: #31374F url('/assets/images/icon-arrow.svg') no-repeat right 14px center;
+  background-size: auto 23px;
+  padding: 0;
+  text-align: left;
+  transition: all .5s;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+
+  @media #{$tablet} {
+    display: inline-block;
+    width: 46px;
+    min-width: auto;
+    text-indent: -150px;
+    text-align: left;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+form input:focus ~ button,
+form input:focus ~ .Button,
+form button:hover,
+.Button:hover {
+  @media #{$tablet} {
+    width: 160px;
+    text-indent: 26px;
+  }
+}
+
+.article {
+  width: 80%;
+  max-width: 550px;
+  margin: 100px auto 150px;
+
+  h1 {
+    margin-bottom: 3em;
+  }
+
+  h2 {
+    margin-top: 2.5em;
+  }
+
+  li {
+    margin-bottom: 15px;
+  }
+
+  ol {
+    padding: 0;
+  }
+
+  section {
+    margin-bottom: 50px;
+  }
+}
+
+$sectionWidth: 1120px;
+
+.Section {
+  position: relative;
+
+  > div {
+    max-width: $sectionWidth;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+
+    @media #{$tablet} {
+      padding: 0 0 0 85px;
+    }
+  }
+
+  &--blue, &--lblue {
+    background: #5ca8f5;
+
+    > div > div:last-child {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+
+    img {
+      vertical-align: bottom;
+    }
+  }
+
+  &--lblue {
+    background: #F6F9FE;
+    padding-top: 80px;
+    padding-bottom: 150px;
+
+    @media #{$tablet} {
+      padding-bottom: 80px;
+    }
+  }
+
+  &__Flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column-reverse;
+
+    @media #{$tablet} {
+      flex-direction: row;
+    }
+
+    &--reverse {
+      @media #{$tablet} {
+        flex-direction: row-reverse;
+      }
+    }
+
+    &--top {
+      align-items: flex-start;
+    }
+
+    > div {
+      &:first-child {
+        text-align: center;
+      }
+
+      @media #{$tablet} {
+        width: 45%;
+      }
+    }
+  }
+}
+
+.Feature {
+  width: 100%;
+  padding-left: 17px;
+  border-left: 1px solid #3E7CE4;
+
+  @media #{$tablet} {
+    width: 50%;
+    max-width: 235px;
+  }
+
+  &__Product {
+    @media #{$tablet} {
+      align-self: flex-end;
+      padding-top: 280px;
+      margin-bottom: -30px;
+    }
+  }
+
+  &__Platform {
+    @media #{$tablet} {
+      padding-bottom: 215px;
+      align-self: flex-start;
+      margin-top: -40px;
+      z-index: 15;
+    }
+  }
+}
+
+.Pricing {
+  padding: 30px 0;
+
+  @media #{$tablet} {
+    padding: 90px 0 70px 0;
+  }
+
+  > div {
+    background: url('/assets/images/pricing-bg.svg') no-repeat;
+    display: flex;
+    align-items: center;
+    background-size: 87% auto;
+    padding: 0 20px 62vw 20px;
+    background-position: center bottom;
+    height: auto;
+
+    @media #{$tablet} {
+      height: 510px;
+      background-position: right center;
+      padding: 0 0 0 85px;
+      background-size: auto 100%;
+    }
+  }
+
+  &__Text {
+    margin-top: 20px;
+    max-width: 300px;
+
+    @media #{$tablet} {
+      margin-top: 140px;
+    }
+  }
+}
+
+.Intro {
+  @include fluid-container();
+
+  > div {
+    height: auto;
+
+    @media #{$tablet} {
+      height: auto;
+      padding: 80px 0 130px 0;
+    }
+  }
+
+  h1 {
+    max-width: 540px;
+  }
+
+  p {
+    @extend .lead;
+
+    max-width: 380px;
+  }
+
+  &--platform {
+    h1 {
+      max-width: 600px;
+    }
+
+    p {
+      max-width: 450px;
+    }
+  }
+}
+
+.Features {
+  background: #f6fbfe;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  overflow: hidden;
+
+  @media #{$tablet} {
+    padding-top: 200px;
+  }
+
+  > div {
+    display: block;
+    position: relative;
+    background: url('/assets/images/features-bg.png') no-repeat;
+    background-position: right center;
+    background-size: 94% auto;
+    background-position: center bottom;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0 20px 43vw 20px;
+
+    @media #{$tablet} {
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0 150px 0 155px;
+      height: 700px;
+      background-size: auto 65%;
+      background-position: center center;
+    }
+  }
+
+  &__Overlay {
+    height: auto;
+    max-width: 550px;
+
+    @media #{$tablet} {
+      position: absolute;
+      top: 12%;
+      left: 20%;
+      width: 73%;
+      z-index: 10;
+    }
+
+    img {
+      width: 100%;
+      backface-visibility: hidden;
+      box-shadow: -20px 20px 45px 0px rgba(0, 0, 0, 0.2);
+      transform: rotateX(55deg) rotateZ(-45deg);
+      transform-origin: 50% 50%;
+      transform-style: preserve-3d;
+
+      @media #{$tablet} {
+        transform-origin: 85% 35%;
+      }
+    }
+  }
+}
+
+hr {
+  width: 50px;
+  display: block;
+  height: 1px;
+  background: #31374F;
+  text-align: left;
+  margin: 30px 0 30px;
+  border: 0;
+}
+
+.Split {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  @media #{$tablet} {
+    flex-direction: row;
+  }
+
+  &__Part {
+    padding: 80px 0 200px;
+
+    @media #{$tablet} {
+      width: 50%;
+    }
+
+    > div {
+      display: inline-block;
+      width: 100%;
+      text-align: left;
+      padding: 0 10px;
+
+      @media #{$tablet} {
+        padding: 0 0 0 10%;
+        max-width: $sectionWidth/2;
+      }
+    }
+
+    &--left {
+      text-align: right;
+
+      > div {
+        padding: 0 10px;
+
+        @media #{$tablet} {
+          padding: 0 10% 0 0;
+        }
+      }
+    }
+  }
+}
+
+.PlatformImage {
+  &--docs {
+    position: absolute;
+    bottom: -52px;
+    left: 0;
+  }
+
+  &--marketplace {
+    position: absolute;
+    bottom: -48px;
+    right: 0;
+  }
+
+  &--own {
+    vertical-align: bottom;
+    margin-bottom: -1px;
+    margin-top: 60px;
+  }
+}
+
+.coming-soon {
+  color: #4484e7;
+}
+
+.Platform {
+  &__Exp {
+    img {
+      vertical-align: bottom;
+    }
+  }
+
+  &__APIs {
+    margin-top: 120px;
+  }
+
+  .Section__Flex > div {
+    @media #{$tablet} {
+      padding-right: 50px;
+    }
+  }
+
+  .ProductFeatures > div {
+    margin-bottom: 120px;
+  }
+
+  .ProductFeatures {
+    padding-top: 140px;
+  }
+}
+
+@import '_pricing.scss';
+@import '_product.scss';
+@import '_features.scss';

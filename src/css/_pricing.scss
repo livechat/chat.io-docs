@@ -1,0 +1,134 @@
+.PricingFeatures {
+  padding: 20px 20px;
+
+  @media #{$tablet} {
+    padding: 100px 0 0 0;
+  }
+
+  > div {
+    > div {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+
+      @media #{$tablet} {
+        flex-direction: row;
+      }
+    }
+  }
+
+  &__Feature {
+    width: 100%;
+    padding-bottom: 20px;
+
+    @media #{$tablet} {
+      width: 50%;
+      max-width: 455px;
+      padding-bottom: 100px;
+    }
+  }
+
+}
+
+.PricingText {
+  width: 50%;
+}
+
+.PricingPage {
+  > div {
+    height: auto;
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    @media #{$tablet} {
+      padding: 0 0 0 85px;
+      height: 415px;
+      flex-direction: row;
+    }
+  }
+
+  form {
+    width: 150%;
+    margin-top: 40px;
+  }
+
+  &__Text {
+    @extend .lead;
+
+    width: 100%;
+    padding-top: 60px;
+
+    @media #{$tablet} {
+      width: 50%;
+      max-width: 415px;
+    }
+  }
+
+  &__Price {
+    background: url('/assets/images/pricing-price.png') no-repeat center center;
+    background-size: 100% auto;
+    width: 100%;
+    margin: 0;
+    height: 80vw;
+    position: relative;
+
+    @media #{$tablet} {
+      width: 50%;
+      margin: 50px 100px 0;
+      height: auto;
+      max-width: 400px;
+    }
+
+    p {
+      font-weight: 300;
+      position: absolute;
+      left: 36%;
+      margin: 0;
+      color: #31374F;
+      font-size: 17px;
+      top: 74%;
+
+      @media #{$tablet} {
+        top: 72%;
+        font-size: 21px;
+      }
+    }
+  }
+}
+
+.PricingFAQ {
+  padding: 20px 0;
+  background: #f7fbfe;
+
+  @media #{$tablet} {
+    padding: 100px 0;
+  }
+
+  > div {
+    padding: 0 20px;
+
+    @media #{$tablet} {
+      padding: 0 0 0 85px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  &__Question {
+    width: 100%;
+    display: block;
+    vertical-align: top;
+    margin-bottom: 40px;
+
+    @media #{$tablet} {
+      max-width: 455px;
+    }
+
+    &:nth-child(even) {
+      float: right;
+    }
+  }
+}

@@ -1,0 +1,176 @@
+
+.FeaturesList {
+  color: #fff;
+
+  a {
+    color: #fff;
+  }
+
+  h2 {
+    color: #fff;
+    margin-bottom: 60px;
+    padding-left: 35px;
+
+    @media #{$tablet} {
+      text-align: center;
+      padding: 0;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+
+    li {
+      font-size: 17px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .link {
+    margin-left: -5px;
+  }
+
+  &__Feature {
+    height: auto;
+    padding-bottom: 0;
+
+    @media #{$tablet} {
+      height: 600px;
+    }
+
+    > div {
+      padding-bottom: 120px;
+
+      @media #{$tablet} {
+        height: 520px;
+      }
+
+      height: 100%;
+    }
+
+    &--chatting {
+      background-color: #4484E7;
+
+      > div {
+        background:  url('/assets/images/features-chatting.png') no-repeat right bottom;
+        background-size: 18%;
+
+        @media #{$tablet} {
+          background-size: 115px auto;
+        }
+      }
+    }
+
+    &--engagement {
+      background-color: #5CA7F5;
+
+      > div {
+        background:  url('/assets/images/features-engagement.png') no-repeat right 20px bottom;
+        background-size: 25%;
+
+        @media #{$tablet} {
+          background-position: center bottom;
+          background-size: 164px auto;
+        }
+      }
+    }
+
+    &--support {
+      background-color: #F5A623;
+
+      > div {
+        background: url('/assets/images/features-support.png') no-repeat right 20px bottom;
+        background-size: 55%;
+
+        @media #{$tablet} {
+          background-size: 345px auto;
+        }
+      }
+    }
+
+    &--applications {
+      background-color: #47CB72;
+
+      > div {
+        background: url('/assets/images/features-applications.png') no-repeat right 20px bottom;
+        background-size: 24%;
+
+        @media #{$tablet} {
+          background-size: 176px auto;
+        }
+      }
+    }
+
+    &--integrations {
+      background-color: #7ABFE8;
+
+      > div {
+        background: url('/assets/images/features-integrations.png') no-repeat right bottom;
+        background-size: 45%;
+
+        @media #{$tablet} {
+          background-size: auto 176px;
+        }
+      }
+    }
+  }
+
+  &__White {
+    color: #000;
+    padding: 60px 0;
+    text-align: center;
+
+    @media #{$tablet} {
+      padding: 120px 0 0;
+    }
+
+    h2 {
+      color: #000;
+      margin-bottom: 20px;
+    }
+
+    p {
+      @extend .lead;
+
+      max-width: 270px;
+      text-align: center;
+      margin: 0 auto;
+      margin-bottom: 30px;
+    }
+
+    .link {
+      margin: 0 auto;
+      color: #3E7CE4;
+    }
+  }
+
+  &__Circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #4484E7;
+    position: relative;
+    margin: 0 auto 40px;
+
+    &:before, &:after {
+      display: block;
+      content: '';
+      position: absolute;
+      background: #fff;
+    }
+
+    &:before {
+      width: 30px;
+      height: 1px;
+      top: 50%;
+      left: 15px;
+    }
+
+    &:after {
+      width: 1px;
+      height: 30px;
+      left: 50%;
+      top: 15px;
+    }
+  }
+}

@@ -1,0 +1,425 @@
+.ProductFeatures {
+  padding-top: 120px;
+
+  > div {
+    margin-bottom: 100px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__Image {
+    display: inline-block;
+
+    &--engagement {
+      width: 100%;
+
+      @media #{$tablet} {
+        width: 358px;
+      }
+    }
+
+    &--experience {
+      margin: 0 auto;
+      width: 60%;
+
+      @media #{$tablet} {
+        width: 264px;
+      }
+    }
+
+    &--sales {
+      width: 70%;
+      vertical-align: bottom;
+
+      @media #{$tablet} {
+        width: 259px;
+      }
+    }
+
+    &--customer {
+      width: 80%;
+    }
+
+    &--service {
+      position: relative;
+
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        background: url(../assets/images/product-service.png) no-repeat center bottom;
+        background-size: cover;
+        width: 250px;
+        height: 223px;
+        left: 47%;
+        bottom: -24%;
+      }
+    }
+  }
+}
+
+.ChatView {
+  &__Loader {
+    @keyframes loader {
+        0 { transform: scale(1); }
+        50% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+
+    span {
+      display: inline-block;
+      width: .5em;
+      height: .5em;
+      background: #587885;
+      border-radius: 50%;
+      margin: 0 1px;
+      animation: loader 1s infinite;
+
+      &:nth-child(2) {
+        animation-delay: .3s;
+      }
+
+      &:nth-child(3) {
+        animation-delay: .6s;
+      }
+    }
+  }
+}
+
+.CustomerView {
+  position: relative;
+  font-size: 2.16vw;
+
+  @media #{$tablet} {
+    font-size: 11px;
+  }
+
+
+  &__Typing {
+    display: block;
+    margin: 4% 0 0 5%;
+    border-right: .1em solid black;
+    width: 22ch;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: opacity 2s, typing 1.5s steps(22, end), blink-caret .5s step-end infinite alternate;
+    animation-delay: 2.8s;
+
+    &--second {
+      width: 26ch;
+      animation: opacity 2s, typing 1.5s steps(26, end), blink-caret .5s step-end infinite alternate;
+      animation-delay: 5.4s;
+    }
+  }
+
+  &__Window {
+    position: absolute;
+    top: 0;
+    right: 3%;
+    width: 40%;
+    height: 99%;
+
+    > p {
+      position: absolute;
+      bottom: .5%;
+      left: 2.5%;
+      width: 95%;
+      margin: 0;
+      height: 10%;
+      border-radius: .2em;
+    }
+  }
+
+  &__Speech {
+    position: absolute;
+    right: 5%;
+    top: 80%;
+    background: #fff;
+    border-radius: 0 1em 1em 1em;
+    padding: 20px;
+    color: #527281;
+    padding: 0.5em 1em;
+    animation: zoom-in .5s;
+    transform: scale(0);
+    animation-fill-mode: forwards;
+    animation-delay: 2.2s;
+
+    @keyframes zoom-in {
+      from { transform: scale(0); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes hide {
+      0% { opacity: 0; }
+      1% { opacity: 1; }
+      99% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes changebg {
+      from { background-color: #3f7de4; }
+      to { background-color: #202d4d; }
+    }
+
+    &--firstloader {
+      top: 19%;
+      right: auto;
+      left: 8%;
+      width: 25%;
+      transform: scale(1);
+      animation: hide 2.3s forwards;
+      opacity: 1;
+    }
+
+    &--secondloader {
+      top: 64%;
+      right: auto;
+      left: 8%;
+      width: 25%;
+      opacity: 0;
+      transform: scale(1);
+      animation: hide 1.5s;
+      animation-delay: 8s;
+    }
+
+    &--first {
+      top: 19%;
+      right: auto;
+      left: 8%;
+      width: 74%;
+    }
+
+    &--second {
+      top: 30%;
+      background: #3f7de4;
+      color: #fff;
+      border-radius: 1em 1em 0 1em;
+      width: 70%;
+      padding: 1em;
+      animation: zoom-in .5s linear 4.9s forwards, changebg .3s linear 7.5s forwards;
+    }
+
+    &--third {
+      top: 47%;
+      background: #3f7de4;
+      color: #fff;
+      width: 78%;
+      border-radius: 1em 0 1em 1em;
+      padding: 1em;
+      animation-delay: 7.5s;
+    }
+
+    &--fourth {
+      right: auto;
+      left: 8%;
+      right: auto;
+      top: 64%;
+      animation-delay: 9.8s;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.AgentView {
+  position: relative;
+  font-size: 2.32vw;
+
+  @media #{$tablet} {
+    font-size: 11px;
+  }
+
+  &__Type {
+    background: #e4e9ef;
+    position: absolute;
+    bottom: 1.5%;
+    left: 2.5%;
+    width: 95%;
+    margin: 0;
+    height: 10%;
+    border-radius: .2em;
+  }
+
+  &__Typing {
+    display: block;
+    margin: 4% 0 0 5%;
+    border-right: .1em solid black;
+    width: 18ch;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: opacity 2s, typing 1.5s steps(18, end), blink-caret .5s step-end infinite alternate;
+
+    &--second {
+      animation: opacity 1.5s, typing 1s steps(10, end), blink-caret .5s step-end infinite alternate;
+      animation-delay: 8s;
+      width: 10ch;
+    }
+  }
+
+  &__Window {
+    width: 52%;
+    height: 84%;
+    background: #fff;
+    position: absolute;
+    left: 25%;
+    top: 7%;
+    box-shadow: 0px 0px 37px rgba(0,0,0,0.2);
+
+    @keyframes typing { from { width: 0; } }
+    @keyframes blink-caret { 50% { border-color: transparent; } }
+    @keyframes opacity {
+      0% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+  }
+
+  &__Speech {
+    position: absolute;
+    right: 5%;
+    top: 80%;
+    background: #3f7de4;
+    border-radius: 0 1em 1em 1em;
+    padding: 20px;
+    color: #527281;
+    padding: 0.5em 1em;
+    zoom: 0;
+    animation-name: zoom-in;
+    animation-duration: .5s;
+    animation-delay: 2s;
+    transform: scale(0);
+    animation-fill-mode: forwards;
+
+    @keyframes zoom-in {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+
+    @keyframes hide {
+      0% { opacity: 0; }
+      1% { opacity: 1; }
+      99% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    @keyframes changebg {
+      from { background-color: #3f7de4; }
+      to { background-color: #202d4d; }
+    }
+
+    &--firstloader {
+      top: 31%;
+      right: auto;
+      left: 8%;
+      width: 20%;
+      transform: scale(1);
+      animation: hide 2.3s;
+      animation-delay: 2.5s;
+      opacity: 0;
+      background-color: #e4e9ef;
+    }
+
+    &--secondloader {
+      top: 44%;
+      right: auto;
+      left: 8%;
+      width: 20%;
+      opacity: 0;
+      transform: scale(1);
+      animation: hide 2s;
+      animation-delay: 5.4s;
+      background-color: #e4e9ef;
+    }
+
+    &--first {
+      top: 19%;
+      right: 11%;
+      width: 55%;
+      color: #fff;
+      border-radius: 1em 0 1em 1em;
+      animation: zoom-in .5s linear 2s forwards, changebg .3s linear 9.6s forwards;
+    }
+
+    &--second {
+      top: 31%;
+      background: #e4e9ef;
+      color: #527281;
+      border-radius: 1em 1em 1em 0;
+      width: 70%;
+      padding: 1em;
+      animation-delay: 5.1s;
+      right: 23%;
+    }
+
+    &--third {
+      top: 44%;
+      background: #e4e9ef;
+      color: #527281;
+      width: 70%;
+      border-radius: 0 1em 1em 1em;
+      padding: 1em;
+      animation-delay: 7.7s;
+      right: 23%;
+    }
+
+    &--fourth {
+      border-radius: 1em 0 1em 1em;
+      color: #fff;
+      top: 63%;
+      right: 11%;
+      animation-delay: 9.6s;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.Product {
+  &__View {
+    background: #4484E7;
+    padding: 70px 0 40px;
+
+    @media #{$tablet} {
+      padding-bottom: 200px;
+    }
+
+    &--agent {
+      background: #5CA8F5;
+      padding: 70px 0 100px;
+
+      @media #{$tablet} {
+        padding-bottom: 200px;
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__Bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    height: 150px;
+    background: url(../assets/images/product-bottom.png) no-repeat center bottom;
+    background-size: 100% auto;
+
+    @media #{$tablet} {
+      background-size: auto 100%;
+    }
+  }
+}
