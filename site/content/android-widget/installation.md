@@ -3,8 +3,6 @@ title: "Installation"
 weight: 10
 ---
 
-# Installation
-
 To get the project into your build, do the following:
 
 ## 1. Add the JitPack repository

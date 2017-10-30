@@ -1,7 +1,4 @@
-baseurl = "/"
+baseurl = "/docs/"
 languageCode = "en-us"
 title = "chat.io/docs"
 disableHugoGeneratorInject = true
-
-[Permalinks]
-  page = "/:slug/"

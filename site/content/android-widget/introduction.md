@@ -1,9 +1,7 @@
 ---
-title: "Android Widget"
+title: "Introduction"
 weight: 1
 ---
-
-# Introduction
 
 This documentation will cover embedding a mobile chat window in an Android application. 
 

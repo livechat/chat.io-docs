@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start":
-      "(export NODE_ENV=development; concurrently --kill-others \"hugo -d ../dist -s site -v --watch\" \"webpack --watch --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js\")",
+      "(export NODE_ENV=development; concurrently --kill-others \"hugo -d ../dist/docs -s site --watch\" \"webpack --watch --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js\")",
     "build":
-      "(export NODE_ENV=production; webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js && hugo -d ../dist -s site)"
+      "(export NODE_ENV=production; webpack --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js && hugo -d ../dist/docs -s site)"
   },
   "keywords": [],
   "author": "",
