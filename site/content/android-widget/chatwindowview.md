@@ -3,8 +3,6 @@ title: "ChatWindowView"
 weight: 40
 ---
 
-# Chat Window View
-
 There are two recommended ways to use the **ChatWindow**:
 
 *   Full screen ChatWindow added to the root of your Activity

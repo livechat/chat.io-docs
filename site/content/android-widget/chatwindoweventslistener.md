@@ -3,8 +3,6 @@ title: "ChatWindowEventsListener"
 weight: 70
 ---
 
-# ChatWindowEventsListener
-
 This listener allows you to:
 
 *	handle a case when a user wants to attach a file in the **ChatWindow**

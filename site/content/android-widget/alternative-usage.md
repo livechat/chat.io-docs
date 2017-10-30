@@ -3,8 +3,6 @@ title: "Alternative usage"
 weight: 80
 ---
 
-# Alternative usage
-
 **Note: This option has limited capabilities.**
 
 If you don't need the chat to work in the background nor to receive messages when the window is minimized, use Activity and Fragment chat window described above.

@@ -3,8 +3,6 @@ title: "File sharing"
 weight: 60
 ---
 
-# File sharing
-
 If you want the users to be able to send files, you need to set `ChatWindowEventsListener` on your `ChatWindowView` and allow the view to handle the activity result:
 
 ```java
