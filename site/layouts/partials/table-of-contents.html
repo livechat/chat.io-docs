@@ -3,7 +3,7 @@
 <!-- at least one header to link to -->
 {{ $has_headers := ge (len $headers) 1 }}
 {{ if $has_headers }}
-  <ul>
+  <ul class="docs__toc__ul docs__toc__ul--l2">
     {{ range $i, $header := $headers }}
       {{ $headerLevel := index (findRE "[2-3]" . 1) 0 }}
       {{ $headerLevel := len (seq $headerLevel) }}
@@ -16,7 +16,7 @@
 
           {{ if gt $headerLevel $prevHeaderLevel }}
             {{ range seq (sub $headerLevel $prevHeaderLevel) }}
-              <ul>
+            <ul class="docs__toc__ul docs__toc__ul--l{{$headerLevel}}">
             {{end}}
           {{end}}
 
@@ -30,8 +30,8 @@
             </li>
           {{end}}
 
-          <li>
-            <a href="#{{ $anchorID }}">{{ $header | plainify | htmlEscape }}</a>
+          <li class="docs__toc__li">
+            <a class="nav-link" href="#{{ $anchorID }}">{{ $header | plainify | htmlEscape }}</a>
 
           {{ if eq $i (sub (len $headers) 1) }}
             {{ range seq (sub $prevHeaderLevel $headerLevel) }}
@@ -39,8 +39,8 @@
             {{end}}
           {{end}}
       {{else}}
-      <li>
-        <a href="#{{ $anchorID }}">{{ $header | plainify | htmlEscape }}</a>
+      <li class="docs__toc__li">
+        <a class="nav-link" href="#{{ $anchorID }}">{{ $header | plainify | htmlEscape }}</a>
       {{end}}
     {{end}}
 

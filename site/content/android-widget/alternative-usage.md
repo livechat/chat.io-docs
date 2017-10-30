@@ -24,8 +24,6 @@ There are two ways to open the chat window – by using an Activity or a Fragmen
 
 In order to open a chat window in a new Activity, you need to declare **ChatWindowActivity** in your manifest. Add the following line to **AndroidManifest.xml**, between `<application></application>` tags:
 
-#### Testavity
-
 ```xml
 <activity android:name="com.livechatinc.inappchat.ChatWindowActivity" android:configChanges="orientation|screenSize" />
 ```

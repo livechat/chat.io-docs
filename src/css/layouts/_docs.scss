@@ -1,12 +1,25 @@
 .docs {
   &__logo {
-    @extend .heading--alternative;
+    // @extend .heading--alternative;
+    // color: #fff;
 
-    margin-top: 15px;
-    margin-bottom: 35px;
+    padding: 15px;
+    background-color: $link-color;
 
-    img {
-      margin-right: 20px;
+    &__home {
+      color: #364149;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      img {
+        // opacity: 0.7;
+      }
+    }
+
+    &__title {
+      color: #fff;
+      font-size: 20px;
+      font-weight: 700;
     }
 
     a {
@@ -21,29 +34,39 @@
     position: relative;
   }
 
+  &__sidebar-nav {
+    padding: 30px;
+  }
   &__sidebar {
-    width: 300px;
-    left: auto;
-    float: left;
-    border-right: 1px solid rgba(0, 0, 0, 0.07);
-    overflow-y: auto;
-    padding: 15px 30px;
-    height: 100vh;
-    background-color: #ecf0f4;
-    position: fixed;
+    display: none;
+
+    @media #{$phone} {
+      width: 300px;
+      display: block;
+      left: auto;
+      float: left;
+      border-right: 1px solid rgba(0, 0, 0, 0.07);
+      overflow-y: auto;
+      height: 100vh;
+      background-color: #ecf0f4;
+      position: fixed;
+    }
   }
 
   &__content {
     position: relative;
     padding-top: 10px;
     font-weight: normal;
-    width: calc(100% - 380px);
-    float: left;
-    margin-left: 380px;
+
+    @media #{$phone} {
+      width: calc(100% - 380px);
+      float: left;
+      margin-left: 380px;
+    }
 
     @media #{$large-desktop} {
       width: calc(100% - 580px);
-      padding-top: 70px;
+      //   padding-top: 70px;
     }
 
     > article {
@@ -76,6 +99,47 @@
       list-style-type: none;
     }
   }
+
+  &__toc {
+    &__ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0 0 0 15px;
+      &--l1 {
+        padding: 0;
+      }
+      &--l1 > li > a {
+        font-weight: 700;
+      }
+      &--l2 > li > a {
+        padding: 2px 0;
+      }
+      &--l3 > li > a {
+        padding: 2px 0;
+        font-size: 0.9em;
+      }
+    }
+
+    &__li {
+      //   border: 1px solid red;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow-x: hidden;
+      display: block;
+
+      a {
+        display: block;
+        padding: 4px 0;
+        position: relative;
+        transition: all 0.1s;
+        color: #364149;
+      }
+
+      .active {
+        color: $link-color;
+      }
+    }
+  }
 }
 
 .docs-excerpts {
@@ -96,45 +160,6 @@
 
     .link {
       float: right;
-    }
-  }
-}
-#TableOfContents {
-  line-height: 1.3em;
-  color: #364149;
-  line-height: 1.3em;
-  a {
-    color: #364149;
-
-    &:hover {
-      color: darken(#364149, 10%);
-    }
-  }
-
-  ul {
-    list-style: none;
-    margin: 5px 0 10px;
-    padding: 0;
-  }
-
-  a[href^="#introduction"] {
-    // background: red;
-  }
-
-  > ul > li {
-    font-weight: 700;
-    ul {
-      margin-left: 15px;
-    }
-    > ul > li {
-      margin: 5px 0;
-      font-weight: 400;
-      a {
-        color: rgba(#364149, 0.7);
-      }
-      ul {
-        display: none;
-      }
     }
   }
 }
