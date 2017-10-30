@@ -14,18 +14,16 @@ $large-desktop: "(min-width: 1200px)";
 $container: 1200px;
 $spacing: 25px;
 
-
-
 @import "components/nav";
 @import "components/headers";
 @import "components/footer";
 @import "components/hero";
 @import "components/chat";
 
-
 @import "layouts/guides";
 @import "layouts/features";
 @import "layouts/docs";
+@import "layouts/markdown";
 
 .table {
   display: block;
@@ -33,41 +31,42 @@ $spacing: 25px;
   overflow: auto;
   border-spacing: 0;
   border-collapse: collapse;
-    tr {
-      background-color: #fff;
-      border-top: 1px solid #c6cbd1;
-    }
-    tr:nth-child(2n) {
-      background-color: #f6f8fa;
-    }
-    td, th {
-      padding: 6px 13px;
-      border: 1px solid #dfe2e5;
-    }
+  tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+  }
+  tr:nth-child(2n) {
+    background-color: #f6f8fa;
+  }
+  td,
+  th {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
 }
 
 .highlight {
   margin-bottom: 16px;
-    pre {
-        padding: 16px;
-        overflow: auto;
-        line-height: 1.45;
-        background-color: #f6f8fa;
-        border-radius: 3px;
-    }
+  pre {
+    padding: 16px;
+    overflow: auto;
+    line-height: 1.45;
+    background-color: #f6f8fa;
+    border-radius: 3px;
+  }
 }
 
 code {
   padding: 3px;
-  background-color: rgba(27,31,35,0.05);
+  background-color: rgba(27, 31, 35, 0.05);
   border-radius: 3px;
 }
 
 .col {
   float: left;
-    &--half {
-      width: 50%;
-    }
+  &--half {
+    width: 50%;
+  }
 }
 
 form {
@@ -87,12 +86,12 @@ form {
     width: 100%;
     margin-bottom: 10px;
     display: inline-block;
-    color: #31374F;
+    color: #31374f;
     -webkit-appearance: none;
 
     border-radius: 23px;
     height: 44px;
-    border: 1px solid #31374F;
+    border: 1px solid #31374f;
     padding: 0 18px;
 
     @media #{$tablet} {
@@ -104,11 +103,11 @@ form {
       padding: 0px 8px;
       border-radius: 0;
       border: none;
-      border-bottom: 1px solid #31374F;
+      border-bottom: 1px solid #31374f;
     }
 
     &::-webkit-input-placeholder {
-      color: #31374F;
+      color: #31374f;
     }
 
     &:focus {
@@ -119,7 +118,6 @@ form {
   button {
     margin: 0 auto;
 
-
     @media #{$tablet} {
       margin-left: 0;
       margin-right: 0;
@@ -127,7 +125,8 @@ form {
   }
 }
 
-form button, .Button {
+form button,
+.Button {
   height: 46px;
   border: none;
   border-radius: 23px;
@@ -137,11 +136,12 @@ form button, .Button {
   text-decoration: none;
   line-height: 46px;
   display: inline-block;
-  background: #31374F url('/assets/images/icon-arrow.svg') no-repeat right 14px center;
+  background: #31374f url("/assets/images/icon-arrow.svg") no-repeat right 14px
+    center;
   background-size: auto 23px;
   padding: 0;
   text-align: left;
-  transition: all .5s;
+  transition: all 0.5s;
   overflow: hidden;
   width: 100%;
   text-align: center;
@@ -211,7 +211,8 @@ $sectionWidth: 1120px;
     }
   }
 
-  &--blue, &--lblue {
+  &--blue,
+  &--lblue {
     background: #5ca8f5;
 
     > div > div:last-child {
@@ -225,7 +226,7 @@ $sectionWidth: 1120px;
   }
 
   &--lblue {
-    background: #F6F9FE;
+    background: #f6f9fe;
     padding-top: 80px;
     padding-bottom: 150px;
 
@@ -269,7 +270,7 @@ $sectionWidth: 1120px;
 .Feature {
   width: 100%;
   padding-left: 17px;
-  border-left: 1px solid #3E7CE4;
+  border-left: 1px solid #3e7ce4;
 
   @media #{$tablet} {
     width: 50%;
@@ -302,7 +303,7 @@ $sectionWidth: 1120px;
   }
 
   > div {
-    background: url('/assets/images/pricing-bg.svg') no-repeat;
+    background: url("/assets/images/pricing-bg.svg") no-repeat;
     display: flex;
     align-items: center;
     background-size: 87% auto;
@@ -374,7 +375,7 @@ $sectionWidth: 1120px;
   > div {
     display: block;
     position: relative;
-    background: url('/assets/images/features-bg.png') no-repeat;
+    background: url("/assets/images/features-bg.png") no-repeat;
     background-position: right center;
     background-size: 94% auto;
     background-position: center bottom;
@@ -423,7 +424,7 @@ hr {
   width: 50px;
   display: block;
   height: 1px;
-  background: #31374F;
+  background: #31374f;
   text-align: left;
   margin: 30px 0 30px;
   border: 0;
@@ -521,6 +522,6 @@ hr {
   }
 }
 
-@import '_pricing.scss';
-@import '_product.scss';
-@import '_features.scss';
+@import "_pricing.scss";
+@import "_product.scss";
+@import "_features.scss";

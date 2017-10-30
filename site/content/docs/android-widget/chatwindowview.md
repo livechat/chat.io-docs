@@ -10,7 +10,7 @@ There are two recommended ways to use the **ChatWindow**:
 *   Full screen ChatWindow added to the root of your Activity
 *   XML embedded ChatWindow to control the location and size
 
-### Full Screen Window
+## Full Screen Window
 
 All you need to do is to create, attach and initialize the chat window. For example:
 
@@ -26,7 +26,7 @@ public void startFullScreenChat() {
 }
 ```
 
-### XML Embedded View
+## XML Embedded View
 
 If you want to control the location and size of the **ChatWindowView**, you may want to add it to your app either by including a view in XML:
 

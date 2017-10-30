@@ -7,7 +7,7 @@ weight: 10
 
 To get the project into your build, do the following:
 
-### 1. Add the JitPack repository
+## 1. Add the JitPack repository
 
 [See the repository at JitPack](https://jitpack.io/#livechat/chat-window-android)
 
@@ -22,7 +22,7 @@ allprojects {
  }
 ```
 
-### 2. Add the dependency
+## 2. Add the dependency
 
 To add the dependency, use the following code:
 
