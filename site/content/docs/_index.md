@@ -1,5 +1,5 @@
 ---
-title: "chat.io docs – live chat and help desk for websites"
+title: "chat.io docs"
 seo:
   title: "chat.io – live chat and help desk for websites"
   description: "First AI powered chat platform you can build on your own."

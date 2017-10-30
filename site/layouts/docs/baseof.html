@@ -28,20 +28,23 @@
 
   <div id="Chatio">
 
-
+    {{ $docs := (.Site.GetPage "section" "docs/android-widget") }}
     <main class="docs__wrapper">
 
       <aside class="docs__sidebar">
         <h5 class="docs__logo">
           <a href="/docs/">
-            <img src="/assets/images/signet-chatio.svg" alt="chat.io logo" height="40"> {{.Title}}
+            <img src="/assets/images/signet-chatio.svg" alt="chat.io logo" height="20">docs
+            <br/>{{.Title}}
           </a>
         </h5>
         <div class="docs__sidebar-nav">
-
-          {{ range .Data.Pages }} {{.TableOfContents}} {{ end }}
-
-          </ul>
+          {{ template "docs-tree-nav" (dict "root" $docs) }} {{ define "docs-tree-nav" }} {{ with .root }} {{ range .Data.Pages }}
+            {{ $hash := lower .Title | urlize }}
+          <li>
+            <a href="#{{ $hash }}">{{ .Title }}</a>
+          </li>
+          {{ end }} {{ end }} {{ end }}
         </div>
       </aside>
 

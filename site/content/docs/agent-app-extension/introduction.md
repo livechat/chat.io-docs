@@ -5,20 +5,20 @@ weight: 10
 
 # Introduction
 
-### What is an Agent App Extension?
+## What is an Agent App Extension?
 
 Agent App Extensions are web applications loaded inside the chat.io Agent App. All agents can interact with the extension during chats with customers. The extension itself is displayed in the Agent's App sidebar:
 
 <img src="../../../assets/images/platform-agent-app-extension.png" width="550" style="border: 1px solid rgba(0,0,0,.1);margin-bottom: 30px;"/>
 
-### Sample use cases
+## Sample use cases
 
 One can use the Agent App Extension to:
 
 * embed and display static content, e.g. knowledge base articles, conversation prompts or context information,
 * embed your service or web app as a part of agents' workspace.
 
-### Getting started in 5 minutes
+## Getting started in 5 minutes
 
 1. Go to the <a href="https://console.chat.io/apps">chat.io Developers Console</a>.
 2. Create a new app and follow the app wizard.
