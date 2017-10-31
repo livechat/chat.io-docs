@@ -12,7 +12,13 @@ Welcome to the developer's side of chat.io! If there's anything missing or if yo
 ## Your account
 We ship a dedicated account for developers, where you can manage all your apps. Create one to access the chat.io Developer Console.
 
-<a href="https://console.chat.io/" class="link">Go to Developers Console</a>
+<ul class="docs-excerpts">
+        <a href="https://console.chat.io/" target="_blank">
+    <li style="background-color: #374266; background-image: url('https://console.chat.io/static/media/girl-build.359bf3bc.png')">
+        <h4>Developer Console</h4>
+        <p>A dedicated panel for developers, where you can manage all your apps.</p>
+    </li></a>
+</ul>
 
 ## Your tools
 

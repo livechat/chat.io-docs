@@ -1,9 +1,10 @@
 <ul class="docs-excerpts">
     {{ range $section, $pages := $.Site.Sections }}
-    <li style="background-color: {{ .Params.color }}">
-        <h4>{{.Title}}</h4>
-        <p>{{.Params.desc}}</p>
-        <a href="{{.Permalink}}" class="link">See the docs</a>
-    </li>
+    <a href="{{.Permalink}}">
+        <li style="background-color: {{ .Params.color }}">
+            <h4>{{.Title}}</h4>
+            <p>{{.Params.desc}}</p>
+        </li>
+    </a>
     {{ end }}
 </ul>
