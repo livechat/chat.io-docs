@@ -71,3 +71,47 @@ if (location.search) {
     }
   }
 }
+
+function throttle(fn, wait) {
+  var time = Date.now();
+  return function() {
+    if (time + wait - Date.now() < 0) {
+      fn();
+      time = Date.now();
+    }
+  };
+}
+
+function scrollSpy() {
+  "use strict";
+
+  const section = document.querySelectorAll("h1,h2,h3");
+  const offset = 40;
+  let sections = {};
+
+  Array.prototype.forEach.call(section, function(e) {
+    sections[e.id] = e.offsetTop;
+  });
+  
+  updateMenu()
+  window.addEventListener("scroll", throttle(updateMenu, 50));
+
+  function updateMenu() {
+    var scrollPosition =
+      document.documentElement.scrollTop || document.body.scrollTop;
+      
+    for (var section in sections) {
+      if (sections[section] <= scrollPosition + offset) {
+        let active = document.querySelector(".active");
+        let links = document.querySelector("a[href*=" + section + "]");
+
+        if (active) active.setAttribute("class", " ");
+        if (links) links.setAttribute("class", "active");
+      }
+    }
+  }
+}
+
+if (document.querySelector(".docs__sidebar")) 
+  window.addEventListener("load", scrollSpy);
+

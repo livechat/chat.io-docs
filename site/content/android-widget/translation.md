@@ -1,7 +1,8 @@
 ---
-title: "Translation"
 weight: 100
 ---
+
+# Translation
 
 You can change or translate error messages by defining your own string resources with the following IDs:
 

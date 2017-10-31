@@ -17,20 +17,10 @@
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-W9TN22J');</script>
   <!-- End Google Tag Manager -->
-
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-    crossorigin="anonymous"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
-    crossorigin="anonymous"></script>
-
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-    crossorigin="anonymous"></script>
-
-
+  <style type="text/css">.docs__toc__li a.active {color: {{ .Params.color }} }</style>
 </head>
 
-<body data-spy="scroll" data-target=".docs__toc" data-offset="60">
+<body>
   <!-- Google Tag Manager (noscript) -->
   <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W9TN22J" height="0" width="0" style="display:none;visibility:hidden"></iframe>
@@ -45,25 +35,26 @@
       {{ if not .IsHome }}
       <aside class="docs__sidebar">
         <div class="docs__logo">
-          <div class="docs__logo__home">
-            <a href="/docs/">
-              <img src="./../assets/images/signet-dark-chatio.svg" alt="chat.io logo" height="16">
-              <img src="./../assets/images/breadcrumb.svg" alt="chat.io logo" height="16">developers tools</a>
+         
+          <div class="docs__logo__home"  style="background-color: {{ .Params.color }}">
+              <a href="https://www.chat.io/platform/"><img src="./../assets/images/home.svg" alt="chat.io" height="17"></a><img src="./../assets/images/breadcrumb.svg" alt=">" height="17" class="breadcrumb">
+            <a href="/docs/">docs</a><img src="./../assets/images/breadcrumb.svg" alt=">" height="17" class="breadcrumb"></a>
           </div>
-          <div class="docs__logo__title">
+          <div class="docs__logo__title" style="background-color: {{ .Params.color }}">
             {{.Title}}
           </div>
+
         </div>
         <div class="docs__sidebar-nav">
           <nav class="docs__toc">
             <ul class="docs__toc__ul docs__toc__ul--l1">
               {{ range .Data.Pages }}
               <li class="docs__toc__li">
-                <a class="nav-link" href="#{{ (.Title | plainify | htmlEscape | urlize) }}">{{ .Title }}</a>
                 {{ partial "table-of-contents" . }}
               </li>
               {{ end }}
             </ul>
+            <div class="docs__toc__footer">Don't have your Developer Account yet? </div>
           </nav>
         </div>
       </aside>

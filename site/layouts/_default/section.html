@@ -1,9 +1,5 @@
-{{ define "main" }}
-	{{ .Content }}
-	{{ range .Data.Pages }}
-		<section>
-			<header><h1 id="{{ (.Title | plainify | htmlEscape | urlize) }}">{{ .Title }}</h1></header>
-			{{.Content}}
-		</section>
-	{{ end }}
-{{ end }}
+{{ define "main" }} {{ .Content }} {{ range .Data.Pages }}
+<section class="article-section">
+	{{.Content}}
+</section>
+{{ end }} {{ end }}

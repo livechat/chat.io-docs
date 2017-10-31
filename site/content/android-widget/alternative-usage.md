@@ -1,7 +1,8 @@
 ---
-title: "Alternative usage"
 weight: 80
 ---
+
+# Alternative usage
 
 **Note: This option has limited capabilities.**
 

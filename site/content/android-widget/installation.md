@@ -1,7 +1,8 @@
 ---
-title: "Installation"
 weight: 10
 ---
+
+# Installation
 
 To get the project into your build, do the following:
 

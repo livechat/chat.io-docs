@@ -1,7 +1,8 @@
 ---
-title: "ChatWindowView"
 weight: 40
 ---
+
+# ChatWindowView
 
 There are two recommended ways to use the **ChatWindow**:
 

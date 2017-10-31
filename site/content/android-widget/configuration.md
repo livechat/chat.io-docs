@@ -1,7 +1,8 @@
 ---
-title: "Configuration"
 weight: 30
 ---
+
+# Configuration
 
 The configuration is very simple - just use **ChatWindowConfiguration.java** constructor. Note that the licence number is mandatory.
 

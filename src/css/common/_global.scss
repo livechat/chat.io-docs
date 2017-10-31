@@ -14,6 +14,7 @@ body {
   background: white;
   margin: 0;
   padding: 0;
+  line-height: 1.4;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -34,7 +35,7 @@ body {
     width: 6px;
     height: 10px;
     position: absolute;
-    background: url('/assets/icons/link-arrow.svg');
+    background: url('../assets/icons/link-arrow.svg');
     left: -10px;
     top: 50%;
     margin-top: -5px;
