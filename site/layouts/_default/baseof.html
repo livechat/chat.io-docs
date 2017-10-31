@@ -60,11 +60,19 @@
       </aside>
       {{ end }}
 
+      {{ if not .IsHome }}
       <section class="docs__content">
         <article class="markdown-body">
           {{ block "main" . }} {{ end }}
         </article>
       </section>
+      {{ else }}
+      <section>
+        <article>
+          {{ block "main" . }} {{ end }}
+        </article>
+      </section>
+      {{ end }}
     </main>
 
 

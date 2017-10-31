@@ -1,5 +1,5 @@
 ---
-title: "Customer API"
+title: "Agent API"
 desc: "Embed a mobile chat window in an Android application."
-color: "#4484e7"
+color: "#ee5201"
 ---

@@ -2,25 +2,24 @@ $sidebarWidth: 260px;
 
 .docs {
   &__logo {
-    
     background-color: rgba(#364149, 0.8);
 
     &__home {
-      color: rgba(#fff, .6);
+      color: rgba(#fff, 0.6);
       font-size: 12px;
-	  font-weight: 700;
+      font-weight: 700;
       letter-spacing: 0.04em;
-	  padding: 50px 20px 0;
-	  
+      padding: 15px 20px 0;
+
       img {
-		  opacity: 0.6;
-		  vertical-align: middle;
-		}
+        opacity: 0.6;
+        vertical-align: middle;
+      }
     }
-	
+
     &__title {
       padding: 0 20px 15px;
-	  font-family: 'Roboto Slab', serif;
+      font-family: "Roboto Slab", serif;
       color: #fff;
       font-size: 20px;
       font-weight: 700;
@@ -60,9 +59,9 @@ $sidebarWidth: 260px;
   &__content {
     position: relative;
     padding-top: 10px;
-	font-weight: normal;
-	padding-bottom: 70vh;
-	margin-left: 0;
+    font-weight: normal;
+    padding-bottom: 70vh;
+    margin-left: 0;
 
     @media #{$phone} {
       width: calc(100% - $sidebarWidth);
@@ -107,26 +106,44 @@ $sidebarWidth: 260px;
   }
 
   &__toc {
-
     &__ul {
       list-style-type: none;
       margin: 0;
-      padding: 0 0 4px 15px;
+      padding: 0 0 4px 10px;
       &--l1 {
-        padding: 0;
-      }
+		  padding: 0;
+		}
+		&--l2 {
+		border-top: 1px solid rgba(#364149, 0.1);
+		padding-top: 5px;
+		margin-bottom: 10px;
+	}
       &--l1 > li > a {
-
       }
       &--l2 > li > a {
         padding: 2px 0;
-		font-size: 0.9em;
-		color: rgba(#364149,.7);
+        font-size: 0.9em;
+        color: rgba(#364149, 0.9);
+		&:before {
+			content: ' ';
+			display: inline-block;
+			// position: absolute;
+			vertical-align: middle;
+			margin-right: 5px;
+			margin-bottom: 3px;
+			width: 3px;
+			height: 3px;
+			border-radius: 50%;
+			background-color: rgba(#364149, 0.3);
+			// left: -10px;
+  
+		}
       }
       &--l3 > li > a {
-        padding: 0;
-		font-size: 0.9em;
-		color: rgba(#364149,.6);
+        padding: 2px 0;
+        font-size: 0.9em;
+		color: rgba(#364149, 0.85);
+		position: relative;
       }
     }
 
@@ -142,61 +159,77 @@ $sidebarWidth: 260px;
         padding: 4px 0 2px;
         position: relative;
         transition: all 0.1s;
-		color: #364149;
+        color: #364149;
 
-		&:hover {
-			color: darken(#364149, 15%);
-		}
+        &:hover {
+          color: darken(#364149, 15%);
+        }
       }
 
       a.active {
-		color: $link-color;
+        color: $link-color;
       }
-	}
+    }
 
-	&__footer {
-		margin-top: 2em;
-		padding: 2em;
-		font-size: 14px;
-		text-align: center;
-		background: rgba(#fff,.7);
-	}
+    &__footer {
+      margin-top: 2em;
+      padding: 15px;
+      font-size: 14px;
+      text-align: center;
+      background: rgba(#fff, 0.7);
+    }
   }
 }
 
 .docs-excerpts {
   list-style: none;
   padding: 0 !important;
-	p{ color: rgba(#fff, .8);}
-	a {
-		transition: transform .1s ease-in-out;
-		display: inline-block;
-		&:hover {
-		transform: scale(1.02);}
-	}
+  margin-bottom: 0 !important;
+  
+  p {
+	color: rgba(#fff, 0.8);
+	margin-bottom: 0 !important;
+  }
+
+  a {
+    transition: transform 0.1s ease-in-out;
+    display: inline-block;
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
   li {
     display: inline-block;
     vertical-align: top;
-	max-width: 280px;
-	height: 170px;
-    margin: 15px 15px 15px 0 !important;
-    padding: 25px 20px;
-    border-radius: 12px;
-    border: 1px solid #dfe2e5;
-    background-color: #fff;
-	
-	h4 {
-	  margin: 0;
-	  padding: 0;
-	  font-family: 'Roboto Slab', serif;
+    max-width: 280px;
+    min-height: 160px;
+    margin: 15px 25px 15px 0 !important;
+    padding: 20px;
+    border-radius: 8px;
+	background-color: #fff;
+	box-shadow: 4px 4px 4px 0 rgba(#364149, .08);
+
+    h4 {
+      margin: 0;
+      padding: 0;
+      font-family: "Roboto Slab", serif;
       color: #fff;
       font-size: 20px;
-	  font-weight: 700;
+      font-weight: 700;
     }
 
     .link {
-	  float: right;
-	  color: #fff;
+      float: right;
+      color: #fff;
     }
   }
+
+  &--double {
+	li {
+		max-width: 590px;
+		// width: 100%;
+		min-height: 140px;
+	}
+}
 }
