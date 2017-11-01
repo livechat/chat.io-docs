@@ -1,10 +1,8 @@
 <ul class="docs-excerpts">
-    {{ range $section, $pages := $.Site.Sections }}
-    <a href="{{.Permalink}}">
+    {{ range $section, $pages := $.Site.Sections }}<a href="{{.Permalink}}">
         <li style="background-color: {{ .Params.color }}">
             <h4>{{.Title}}</h4>
             <p>{{.Params.desc}}</p>
         </li>
-    </a>
-    {{ end }}
+    </a>{{ end }}
 </ul>

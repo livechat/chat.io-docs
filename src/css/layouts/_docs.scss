@@ -193,7 +193,8 @@ $sidebarWidth: 260px;
 
   a {
     transition: transform 0.1s ease-in-out;
-    display: inline-block;
+	display: inline-block;
+	margin: 0;
     &:hover {
       transform: scale(1.02);
     }
@@ -204,14 +205,15 @@ $sidebarWidth: 260px;
     vertical-align: top;
     max-width: 280px;
     min-height: 160px;
-    margin: 15px 25px 15px 0 !important;
+    margin: 0 !important;
+    // margin: 15px 25px 15px 0 !important;
     padding: 20px;
-    border-radius: 8px;
-	background-color: #fff;
-	box-shadow: 4px 4px 4px 0 rgba(#364149, .08);
+    // border-radius: 8px;
+	// background-color: #fff;
+	// box-shadow: 4px 4px 4px 0 rgba(#364149, .08);
 
     h4 {
-      margin: 0;
+      margin: 0 0 10px;
       padding: 0;
       font-family: "Roboto Slab", serif;
       color: #fff;
@@ -227,7 +229,7 @@ $sidebarWidth: 260px;
 
   &--double {
 	li {
-		max-width: 590px;
+		max-width: 558px;
 		// width: 100%;
 		min-height: 140px;
 	}
