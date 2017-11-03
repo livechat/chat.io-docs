@@ -1,5 +1,6 @@
 ---
 title: "Agent API"
-desc: "Embed a mobile chat window in an Android application."
+desc: "Join the messaging protocol as an agent. "
 color: "#ee5201"
+weight: 20
 ---

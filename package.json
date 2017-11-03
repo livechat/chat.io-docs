@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "bootstrap": "^4.0.0-beta",
+    "bulma": "^0.6.0",
     "rellax": "^1.1.0",
     "webfontloader": "^1.6.28"
   }

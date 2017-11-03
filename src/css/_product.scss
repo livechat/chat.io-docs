@@ -15,7 +15,7 @@
     &--engagement {
       width: 100%;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         width: 358px;
       }
     }
@@ -24,7 +24,7 @@
       margin: 0 auto;
       width: 60%;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         width: 264px;
       }
     }
@@ -33,7 +33,7 @@
       width: 70%;
       vertical-align: bottom;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         width: 259px;
       }
     }
@@ -92,7 +92,7 @@
   position: relative;
   font-size: 2.16vw;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     font-size: 11px;
   }
 
@@ -230,7 +230,7 @@
   position: relative;
   font-size: 2.32vw;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     font-size: 11px;
   }
 
@@ -390,7 +390,7 @@
     background: #4484E7;
     padding: 70px 0 40px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding-bottom: 200px;
     }
 
@@ -398,7 +398,7 @@
       background: #5CA8F5;
       padding: 70px 0 100px;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         padding-bottom: 200px;
       }
     }
@@ -418,7 +418,7 @@
     background: url(../assets/images/product-bottom.png) no-repeat center bottom;
     background-size: 100% auto;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       background-size: auto 100%;
     }
   }

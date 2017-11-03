@@ -11,7 +11,7 @@
     margin-bottom: 60px;
     padding-left: 35px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       text-align: center;
       padding: 0;
     }
@@ -34,14 +34,14 @@
     height: auto;
     padding-bottom: 0;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       height: 600px;
     }
 
     > div {
       padding-bottom: 120px;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         height: 520px;
       }
 
@@ -55,7 +55,7 @@
         background:  url('/assets/images/features-chatting.png') no-repeat right bottom;
         background-size: 18%;
 
-        @media #{$tablet} {
+        @media #{$chatioTablet} {
           background-size: 115px auto;
         }
       }
@@ -68,7 +68,7 @@
         background:  url('/assets/images/features-engagement.png') no-repeat right 20px bottom;
         background-size: 25%;
 
-        @media #{$tablet} {
+        @media #{$chatioTablet} {
           background-position: center bottom;
           background-size: 164px auto;
         }
@@ -82,7 +82,7 @@
         background: url('/assets/images/features-support.png') no-repeat right 20px bottom;
         background-size: 55%;
 
-        @media #{$tablet} {
+        @media #{$chatioTablet} {
           background-size: 345px auto;
         }
       }
@@ -95,7 +95,7 @@
         background: url('/assets/images/features-applications.png') no-repeat right 20px bottom;
         background-size: 24%;
 
-        @media #{$tablet} {
+        @media #{$chatioTablet} {
           background-size: 176px auto;
         }
       }
@@ -108,7 +108,7 @@
         background: url('/assets/images/features-integrations.png') no-repeat right bottom;
         background-size: 45%;
 
-        @media #{$tablet} {
+        @media #{$chatioTablet} {
           background-size: auto 176px;
         }
       }
@@ -120,7 +120,7 @@
     padding: 60px 0;
     text-align: center;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding: 120px 0 0;
     }
 

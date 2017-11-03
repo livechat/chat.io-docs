@@ -7,7 +7,7 @@
 // Old:
 
 $phone: "(min-width: 576px)";
-$tablet: "(min-width: 768px)";
+$chatioTablet: "(min-width: 768px)";
 $desktop: "(min-width: 992px)";
 $large-desktop: "(min-width: 1200px)";
 
@@ -24,6 +24,10 @@ $spacing: 25px;
 @import "layouts/features";
 @import "layouts/docs";
 @import "layouts/markdown";
+
+@import "~bulma/sass/utilities/_all";
+@import "~bulma/sass/grid/tiles";
+
 
 .table {
   display: block;
@@ -72,7 +76,7 @@ code {
 form {
   text-align: center;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     text-align: left;
   }
 
@@ -94,7 +98,7 @@ form {
     border: 1px solid #31374f;
     padding: 0 18px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       height: 37px;
       max-width: 250px;
       margin-right: 10px;
@@ -118,7 +122,7 @@ form {
   button {
     margin: 0 auto;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       margin-left: 0;
       margin-right: 0;
     }
@@ -146,7 +150,7 @@ form button,
   width: 100%;
   text-align: center;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     display: inline-block;
     width: 46px;
     min-width: auto;
@@ -163,7 +167,7 @@ form input:focus ~ button,
 form input:focus ~ .Button,
 form button:hover,
 .Button:hover {
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     width: 160px;
     text-indent: 26px;
   }
@@ -206,7 +210,7 @@ $sectionWidth: 1120px;
     padding: 0 20px;
     position: relative;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding: 0 0 0 85px;
     }
   }
@@ -230,7 +234,7 @@ $sectionWidth: 1120px;
     padding-top: 80px;
     padding-bottom: 150px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding-bottom: 80px;
     }
   }
@@ -241,12 +245,12 @@ $sectionWidth: 1120px;
     align-items: center;
     flex-direction: column-reverse;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       flex-direction: row;
     }
 
     &--reverse {
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         flex-direction: row-reverse;
       }
     }
@@ -260,7 +264,7 @@ $sectionWidth: 1120px;
         text-align: center;
       }
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         width: 45%;
       }
     }
@@ -272,13 +276,13 @@ $sectionWidth: 1120px;
   padding-left: 17px;
   border-left: 1px solid #3e7ce4;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     width: 50%;
     max-width: 235px;
   }
 
   &__Product {
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       align-self: flex-end;
       padding-top: 280px;
       margin-bottom: -30px;
@@ -286,7 +290,7 @@ $sectionWidth: 1120px;
   }
 
   &__Platform {
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding-bottom: 215px;
       align-self: flex-start;
       margin-top: -40px;
@@ -298,7 +302,7 @@ $sectionWidth: 1120px;
 .Pricing {
   padding: 30px 0;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     padding: 90px 0 70px 0;
   }
 
@@ -311,7 +315,7 @@ $sectionWidth: 1120px;
     background-position: center bottom;
     height: auto;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       height: 510px;
       background-position: right center;
       padding: 0 0 0 85px;
@@ -323,7 +327,7 @@ $sectionWidth: 1120px;
     margin-top: 20px;
     max-width: 300px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       margin-top: 140px;
     }
   }
@@ -335,7 +339,7 @@ $sectionWidth: 1120px;
   > div {
     height: auto;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       height: auto;
       padding: 80px 0 130px 0;
     }
@@ -368,7 +372,7 @@ $sectionWidth: 1120px;
   padding-bottom: 50px;
   overflow: hidden;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     padding-top: 200px;
   }
 
@@ -383,7 +387,7 @@ $sectionWidth: 1120px;
     flex-direction: column-reverse;
     padding: 0 20px 43vw 20px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       flex-direction: row;
       justify-content: space-between;
       padding: 0 150px 0 155px;
@@ -397,7 +401,7 @@ $sectionWidth: 1120px;
     height: auto;
     max-width: 550px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       position: absolute;
       top: 12%;
       left: 20%;
@@ -413,7 +417,7 @@ $sectionWidth: 1120px;
       transform-origin: 50% 50%;
       transform-style: preserve-3d;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         transform-origin: 85% 35%;
       }
     }
@@ -435,14 +439,14 @@ hr {
   position: relative;
   flex-direction: column;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     flex-direction: row;
   }
 
   &__Part {
     padding: 80px 0 200px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       width: 50%;
     }
 
@@ -452,7 +456,7 @@ hr {
       text-align: left;
       padding: 0 10px;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         padding: 0 0 0 10%;
         max-width: $sectionWidth/2;
       }
@@ -464,7 +468,7 @@ hr {
       > div {
         padding: 0 10px;
 
-        @media #{$tablet} {
+        @media #{$chatioTablet} {
           padding: 0 10% 0 0;
         }
       }
@@ -508,7 +512,7 @@ hr {
   }
 
   .Section__Flex > div {
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding-right: 50px;
     }
   }

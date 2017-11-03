@@ -1,7 +1,7 @@
 .PricingFeatures {
   padding: 20px 20px;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     padding: 100px 0 0 0;
   }
 
@@ -11,7 +11,7 @@
       justify-content: space-between;
       flex-direction: column;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         flex-direction: row;
       }
     }
@@ -21,7 +21,7 @@
     width: 100%;
     padding-bottom: 20px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       width: 50%;
       max-width: 455px;
       padding-bottom: 100px;
@@ -43,7 +43,7 @@
     justify-content: space-between;
     flex-direction: column;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding: 0 0 0 85px;
       height: 415px;
       flex-direction: row;
@@ -61,7 +61,7 @@
     width: 100%;
     padding-top: 60px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       width: 50%;
       max-width: 415px;
     }
@@ -75,7 +75,7 @@
     height: 80vw;
     position: relative;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       width: 50%;
       margin: 50px 100px 0;
       height: auto;
@@ -91,7 +91,7 @@
       font-size: 17px;
       top: 74%;
 
-      @media #{$tablet} {
+      @media #{$chatioTablet} {
         top: 72%;
         font-size: 21px;
       }
@@ -103,14 +103,14 @@
   padding: 20px 0;
   background: #f7fbfe;
 
-  @media #{$tablet} {
+  @media #{$chatioTablet} {
     padding: 100px 0;
   }
 
   > div {
     padding: 0 20px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       padding: 0 0 0 85px;
       display: flex;
       justify-content: space-between;
@@ -123,7 +123,7 @@
     vertical-align: top;
     margin-bottom: 40px;
 
-    @media #{$tablet} {
+    @media #{$chatioTablet} {
       max-width: 455px;
     }
 
