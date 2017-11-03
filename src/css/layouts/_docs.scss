@@ -6,9 +6,27 @@ $sidebarWidth: 260px;
   padding: 30px;
 }
 
+.version {
+  padding: 10px 20px;
+  &__label {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  &__select {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    padding: 4px;
+    margin: 0;
+    background: none;
+    border: none;
+    outline: none;
+  }
+}
 .docs {
+
   &__logo {
-    background-color: rgba(#364149, 0.8);
+    background-color: rgba(#364149, 0.3);
 
     &__home {
       color: rgba(#fff, 0.6);
