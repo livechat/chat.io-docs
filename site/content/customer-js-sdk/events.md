@@ -3,7 +3,7 @@ title: "Events"
 weight: 40
 ---
 
-## Events
+# Events
 
 You can listen for emitted events by subscribing to them (using [on method](#on)) with your custom JavaScript function.
 For example, your function can be executed every time a message has been received.

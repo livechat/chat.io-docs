@@ -3,9 +3,9 @@ title: "Methods"
 weight: 30
 ---
 
-## Methods
+# Methods
 
-### closeThread
+## closeThread
 ```js
 customerSDK.closeThread("ON0X0R0L67")
     .then(response => {
@@ -28,12 +28,12 @@ Returned value:
 | --------- | ---------------- |
 | success   | boolean          |
 
-### disconnect
+## disconnect
 ```js
 customerSDK.disconnect()
 ```
 
-### getChatHistory
+## getChatHistory
 
 Using this method makes loading more history events really simple. You need to get access to the `history` object
 for certain chat by calling this method. The returned `history` object has only one method, `next`, which gives you promise
@@ -99,7 +99,7 @@ Returned value:
 | users           | string[]         | Users' ids  |
 | lastEvent       | object           | Event       |
 -->
-### getChatThreads
+## getChatThreads
 
 In most cases you do not need to use this method directly. If you want to load more events consider using [`getChatHistory`](#getchathistory).
 
@@ -132,7 +132,7 @@ Returned value:
 | users               | string[]         | Users' ids                      |
 | events              | object[]         | Events                          |
 
-### getChatThreadsSummary
+## getChatThreadsSummary
 
 In most cases you do not need to use this method directly. If you want to load more events consider using [`getChatHistory`](#getchathistory).
 
@@ -169,15 +169,15 @@ Returned value:
 |                     |                  | totalEvents  | number  |
 | totalThreads        | number           |              |         |
 
-### off
+## off
 
 Used to unsubscribe from emitted events which are described [here](#events).
 
-### on
+## on
 
 Used to subscribe to emitted events which are described [here](#events).
 
-### sendEvent
+## sendEvent
 ```js
 const event = {
     type: "message",
@@ -202,7 +202,7 @@ Arguments:
 |           | type   | string | Type of the event     |
 |           | ...    |        | Other properties      |
 
-### sendMessage
+## sendMessage
 ```js
 const message = { text: "Hello" }
 
@@ -223,7 +223,7 @@ Arguments:
 | message   |        |        |                       |
 |           | text   | string | Customer's message    |
 
-### sendRating - not implemented yet
+## sendRating - not implemented yet
 ```js
 customerSDK.sendRating("ON0X0R0L67", {
     value: "good",
@@ -246,7 +246,7 @@ Arguments:
 |           | value   | 'good' / 'bad' | Rating value          |
 |           | comment | string         | Optional comment      |
 
-### setSneakPeek
+## setSneakPeek
 
 This method doesn't return a promise. It just sets the internal sneak peek value.
 It will be sent to the server only if the target chat is active and only once per 2 seconds (it's [throttled](https://lodash.com/docs/4.17.4#throttle)).
@@ -262,7 +262,7 @@ Arguments:
 | chat      | string | Destination chat id                      |
 | text      | string | Message preview broadcasted to the agent |
 
-### startChat
+## startChat
 ```js
 customerSDK.startChat({
     events: [],
@@ -330,7 +330,7 @@ Arguments:
 | thread        |            | string   |                    |
 | properties    |            |          |                    |-->
 
-### updateCustomer
+## updateCustomer
 ```js
 const properties = {
     name: 'John Doe',
@@ -361,7 +361,7 @@ Returned value:
 | --------- | ---------------- |
 | success   | boolean          |
 
-### updateLastSeenTimestamp
+## updateLastSeenTimestamp
 ```js
 customerSDK.updateLastSeenTimestamp("ON0X0R0L67", 1500646701447)
     .then(response => {
@@ -385,7 +385,7 @@ Returned value:
 | ----------- | ---------------- |
 | timestamp   | number           |
 
-### $$observable
+## $$observable
 
 You can consume all emitted events as a stream with [most](https://github.com/mostjs/core) of stream libraries like in example [RxJS](https://github.com/reactivex/rxjs).
 We provide an interop point for this, so you can easily convert our SDK to a stream like this:

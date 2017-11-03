@@ -1,6 +1,6 @@
 ---
 title: "Customer API"
-desc: "Embed a mobile chat window in an Android application."
+desc: "Join the conversation as a customer or build your own backend chat client."
 color: "#4484e7"
 weight: 30
 ---

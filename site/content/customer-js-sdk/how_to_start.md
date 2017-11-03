@@ -9,7 +9,7 @@ weight: 10
 
 You can use chat.io Customer JS SDK in two different ways:
 
-#### Using npm
+### Using npm
 
 `npm install --save @livechat/chat.io-customer-sdk`
 
@@ -21,7 +21,7 @@ or with node-style `require` call:
 
 `const chatIoCustomerSDK = require('@livechat/chat.io-customer-sdk')`
 
-#### Using script tag - UMD module hosted on unpkg's CDN
+### Using script tag - UMD module hosted on unpkg's CDN
 
 `<script src="https://unpkg.com/@livechat/chat.io-customer-sdk@0.1.2/dist/chat.io-customer-sdk.min.js"></script>`
 

@@ -16,7 +16,7 @@
 
           {{ if gt $headerLevel $prevHeaderLevel }}
             {{ range seq (sub $headerLevel $prevHeaderLevel) }}
-            <ul class="docs__toc__ul docs__toc__ul--l{{$prevHeaderLevel}}">
+            <ul class="docs__toc__ul docs__toc__ul--l{{$headerLevel}}">
             {{end}}
           {{end}}
 
