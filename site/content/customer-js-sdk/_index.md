@@ -1,5 +1,5 @@
 ---
 title: "Customer JS SDK"
-desc: "Build your own chat widget with easy-to-use JS library."
+desc: "If our default widget is not enough, build your own with this easy-to-use JS library."
 color: "#f5a623"
 ---
