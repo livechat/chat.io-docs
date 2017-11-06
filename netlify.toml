@@ -3,13 +3,13 @@
   publish = "dist"
 
 [[redirects]]
-  from = "/agent-api/*"
-  to = "/agent-api/v0.2/:splat"
+  from = "/agent-api/"
+  to = "/agent-api/v0.2/"
   status = 200
   force = false
 
 [[redirects]]
-  from = "/customer-api/*"
-  to = "/customer-api/v0.2/:splat"
+  from = "/customer-api/"
+  to = "/customer-api/v0.2/"
   status = 200
   force = false
