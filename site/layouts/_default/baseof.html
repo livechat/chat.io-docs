@@ -17,7 +17,15 @@
           'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-W9TN22J');</script>
   <!-- End Google Tag Manager -->
-  <style type="text/css">.docs__toc__li a.active {color: {{ .Params.color }} }</style>
+  <style type="text/css">
+    .docs__toc__li a.active {
+      color: {
+          {
+          .Params.color
+        }
+      }
+    }
+  </style>
 </head>
 
 <body class="{{ if .IsHome }}home{{ end }}">
@@ -33,27 +41,45 @@
       {{ if not .IsHome }}
       <aside class="docs__sidebar">
         <div class="docs__logo">
-          <div class="docs__logo__home"  style="background-color: {{ .Params.color }}">
-              <a href="https://www.chat.io/platform/"><img src="/docs/assets/images/home.svg" alt="chat.io" height="17"></a><img src="/docs/assets/images/breadcrumb.svg" alt=">" height="17" class="breadcrumb">
-            <a href="/docs/">docs</a><img src="/docs/assets/images/breadcrumb.svg" alt=">" height="17" class="breadcrumb"></a>
+          <div class="docs__logo__home" style="background-color: {{ .Params.color }}">
+            <a href="https://www.chat.io/platform/">
+              <img src="/docs/assets/images/home.svg" alt="chat.io" height="17">
+            </a>
+            <img src="/docs/assets/images/breadcrumb.svg" alt=">" height="17" class="breadcrumb">
+            <a href="/docs/">docs</a>
+            <img src="/docs/assets/images/breadcrumb.svg" alt=">" height="17" class="breadcrumb">
+            </a>
           </div>
           <div class="docs__logo__title" style="background-color: {{ .Params.color }}">
             {{.Title}}
           </div>
-
-          <div class="version">
-          <label class="version__label" for="version">Version:</label>
-            <select id="version" class="version__select" onchange="window.location.href=this.value">
-              <option value="">–––</option>
-            {{ $currentPage := . }}
-            {{ $menuName := "agentApi" }}
-            {{ range $index, $menu := $.Site.Menus.agentApi }}
-              <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
-            {{ end }}
-            </select>
           
+        {{ $currentPage := . }}
+
+        {{ if (eq $currentPage.Title "Agent API") }}
+          {{ $menuName := "agent_api" }}
+          <div class="version">
+            <label class="version__label" for="version">Version:</label>
+            <select id="version" class="version__select" onchange="window.location.href=this.value">
+              {{ range $index, $menu := $.Site.Menus.agent_api }}
+                <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
+              {{ end }}
+            </select>
+          </div>
+          
+        {{ else if (eq $currentPage.Title "Customer API") }}
+          {{ $menuName := "customer_api" }}
+          <div class="version">
+            <label class="version__label" for="version">Version:</label>
+            <select id="version" class="version__select" onchange="window.location.href=this.value">
+              {{ range $index, $menu := $.Site.Menus.customer_api }}
+                <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
+              {{ end }}
+            </select>
+          </div>
+        {{ end }}
         </div>
-        </div>
+
         <div class="docs__sidebar-nav">
           <nav class="docs__toc">
             <ul class="docs__toc__ul docs__toc__ul--l1">
@@ -63,13 +89,13 @@
               </li>
               {{ end }}
             </ul>
-            <div class="docs__toc__footer">Don't have your Developer Account yet? <a href="https://console.chat.io/" target="_blank">Get one!</a></div>
+            <div class="docs__toc__footer">Don't have your Developer Account yet?
+              <a href="https://console.chat.io/" target="_blank">Get one!</a>
+            </div>
           </nav>
         </div>
       </aside>
-      {{ end }}
-
-      {{ if not .IsHome }}
+      {{ end }} {{ if not .IsHome }}
       <section class="docs__content">
         <article class="markdown-body">
           {{ block "main" . }} {{ end }}

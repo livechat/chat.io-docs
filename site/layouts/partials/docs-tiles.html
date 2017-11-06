@@ -13,14 +13,12 @@
         <div class="tile is-ancestor">
     {{end}}
 
-    <div class="tile is-parent">
+    <div class="tile is-4 is-parent">
         <a class="tile is-link is-child box content" href="{{.Permalink}}"  style="background-color: {{ .Params.color }}">
             <h3>{{.Title}}</h3>
             <p>{{.Params.desc}}</p>
         </a>
     </div>
-
-
 
     {{if eq $section $len }}
     </div>
