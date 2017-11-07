@@ -18,13 +18,8 @@
     })(window, document, 'script', 'dataLayer', 'GTM-W9TN22J');</script>
   <!-- End Google Tag Manager -->
   <style type="text/css">
-    .docs__toc__li a.active {
-      color: {
-          {
-          .Params.color
-        }
-      }
-    }
+    .docs__toc__li a.active {color: {{.Params.color}}}
+    .subnav__link--active {border-color:{{.Params.color}}}
   </style>
 </head>
 
@@ -53,15 +48,24 @@
           <div class="docs__logo__title" style="background-color: {{ .Params.color }}">
             {{.Title}}
           </div>
-          
-        {{ $currentPage := . }}
 
-        {{ if (eq $currentPage.Title "Agent API") }}
+        {{ $currentPage := . }}
           {{ $menuName := "agent_api" }}
+          <div class="subnav">
+              {{ range $index, $menu := $.Site.Menus.agent_api }}
+              
+              {{ $menuParts := index ( split $menu.URL "/" ) 3}}
+              {{ $urlParts := index ( split $currentPage.URL "/" ) 3}}
+              <a class="subnav__link {{if eq $urlParts $menuParts }} subnav__link--active{{end}}" href="{{ .URL }}">{{ .Identifier }}</a>
+            {{ end }}
+          </div>
+        
+        {{ if (eq $currentPage.Title "Agent API Reference") }}
+          {{ $menuName := "agent_api_reference" }}
           <div class="version">
             <label class="version__label" for="version">Version:</label>
             <select id="version" class="version__select" onchange="window.location.href=this.value">
-              {{ range $index, $menu := $.Site.Menus.agent_api }}
+              {{ range $index, $menu := $.Site.Menus.agent_api_reference }}
                 <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
               {{ end }}
             </select>

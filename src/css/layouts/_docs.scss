@@ -7,6 +7,7 @@ $sidebarWidth: 260px;
 }
 
 .version {
+  background-color: rgba(#364149, 0.2);
   padding: 10px 20px;
   &__label {
     font-size: 14px;
@@ -23,11 +24,29 @@ $sidebarWidth: 260px;
     outline: none;
   }
 }
+
+.subnav {
+  background-color: rgba(#364149, 0.1);
+  padding: 0 20px;
+
+  &__link {
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    // font-size: 14px;
+    padding: 10px 4px 6px;
+    margin: 0;
+    background: none;
+    border: none;
+    outline: none;
+    &--active {
+      border-bottom: 4px solid rgba(#364149, 1);
+    }
+  }
+}
+
 .docs {
 
   &__logo {
-    background-color: rgba(#364149, 0.3);
-
     &__home {
       color: rgba(#fff, 0.6);
       font-size: 12px;
@@ -105,30 +124,6 @@ $sidebarWidth: 260px;
     }
   }
 
-  &__version {
-    float: right;
-    font-size: 12px;
-    background-color: #f6f8fa;
-    border-radius: 3px;
-    padding: 15px;
-    width: calc(100% - 410px);
-    z-index: 10;
-    margin-top: 40px;
-    margin-right: 50px;
-
-    @media #{$large-desktop} {
-      float: right;
-      width: 200px;
-      margin: 150px 20px 0 10px;
-    }
-
-    ul {
-      padding: 0 0 0 10px;
-      margin: -10px 0 0 0;
-      list-style-type: none;
-    }
-  }
-
   &__toc {
     &__ul {
       list-style-type: none;
@@ -167,17 +162,30 @@ $sidebarWidth: 260px;
         font-size: 0.9em;
         color: rgba(#364149, 0.85);
         position: relative;
+        &:before {
+          content: " ";
+          display: inline-block;
+          // position: absolute;
+          vertical-align: middle;
+          margin-right: 5px;
+          margin-bottom: 3px;
+          width: 2px;
+          height: 2px;
+          border-radius: 50%;
+          background-color: rgba(#364149, 0.3);
+          // left: -10px;
+        }
       }
     }
 
     &__li {
       //   border: 1px solid red;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow-x: hidden;
       display: block;
 
       a {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow-x: hidden;  
         display: block;
         padding: 4px 0 2px;
         position: relative;

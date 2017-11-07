@@ -1,9 +1,9 @@
 ---
-title: "Agent API"
+title: "Agent API Reference"
 version: "0.3-dev-preview"
 menu: 
-    agent_api: 
-        identifier: "0.3 developer preview"
+    agent_api_reference:
+        identifier: "0.3 dev preview"
 desc: "Embed a mobile chat window in an Android application."
 color: "#ee5201"
 ---

@@ -1,3 +1,10 @@
+---
+title: 'Agent API Changelog'
+weight: 40
+---
+
+# Changelog
+
 ## [v0.3-beta]
 
 ### Added

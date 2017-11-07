@@ -8,7 +8,7 @@ weight: 40
 You can listen for emitted events by subscribing to them (using [on method](#on)) with your custom JavaScript function.
 For example, your function can be executed every time a message has been received.
 
-### connected
+## connected
 
 ```js
 api.on('connected', payload => {
@@ -28,7 +28,7 @@ Payload:
 |                  |          | lastEvent | object           | Event       |
 | totalChats       | number   |           |                  |             |
 
-### connection_lost
+## connection_lost
 
 ```js
 api.on('connection_lost', () => {
@@ -38,7 +38,7 @@ api.on('connection_lost', () => {
 
 This event doesn't carry any additional payload.
 
-### connection_restored
+## connection_restored
 
 ```js
 api.on('connection_restored', payload => {
@@ -58,7 +58,7 @@ Payload:
 |                  |          | lastEvent | object           | Event       |
 | totalChats       | number   |           |                  |             |
 
-### customer_id
+## customer_id
 
 ```js
 api.on('customer_id', id => {
@@ -72,7 +72,7 @@ Payload:
 | ---------------- | -------- |
 | id               | string   |
 
-### disconnected
+## disconnected
 
 ```js
 api.on('disconnected', reason => {
@@ -120,7 +120,7 @@ Payload:
 | thread     | string  | Thread's id                   |
 | properties | object  | Thread properties             |-->
 
-### last_seen_timestamp_updated
+## last_seen_timestamp_updated
 
 ```js
 api.on('last_seen_timestamp_updated', payload => {
@@ -138,7 +138,7 @@ Payload:
 | user       | string  | User's id                     |
 | timestamp  | number  |                               |
 
-### new_event
+## new_event
 
 You should distinguish received events by their types.
 
@@ -161,7 +161,7 @@ Payload:
 | type       | string  | Event's type                  |
 | ...        |         | Other properties              |
 
-### user_data
+## user_data
 
 ```js
 api.on('user_data', (user) => {
@@ -175,7 +175,7 @@ User:
 | ---------- | ------- | ----------------------------- |
 |            |         |                               |
 
-### user_is_typing
+## user_is_typing
 
 ```js
 api.on('user_is_typing', (payload) => {
@@ -190,7 +190,7 @@ Payload:
 | chat       | string  | Chat's id                     |
 | user       | string  | User's id                     |
 
-### user_stopped_typing
+## user_stopped_typing
 
 ```js
 api.on('user_stopped_typing', (payload) => {
@@ -205,7 +205,7 @@ Payload:
 | chat       | string  | Chat's id                     |
 | user       | string  | User's id                     |
 
-### thread_closed
+## thread_closed
 
 ```js
 api.on('thread_closed', ({ chat }) => {
@@ -219,7 +219,7 @@ Payload:
 | ---------- | ------- | ----------------------------- |
 | chat       | string  | Chat's id                     |
 
-### thread_metada
+## thread_metada
 
 ```js
 api.on('thread_metada', (metadata) => {
