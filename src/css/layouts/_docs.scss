@@ -1,5 +1,10 @@
 $sidebarWidth: 260px;
 
+
+.hide {
+  display: none;
+}
+
 .home-wrapper {
   max-width: 1100px;
   margin: 0 auto;
@@ -30,7 +35,7 @@ $sidebarWidth: 260px;
 
 .subnav {
   background-color: rgba(#fff, .8);
-  padding: 0 20px;
+  padding: 0 16px;
 
   &__link {
     display: inline-block;

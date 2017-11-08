@@ -1,4 +1,8 @@
-<!--* [Introduction](#introduction)
+<div class="hide">
+
+# Agent API
+
+* [Introduction](#introduction)
   * [Web API](#web-api)
   * [Real-Time Messaging API](#real-time-messaging-api)
   * [Authentication](#authentication)
@@ -56,7 +60,8 @@
   * [Chat properties updated](#chat-properties-updated)
   * [Chat thread properties updated](#chat-thread-properties-updated)
   * [Last seen timestamp updated](#last-seen-timestamp-updated)
--->
+
+</div>
 
 ## Introduction
 
