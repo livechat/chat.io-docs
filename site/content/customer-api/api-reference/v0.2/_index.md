@@ -5,5 +5,7 @@ color: "#4484e7"
 version: "0.2"
 menu: 
     customer_api: 
+        identifier: "API Reference"
+    customer_api_reference:
         identifier: "0.2"
 ---

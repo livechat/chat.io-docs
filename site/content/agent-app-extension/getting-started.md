@@ -4,6 +4,7 @@ weight: 30
 
 # Getting Started
 
+
 1. Go to the <a href="https://console.chat.io/apps">chat.io Developers Console</a>.
 2. Create a new app and follow the app wizard.
 3. Set up app name, descriptions and icon in **Display** settings.

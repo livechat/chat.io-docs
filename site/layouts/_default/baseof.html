@@ -50,38 +50,56 @@
           </div>
 
         {{ $currentPage := . }}
+
+
+        {{ if (in $currentPage.URL "agent-api") }}
           {{ $menuName := "agent_api" }}
           <div class="subnav">
               {{ range $index, $menu := $.Site.Menus.agent_api }}
               
-              {{ $menuParts := index ( split $menu.URL "/" ) 3}}
-              {{ $urlParts := index ( split $currentPage.URL "/" ) 3}}
-              <a class="subnav__link {{if eq $urlParts $menuParts }} subnav__link--active{{end}}" href="{{ .URL }}">{{ .Identifier }}</a>
+              {{ $menuUrl := index ( split $menu.URL "/" ) 3}}
+              {{ $currentUrl := index ( split $currentPage.URL "/" ) 3}}
+              <a class="subnav__link {{if eq $currentUrl $menuUrl }} subnav__link--active{{end}}" href="{{ .URL }}">{{ .Identifier }}</a>
             {{ end }}
           </div>
-        
-        {{ if (eq $currentPage.Title "Agent API Reference") }}
-          {{ $menuName := "agent_api_reference" }}
-          <div class="version">
-            <label class="version__label" for="version">Version:</label>
-            <select id="version" class="version__select" onchange="window.location.href=this.value">
-              {{ range $index, $menu := $.Site.Menus.agent_api_reference }}
-                <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
+
+          {{ if (in $currentPage.URL "api-reference") }}
+            {{ $menuName := "agent_api_reference" }}
+            <div class="version">
+              <label class="version__label" for="version">Version:</label>
+              <select id="version" class="version__select" onchange="window.location.href=this.value">
+                {{ range $index, $menu := $.Site.Menus.agent_api_reference }}
+                  <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
+                {{ end }}
+              </select>
+            </div>
+            {{ end }}
+
+        {{ else if (in $currentPage.URL "customer-api") }}
+            {{ $menuName := "customer_api" }}
+            <div class="subnav">
+                {{ range $index, $menu := $.Site.Menus.customer_api }}
+                
+                {{ $menuUrl := index ( split $menu.URL "/" ) 3}}
+                {{ $currentUrl := index ( split $currentPage.URL "/" ) 3}}
+                <a class="subnav__link {{if eq $currentUrl $menuUrl }} subnav__link--active{{end}}" href="{{ .URL }}">{{ .Identifier }}</a>
               {{ end }}
-            </select>
-          </div>
-          
-        {{ else if (eq $currentPage.Title "Customer API") }}
-          {{ $menuName := "customer_api" }}
-          <div class="version">
-            <label class="version__label" for="version">Version:</label>
-            <select id="version" class="version__select" onchange="window.location.href=this.value">
-              {{ range $index, $menu := $.Site.Menus.customer_api }}
-                <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
-              {{ end }}
-            </select>
-          </div>
+            </div>
+  
+            {{ if (in $currentPage.URL "api-reference") }}
+              {{ $menuName := "customer_api_reference" }}
+              <div class="version">
+                <label class="version__label" for="version">Version:</label>
+                <select id="version" class="version__select" onchange="window.location.href=this.value">
+                  {{ range $index, $menu := $.Site.Menus.customer_api_reference }}
+                    <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
+                  {{ end }}
+                </select>
+              </div>
+            {{ end }}
         {{ end }}
+
+
         </div>
 
         <div class="docs__sidebar-nav">

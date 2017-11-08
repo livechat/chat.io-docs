@@ -1,5 +1,5 @@
 ---
-title: "Agent API Reference"
+title: "Agent API"
 version: "0.3-dev-preview"
 menu: 
     agent_api_reference:
