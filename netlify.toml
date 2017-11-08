@@ -1,14 +1,3 @@
 [build]
   command = "npm run build"
   publish = "dist"
-
-redirects = [
-  {from = "/docs/agent-api", to = "/docs/agent-api/v0.2", status = 200, force = true},
-  {from = "/agent-api", to = "/agent-api/v0.2", status = 200, force = true}
-  ]
-
-[[redirects]]
-  from = "/docs/customer-api"
-  to = "/docs/customer-api/v0.2"
-  status = 200
-  force = false
