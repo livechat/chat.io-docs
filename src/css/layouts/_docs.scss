@@ -7,7 +7,10 @@ $sidebarWidth: 260px;
 }
 
 .version {
-  background-color: rgba(#364149, 0.2);
+  background-color: rgba(#364149, 0.1);
+  // background-color: rgba(#fff, .1);
+  // border-bottom: 1px solid rgba(#364149, .1);
+  // border-top: 1px solid rgba(#364149, .1);
   padding: 10px 20px;
   &__label {
     font-size: 14px;
@@ -26,7 +29,7 @@ $sidebarWidth: 260px;
 }
 
 .subnav {
-  background-color: rgba(#364149, 0.1);
+  background-color: rgba(#fff, .8);
   padding: 0 20px;
 
   &__link {
