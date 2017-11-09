@@ -1,5 +1,9 @@
 import WebFont from "webfontloader";
 
+import * as $ from 'jquery';
+import 'bootstrap/js/src/util';
+import 'bootstrap/js/src/scrollspy';
+
 WebFont.load({
   google: {
     families: ["Poppins:700", "Roboto:300,400,700", "Roboto Slab:300"]
@@ -85,31 +89,23 @@ function throttle(fn, wait) {
 function scrollSpy() {
   "use strict";
 
-  const section = document.querySelectorAll("h1,h2,h3");
-  const offset = 40;
-  let sections = {};
-
-  Array.prototype.forEach.call(section, function(e) {
-    sections[e.id] = e.offsetTop;
-  });
-  
   updateMenu()
-  window.addEventListener("scroll", throttle(updateMenu, 50));
+
+  window.addEventListener("scroll", updateMenu);
 
   function updateMenu() {
-    var scrollPosition =
-      document.documentElement.scrollTop || document.body.scrollTop;
-      
-    for (var section in sections) {
-      if (sections[section] <= scrollPosition + offset) {
-        let active = document.querySelector(".active");
-        let links = document.querySelector("a[href*=" + section + "]");
+    const sections = $(".active").siblings(".docs__toc__ul");
+    const activeSections = $(".docs__toc__ul");
 
-        if (active) active.setAttribute("class", " ");
-        if (links) links.setAttribute("class", "active");
-      }
-    }
+    [].forEach.call(activeSections, (el) => {
+      $(el).removeClass('docs__toc__ul--active')
+    });
+    [].forEach.call(sections, (el) => {
+      $(el).addClass('docs__toc__ul--active')
+    });
+
   }
+   
 }
 
 if (document.querySelector(".docs__sidebar")) 
