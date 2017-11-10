@@ -5,7 +5,7 @@ mix.autoload({
 })
 
 mix.copy('src/_redirects', 'dist/_redirects')
-   .react('src/js/app.js', 'dist/docs/js')
+   .scripts('src/js/app.js', 'dist/docs/js')
    .sass('src/css/app.scss', 'dist/docs/css')
    .options({
       processCssUrls: false
