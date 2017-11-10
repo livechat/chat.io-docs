@@ -1,9 +1,5 @@
 import WebFont from "webfontloader";
-import * as Util from 'bootstrap/js/dist/util.js';
-window.Util = Util
-console.log(Util)
-
-import 'bootstrap/js/dist/scrollspy.js';
+import 'bootstrap/js/src/scrollspy';
 
 WebFont.load({
   google: {

@@ -3,10 +3,10 @@ let mix = require('laravel-mix');
 mix.autoload({
   'jquery': ['jQuery', '$']
 })
+
 mix.copy('src/_redirects', 'dist/_redirects')
-   .js('src/js/app.js', 'dist/docs/js')
+   .react('src/js/app.js', 'dist/docs/js')
    .sass('src/css/app.scss', 'dist/docs/css')
-   .sourceMaps()
    .options({
       processCssUrls: false
    })
