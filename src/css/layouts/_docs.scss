@@ -136,7 +136,7 @@ $sidebarWidth: 260px;
       list-style-type: none;
       margin: 0;
       padding: 0;
-      transition: max-height .1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: max-height .2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       // height: 0;
       overflow-y: hidden;
 
@@ -159,28 +159,69 @@ $sidebarWidth: 260px;
         // transition: transform 0.26s ease;
         // overflow-y: hidden;
       }
+      &--l0 > li > a {
+        &.active {
+          &:before { transform: rotate(-90deg); }
+        }
+        &:before {
+          content: " ";
+          display: inline-block;
+          // position: absolute;
+          transition: transform .1s ease-in-out;
+          vertical-align: middle;
+          margin-right: 4px;
+          margin-bottom: 3px;
+          width: 14px;
+          height: 14px;
+          background-image: url('./../assets/icons/menu-arrow.svg');
+          background-position: center;
+          background-size: 100% 100%;
+          // left: -10px;
+        }
+      }
       &--l1 > li > a {
-
+        &.active {
+          &:before { transform: rotate(-90deg); }
+        }
+        &:before {
+          content: " ";
+          display: inline-block;
+          transition: transform .1s ease-in-out;
+          vertical-align: middle;
+          margin-right: 4px;
+          margin-bottom: 3px;
+          width: 12px;
+          height: 12px;
+          background-image: url('./../assets/icons/menu-arrow.svg');
+          background-position: center;
+          background-size: 100% 100%;
+        }
       }
       &--l2 > li > a {
+        &.active {
+          &:before { transform: rotate(-90deg); }
+        }
         padding: 6px 20px 6px 30px;
         font-size: 0.9em;
         color: rgba(#364149, 0.9);
         &:before {
           content: " ";
           display: inline-block;
-          // position: absolute;
+          transition: transform .1s ease-in-out;
           vertical-align: middle;
-          margin-right: 5px;
+          margin-right: 4px;
           margin-bottom: 3px;
-          width: 3px;
-          height: 3px;
-          border-radius: 50%;
-          background-color: rgba(#364149, 0.3);
-          // left: -10px;
+          width: 12px;
+          height: 12px;
+          background-image: url('./../assets/icons/menu-arrow.svg');
+          background-position: center;
+          background-size: 100% 100%;
         }
       }
       &--l3 > li > a {
+        &.active {
+          &:before { transform: rotate(-90deg); }
+        }
         padding: 4px 20px 4px 40px;
         font-size: 0.9em;
         color: rgba(#364149, 0.85);
@@ -188,20 +229,20 @@ $sidebarWidth: 260px;
         &:before {
           content: " ";
           display: inline-block;
-          // position: absolute;
+          transition: transform .1s ease-in-out;
           vertical-align: middle;
-          margin-right: 5px;
+          margin-right: 4px;
           margin-bottom: 3px;
-          width: 2px;
-          height: 2px;
-          border-radius: 50%;
-          background-color: rgba(#364149, 0.3);
-          // left: -10px;
+          width: 10px;
+          height: 10px;
+          background-image: url('./../assets/icons/menu-arrow.svg');
+          background-position: center;
+          background-size: 100% 100%;
         }
       }
       &--active {  
         max-height: 100vh;
-        background-color: rgba(#364149, 0.03);
+        background-color: rgba(#fff, 0.5);
       }
     }
 
@@ -216,7 +257,7 @@ $sidebarWidth: 260px;
         display: block;
         padding: 6px 20px;
         position: relative;
-        transition: all 0.1s;
+        transition: color 0.1s ease-in-out;
         color: #364149;
 
         &:hover {
@@ -227,8 +268,6 @@ $sidebarWidth: 260px;
       a.active {
         color: $link-color;
       }
-
-      .active {}
     }
 
     &__footer {

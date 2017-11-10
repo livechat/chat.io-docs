@@ -97,6 +97,7 @@ function scrollSpy() {
     [].forEach.call(activeSections, (el) => {
       $(el).removeClass('docs__toc__ul--active')
     });
+
     [].forEach.call(sections, (el) => {
       $(el).addClass('docs__toc__ul--active')
     });
