@@ -1,7 +1,8 @@
 import WebFont from "webfontloader";
-import Util from 'bootstrap/js/dist/util.js';
+import * as Util from 'bootstrap/js/dist/util.js';
 window.Util = Util
 console.log(Util)
+
 import 'bootstrap/js/dist/scrollspy.js';
 
 WebFont.load({
