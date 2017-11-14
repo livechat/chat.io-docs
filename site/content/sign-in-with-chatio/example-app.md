@@ -29,4 +29,4 @@ AccountsSDK.init({
 </body>
 </html>
 ```
-This example app displays LiveChat user's license number when user clicks the "Sign in with LiveChat" button.
+This example app displays chat.io user's license number when user clicks the "Sign in with chat.io" button.
