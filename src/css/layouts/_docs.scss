@@ -319,6 +319,13 @@ $sidebarWidth: 260px;
       color: rgba(#fff, 0.8);
     }
 
+    &.coming-soon {
+      &:before {
+        content: 'coming soon';
+
+      }
+    }
+
     &--large {
       p {
         max-width: 400px;
