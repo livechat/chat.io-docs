@@ -37,7 +37,7 @@ const customerSDK = chatIoCustomerSDK.init({
 })
 ```
 
-With `customerSDK`, you can attach [callbacks](#callbacks):
+With `customerSDK`, you can attach [events](#events):
 
 ```js
 customerSDK.on('new_event', newEvent => {
@@ -59,5 +59,3 @@ customerSDK.sendMessage(chatId, {
         console.log(error)
     })
 ```
-
-
