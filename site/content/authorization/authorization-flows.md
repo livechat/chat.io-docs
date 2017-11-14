@@ -1,8 +1,7 @@
 # Authorization flows
 All apps integrated with chat.io must be first created in [chat.io Developers Console](https://console.chat.io). When a user starts using your app, they will see what parts of his account your app will have access to:
 
-<img src="../__images/authorization/grant-access.png" style="border: 1px solid #ddd" />
-
+<!-- screenshot -->
 When a user allows the access, your app will receive an `access_token` that will let you access their account.
 
 There are a few scenarios in which you can acquire an `access_token`:
@@ -16,24 +15,22 @@ There are a few scenarios in which you can acquire an `access_token`:
 ## Sign in with chat.io
 "Sign in with chat.io" button is the easiest way to collect `access_token` from a chat.io user.
 
-<img src="../__images/authorization/sign-in-with-livechat.png" style="border: 1px solid #ddd" />
-
+<!-- screenshot -->
 In this scenario, chat.io user enters your website with a "Sign in with chat.io" button installed. After clicking the button, they enter chat.io login and password in a pop-up window and grant access to some parts of their account.
 
-In return, you acquire an `access_token` which can be used to call [REST API](/rest-api) methods.
+In return, you acquire an `access_token` which can be used to call [Customer API](/customer-api) or [Agent API](/customer-api) methods.
 
 Read more how to implement this flow in a dedicated ["Sign in with chat.io"](/sign-in-with-livechat) article.
 
 ## Public web apps
 
-Public web apps are JavaScript applications that can access any chat.io customer account. Examples of public web apps are [chat.io's Agent App](https://my.livechatinc.com/) and [Developers Console](https://console.chat.io).
+Public web apps are JavaScript applications that can access any chat.io customer account. 
 
 To set up your own public app, you must define the URL of the app and the list of scopes – parts of chat.io account your app will have access to. chat.io customer who enters your app URL is be asked to enter their login and password and grant access for your app.
 
 Then, the user is redirected to your app with `access_token` included in the URL.
 
-<img src="../__images/authorization/public-web-app.png" style="border: 1px solid #ddd" />
-
+<!-- screenshot -->
 ### 1. Create the app
 Go to [Developers Console](https://console.chat.io) and create a new "chat.io OAuth 2.0 Client" app. **Redirect URI** is the address of your app that will receive `access_token` in a URL. **Scopes** is a list of permissions your app will get.
 
@@ -81,7 +78,7 @@ After successful authorization, the user is redirected back to your app. The URL
 
 Your application should remember `access_token` in localStorage or a cookie until it expires. Caching the token prevents you from redirecting the user to chat.io OAuth Server every time he visits your app.
 
-### Example app
+<!--### Example app
 
 > This example private web application fetches chat.io agents list and logs it in the console.
 
@@ -157,6 +154,7 @@ You should update `clientId` and `redirectUri` params from the example to match 
 
 Please note that the actual REST API request is performed by the backend script (in this case, PHP) because chat.io REST API does not allow cross-domain requests.
 
+-->
 
 ## Private web apps
 
@@ -167,15 +165,16 @@ Private web apps work the very same way like [public web apps](#public-web-apps)
 To start building a private web app, set it up [chat.io Developers Console](https://console.chat.io).
 
 ## Public server-side apps
+
 Public server-side apps are applications that have access to user's data for unlimited time.
 
 When your application wants to acquire the `access_token`, you must redirect the user to chat.io OAuth Server only once. After successful authorization, the user is redirected back to your app along with a single-use authorization code.
 
 Your application exchanges the authorization code for an `access_token` and `refresh_token`. From now now, you can generate new `access_tokens` indefinitely without any action required from the user.
 
-<img src="../__images/authorization/public-backend-app.png" style="border: 1px solid #ddd" />
-
+<!-- screenshot -->
 ### 1. Create the app
+
 Go to [Developers Console](https://console.chat.io) to create a new server-side app. **Redirect URI** is the address of your app that will receive authorization `code` in a URL. **Scopes** is a list of permissions your app will get.
 
 ### 2. Redirect o chat.io OAuth Server
@@ -361,6 +360,5 @@ The response will include the following params in JSON format:
 ## Private server-side apps (coming soon)
 Private apps can be used only on accounts chosen by the developer.
 
-<img src="../__images/authorization/private-backend-app.png" style="border: 1px solid #ddd" />
-
+<!-- screenshot -->
 This authorization flow is not yet available.

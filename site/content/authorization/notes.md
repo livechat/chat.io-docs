@@ -17,19 +17,3 @@ URI is composed of several parts:
 * path (`/info`, `/test`, ...) - is optional, client redirect URI path must be a substring of authorization request redirect path, path traversals are forbidden,
 * query (`?size=20`, ...) - is forbidden,
 * fragment (`#paragraph`) - is forbidden.
-
-**Examples:**
-
-| client redirect configuration      | authorization redirect URI            | is valid|
-| ---------------------------------- |:--------------------------------------| --------|
-| http://livechatinc.com             | http://livechatinc.com                | yes     |
-| http://livechatinc.com             | http://livechatinc.com/archives       | yes     |
-| http://livechatinc.com             | http://livechatinc.com/archives/../   | no      |
-| http://livechatinc.com/archives    | http://livechatinc.com                | no      |
-| http://livechatinc.com/archives    | http://livechatinc.com/archives       | yes     |
-| http://livechatinc.com/archives    | http://livechatinc.com/archives/chats | yes     |
-| http://localhost:3000              | http://localhost:3000                 | yes     |
-| http://127.0.0.1:3000              | http://127.0.0.1:3000                 | yes     |
-| http://localhost:3000              | http://localhost:4000                 | no      |
-| https://livechatinc.com            | http://livechatinc.com                | no      |
-| http://livechatinc.com             | https://livechatinc.com               | no      |
