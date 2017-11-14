@@ -11,7 +11,7 @@ menu:
 
 ## Overview
 
-With Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](./customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases. 
+With Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](/docs/customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases. 
 
 ## Use cases
 
@@ -23,7 +23,7 @@ You can use Agent API to build your very own Agent App, perform chats in the nam
 
 To use this tool you need to have basic knowledge about REST or websocket APIs, OAuth 2.0 protocol and your technology of choice. We've got examples ready in JavaScrip, Go and Pyhon.
 
-If you want to perform a chat from the customer perspective, you should use [Customer API](./customer-api).
+If you want to perform a chat from the customer perspective, you should use [Customer API](/docs/customer-api).
 
 Keep in mind this API is under heavy development. We introduce changes every month. If you want to stay updated, follow the changelog below.
 
