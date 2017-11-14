@@ -1,3 +1,7 @@
+---
+weight: 40
+---
+
 # Example app
 ```html
 <!DOCTYPE html>
@@ -8,10 +12,10 @@
 <body>
 
 <h1>Hello, world!</h1>
-<div class="livechat-login-button"></div>
+<div class="chatio-login-button"></div>
 <div id="license"></div>
 
-<script src="//cdn.livechatinc.com/accounts/accounts-sdk.min.js"></script>
+<script src="//cdn.livechatinc.com/accounts/chatio/accounts-sdk.min.js"></script>
 <script>
 AccountsSDK.init({
   client_id: '<your_client_id>',

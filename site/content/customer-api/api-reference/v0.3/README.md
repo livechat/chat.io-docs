@@ -1,3 +1,56 @@
+<div class="hide">
+# Customer Chat API
+
+* [Introduction](#introduction)
+  * [Web API](#web-api)
+  * [Real-Time Messaging API](#real-time-messaging-api)
+  * [Authentication](#authentication)
+  * [Events order](#events-order)
+* [Examples](#examples)
+  * [JavaScript](#javascript)
+  * [Go](#go)
+  * [Python](#python)
+* [Objects](#objects)
+  * [Chat](#chat)
+  * [Thread](#thread)
+  * [User](#user)
+  * [Event](#event)
+  * [Typing indicator](#typing-indicator)
+  * [Sneak peek](#sneak-peek)
+  * [Scopes](#scopes)
+  * [Properties](#properties)
+* [Errors handling](#errors-handling)
+  * [Format](#format)
+  * [Possible errors](#possible-errors)
+* [Methods](#methods)
+  * [Login](#login)
+  * [Get chats summary](#get-chats-summary)
+  * [Get chat threads](#get-chat-threads)
+  * [Get chat threads summary](#get-chat-threads-summary)
+  * [Start chat](#start-chat)
+  * [Send event](#send-event)
+  * [Send file](#send-file)
+  * [Send sneak peek](#send-sneak-peek)
+  * [Close thread](#close-thread)
+  * [Update chat scopes](#update-chat-scopes)
+  * [Update customer](#update-customer)
+  * [Update chat properties](#update-chat-properties)
+  * [Update chat thread properties](#update-chat-thread-properties)
+  * [Update last seen timestamp](#update-last-seen-timestamp)
+* [Pushes](#pushes)
+  * [Incoming chat thread](#incoming-chat-thread)
+  * [Chat users updated](#chat-users-updated)
+  * [Incoming event](#incoming-event)
+  * [Incoming typing indicator](#incoming-typing-indicator)
+  * [Customer disconnected](#customer-disconnected)
+  * [Thread closed](#thread-closed)
+  * [Chat scopes updated](#chat-scopes-updated)
+  * [Customer updated](#customer-updated)
+  * [Chat properties updated](#chat-properties-updated)
+  * [Chat thread properties updated](#chat-thread-properties-updated)
+  * [Last seen timestamp updated](#last-seen-timestamp-updated)
+</div>
+
 ## Introduction
 
 This documentation describes version **v0.3** of customer-api.
@@ -14,12 +67,15 @@ API endpoint:
 |--------|----------------|
 | `POST` | `https://api.chat.io/customer/v0.3/action/<action>` |
 
-Client should send `Content-Type` header:
+Required headers:
 
-* `multipart/form-data; boundary=<boundary>` for `send_file` action
-* `application/json` for every other action 
+| Header | Value | Notes |
+| --- | --- | --- |
+| `Content-Type` | `multipart/form-data; boundary=<boundary>` | Valid for `send_file` action |
+| | `application/json` | Valid for every action except `send_file` |
+| `Authorization` | `Bearer <token>` | Access token |
 
-Client must also send query string params in every request to Web API:
+Client should send query string params in every request to Web API:
 
 | Param | Required | Type | Notes |
 |--|--|--|--|
@@ -68,7 +124,7 @@ Client should implement server pinging or connection will be closed after about 
 Request
 ```js
 {
-	"id": "<request_id>",
+	"request_id": "<request_id>",
 	"action": "<action>",
 	"payload": {
 		// optional payload
@@ -79,7 +135,7 @@ Request
 Response
 ```js
 {
-	"id": "<request_id>",
+	"request_id": "<request_id>",
 	"action": "<action>",
 	"type": "response",
 	"success": true,
@@ -92,6 +148,7 @@ Response
 Push
 ```js
 {
+	"request_id": "<request_id>", // optional
 	"action": "<action>",
 	"type": "push",
 	"payload": {
@@ -99,6 +156,8 @@ Push
 	}
 }
 ```
+
+Note: `request_id` applies only for requester, other users will not receive this `request_id`.
 
 ### Authentication
 Customer authentication is done with access token. It can be obtained from customer sso.
@@ -777,9 +836,9 @@ Request payload:
 
 Example request payload
 ```
-  chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
-  custom_id=12345-bhdsa
-  file=test.png
+	chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
+	custom_id=12345-bhdsa
+	file=test.png
 ```
 
 No response payload.

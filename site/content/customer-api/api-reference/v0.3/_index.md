@@ -2,8 +2,8 @@
 title: "Customer API"
 desc: "Embed a mobile chat window in an Android application."
 color: "#4484e7"
-version: "0.3-dev-preview"
+version: "0.3"
 menu: 
     customer_api_reference: 
-        identifier: "0.3 dev preview"
+        identifier: "0.3"
 ---

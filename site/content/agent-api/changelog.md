@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.3-beta]
+## [v0.3 dev preview]
 
 ### Added
 - Support for uploading images

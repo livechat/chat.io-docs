@@ -1,3 +1,7 @@
+---
+weight: 20
+---
+
 # Authorization flows
 All apps integrated with chat.io must be first created in [chat.io Developers Console](https://console.chat.io). When a user starts using your app, they will see what parts of his account your app will have access to:
 
