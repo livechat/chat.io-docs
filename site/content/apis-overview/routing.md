@@ -1,19 +1,20 @@
 ---
-title: "Routing"
-weight: 30
+weight: 40
 ---
 
 # Routing
 
-Routing is an mechanism which decides how chats within a single license are distributed between the agents. This document describes chat.io product routing but in the future you will be able to write your own routing mechanism and run it on our platform.
+Routing is a process of **assigning chats to agents**. The primary goal of routing mechanism is to distribute chats at single license to all available agents.
 
-In chat.io product it's not possible for a customer to have multiple chats within a single license. The conversation within a license (i.e. a company) is continuous from the customer's perspective and it's not necessary to split it into multiple chats. Agents are assigned to this chat either automatically or manually depending on the routing settings.
+This section describes chat.io default product routing. In the future you will be able to write your own routing mechanism and run it on our platform.
 
+In chat.io product it's not possible for a customer to have multiple chats within a single license. The conversation within a license (i.e. a company) is continuous from the customer's perspective and it's not necessary to split it into multiple chats.
+
+Agents are assigned to the chat **either automatically or manually** depending on the routing settings.
 
 ## Automatic routing
 
 ![Automatic routing](./images/automatic-routing.png "automatic routing")
-
 
 ## Manual routing
 
