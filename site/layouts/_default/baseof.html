@@ -43,15 +43,6 @@
           <div class="docs__logo__title" style="background-color: {{ .Params.color }}">
             {{.Title}}
           </div>
-        
-          {{ range where .Site.Pages "Params.type" "api-reference" }}
-            {{ .Params.version }}
-          {{ end }}
-
-          {{ range where .Site.Pages "Params.type" "guide" }}
-            {{ .URL }}
-          {{ end }}
-
           {{ partial "api-submenu" . }}
         </div>
 
