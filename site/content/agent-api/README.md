@@ -9,50 +9,32 @@ menu:
 
 # Introduction
 
->_I'm new to this tool and I've just 2 minutes to grasp the basic idea. Help me out!_
-
 ## Overview
 
->_What does this tool do and why it exists? (Not how it works!)_
-
-This tool was created to... The primary job for this tool is to... With this tool you can easily...
+With Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](/customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases. 
 
 ## Use cases
 
->_What is the typical use case?_
+The basic use case for this tool is to post messages as an agent, browse archives or ban customers. This API is used at [chat.io Agent App](https://app.chat.io/).
 
-The basic use case for this tool is... Usually this tool serves as a... This tool is used at...
-
->_Where and when should I use this tool?_
-
-You can use this tool to build... This tool best works for... 
+You can use Agent API to build your very own Agent App, perform chats in the name of an agent or just interact with archives.
 
 ## Important notes
 
->_How hard is it to use this tool?_
+To use this tool you need to have basic knowledge about REST or websocket APIs, OAuth 2.0 protocol and your technology of choice. We've got examples ready in JavaScrip, Go and Pyhon.
 
-To use this tool you need to have basic knowledge about... This tool is easy to use for...
+If you want to perform a chat from the customer perspective, you should use [Customer API](/customer-api).
 
->_When should I never use this tool?_
-
-This tool will not perform well for X, you should use Y instead... If you just want to..., you'd rather use Z.
-
->_Are there any limitations of this tool?_
-
-Currently this tool won't work for... Keep in mind that this tool is meant to... and not to...
+Keep in mind this API is under heavy development. We introduce changes every month. If you want to stay updated, follow the changelog below.
 
 # Getting started
 
->_I got the basic idea. Now I need to see this tool in action!_
-
 ## Prerequisites
 
->_What do I need to do, **before** I start using this tool?_
-
-To start off with this tool, follow these steps:
-- prepare a valid...
-- create an account...
-- run the init...
+To start off follow these steps:
+1. Sign up or sign in to the [Developers Console](https://console.chat.io/).
+2. Create a Backend app.
+3. Copy the Client Secret and Client ID
 
 ## Working example
 

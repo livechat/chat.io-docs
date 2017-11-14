@@ -1,6 +1,7 @@
 ---
 title: "Agent API"
 version: "0.2"
+type: "api-reference"
 menu: 
     agent_api: 
         identifier: "API Reference"

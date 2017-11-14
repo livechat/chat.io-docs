@@ -1,12 +1,6 @@
 import WebFont from "webfontloader";
 import 'bootstrap/js/src/scrollspy';
 
-WebFont.load({
-  google: {
-    families: ["Poppins:700", "Roboto:300,400,700", "Roboto Slab:300"]
-  }
-});
-
 var hamburgers = [].slice.call(document.querySelectorAll(".Nav__open"));
 if (hamburgers.length > 0) {
   hamburgers.forEach(function(hamburger) {
