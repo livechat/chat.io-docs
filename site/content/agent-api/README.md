@@ -2,8 +2,8 @@
 title: 'Agent API Guide'
 weight: 10
 slug: '/'
-menu: 
-    agent_api: 
+menu:
+    agent_api:
         identifier: "Guide"
 ---
 
@@ -11,7 +11,7 @@ menu:
 
 ## Overview
 
-With Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](/docs/customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases. 
+With Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](/docs/customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases.
 
 ## Use cases
 
@@ -32,6 +32,7 @@ Keep in mind this API is under heavy development. We introduce changes every mon
 ## Prerequisites
 
 To start off follow these steps:
+
 1. Sign up or sign in to the [Developers Console](https://console.chat.io/).
 2. Create a Backend app.
 3. Copy the Client Secret and Client ID
@@ -51,7 +52,7 @@ There is a ready-to-use example... To see the online demo... Do X to see it work
 
 >_What else can I do with this tool?_
 
-To better understand the power of this tool, check out following guides. To explore all of the functionalites, go to the API reference... 
+To better understand the power of this tool, check out following guides. To explore all of the functionalites, go to the API reference...
 
 ### Guide on creating
 
