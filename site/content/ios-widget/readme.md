@@ -21,7 +21,7 @@ chat.io for iOS allows you to integrate [chat.io](https://www.chat.io) Chat Wind
 
 ### Carthage
 
-If you use [Carthage](https://github.com/Carthage/Carthage) to manage your dependencies, simply add the library to your `Cartfile`. 
+If you use [Carthage](https://github.com/Carthage/Carthage) to manage your dependencies, simply add the library to your `Cartfile`.
 
 ```
 github "livechat/chat-window-ios" ~> 2.0
@@ -39,7 +39,7 @@ pod 'LiveChat', '~> 2.0'
 
 ### Manual Installation
 
-You can integrate chat.io into your project manually without using a dependency manager. 
+You can integrate chat.io into your project manually without using a dependency manager.
 
 #### Swift
 
@@ -49,7 +49,7 @@ Just drag all files from the `LiveChat/Classes` directory into your project.
 
 Drag all files from the `LiveChat/Classes` directory into your project. When adding first `*.swift` file to Objective-C project, Xcode will ask you to create a Bridging Header. It is not necessary for LiveChat to work, so you can decline unless you plan to call Swift code from Objective-C. More information about bridging headers and Swift and Objective-C interoperability can be found [here](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html). You need to put following import statement: `#import "<Your Project Name>-Swift.h"` at the top of your .m file.
 
-Also, for Objective-C projects, you need to set the **Embedded Content Contains Swift Code** flag in your project to `Yes` (found under **Build Options** in the **Build Settings** tab). 
+Also, for Objective-C projects, you need to set the **Embedded Content Contains Swift Code** flag in your project to `Yes` (found under **Build Options** in the **Build Settings** tab).
 
 ## Usage
 
@@ -123,7 +123,7 @@ Example apps can be found in the `Examples` folder. Samples for both Swift and O
 
 ## Getting help
 
-Any questions? [Chat with Us!](https://secure-lc.livechatinc.com/licence/8413431/open_chat.cgi)
+Any questions? <a href="#" onclick="LC_API.open_chat_window();return false;">Chat with us!</a>
 
 ## License
 

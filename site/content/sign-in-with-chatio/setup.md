@@ -12,7 +12,7 @@ Please note that **Redirect URI** field must match the URL of the website with "
 
 ## 2. Include SDK library
 ```html
-<script src="//cdn.livechatinc.com/accounts/chatio/accounts-sdk.min.js"></script>
+<script src="//cdn.chatio-static.com/accounts/accounts-sdk.min.js"></script>
 ```
 Create a simple HTML page and include the following JavaScript library.
 

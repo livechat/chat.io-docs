@@ -47,7 +47,7 @@
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
-  * [Incoming broadcast](#incoming-broadcast)  
+  * [Incoming broadcast](#incoming-broadcast)
   * [Incoming typing indicator](#incoming-typing-indicator)
   * [Incoming sneak peek](#incoming-sneak-peek)
   * [Customer banned](#customer-banned)
@@ -291,6 +291,7 @@ Objects are standardized data formats that are used in API requests and response
 ```
 
 Optional properties:
+
 * `name`
 * `email`
 * `last_seen_timestamp`
@@ -753,10 +754,10 @@ Example response payloads
 		"chat": {
 			"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 			"users": [
-				// array of "User" objects          
+				// array of "User" objects
 			],
 			"thread": {
-				// "Thread" object          
+				// "Thread" object
 			}
 		}
 	}],
@@ -880,7 +881,7 @@ Example response payload
 	"chat": {
 		"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 		"users": [
-			// array of "User" objects         
+			// array of "User" objects
 		],
 		"threads": [ // optional
 			// "Thread" object
@@ -1393,7 +1394,7 @@ Request payload:
     * `<match_object>` structure:
       * `value` - value to match (`string`)
       * `exact_match` - if exact match, if set to `false` a `match_object.value` will be matched as substring of `customer_url`
-  
+
 Example request payload
 ```js
 {

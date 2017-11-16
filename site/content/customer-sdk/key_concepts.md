@@ -12,7 +12,11 @@ Our system is based on a few simple types of entities - users, chats, events and
 - users can add events to chats, which then are automatically added to threads
 - users can participate in many chats at the same time
 
-Threads have a very important place in our architecture, as they provide a continuous chat experience (the ones that never end and you can always add to them) and they group events in smaller logical chunks, i.e. for raporting and caching purposes. However, while threads exist, they tend to complicate handling various operations like loading more history events. We believe that you don't have to worry about them most of the time and this SDK is doing a heavy lifting behind the scenes for you. Based on our experience we know that you do not even have to know that they exist, that's why you will get notified about their metadata only if you explicitly ask for it - most SDK methods expect only chat IDs.
+Threads have a very important place in our architecture, as they provide a continuous chat experience (the ones that never end and you can always add to them) and they group events in smaller logical chunks, i.e. for raporting and caching purposes.
+
+However, while threads exist, they tend to complicate handling various operations like loading more history events. We believe that you don't have to worry about them most of the time and this SDK is doing a heavy lifting behind the scenes for you.
+
+Based on our experience we know that you do not even have to know that they exist, that's why you will get notified about their metadata only if you explicitly ask for it - most SDK methods expect only chat IDs.
 
 ## User
 

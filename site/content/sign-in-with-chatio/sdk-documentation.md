@@ -42,7 +42,7 @@ var instance = AccountsSDK.init({ ... });
 <a href="" onclick="instance.openPopup()">Sign in with chat.io</a>
 ```
 
-Binds `onclick` param for custom HTML `<a>` element that replaces the "Sign in with chat.io" button. See the example of custom button in <a href="#prepare-button-container">Prepare button container</a> section.
+Binds `onclick` param for custom HTML `<a>` element that replaces the "Sign in with chat.io" button. See the example of custom button in <a href="#3-prepare-button-container">Prepare button container</a> section.
 
 ### **instance.signOut(callback)**
 > Example `signOut()` method usage:
@@ -91,7 +91,7 @@ If the user passes through "Sign in with chat.io" flow, `error` param will be nu
 
 <!--If `response_code` was set to **access_token**:-->
 
-* **access_token** – used for authorization in [REST API](/rest-api) calls,
+* **access_token** – used for authorization in API calls,
 * **scopes** – array of scopes that ``access_token`` has access to,
 * **expires_in** – number of seconds from now that ``access_token`` will be valid,
 * **entity_id** – chat.io's user email,
