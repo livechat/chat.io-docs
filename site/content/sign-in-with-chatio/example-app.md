@@ -15,7 +15,7 @@ weight: 40
 <div class="chatio-login-button"></div>
 <div id="license"></div>
 
-<script src="//cdn.livechatinc.com/accounts/chatio/accounts-sdk.min.js"></script>
+<script src="//cdn.chatio-static.com/accounts/accounts-sdk.min.js"></script>
 <script>
 AccountsSDK.init({
   client_id: '<your_client_id>',

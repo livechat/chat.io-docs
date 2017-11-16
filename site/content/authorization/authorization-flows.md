@@ -14,7 +14,7 @@ There are a few scenarios in which you can acquire an `access_token`:
 * [Public web apps (coming soon)](#public-web-apps) – JavaScript apps available to all chat.io customers.
 * [Private web apps](#private-web-apps) – JavaScript apps available to agents from single chat.io account.
 * [Public server-side apps (coming soon)](#public-server-side-apps) – backend apps available to all chat.io customers.
-* [Private server-side apps](#private-server-side-apps) – backend apps installed on a single chat.io account.
+* [Private server-side apps (coming soon)](#private-server-side-apps) – backend apps installed on a single chat.io account.
 
 ## Sign in with chat.io
 "Sign in with chat.io" button is the easiest way to collect `access_token` from a chat.io user.
@@ -30,7 +30,7 @@ Read more how to implement this flow in a dedicated ["Sign in with chat.io"](/si
 
 **Coming soon**
 
-Public web apps are JavaScript applications that can access any chat.io customer account. 
+Public web apps are JavaScript applications that can access any chat.io customer account.
 
 To set up your own public app, you must define the URL of the app and the list of scopes – parts of chat.io account your app will have access to. chat.io customer who enters your app URL is be asked to enter their login and password and grant access for your app.
 
@@ -365,7 +365,10 @@ The response will include the following params in JSON format:
 * **entity_id** – chat.io's user login.
 * **license_id** – chat.io's user account number.
 
-## Private server-side apps (coming soon)
+## Private server-side apps
+
+**Coming soon**
+
 Private apps can be used only on accounts chosen by the developer.
 
 <!-- screenshot -->
