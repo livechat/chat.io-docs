@@ -28,6 +28,8 @@ Read more how to implement this flow in a dedicated ["Sign in with chat.io"](/si
 
 ## Public web apps
 
+**Coming soon**
+
 Public web apps are JavaScript applications that can access any chat.io customer account. 
 
 To set up your own public app, you must define the URL of the app and the list of scopes – parts of chat.io account your app will have access to. chat.io customer who enters your app URL is be asked to enter their login and password and grant access for your app.
@@ -169,6 +171,8 @@ Private web apps work the very same way like [public web apps](#public-web-apps)
 To start building a private web app, set it up [chat.io Developers Console](https://console.chat.io).
 
 ## Public server-side apps
+
+**Coming soon**
 
 Public server-side apps are applications that have access to user's data for unlimited time.
 
