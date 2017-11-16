@@ -11,10 +11,10 @@ When a user allows the access, your app will receive an `access_token` that will
 There are a few scenarios in which you can acquire an `access_token`:
 
 * [Sign in with chat.io](#sign-in-with-chat-io) – the easiest way to get access to any chat.io account.
-* [Public web apps](#public-web-apps) – JavaScript apps available to all chat.io customers.
+* [Public web apps (coming soon)](#public-web-apps) – JavaScript apps available to all chat.io customers.
 * [Private web apps](#private-web-apps) – JavaScript apps available to agents from single chat.io account.
-* [Public server-side apps](#public-server-side-apps) – backend apps available to all chat.io customers.
-* [Private server-side apps (coming soon)](#private-server-side-apps) – backend apps installed on a single chat.io account.
+* [Public server-side apps (coming soon)](#public-server-side-apps) – backend apps available to all chat.io customers.
+* [Private server-side apps](#private-server-side-apps) – backend apps installed on a single chat.io account.
 
 ## Sign in with chat.io
 "Sign in with chat.io" button is the easiest way to collect `access_token` from a chat.io user.
