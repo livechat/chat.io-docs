@@ -242,6 +242,9 @@
   display: block;
   width: 100%;
   overflow: auto;
+  @media #{$desktop} {
+    overflow: visible;
+  }
 }
 
 .markdown-body table th {

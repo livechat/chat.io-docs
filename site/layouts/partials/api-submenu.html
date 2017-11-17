@@ -22,7 +22,7 @@
     </div>
     {{ end }}
 
-{{ else if (in $currentPage.URL "customer-api") }}
+    {{ else if (in $currentPage.URL "customer-api") }}
     {{ $menuName := "customer_api" }}
     <div class="subnav">
         {{ range $index, $menu := $.Site.Menus.customer_api }}
@@ -39,6 +39,29 @@
         <label class="version__label" for="version">Version:</label>
         <select id="version" class="version__select" onchange="window.location.href=this.value">
           {{ range $index, $menu := $.Site.Menus.customer_api_reference }}
+            <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
+          {{ end }}
+        </select>
+      </div>
+    {{ end }}
+
+{{ else if (in $currentPage.URL "configuration-api") }}
+    {{ $menuName := "configuration_api" }}
+    <div class="subnav">
+        {{ range $index, $menu := $.Site.Menus.configuration_api }}
+        
+        {{ $menuUrl := index ( split $menu.URL "/" ) 3}}
+        {{ $currentUrl := index ( split $currentPage.URL "/" ) 3}}
+        <a class="subnav__link {{if eq $currentUrl $menuUrl }} subnav__link--active{{end}}" href="{{ .URL }}">{{ .Identifier }}</a>
+      {{ end }}
+    </div>
+
+    {{ if (in $currentPage.URL "api-reference") }}
+      {{ $menuName := "configuration_api_reference" }}
+      <div class="version">
+        <label class="version__label" for="version">Version:</label>
+        <select id="version" class="version__select" onchange="window.location.href=this.value">
+          {{ range $index, $menu := $.Site.Menus.configuration_api_reference }}
             <option class="version__option" value="{{ .URL }}" {{if $currentPage.IsMenuCurrent $menuName . }} selected{{end}}>{{ .Identifier }}</option>
           {{ end }}
         </select>
