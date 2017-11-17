@@ -22,7 +22,7 @@ Agents are assigned to the chat **either automatically or manually** depending o
 
 ## System messages
 
-While routing switches states (as shown in diagrams), the router will send some system messages (see [Events](../events#system-message) section) to the chat.
+While routing switches states (as shown in diagrams), the router will send some system messages (see [Events](#system-message) section) to the chat.
 
 | Message text | System message type |
 |--------------|---------------------|
