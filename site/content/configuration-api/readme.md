@@ -11,17 +11,15 @@ menu:
 
 ## Overview
 
-With Customer API you can join the conversation as **a customer**. It has a different set of methods than the [Agent API](/docs/agent-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases.
+Configuration API is a service for storing configuration of the license. 
 
 ## Use cases
 
-The basic use case for this tool is to post messages as a customer. This API is used for chat.io chat widget.
-
-You can use Customer API to build your very own chat widget or just perform chats in the name of a customer.
+The basic use case for Configuration API is to set up webhooks and define storage for your app or service.
 
 ## Important notes
 
-To use this tool you need to have basic knowledge about REST or websocket APIs, OAuth 2.0 protocol and your technology of choice. We've got examples ready in JavaScrip, Go and Pyhon.
+To use this API you need to have basic knowledge about REST or websocket APIs, OAuth 2.0 protocol and your technology of choice.
 
 If you want to perform a chat from the agent perspective, you should use [Agent API](/docs/agent-api).
 
@@ -35,7 +33,7 @@ To start off follow these steps:
 
 1. Sign up or sign in to the [Developers Console](https://console.chat.io/).
 2. Create a Backend app.
-3. Copy the Client Secret and Client ID
+3. Copy the Client Secret and Client ID.
 
 <!--
 ## Working example

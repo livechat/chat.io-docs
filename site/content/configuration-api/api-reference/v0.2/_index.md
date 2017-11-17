@@ -1,7 +1,7 @@
 ---
 title: "Configuration API"
 desc: "Configuration API is a service for storing configuration of license."
-color: "#4484e7"
+color: "#7702f7"
 version: "0.2"
 menu: 
     configuration_api_reference:

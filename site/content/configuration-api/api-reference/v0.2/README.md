@@ -1,19 +1,16 @@
-# Configuration API
-
-
-## Introduction
+# Introduction
 
 Configuration API is a service for storing configuration of license. You can set up here different types of features such as properties or webhooks.
 
-### URL
+## URL
 
 Configuration API is available under URL `api.chat.io/configuration/<version>/{endpoint}`.
 
-### Versioning
+## Versioning
 
 There are two available versions: `v0.2`, `v0.3`. They work the same but are created for plarform api versioning consistency. If you want use latest version you should use `api.chat.io/configuration/{endpoint}` URL, but it is not recommended.
 
-### Authentication
+## Authentication
 
 Authentication is done via `Authorization` header. In each request you should add `Authorization` header with Bearer token.
 
@@ -21,7 +18,7 @@ Authentication is done via `Authorization` header. In each request you should ad
 curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authorization: Bearer fra-7XNqYbjTS4ux1uSdp1ig8w" -X POST -d '{"bot_agent_id":"9a1829e224aea210da3a3f46a7074e28"}'
 ```
 
-## BOT Agent
+# BOT Agent
 
 * BOT Agent enables writing integrations using agent-api to communicate in chats as a regular Agent.
 
@@ -29,15 +26,15 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 
 * Each BOT Agent is a resource owned by an application in developers platform identified by `client_id`. By "My BOT Agents" the BOTs owned by application with given `client_id` is meant.
 
-### Differences from regular Agent
+## Differences from regular Agent
 
 * you can not log in using BOT Agent account
 * you can not set password for BOT Agent account
 * BOT Agent does not have an email - operator_id is a random hash
 
-### Methods
+## Methods
 
-#### Create BOT Agent
+### Create BOT Agent
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `/agents/create_bot_agent` ||||
@@ -56,7 +53,7 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 | | `webhooks.actions[].filters` | `object` | No | filters to check if webhook should be triggered |
 
 
-##### Example request payload
+#### Example request payload
 ```js
 {
     "name": "John Doe",
@@ -95,36 +92,36 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
   * `last` - the lowest chat routing priority - agents with `last` priority get chats when there are no agents with `first` or `normal` priority available with free slots in that group
 * `webhooks` - go [here](#webhooks) for possible actions values and payloads.
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
     "bot_agent_id": "5c9871d5372c824cbf22d860a707a578"
 }
 ```
 
-#### Remove BOT Agent
+### Remove BOT Agent
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `agents/remove_bot_agent` ||||
 | | `bot_agent_id` | `string` | Yes | BOT agent ID |
 
 
-##### Example request payload
+#### Example request payload
 ```js
 {
     "bot_agent_id": "5c9871d5372c824cbf22d860a707a578"
 }
 ```
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
 }
 ```
 
-#### Update BOT Agent
+### Update BOT Agent
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `agents/update_bot_agent` ||||
@@ -144,7 +141,7 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 | | `webhooks.actions[].filters` | `object` | No | filters to check if webhook should be triggered |
 
 
-##### Example request payload
+#### Example request payload
 ```js
 {
     "id": "5c9871d5372c824cbf22d860a707a578",
@@ -179,30 +176,30 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
   * `last` - the lowest chat routing priority - agents with `last` priority get chats when there are no agents with `first` or `normal` priority available with free slots in that group
 * `webhooks` - go [here](#webhooks) for possible actions values and payloads.
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
 }
 ```
 
 
-#### Get BOT Agents
+### Get BOT Agents
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `agents/get_bot_agents` ||||
 | | `all` | `bool` | No | Get all BOT Agents, if `false` returns only caller's BOT Agents, default value is `false` |
 
 
-##### Example request payload
+#### Example request payload
 ```js
 {
     "all": false
 }
 ```
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
     "bot_agents": [{
@@ -215,22 +212,22 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 ```
 
 
-#### Get BOT Agent details
+### Get BOT Agent details
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `agents/get_bot_agent_details` ||||
 | | `bot_agent_id` | `string` | Yes | BOT Agent ID |
 
 
-##### Example request payload
+#### Example request payload
 ```js
 {
     "bot_agent_id": "5c9871d5372c824cbf22d860a707a578"
 }
 ```
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
     "bot_agent": {
@@ -272,9 +269,9 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 }
 ```
 
-## Webhooks
+# Webhooks
 
-#### Register webhook
+### Register webhook
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `webhooks/register_webhook` ||||
@@ -323,7 +320,7 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
   * `event_properties.<namespace>.<name>.<filter_type>`
     * `<filter_type>` as above
 
-##### Example request payload
+#### Example request payload
 ```js
 {
   "url": "http://myservice.com/webhooks",
@@ -347,26 +344,26 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 }
 ```
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
   "webhook_id": "pqi8oasdjahuakndw9nsad9na"
 }
 ```
 
-#### Get webhooks config
+### Get webhooks config
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `webhooks/register_webhook` ||||
 
-##### Example request payload
+#### Example request payload
 ```js
 {}
 ```
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
   "webhooks_config":[
@@ -395,28 +392,28 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 }
 ```
 
-#### Unregister webhook
+### Unregister webhook
 | Endpoint | Request object | Type | Required | Notes |
 | -------|----------------|------|----------|-------|
 | `webhooks/unregister_webhook` ||||
 | | `webhook_id` | `string` | Yes | Webhook ID  |
 
-##### Example request payload
+#### Example request payload
 ```js
 {
   "webhook_id": "pqi8oasdjahuakndw9nsad9na"
 }
 ```
 
-##### Example response payloads
-###### Success
+#### Example response payloads
+##### Success
 ```js
 {
 }
 ```
 
-## Webhooks data structure
-### Webhook format
+# Webhooks data structure
+## Webhook format
 ```js
 {
   "webhook_id": "<webhook_id>",
@@ -428,7 +425,7 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 }
 ```
 
-### Payload for actions
+## Payload for actions
 * [`incoming_chat_thread`](https://www.chat.io/docs/platform-api/v0.2/agent-api/server-client/#incoming-chat-thread)
 * [`chat_users_updated`](https://www.chat.io/docs/platform-api/v0.2/agent-api/server-client/#chat-users-updated)
 * [`incoming_event`](https://www.chat.io/docs/platform-api/v0.2/agent-api/server-client/#incoming-event)
