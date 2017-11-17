@@ -12,7 +12,7 @@ To get customer access token, you will need the customer code.
 
 ### Creating new customer
 
-You can create a new customer on licence or use an existing identity. 
+You can create a new customer on licence or use an existing identity. The `<ACCESS_TOKEN>` mentioned below is the one that you get from the app authorization flow.
 
 ```
 POST https://accounts.chat.io/customer/ -H "Authorization: Bearer <ACCESS_TOKEN>"
@@ -42,11 +42,11 @@ Your application should save `customer_id` and `customer_key` for further use.
 
 ### Other scenarios
 
-1. To obtain new `customer_id`, `customer_key` and `code`, your application should sends request with required parameters only.
+1. To obtain new `customer_id`, `customer_key` and `code`, your application should send request with required parameters only.
 
-2. To generate new `code` for existing customer, your application should sends `customer_id` and `customer_key`.
+2. To generate new `code` for existing customer, your application should send `customer_id` and `customer_key`.
 
-3. To generate new `code` for existing customer having only `customer_id`, your application should sends `customer_id` (possible only for integration `access_token` with `customers.manage--identity` scope)
+3. To generate new `code` for existing customer having only `customer_id`, your application should send `customer_id` (possible only for integration `access_token` with `customers.manage--identity` scope)
 
 ## Obtaining customer access token
 
@@ -54,7 +54,7 @@ Once you have the `code` assigned to a specific customer, you need to exchange i
 
 To exchange the `code` for an `access_token`, you should perform an HTTP POST request to the following URL:
 
-`https://accounts.chat.io/token`
+`https://accounts.chat.io/customer/token`
 
 Required parameters:
 
