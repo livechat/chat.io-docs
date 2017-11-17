@@ -35,22 +35,24 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 ## Methods
 
 ### Create BOT Agent
-| Endpoint | Request object | Type | Required | Notes |
-| -------|----------------|------|----------|-------|
-| `/agents/create_bot_agent` ||||
-| | `name` | `string` | Yes | display name |
-| | `avatar` | `string` | No | avatar URL |
-| | `status` | `string` | Yes | agent status |
-| | `max_chats_count` | `int` | No | maximum incoming chats that can be routed to the agent, by default 6 |
-| | `groups` | `object[]` | Yes | groups the agent belongs to |
-| | `groups[].id` | `uint` | Yes | group ID |
-| | `groups[].priority` | `string` | Yes | agent priority in group |
-| | `webhooks` | `object` | Yes | webhooks sent to the agent |
-| | `webhooks.url` | `string` | Yes | destination URL for webhooks |
-| | `webhooks.secret_key` | `string` | Yes | secret sent in webhooks to verify webhook source |
-| | `webhooks.actions` | `object[]` | Yes | triggering actions |
-| | `webhooks.actions[].name` | `string` | Yes | triggering action name |
-| | `webhooks.actions[].filters` | `object` | No | filters to check if webhook should be triggered |
+
+**Endpoint**: `/agents/create_bot_agent`
+
+| Request object | Type | Required | Notes |
+|----------------|------|----------|-------|
+| `name` | `string` | Yes | display name |
+| `avatar` | `string` | No | avatar URL |
+| `status` | `string` | Yes | agent status |
+| `max_chats_count` | `int` | No | maximum incoming chats that can be routed to the agent, by default 6 |
+| `groups` | `object[]` | Yes | groups the agent belongs to |
+| `groups[].id` | `uint` | Yes | group ID |
+| `groups[].priority` | `string` | Yes | agent priority in group |
+| `webhooks` | `object` | Yes | webhooks sent to the agent |
+| `webhooks.url` | `string` | Yes | destination URL for webhooks |
+| `webhooks.secret_key` | `string` | Yes | secret sent in webhooks to verify webhook source |
+| `webhooks.actions` | `object[]` | Yes | triggering actions |
+| `webhooks.actions[].name` | `string` | Yes | triggering action name |
+| `webhooks.actions[].filters` | `object` | No | filters to check if webhook should be triggered |
 
 
 #### Example request payload
@@ -101,10 +103,12 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 ```
 
 ### Remove BOT Agent
-| Endpoint | Request object | Type | Required | Notes |
-| -------|----------------|------|----------|-------|
-| `agents/remove_bot_agent` ||||
-| | `bot_agent_id` | `string` | Yes | BOT agent ID |
+
+**Endpoint**: `agents/remove_bot_agent`
+
+| Request object | Type | Required | Notes |
+|----------------|------|----------|-------|
+| `bot_agent_id` | `string` | Yes | BOT agent ID |
 
 
 #### Example request payload
@@ -122,23 +126,25 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 ```
 
 ### Update BOT Agent
-| Endpoint | Request object | Type | Required | Notes |
-| -------|----------------|------|----------|-------|
-| `agents/update_bot_agent` ||||
-| | `id` | `string` | Yes | bot agent ID |
-| | `name` | `string` | No | display name |
-| | `avatar` | `string` | No | avatar URL |
-| | `status` | `string` | No | agent status |
-| | `max_chats_count` | `int` | No | maximum incoming chats that can be routed to the agent |
-| | `groups` | `object[]` | No | groups the agent belongs to |
-| | `groups[].id` | `uint` | Yes | group ID |
-| | `groups[].priority` | `string` | Yes | agent priority in group |
-| | `webhooks` | `object` | No | webhooks sent to the agent |
-| | `webhooks.url` | `string` | Yes | destination URL for webhooks |
-| | `webhooks.secret_key` | `string` | Yes | secret sent in webhooks to verify webhook source |
-| | `webhooks.actions` | `object[]` | Yes | triggering actions |
-| | `webhooks.actions[].name` | `string` | Yes | triggering action name |
-| | `webhooks.actions[].filters` | `object` | No | filters to check if webhook should be triggered |
+
+**Endpoint**: `agents/update_bot_agent`
+
+| Request object | Type | Required | Notes |
+|----------------|------|----------|-------|
+| `id` | `string` | Yes | bot agent ID |
+| `name` | `string` | No | display name |
+| `avatar` | `string` | No | avatar URL |
+| `status` | `string` | No | agent status |
+| `max_chats_count` | `int` | No | maximum incoming chats that can be routed to the agent |
+| `groups` | `object[]` | No | groups the agent belongs to |
+| `groups[].id` | `uint` | Yes | group ID |
+| `groups[].priority` | `string` | Yes | agent priority in group |
+| `webhooks` | `object` | No | webhooks sent to the agent |
+| `webhooks.url` | `string` | Yes | destination URL for webhooks |
+| `webhooks.secret_key` | `string` | Yes | secret sent in webhooks to verify webhook source |
+| `webhooks.actions` | `object[]` | Yes | triggering actions |
+| `webhooks.actions[].name` | `string` | Yes | triggering action name |
+| `webhooks.actions[].filters` | `object` | No | filters to check if webhook should be triggered |
 
 
 #### Example request payload
@@ -272,14 +278,16 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 # Webhooks
 
 ### Register webhook
-| Endpoint | Request object | Type | Required | Notes |
-| -------|----------------|------|----------|-------|
-| `webhooks/register_webhook` ||||
-| | `url` | `string` | Yes | Destination URL for webhook  |
-| | `description` | `string` | No | Webhook description |
-| | `action` | `string` | Yes | Triggerring action |
-| | `secret_key` | `string` | Yes | Secret sent in webhooks to verify webhook source |
-| | `filters` | `object` | No | Filters to check if webhook should be triggered |
+
+**Endpoint**: `webhooks/register_webhook`
+
+| Request object | Type | Required | Notes |
+|----------------|------|----------|-------|
+| `url` | `string` | Yes | Destination URL for webhook  |
+| `description` | `string` | No | Webhook description |
+| `action` | `string` | Yes | Triggerring action |
+| `secret_key` | `string` | Yes | Secret sent in webhooks to verify webhook source |
+| `filters` | `object` | No | Filters to check if webhook should be triggered |
 
 * `action` possible values:
   * `incoming_chat_thread` - triggers on action [agent-api push](https://www.chat.io/docs/platform-api/v0.2/agent-api/server-client/#incoming-chat-thread)
@@ -353,8 +361,8 @@ curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authoriz
 ```
 
 ### Get webhooks config
-| Endpoint | Request object | Type | Required | Notes |
-| -------|----------------|------|----------|-------|
+| Request object | Type | Required | Notes |
+|----------------|------|----------|-------|
 | `webhooks/register_webhook` ||||
 
 #### Example request payload
