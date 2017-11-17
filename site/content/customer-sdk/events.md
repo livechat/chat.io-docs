@@ -21,13 +21,14 @@ api.on('connected', payload => {
 
 Payload:
 
-| shape        | type     | shape     | type     | description |
-| ------------ | -------- | --------- | -------- | ----------- |
-| chatsSummary | object[] |           |          |             |
-|              |          | id        |          | Chat's id   |
-|              |          | users     | string[] | Users' ids  |
-|              |          | lastEvent | object   | Event       |
-| totalChats   | number   |           |          |             |
+| shape        | type     | shape              | type     | description                                        |
+| ------------ | -------- | ------------------ | -------- | -------------------------------------------------- |
+| chatsSummary | object[] |                    |          |                                                    |
+|              |          | id                 |          | Chat's id                                          |
+|              |          | users              | string[] | Users' ids                                         |
+|              |          | lastEvent          | object   | Event                                              |
+|              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
+| totalChats   | number   |                    |          |                                                    |
 
 ### connection_lost
 
@@ -51,13 +52,14 @@ api.on('connection_restored', payload => {
 
 Payload:
 
-| shape        | type     | shape     | type     | description |
-| ------------ | -------- | --------- | -------- | ----------- |
-| chatsSummary | object[] |           |          |             |
-|              |          | id        |          | Chat's id   |
-|              |          | users     | string[] | Users' ids  |
-|              |          | lastEvent | object   | Event       |
-| totalChats   | number   |           |          |             |
+| shape        | type     | shape              | type     | description                                        |
+| ------------ | -------- | ------------------ | -------- | -------------------------------------------------- |
+| chatsSummary | object[] |                    |          |                                                    |
+|              |          | id                 |          | Chat's id                                          |
+|              |          | users              | string[] | Users' ids                                         |
+|              |          | lastEvent          | object   | Event                                              |
+|              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
+| totalChats   | number   |                    |          |                                                    |
 
 ### customer_id
 
