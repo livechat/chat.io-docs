@@ -2,11 +2,13 @@
 weight: 20
 ---
 
-# Authorization flows
-All apps integrated with chat.io must be first created in [chat.io Developers Console](https://console.chat.io). When a user starts using your app, they will see what parts of his account your app will have access to:
+# App authorization flows
+All apps integrated with chat.io must be first created in [chat.io Developers Console](https://console.chat.io).
 
-<!-- screenshot -->
-When a user allows the access, your app will receive an `access_token` that will let you access their account.
+**Note**: If you want to use [Customer API](../customer-api) you will need an additional authorization flow. Check the [Customer Authorization](#customer-authorization) section.
+
+When a user starts using your app, they will see what parts of his account your app will have access to. When they grant the access, your app will receive an `access_token` that will let you authorize [Agent API](../agent-api) or [Configuration API](../configuration-api) calls.
+
 
 There are a few scenarios in which you can acquire an `access_token`:
 
@@ -22,9 +24,9 @@ There are a few scenarios in which you can acquire an `access_token`:
 <!-- screenshot -->
 In this scenario, chat.io user enters your website with a "Sign in with chat.io" button installed. After clicking the button, they enter chat.io login and password in a pop-up window and grant access to some parts of their account.
 
-In return, you acquire an `access_token` which can be used to call [Customer API](/customer-api) or [Agent API](/customer-api) methods.
+In return, you acquire an `access_token` which can be used to call [Agent API](/customer-api) methods.
 
-Read more how to implement this flow in a dedicated ["Sign in with chat.io"](/sign-in-with-livechat) article.
+Read more how to implement this flow in a dedicated ["Sign in with chat.io"](../sign-in-with-chatio) article.
 
 ## Public web apps
 
