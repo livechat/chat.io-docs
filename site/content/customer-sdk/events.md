@@ -1,90 +1,91 @@
 ---
 title: "Events"
-weight: 40
+weight: 50
 ---
 
-# Events
+## Events
 
-You can listen for emitted events by subscribing to them (using [on method](#on)) with your custom JavaScript function.
-For example, your function can be executed every time a message has been received.
+You can listen for emitted events by subscribing to them (using
+[on method](#on)) with your custom JavaScript function. For example, your
+function can be executed every time a message has been received.
 
-## connected
+### connected
 
 ```js
 api.on('connected', payload => {
-    console.log('connected')
-    console.log(payload.chatsSummary)
-    console.log(payload.totalChats)
+  console.log('connected')
+  console.log(payload.chatsSummary)
+  console.log(payload.totalChats)
 })
 ```
 
 Payload:
 
-| shape            | type     | shape     | type             | description |
-| ---------------- | -------- | --------- | -----------------|------------ |
-| chatsSummary     | object[] |           |                  |             |
-|                  |          | id        |                  | Chat's id   |
-|                  |          | users     | string[]         | Users' ids  |
-|                  |          | lastEvent | object           | Event       |
-| totalChats       | number   |           |                  |             |
+| shape        | type     | shape     | type     | description |
+| ------------ | -------- | --------- | -------- | ----------- |
+| chatsSummary | object[] |           |          |             |
+|              |          | id        |          | Chat's id   |
+|              |          | users     | string[] | Users' ids  |
+|              |          | lastEvent | object   | Event       |
+| totalChats   | number   |           |          |             |
 
-## connection_lost
+### connection_lost
 
 ```js
 api.on('connection_lost', () => {
-    console.log('connection_lost')
+  console.log('connection_lost')
 })
 ```
 
 This event doesn't carry any additional payload.
 
-## connection_restored
+### connection_restored
 
 ```js
 api.on('connection_restored', payload => {
-    console.log('connection_restored')
-    console.log(payload.chatsSummary)
-    console.log(payload.totalChats)
+  console.log('connection_restored')
+  console.log(payload.chatsSummary)
+  console.log(payload.totalChats)
 })
 ```
 
 Payload:
 
-| shape            | type     | shape     | type             | description |
-| ---------------- | -------- | --------- | -----------------|------------ |
-| chatsSummary     | object[] |           |                  |             |
-|                  |          | id        |                  | Chat's id   |
-|                  |          | users     | string[]         | Users' ids  |
-|                  |          | lastEvent | object           | Event       |
-| totalChats       | number   |           |                  |             |
+| shape        | type     | shape     | type     | description |
+| ------------ | -------- | --------- | -------- | ----------- |
+| chatsSummary | object[] |           |          |             |
+|              |          | id        |          | Chat's id   |
+|              |          | users     | string[] | Users' ids  |
+|              |          | lastEvent | object   | Event       |
+| totalChats   | number   |           |          |             |
 
-## customer_id
+### customer_id
 
 ```js
 api.on('customer_id', id => {
-    console.log('customer id is', id)
+  console.log('customer id is', id)
 })
 ```
 
 Payload:
 
-| argument         | type     |
-| ---------------- | -------- |
-| id               | string   |
+| argument | type   |
+| -------- | ------ |
+| id       | string |
 
-## disconnected
+### disconnected
 
 ```js
 api.on('disconnected', reason => {
-    console.log(reason)
+  console.log(reason)
 })
 ```
 
 Payload:
 
-| argument   | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| reason     | string  | Optional                      |
+| argument | type   | description |
+| -------- | ------ | ----------- |
+| reason   | string | Optional    |
 
 <!--### chat_properties_updated
 
@@ -120,117 +121,152 @@ Payload:
 | thread     | string  | Thread's id                   |
 | properties | object  | Thread properties             |-->
 
-## last_seen_timestamp_updated
+### last_seen_timestamp_updated
 
 ```js
 api.on('last_seen_timestamp_updated', payload => {
-    console.log(payload.chat)
-    console.log(payload.user)
-    console.log(payload.timestamp)
+  console.log(payload.chat)
+  console.log(payload.user)
+  console.log(payload.timestamp)
 })
 ```
 
 Payload:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| chat       | string  | Chat's id                     |
-| user       | string  | User's id                     |
-| timestamp  | number  |                               |
+| shape     | type   | description |
+| --------- | ------ | ----------- |
+| chat      | string | Chat's id   |
+| user      | string | User's id   |
+| timestamp | number |             |
 
-## new_event
+### new_event
 
 You should distinguish received events by their types.
 
 ```js
-api.on('new_event', (payload) => {
-    switch (event.type) {
+api.on('new_event', payload => {
+  switch (event.type) {
     case 'message':
-        console.log('new message - ', event.text)
-        break
+      console.log('new message - ', event.text)
+      break
     default:
-        break
-    }
+      break
+  }
 })
 ```
 
 Payload:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| type       | string  | Event's type                  |
-| ...        |         | Other properties              |
+| shape | type   | description      |
+| ----- | ------ | ---------------- |
+| type  | string | Event's type     |
+| ...   |        | Other properties |
 
-## user_data
+### user_data
 
 ```js
-api.on('user_data', (user) => {
-    console.log(user)
+api.on('user_data', user => {
+  console.log(user)
 })
 ```
 
 User:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-|            |         |                               |
+| shape | type | description |
+| ----- | ---- | ----------- |
+|       |      |             |
 
-## user_is_typing
+### user_joined_chat
 
 ```js
-api.on('user_is_typing', (payload) => {
-    console.log('user with ' + payload.user + ' id is writing something in ' + payload.chat)
+api.on('user_joined_chat', ({ user, chat }) => {
+  console.log({ user, chat })
 })
 ```
 
 Payload:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| chat       | string  | Chat's id                     |
-| user       | string  | User's id                     |
+| shape | type   | description |
+| ----- | ------ | ----------- |
+| user  | string | User's ID   |
+| chat  | string | Chat's ID   |
 
-## user_stopped_typing
+### user_left_chat
 
 ```js
-api.on('user_stopped_typing', (payload) => {
-    console.log('user with ' + payload.user + ' id stopped writing in ' + payload.chat)
+api.on('user_left_chat', ({ user, chat }) => {
+  console.log({ user, chat })
 })
 ```
 
 Payload:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| chat       | string  | Chat's id                     |
-| user       | string  | User's id                     |
+| shape | type   | description |
+| ----- | ------ | ----------- |
+| user  | string | User's ID   |
+| chat  | string | Chat's ID   |
 
-## thread_closed
+### user_is_typing
+
+```js
+api.on('user_is_typing', payload => {
+  console.log(
+    'user with ' + payload.user + ' id is writing something in ' + payload.chat,
+  )
+})
+```
+
+Payload:
+
+| shape | type   | description |
+| ----- | ------ | ----------- |
+| chat  | string | Chat's id   |
+| user  | string | User's id   |
+
+### user_stopped_typing
+
+```js
+api.on('user_stopped_typing', payload => {
+  console.log(
+    'user with ' + payload.user + ' id stopped writing in ' + payload.chat,
+  )
+})
+```
+
+Payload:
+
+| shape | type   | description |
+| ----- | ------ | ----------- |
+| chat  | string | Chat's id   |
+| user  | string | User's id   |
+
+### thread_closed
 
 ```js
 api.on('thread_closed', ({ chat }) => {
-    console.log(chat)
+  console.log(chat)
 })
 ```
 
 Payload:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| chat       | string  | Chat's id                     |
+| shape | type   | description |
+| ----- | ------ | ----------- |
+| chat  | string | Chat's id   |
 
-## thread_metada
+### thread_summary
 
 ```js
-api.on('thread_metada', (metadata) => {
-    console.log(metadata)
+api.on('thread_summary', summary => {
+  console.log(summary)
 })
 ```
 
 Payload:
 
-| shape        | type    | description                   |
-| ------------ | ------- | ----------------------------- |
-| id           | string  |                               |
-| order        | number  |                               |
-| totalEvents  | number  |                               |
+| shape       | type   | description |
+| ----------- | ------ | ----------- |
+| id          | string |             |
+| chat        | string | Chat's ID   |
+| order       | number |             |
+| totalEvents | number |             |
