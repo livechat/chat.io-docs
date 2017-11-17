@@ -2,7 +2,7 @@
 weight: 50
 ---
 
-# BOT Agent
+# BOT Agents
 
 * BOT Agent enables writing integrations using agent-api to communicate in chats as a regular Agent.
 
@@ -14,7 +14,7 @@ weight: 50
 
 * you can not log in using BOT Agent account
 * you can not set password for BOT Agent account
-* BOT Agent does not have an email - operator_id is a random hash
+* BOT Agent does not have an email - agent_id is a random hash
 
 ## Configuring bot agents
 

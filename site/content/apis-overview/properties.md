@@ -22,9 +22,9 @@ Here `routing` is property *namespace* and `pinned` or `chatting` is property na
 ## Types
 
 There are three property types:
- - int (int32)
- - bool
- - string
+* int (int32)
+* bool
+* string
 
 ## Note about namespaces
 
