@@ -10,7 +10,7 @@ Probably the most basic use cases are listing or performing chats. This section 
 
 When you log in to the Agent or Customer API you will receive one of the following in the login response: `chats_summary` or `last_chats_summary`. These objects contain some chat and thread IDs. Those IDs can be used to retrieve the chat history.
 
-If you want to retrieve the chats from the customer perspective, you should use [Customer API](./customer-api/api-reference/). When you log in as an agent, you should go with [Agent API](./agent-api/api-reference/).
+If you want to retrieve the chats from the customer perspective, you should use [Customer API](../customer-api). When you log in as an agent, you should go with [Agent API](../agent-api).
 
 ## Performing a chat
 
