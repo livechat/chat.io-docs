@@ -15,7 +15,7 @@ Configuration API is a service for storing configuration of the license.
 
 ## Use cases
 
-The basic use case for Configuration API is to set up webhooks and define storage for your app or service.
+The basic use case for Configuration API is to set up webhooks and create and manage bot agents.
 
 ## Important notes
 
