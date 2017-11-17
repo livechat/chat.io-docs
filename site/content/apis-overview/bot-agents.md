@@ -18,9 +18,8 @@ weight: 50
 
 ## Configuring bot agents
 
-You can create and manage bot agents using configuration api, here are methods you can use:
+You can create and manage bot agents using configuration api [here](https://www.chat.io/docs/configuration-api/api-reference/v0.3/#bot-agent)
 
-* [create_bot_agent]()
-* [update_bot_agent]()
-* [get_bot_agents]()
-* [get_bot_agent_details]()
+## Notes
+
+We currently don't have chat.io group management. All agents belong to group 0 by default.

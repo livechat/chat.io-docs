@@ -6,35 +6,26 @@ weight: 70
 
 Properties are simple key-value storage. They can be set within chat, thread or event. They appear in those objects in following format:
 
-```
-"properties": {
-    "routing": {
-        "pinned": true,
-        "chatting": false
+```js
+{
+    "properties": {
+        "routing": {
+            "pinned": true,
+            "count": 3
+        }
     }
 }
 ```
 
-Here `routing` is *namespace* and `pinned` is property name.
+Here `routing` is property *namespace* and `pinned` or `chatting` is property name.
 
-You can create your own namespace for your integration [here]().
+## Types
 
-## Property types
+There are three property types:
+ - int (int32)
+ - bool
+ - string
 
-Each property has one of the folowing types:
-- int (int32)
-- bool
-- string
+## Note about namespaces
 
-## Property value domain
-
-Domain of the property can be specified by two constructions:
-- domain - a set of values that property can be set to
-- range - a range of values from one to other (only for numeric types)
-
-## Locations
-
-All properties can be configured to have different access settings for agent and customer in different locations. Currently configurable properties are supported in:
-- chat
-- thread
-- event
+Namespaces are used here because we plan to add configurable properties. Those properties will be configurable whithin your namespace named with your client_id.
