@@ -13,8 +13,8 @@ There are a few scenarios in which you can acquire an `access_token`:
 * [Sign in with chat.io](#sign-in-with-chat-io) – the easiest way to get access to any chat.io account.
 * [Public web apps (coming soon)](#public-web-apps) – JavaScript apps available to all chat.io customers.
 * [Private web apps](#private-web-apps) – JavaScript apps available to agents from single chat.io account.
-* [Public server-side apps (coming soon)](#public-server-side-apps) – backend apps available to all chat.io customers.
-* [Private server-side apps (coming soon)](#private-server-side-apps) – backend apps installed on a single chat.io account.
+* [Private server-side apps](#server-side-apps) – backend apps installed on a single chat.io account.
+* Public server-side apps (coming soon) – backend apps available to all chat.io customers.
 
 ## Sign in with chat.io
 "Sign in with chat.io" button is the easiest way to collect `access_token` from a chat.io user.
@@ -170,11 +170,9 @@ Private web apps work the very same way like [public web apps](#public-web-apps)
 
 To start building a private web app, set it up [chat.io Developers Console](https://console.chat.io).
 
-## Public server-side apps
+## Server-side apps
 
-**Coming soon**
-
-Public server-side apps are applications that have access to user's data for unlimited time.
+Server-side apps are applications that have access to user's data for unlimited time. Private and public server-side apps have the same authorization flows. Public server-side apps are not available yet.
 
 When your application wants to acquire the `access_token`, you must redirect the user to chat.io OAuth Server only once. After successful authorization, the user is redirected back to your app along with a single-use authorization code.
 
@@ -364,12 +362,3 @@ The response will include the following params in JSON format:
 * **token_type=Bearer**
 * **entity_id** – chat.io's user login.
 * **license_id** – chat.io's user account number.
-
-## Private server-side apps
-
-**Coming soon**
-
-Private apps can be used only on accounts chosen by the developer.
-
-<!-- screenshot -->
-This authorization flow is not yet available.
