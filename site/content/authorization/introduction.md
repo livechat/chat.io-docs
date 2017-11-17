@@ -18,7 +18,7 @@ In terms of chat.io apps, authentication is when you check the user credentials 
 
 ### Authorizing API calls
 
-The most popular tool used by developers are [Customer API](./customer-api) and [Agent API](./agent-api). Calling API methods on behalf of chat.io user is as simple as including `Authorization: Bearer <access_token>` HTTP header in each call. Find out how to acquire the `access_token` in the sections below.
+The most popular tool used by developers are [Customer API](./customer-api) and [Agent API](./agent-api). Calling Agent API methods on behalf of chat.io user is as simple as including `Authorization: Bearer <access_token>` HTTP header in each call. Calling Customer API requires an additional steps to get a different access token. Find out how to acquire the access tokens in the sections below.
 
 ### Authentication service
 
