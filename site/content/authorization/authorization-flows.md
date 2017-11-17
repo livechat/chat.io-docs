@@ -364,3 +364,23 @@ The response will include the following params in JSON format:
 * **token_type=Bearer**
 * **entity_id** – chat.io's user login.
 * **license_id** – chat.io's user account number.
+
+## Notes
+
+### Limitations
+
+There is currently a limit of 25 refresh tokens per client per user. When limit is reached, the oldest token is automaticaly revoked (with rabbitmq publishing). 
+
+Another limitation is 3 redirects in 30 seconds to chat.io OAuth 2.0 server per client per user. When limit is reached, server redirects to error page with `too_many_redirects` error detail.
+
+### Redirect URI considerations
+
+Client configuration allows adding many redirect URIs. The redirect URIs are separated by comma. Authorization request redirect URI is valid when matches one of the client's configuration URIs.
+
+URI is composed of several parts:
+
+* scheme (`http://`, `https://`) - is required and must match exactly,
+* host (`google.pl`, `localhost:3000`, ...) - hostname or ip and optional port, is required and must match exactly,
+* path (`/info`, `/test`, ...) - is optional, client redirect URI path must be a substring of authorization request redirect path, path traversals are forbidden,
+* query (`?size=20`, ...) - is forbidden,
+* fragment (`#paragraph`) - is forbidden.
