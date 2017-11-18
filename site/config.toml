@@ -2,4 +2,4 @@ baseurl = "/docs/"
 languageCode = "en-us"
 title = "chat.io/docs"
 disableHugoGeneratorInject = true
-ignorefiles = [ "/docs/agent-api/api-reference/v0.2/examples/index.html", "/docs/agent-api/api-reference/v0.3/examples/index.html", "/docs/customer-api/api-reference/v0.2/examples/index.html", "/docs/customer-api/api-reference/v0.3/examples/index.html"]
+ignorefiles = ["/agent-api/api-reference/v0.2/examples/index.html", "/agent-api/api-reference/v0.3/examples/index.html", "/customer-api/api-reference/v0.2/examples/index.html", "/customer-api/api-reference/v0.3/examples/index.html"]
