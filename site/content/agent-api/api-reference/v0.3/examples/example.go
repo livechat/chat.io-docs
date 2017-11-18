@@ -13,16 +13,15 @@ import (
 )
 
 var (
-	licenseID    int           // <LICENSE_ID>
-	apiURL       string        = "wss://api.chat.io/customer/rtm/ws"
+	apiURL       string        = "wss://api.chat.io/agent/v0.3/rtm/ws"
 	pingInterval time.Duration = time.Second * 30
+	accessToken  string        = "Bearer <YOUR_ACCESS_TOKEN>"
 )
 
 func main() {
-	url := fmt.Sprintf("%s?license_id=%d", apiURL, licenseID)
-	log.Printf("Connecting to %s", url)
+	log.Printf("Connecting to %s", apiURL)
 
-	c, _, err := websocket.DefaultDialer.Dial(url, nil)
+	c, _, err := websocket.DefaultDialer.Dial(apiURL, nil)
 	if err != nil {
 		log.Fatalf("Dial error: %s", err)
 	}
@@ -30,7 +29,7 @@ func main() {
 
 	go pinger(c)
 
-	if err := apiLogin(c); err != nil {
+	if err := apiLogin(c, accessToken); err != nil {
 		log.Fatalf("Send message error: %s", err)
 	}
 
@@ -109,26 +108,19 @@ func handleMessageStartChat(c *websocket.Conn, raw []byte) error {
 	return apiSendChatMessage(c, payload.Chat.ID)
 }
 
-func apiLogin(c *websocket.Conn) error {
-	return sendMessage(c, "login", nil)
+func apiLogin(c *websocket.Conn, token string) error {
+	type loginRequest struct {
+		Token string `json:"token"`
+	}
+
+	payload := &loginRequest{
+		Token: token,
+	}
+	return sendMessage(c, "login", payload)
 }
 
 func apiStartChat(c *websocket.Conn) error {
-	type routingScope struct {
-		Type string `json:"type"`
-	}
-
-	type startChatRequest struct {
-		RoutingScope *routingScope `json:"routing_scope"`
-	}
-
-	payload := &startChatRequest{
-		RoutingScope: &routingScope{
-			Type: "license",
-		},
-	}
-
-	return sendMessage(c, "start_chat", payload)
+	return sendMessage(c, "start_chat", nil)
 }
 
 func apiSendChatMessage(c *websocket.Conn, chatID string) error {
@@ -154,15 +146,15 @@ func apiSendChatMessage(c *websocket.Conn, chatID string) error {
 
 func sendMessage(c *websocket.Conn, action string, payload interface{}) error {
 	type protocolRequest struct {
-		Action  string      `json:"action"`
-		ID      string      `json:"id"`
-		Payload interface{} `json:"payload,omitempty"`
+		Action    string      `json:"action"`
+		RequestID string      `json:"request_id"`
+		Payload   interface{} `json:"payload"`
 	}
 
 	msg := protocolRequest{
-		Action:  action,
-		ID:      strconv.Itoa(rand.Int()),
-		Payload: payload,
+		Action:    action,
+		RequestID: strconv.Itoa(rand.Int()),
+		Payload:   payload,
 	}
 
 	raw, err := json.Marshal(msg)

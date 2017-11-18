@@ -6,8 +6,8 @@ import time
 import json
 import random
 
-license_id = <LICENSE_ID>
-api_url = "wss://api.chat.io/customer/rtm/ws"
+sso_access_token = 'Bearer <YOUR_ACCESS_TOKEN>'
+api_url = "wss://api.chat.io/agent/v0.3/rtm/ws"
 
 #websocket.enableTrace(True)
 
@@ -19,8 +19,9 @@ def api_login(ws):
 		"id": get_random_request_id(),
 		"action": "login",
 		"payload": {
-			"customer": {
-				"name": "Python example"
+			"token": sso_access_token,
+			"application": {
+				"name": "python_example"
 			}
 		}
 	}
@@ -31,9 +32,6 @@ def api_start_chat(ws):
 		"id": get_random_request_id(),
 		"action": "start_chat",
 		"payload": {
-			"routing_scope": {
-				"type": "license"
-			}
 		}
 	}
 	ws.send(json.dumps(start_chat_request))
@@ -46,9 +44,10 @@ def api_send_chat_message(ws, chat_id, message):
 			"chat_id": chat_id,
 			"event": {
 				"type": "message",
-				"text": message
+				"text": message,
+				"recipients": "all"
 			}
-		}		
+		}
 	}
 	ws.send(json.dumps(send_message_request))
 
@@ -56,10 +55,10 @@ def on_message_login(ws, received_message):
 	if received_message['success']:
 		print "Login succeeded"
 	
-		print "Starting a new chat..."			
+		print "Starting a new chat..."
 		api_start_chat(ws)
 	else:
-		print "Login failed"	
+		print "Login failed"
 
 def on_message_start_chat(ws, received_message):
 	chat_id = received_message['payload']['chat']['id']
@@ -89,9 +88,9 @@ def on_close(ws):
 def on_open(ws):
 	print "Connected"
 	
-	# it's required to send login before start sending 
-	# any other protocol messages. Login message subscribe 
-	# connection for receiving server push messages. 
+	# it's required to send login before start sending
+	# any other protocol messages. Login message subscribe
+	# connection for receiving server push messages.
 	print "Logging in..."
 	api_login(ws)
 
@@ -99,13 +98,11 @@ def send(action, payload):
 	ws.send(protocolMessage)
 
 # Start websocket connection
-url = "{0}?license_id={1}".format(api_url, license_id)
-print "Connecting to {0}...".format(url)
-ws = websocket.WebSocketApp(url,
-	on_message = on_message,
-	on_error = on_error,
-	on_close = on_close,
-	on_open = on_open,
-	header={"User-Agent": "PythonWebsocketClient"})
+print "Connecting to {0}...".format(api_url)
+ws = websocket.WebSocketApp(api_url,
+							on_message = on_message,
+							on_error = on_error,
+							on_close = on_close,
+							on_open = on_open)
 
 ws.run_forever(ping_interval=30)

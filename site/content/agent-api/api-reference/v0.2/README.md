@@ -10,6 +10,7 @@
   * [JavaScript](#javascript)
   * [Go](#go)
   * [Python](#python)
+* [Testing](#testing)
 * [SSO scopes for resources](#sso-scopes-for-resources)
 * [Objects](#objects)
   * [Thread](#thread)
@@ -47,7 +48,7 @@
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
-  * [Incoming broadcast](#incoming-broadcast)
+  * [Incoming broadcast](#incoming-broadcast)  
   * [Incoming typing indicator](#incoming-typing-indicator)
   * [Incoming sneak peek](#incoming-sneak-peek)
   * [Customer banned](#customer-banned)
@@ -59,7 +60,6 @@
   * [Chat properties updated](#chat-properties-updated)
   * [Chat thread properties updated](#chat-thread-properties-updated)
   * [Last seen timestamp updated](#last-seen-timestamp-updated)
-
 </div>
 
 # Introduction
@@ -91,7 +91,9 @@ Required headers:
 Request
 ```js
 {
-	// optional payload
+	"payload": {
+		// optional
+	}
 }
 ```
 
@@ -123,10 +125,10 @@ Client should implement server pinging or connection will be closed after about 
 Request
 ```js
 {
-	"id": "<request_id>",
+	"id": "<request_id>", // optional
 	"action": "<action>",
 	"payload": {
-		// optional payload
+		// optional
 	}
 }
 ```
@@ -134,12 +136,12 @@ Request
 Response
 ```js
 {
-	"id": "<request_id>",
+	"id": "<request_id>", // optional
 	"action": "<action>",
 	"type": "response",
 	"success": true,
 	"payload": {
-		// optional payload
+		// optional
 	}
 }
 ```
@@ -150,7 +152,7 @@ Push
 	"action": "<action>",
 	"type": "push",
 	"payload": {
-		// optional payload
+		// optional
 	}
 }
 ```
@@ -179,9 +181,25 @@ go get github.com/gorilla/websocket
 Example file: [examples/example.py](./examples/example.py)
 
 Remember to install proper lib:
+
 ```
 sudo pip install websocket-client
 ```
+
+# Testing
+
+This is simple code, that will make you easier to explore our API.
+Quick instruction how to use it:
+
+1. Download both files (copy paste)
+2. Open index.html in browser and open console in developers tools
+3. Provide authentication token
+4. Click connect
+5. Object proxy has some usefull methods for sending messages, in ex. `proxy.examples.startChatMessage();`
+
+Example files: 
+- [index.html](./examples/index.html)
+- [app.js](./examples/app.js)
 
 # SSO scopes for resources
 | Scope | API methods | permission | Description |
@@ -291,7 +309,6 @@ Objects are standardized data formats that are used in API requests and response
 ```
 
 Optional properties:
-
 * `name`
 * `email`
 * `last_seen_timestamp`
@@ -754,10 +771,10 @@ Example response payloads
 		"chat": {
 			"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 			"users": [
-				// array of "User" objects
+				// array of "User" objects          
 			],
 			"thread": {
-				// "Thread" object
+				// "Thread" object          
 			}
 		}
 	}],
@@ -881,7 +898,7 @@ Example response payload
 	"chat": {
 		"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 		"users": [
-			// array of "User" objects
+			// array of "User" objects         
 		],
 		"threads": [ // optional
 			// "Thread" object
@@ -1047,7 +1064,9 @@ No response payload
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
+| `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
+
+* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
 Request payload:
 
@@ -1394,7 +1413,7 @@ Request payload:
     * `<match_object>` structure:
       * `value` - value to match (`string`)
       * `exact_match` - if exact match, if set to `false` a `match_object.value` will be matched as substring of `customer_url`
-
+  
 Example request payload
 ```js
 {
@@ -1654,12 +1673,12 @@ Example response payload
 
 ## Thread closed
 
-| Action | Payload |
-|--------|------------------|
-| `thread_closed` |
-|  | `chat_id` |
-|  | `thread_id` |
-|  | `user_id` (optional) |
+| Action | Payload | Notes |
+|--------|------------------|---|
+| `thread_closed` | |
+|  | `chat_id` | |
+|  | `thread_id` | |
+|  | `user_id` | Missing if thread was closed by router |
 
 Example response payload
 ```js

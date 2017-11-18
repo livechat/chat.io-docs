@@ -1,8 +1,9 @@
 var cfg = {
-    apiUrl: "wss://api.chat.io/customer/rtm/ws",
-    licenseID: "<LICENSE_ID>",
+    apiUrl: "wss://api.chat.io/agent/v0.2/rtm/ws",
+    accesToken: "Bearer <TOKEN>"
 }
 
+var ChatID = null
 var PING = null
 
 var sendMessage = function(name, payload) {
@@ -18,6 +19,7 @@ var sendMessage = function(name, payload) {
         protocolMessage.payload = payload
     }
 
+    console.log("send:", protocolMessage)
     // emit via socket.io
     this.client.send(JSON.stringify(protocolMessage));
 }
@@ -44,15 +46,15 @@ var onMessage = function(d) {
             return onMessageLogin(msg)
             break
 
-        case "start_chat":
-            return onMessageStartChat(msg)     
+        case "start_chat":   
+            return onMessageStartChat(msg)
             break
     }
 }
 
 var onMessageLogin = function(msg) {
-    console.log("Your vustomer ID:", msg.payload.customer_id)
-    return apiSendStartChat()  
+            console.log("Your agent ID:", msg.payload.my_profile.id)
+            return apiSendStartChat()  
 }
 
 var onMessageStartChat = function(msg) {
@@ -61,12 +63,12 @@ var onMessageStartChat = function(msg) {
 }
 
 var apiSendLogin = function() {
-    sendMessage("login")
+    sendMessage("login", {token: cfg.accesToken})
 }
 
 var apiSendStartChat = function() {
     sendMessage("start_chat", {
-        routing_scope: {type: "license"} // scope type is required
+        routing_scope: {type: "license"}
     });     
 }
 
@@ -101,9 +103,9 @@ var onDisconnect = function(msg) {
         PING = null
     }
 }
-var client = new WebSocket(apiUrl + "?license_id=" + cfg.licenseID)
+
+var client = new WebSocket(cfg.apiUrl)
 
 client.onmessage = onMessage
 client.onopen = onConnect
 client.onclose = onDisconnect
-
