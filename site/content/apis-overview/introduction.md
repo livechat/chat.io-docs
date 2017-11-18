@@ -22,7 +22,7 @@ Both have much in common. The differences come from their use cases and are refl
 See the diagram below to understand the basic flow of information between services. The animation explains the simple chat flow: from logging in, through starting a chat, with ending at sending events.
 
 <video loop width="750" height="500" controls>
-<source type="video/mp4" src="images/simple_event_schema.mp4">
+<source type="video/mp4" src="/docs/apis-overview/images/simple_event_schema.mp4">
 </video>
 
 
