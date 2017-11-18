@@ -110,13 +110,14 @@ Arguments:
 
 Returned value:
 
-| shape        | type     | shape     | type     | description |
-| ------------ | -------- | --------- | -------- | ----------- |
-| chatsSummary | object[] |           |          |             |
-|              |          | id        | string   | Chat's id   |
-|              |          | users     | string[] | Users' ids  |
-|              |          | lastEvent | object   | Event       |
-| totalChats   | number   |           |          |             |
+| shape        | type     | shape              | type     | description                                        |
+| ------------ | -------- | ------------------ | -------- | -------------------------------------------------- |
+| chatsSummary | object[] |                    |          |                                                    |
+|              |          | id                 | string   | Chat's id                                          |
+|              |          | users              | string[] | Users' ids                                         |
+|              |          | lastEvent          | object   | Event                                              |
+|              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
+| totalChats   | number   |                    |          |                                                    |
 
 ### getChatThreads
 

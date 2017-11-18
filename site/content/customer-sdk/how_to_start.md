@@ -5,6 +5,11 @@ weight: 20
 
 # How to start
 
+## Create application
+
+First you need to register your application in our
+[Developer's console](https://console.chat.io/).
+
 ## Install Customer JS SDK
 
 You can use chat.io Customer JS SDK in two different ways:
@@ -43,22 +48,29 @@ import { AuthWebView } from '@livechat/chat.io-customer-auth'
 import { init } from '@livechat/chat.io-customer-sdk'
 
 export default class App extends React.Component {
-  license = LICENSE_NUMBER
-
   componentDidMount() {
-    const customerSDK = init({ license: this.license })
+    const customerSDK = init({
+      license: LICENSE_NUMBER,
+      clientId: CLIENT_ID,
+      redirectUri: REDIRECT_URI,
+    })
     // you can start using customerSDK from now
   }
 
   render() {
     return (
       <View>
-        <AuthWebView license={this.license} />
+        <AuthWebView />
       </View>
     )
   }
 }
 ```
+
+**Note** For the time being you need to register your application in
+[Developer's console](https://console.chat.io/) as "Web app (frontend, eg.
+JavaScript)" type and pass the configured `redirectUri` to the `init` in
+addition to regular required properties of `license` and `clientId`.
 
 ## Use API
 
@@ -68,6 +80,7 @@ your chat.io license number. The function will return the customerSDK instance:
 ```js
 const customerSDK = chatIoCustomerSDK.init({
   license: LICENSE_NUMBER,
+  clientId: CLIENT_ID,
 })
 ```
 
