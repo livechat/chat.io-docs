@@ -1,9 +1,10 @@
 # Changelog
 
-## [v0.3 dev preview]
+## [v0.3]
 
 ### Added
 - Support for uploading images
+- Support for sending messages as bots with `author_id`
 
 ## [v0.2] - 2017-09-01
 

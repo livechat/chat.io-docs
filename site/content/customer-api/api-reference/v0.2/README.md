@@ -4,10 +4,7 @@
 * [Introduction](#introduction)
   * [Connection](#connection)
   * [Events order](#events-order)
-* [Examples](#examples)
-  * [JavaScript](#javascript)
-  * [Go](#go)
-  * [Python](#python)
+* [Testing](#testing)
 * [Objects](#objects)
   * [Chat](#chat)
   * [Thread](#thread)
@@ -80,7 +77,9 @@ Client must also send query string params in every request to Web API:
 Request
 ```js
 {
-	// optional payload
+	"payload": {
+		// optional
+	},
 }
 ```
 
@@ -100,7 +99,7 @@ Connection endpoints:
 Client must send query string param when connecting to RTM API:
 
 | Param | Required | Type | Notes |
-|--|--|--|--|
+|----|----|----|----|
 | `license_id` | Yes | Integer | LiveChat account ID |
 
 Example:
@@ -118,7 +117,7 @@ Client should implement server pinging or connection will be closed after about 
 Request
 ```js
 {
-	"id": "<request_id>",
+	"id": "<request_id>", // optional
 	"action": "<action>",
 	"payload": {
 		// optional
@@ -129,7 +128,7 @@ Request
 Response
 ```js
 {
-	"id": "<request_id>",
+	"id": "<request_id>", // optional
 	"action": "<action>",
 	"type": "response",
 	"success": true,
@@ -162,27 +161,24 @@ Customer authentication is store in cookies. All cookies are secure and http-onl
 ## Events order
 Chat messages are not guaranteed to be sorted by server. Client should sort them by `order` parameter. Do not use `timestamp` to sort messages because two events can have the same timestamp.
 
-# Examples
-All examples are similar i.e., connects and logins to Agent API and starts chat with sending welcome message via Websocket.
 
-## JavaScript
-Example file: [examples/example.js](./examples/example.js)
+# Testing
 
-## Go
-Example file: [examples/example.go](./examples/example.go)
+This is simple code, that will make you easier to explore our API.
+Quick instruction how to use it:
 
-Remember to install proper lib:
-```
-go get github.com/gorilla/websocket
-```
+1. Download all files (copy paste)
+2. Open index.html in browser and open console in developers tools
+3. Type in your license_id
+4. Generate new token (you will be redirected to url, this url has parameter access_token)
+5. Copy access_token to Token field
+6. Click connect
+7. Object proxy has some usefull methods for sending messages, in ex. `proxy.examples.startChatMessage();`
 
-## Python
-Example file: [examples/example.py](./examples/example.py)
-
-Remember to install proper lib:
-```
-sudo pip install websocket-client
-```
+Example files: 
+- [index.html](./examples/index.html)
+- [app.js](./examples/app.js)
+- [socket-io.js](./examples/socket-io.js)
 
 # Objects
 Objects are standardized data formats that are used in API requests and responses.
@@ -527,16 +523,15 @@ Error payload has format:
 
 ## Possible errors
 
-| Type | Default Message | Data | Notes |
-|--------|----------------|----------|---|
-| `internal` | Internal server error | | Sent for any request |
-| `customer_banned` | Customer is banned | | Sent for `login` request, then customer gets disconnected |
-| `validation` | Wrong format of request | | Sent for any request |
-| `auth` | Auth error | | Sent for `login` request |
-| `request_timeout` | Request timeouted | | Sent for any request when not handled within 15 seconds timeframe  |
-| `license_not_found` | License doesn't exist | | Sent in push on connection, then customer gets disconnected |
-| `incorrect_region` | License is in another region | `region` | Sent in push on connection, then customer gets disconnected |
-| `too_many_connections` | Too many connections | | Sent in push on connection when customer reached connection limit, then customer gets disconnected |
+| Type | Default Message | Notes |
+|--------|----------------|---|
+| `internal` | Internal server error | |
+| `customer_banned` | Customer is banned | |
+| `validation` | Wrong format of request | |
+| `authorization` | Authorization error | Customer is not allowed to perform action |
+| `authentication` | Authentication error | Invalid / expired access token |
+| `license_expired` | License expired | |
+| `request_timeout` | Request timeouted | Timeout threshold is 15 seconds |
 
 
 # Methods
@@ -792,9 +787,9 @@ Example response payload
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
+| `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`](#incoming-chat-thread)* |
 
-\* `incoming_chat_thread` will be sent only if event starts new thread
+* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
 Request payload:
 
@@ -819,26 +814,26 @@ Example request payload
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `send_file` | - | ✓ | [`incoming_event`](#incoming-event) <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
+| `send_file` | - | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
 
-\* `incoming_chat_thread` will be sent only if event starts new thread
+* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
-Request payload:
+Request (with payload):
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
-| `chat_id`      | Yes      | Id of the chat that we want to send the file to |
-| `custom_id`        | Yes      | |
-| `file`      | Yes      | max 10MB |
+| `payload.chat_id`      | Yes      | Id of the chat that we want to send the file to |
+| `payload.custom_id`        | Yes      | |
+| `payload.file`      | Yes      | max 10MB |
 
 
 * Content-Type header in form `Content-Type: multipart/form-data; boundary=<boundary>` is required.
 
-Example request payload
+Example request (with payload)
 ```
-  chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
-  custom_id=12345-bhdsa
-  file=test.png
+  payload.chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
+  payload.custom_id=12345-bhdsa
+  payload.file=test.png
 ```
 
 No response payload.
@@ -921,9 +916,9 @@ No response payload.
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `update_customer` | ✓ | ✓ | [`customer_updated`](#customer-updated) |
+| `update_customer` | ✓ | ✓ | [`customer_updated`](#customer-updated)* |
 
-Updates customer details and properties.
+\* `customer_updated` will be sent as many times as there are active chats
 
 Request payload:
 
@@ -1164,12 +1159,12 @@ Example response payload
 
 ## Thread closed
 
-| Action | Payload |
-|--------|------------------|
-| `thread_closed` |
-|  | `chat_id` |
-|  | `thread_id` |
-|  | `user_id` (optional) |
+| Action | Payload | Notes |
+|--------|------------------|-----|
+| `thread_closed` | |
+|  | `chat_id` | |
+|  | `thread_id` | |
+|  | `user_id` | Missing if thread was closed by router |
 
 Example response payload
 ```js
