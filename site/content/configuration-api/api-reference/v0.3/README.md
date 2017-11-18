@@ -110,6 +110,29 @@ We currently don't support chat.io group management. All agents belong to group 
 }
 ```
 
+#### Remove BOT Agent
+
+**Endpoint**: `agents/remove_bot_agent`
+
+| Request object | Type | Required | Notes |
+|----------------|------|----------|-------|
+| `bot_agent_id` | `string` | Yes | BOT agent ID |
+
+
+##### Example request payload
+```js
+{
+    "bot_agent_id": "5c9871d5372c824cbf22d860a707a578"
+}
+```
+
+##### Example response payloads
+###### Success
+```js
+{
+}
+```
+
 #### Update BOT Agent
 
 **Endpoint**: `agents/update_bot_agent`
