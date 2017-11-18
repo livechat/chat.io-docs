@@ -8,6 +8,7 @@ import random
 
 license_id = <LICENSE_ID>
 api_url = "wss://api.chat.io/customer/rtm/ws"
+customer_access_token = "Bearer <ACCESS_TOKEN>"
 
 #websocket.enableTrace(True)
 
@@ -19,6 +20,7 @@ def api_login(ws):
 		"id": get_random_request_id(),
 		"action": "login",
 		"payload": {
+			"token": customer_access_token,
 			"customer": {
 				"name": "Python example"
 			}

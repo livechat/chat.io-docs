@@ -13,9 +13,10 @@ import (
 )
 
 var (
-	licenseID    int           // <LICENSE_ID>
-	apiURL       string        = "wss://api.chat.io/customer/rtm/ws"
-	pingInterval time.Duration = time.Second * 30
+	licenseID           int           = 100000000 // <LICENSE_ID>
+	apiURL              string        = "wss://api.chat.io/customer/rtm/ws"
+	pingInterval        time.Duration = time.Second * 30
+	customerAccessToken string        = "Bearer <ACCESS_TOKEN>" // <CUSTOMER_ACCESS_TOKEN>
 )
 
 func main() {
@@ -110,7 +111,16 @@ func handleMessageStartChat(c *websocket.Conn, raw []byte) error {
 }
 
 func apiLogin(c *websocket.Conn) error {
-	return sendMessage(c, "login", nil)
+
+	type loginRequest struct {
+		Token string `json:"token"`
+	}
+
+	payload := &loginRequest{
+		Token: customerAccessToken,
+	}
+
+	return sendMessage(c, "login", payload)
 }
 
 func apiStartChat(c *websocket.Conn) error {

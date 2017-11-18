@@ -1,9 +1,10 @@
 var cfg = {
     apiUrl: "wss://api.chat.io/customer/rtm/ws",
-    licenseID: "<LICENSE_ID>",
+    licenseID: "100000000", // 
 }
 
 var PING = null
+var ACCESS_TOKEN = "Bearer <ACCESS_TOKEN>"
 
 var sendMessage = function(name, payload) {
 
@@ -61,7 +62,9 @@ var onMessageStartChat = function(msg) {
 }
 
 var apiSendLogin = function() {
-    sendMessage("login")
+    sendMessage("login", {
+        "token": ACCESS_TOKEN
+    })
 }
 
 var apiSendStartChat = function() {
@@ -101,7 +104,7 @@ var onDisconnect = function(msg) {
         PING = null
     }
 }
-var client = new WebSocket(apiUrl + "?license_id=" + cfg.licenseID)
+var client = new WebSocket(cfg.apiUrl + "?license_id=" + cfg.licenseID)
 
 client.onmessage = onMessage
 client.onopen = onConnect
