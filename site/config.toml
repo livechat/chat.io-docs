@@ -3,3 +3,7 @@ languageCode = "en-us"
 title = "chat.io/docs"
 disableHugoGeneratorInject = true
 ignorefiles = ["/agent-api/api-reference/v0.2/examples/index.html", "/agent-api/api-reference/v0.3/examples/index.html", "/customer-api/api-reference/v0.2/examples/index.html", "/customer-api/api-reference/v0.3/examples/index.html"]
+
+[outputs]
+  home = ["HTML","JSON","RSS"]
+  page = ["HTML"]
