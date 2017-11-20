@@ -1,10 +1,6 @@
 ---
 title: 'Configuration API Guide'
 weight: 10
-slug: '/'
-menu:
-    configuration_api:
-        identifier: "Guide"
 ---
 
 # Introduction

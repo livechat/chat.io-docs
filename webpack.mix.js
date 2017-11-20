@@ -30,6 +30,7 @@ mix
   })
   .browserSync({
     server: "dist",
+    startPath: '/docs/',
     proxy: false,
     files: ["dist/**/*.js", "dist/**/*.css", "dist/**/*.html"],
     reloadThrottle: 100

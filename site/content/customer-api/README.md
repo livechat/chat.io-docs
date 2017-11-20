@@ -1,10 +1,6 @@
 ---
 title: 'Customer API Guide'
 weight: 10
-slug: '/'
-menu:
-    customer_api:
-        identifier: "Guide"
 ---
 
 # Introduction

@@ -1,8 +1,6 @@
 ---
 title: 'Agent API Guide'
 weight: 10
-slug: '/'
-type: "guide"
 ---
 
 # Introduction
