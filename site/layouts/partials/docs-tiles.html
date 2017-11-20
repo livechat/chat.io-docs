@@ -16,7 +16,8 @@
     {{if .Params }}
     <div class="tile is-4 is-parent">
         <a class="tile is-link is-child box content" href="{{.Permalink}}"  style="background-color: {{ .Params.color }}">
-            <h6 class="type">{{.Params.type}}</h6>
+            <h6 class="type">
+                {{ partial "pretty-type" . }}
             <h3>{{.Title}}</h3>
             <p>{{.Params.desc}}</p>
         </a>
