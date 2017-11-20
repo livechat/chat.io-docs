@@ -2,9 +2,7 @@
 title: 'Agent API Guide'
 weight: 10
 slug: '/'
-menu:
-    agent_api:
-        identifier: "Guide"
+type: "guide"
 ---
 
 # Introduction
