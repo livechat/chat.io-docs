@@ -10,7 +10,6 @@
   * [JavaScript](#javascript)
   * [Go](#go)
   * [Python](#python)
-* [Testing](#testing)
 * [SSO scopes for resources](#sso-scopes-for-resources)
 * [Objects](#objects)
   * [Thread](#thread)
@@ -181,25 +180,9 @@ go get github.com/gorilla/websocket
 Example file: [examples/example.py](./examples/example.py)
 
 Remember to install proper lib:
-
 ```
 sudo pip install websocket-client
 ```
-
-# Testing
-
-This is simple code, that will make you easier to explore our API.
-Quick instruction how to use it:
-
-1. Download both files (copy paste)
-2. Open index.html in browser and open console in developers tools
-3. Provide authentication token
-4. Click connect
-5. Object proxy has some usefull methods for sending messages, in ex. `proxy.examples.startChatMessage();`
-
-Example files: 
-- [index.html](./examples/index.html)
-- [app.js](./examples/app.js)
 
 # SSO scopes for resources
 | Scope | API methods | permission | Description |
@@ -240,7 +223,6 @@ Objects are standardized data formats that are used in API requests and response
 ```js
 {
 	"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"timestamp": 1473433500,
 	"active": true,
 	"user_ids": ["john@gmail.com"],
 	"events": [
@@ -1066,7 +1048,7 @@ No response payload
 | --- | :---: | :---: | :---: |
 | `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
 
-* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
+\* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
 Request payload:
 

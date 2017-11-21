@@ -6,7 +6,7 @@ import time
 import json
 import random
 
-sso_access_token = 'Bearer <YOUR_ACCESS_TOKEN>'
+sso_access_token = 'Bearer <ACCESS_TOKEN>'
 api_url = "wss://api.chat.io/agent/v0.3/rtm/ws"
 
 #websocket.enableTrace(True)
@@ -16,7 +16,7 @@ def get_random_request_id():
 
 def api_login(ws):
 	login_request = {
-		"id": get_random_request_id(),
+		"request_id": get_random_request_id(),
 		"action": "login",
 		"payload": {
 			"token": sso_access_token,
@@ -29,7 +29,7 @@ def api_login(ws):
 
 def api_start_chat(ws):
 	start_chat_request = {
-		"id": get_random_request_id(),
+		"request_id": get_random_request_id(),
 		"action": "start_chat",
 		"payload": {
 		}
@@ -38,7 +38,7 @@ def api_start_chat(ws):
 
 def api_send_chat_message(ws, chat_id, message):
 	send_message_request = {
-		"id": get_random_request_id(),
+		"request_id": get_random_request_id(),
 		"action": "send_event",
 		"payload": {
 			"chat_id": chat_id,

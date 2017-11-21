@@ -11,7 +11,7 @@ var sendMessage = function(name, payload) {
     // wrap protocol message data
     protocolMessage = {
         action: name,
-        id: generateID(), // id for match response
+        request_id: generateID(), // id for match response
     }
 
     // add payload if exist

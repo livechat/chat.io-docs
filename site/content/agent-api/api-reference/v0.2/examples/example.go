@@ -15,7 +15,7 @@ import (
 var (
 	apiURL       string        = "wss://api.chat.io/agent/v0.2/rtm/ws"
 	pingInterval time.Duration = time.Second * 30
-	accessToken  string        = "Bearer <YOUR_ACCESS_TOKEN>"
+	accessToken  string        = "Bearer <ACCESS_TOKEN>"
 )
 
 func main() {
@@ -56,11 +56,11 @@ func pinger(c *websocket.Conn) {
 
 func handleMessage(c *websocket.Conn, raw []byte) error {
 	type protocolResponse struct {
-		ID      string          `json:"id,omitempty"`
-		Action  string          `json:"action"`
-		Type    string          `json:"type"`
-		Payload json.RawMessage `json:"payload"`
-		Success *bool           `json:"success"`
+		RequestID string          `json:"request_id,omitempty"`
+		Action    string          `json:"action"`
+		Type      string          `json:"type"`
+		Payload   json.RawMessage `json:"payload"`
+		Success   *bool           `json:"success"`
 	}
 
 	log.Printf("Received message: %s", raw)
