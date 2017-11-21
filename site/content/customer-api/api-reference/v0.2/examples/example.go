@@ -13,9 +13,9 @@ import (
 )
 
 var (
-	licenseID    int           // <LICENSE_ID>
-	apiURL       string        = "wss://api.chat.io/customer/rtm/ws"
+	apiURL       string        = "wss://api.chat.io/customer/v0.2/rtm/ws"
 	pingInterval time.Duration = time.Second * 30
+	licenseID    int           = 0 // <LICENSE_ID>
 )
 
 func main() {
@@ -57,11 +57,11 @@ func pinger(c *websocket.Conn) {
 
 func handleMessage(c *websocket.Conn, raw []byte) error {
 	type protocolResponse struct {
-		ID      string          `json:"id,omitempty"`
-		Action  string          `json:"action"`
-		Type    string          `json:"type"`
-		Payload json.RawMessage `json:"payload"`
-		Success *bool           `json:"success"`
+		RequestID string          `json:"request_id,omitempty"`
+		Action    string          `json:"action"`
+		Type      string          `json:"type"`
+		Payload   json.RawMessage `json:"payload"`
+		Success   *bool           `json:"success"`
 	}
 
 	log.Printf("Received message: %s", raw)
@@ -110,7 +110,21 @@ func handleMessageStartChat(c *websocket.Conn, raw []byte) error {
 }
 
 func apiLogin(c *websocket.Conn) error {
-	return sendMessage(c, "login", nil)
+	type customer struct {
+		Name string `json:"name"`
+	}
+
+	type loginRequest struct {
+		Customer *customer `json:"customer"`
+	}
+
+	payload := &loginRequest{
+		Customer: &customer{
+			Name: "Go example",
+		},
+	}
+
+	return sendMessage(c, "login", payload)
 }
 
 func apiStartChat(c *websocket.Conn) error {
@@ -154,15 +168,15 @@ func apiSendChatMessage(c *websocket.Conn, chatID string) error {
 
 func sendMessage(c *websocket.Conn, action string, payload interface{}) error {
 	type protocolRequest struct {
-		Action  string      `json:"action"`
-		ID      string      `json:"id"`
-		Payload interface{} `json:"payload,omitempty"`
+		Action    string      `json:"action"`
+		RequestID string      `json:"request_id"`
+		Payload   interface{} `json:"payload,omitempty"`
 	}
 
 	msg := protocolRequest{
-		Action:  action,
-		ID:      strconv.Itoa(rand.Int()),
-		Payload: payload,
+		Action:    action,
+		RequestID: strconv.Itoa(rand.Int()),
+		Payload:   payload,
 	}
 
 	raw, err := json.Marshal(msg)

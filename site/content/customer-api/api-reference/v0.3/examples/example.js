@@ -1,17 +1,17 @@
 var cfg = {
-    apiUrl: "wss://api.chat.io/customer/rtm/ws",
-    licenseID: "100000000", // 
+    apiUrl: "wss://api.chat.io/customer/v0.3/rtm/ws",
+    licenseID: 0, // <LICENSE_ID>
+    customerAccessToken: "Bearer <TOKEN>",
 }
 
 var PING = null
-var ACCESS_TOKEN = "Bearer <ACCESS_TOKEN>"
 
 var sendMessage = function(name, payload) {
 
     // wrap protocol message data
     protocolMessage = {
         action: name,
-        id: generateID(), // id for match response
+        request_id: generateID(), // request_id for match response
     }
 
     // add payload if exist
@@ -63,7 +63,10 @@ var onMessageStartChat = function(msg) {
 
 var apiSendLogin = function() {
     sendMessage("login", {
-        "token": ACCESS_TOKEN
+        "token": cfg.customerAccessToken,
+        "customer": {
+            "name": "JS example"
+        }
     })
 }
 

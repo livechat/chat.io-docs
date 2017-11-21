@@ -6,17 +6,15 @@ import time
 import json
 import random
 
-license_id = <LICENSE_ID>
-api_url = "wss://api.chat.io/customer/rtm/ws"
-
-#websocket.enableTrace(True)
+api_url = "wss://api.chat.io/customer/v0.2/rtm/ws"
+license_id = 0 # <LICENSE_ID>
 
 def get_random_request_id():
 	return "{0}".format(random.randint(1, 9999999999))
 
 def api_login(ws):
 	login_request = {
-		"id": get_random_request_id(),
+		"request_id": get_random_request_id(),
 		"action": "login",
 		"payload": {
 			"customer": {
@@ -28,7 +26,7 @@ def api_login(ws):
 
 def api_start_chat(ws):
 	start_chat_request = {
-		"id": get_random_request_id(),
+		"request_id": get_random_request_id(),
 		"action": "start_chat",
 		"payload": {
 			"routing_scope": {
@@ -40,7 +38,7 @@ def api_start_chat(ws):
 
 def api_send_chat_message(ws, chat_id, message):
 	send_message_request = {
-		"id": get_random_request_id(),
+		"request_id": get_random_request_id(),
 		"action": "send_event",
 		"payload": {
 			"chat_id": chat_id,

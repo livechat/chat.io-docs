@@ -1,6 +1,6 @@
 var cfg = {
-    apiUrl: "wss://api.chat.io/customer/rtm/ws",
-    licenseID: "<LICENSE_ID>",
+    apiUrl: "wss://api.chat.io/customer/v0.2/rtm/ws",
+    licenseID: 0, // <LICENSE_ID>
 }
 
 var PING = null
@@ -10,7 +10,7 @@ var sendMessage = function(name, payload) {
     // wrap protocol message data
     protocolMessage = {
         action: name,
-        id: generateID(), // id for match response
+        request_id: generateID(), // request_id for match response
     }
 
     // add payload if exist
@@ -61,7 +61,11 @@ var onMessageStartChat = function(msg) {
 }
 
 var apiSendLogin = function() {
-    sendMessage("login")
+    sendMessage("login", {
+        "customer": {
+            "name": "JS example"
+        }
+    })
 }
 
 var apiSendStartChat = function() {
@@ -101,7 +105,7 @@ var onDisconnect = function(msg) {
         PING = null
     }
 }
-var client = new WebSocket(apiUrl + "?license_id=" + cfg.licenseID)
+var client = new WebSocket(cfg.apiUrl + "?license_id=" + cfg.licenseID)
 
 client.onmessage = onMessage
 client.onopen = onConnect
