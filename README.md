@@ -1,16 +1,14 @@
-# chat.io for developers
+## chat.io for developers
 
 Hello 👋!
 
-This is a source repository for [chat.io/docs](https://www.chat.io/docs/). It's a Hugo + Webpack powered static generated website.
+This is a source repository for [chat.io/docs](https://www.chat.io/docs/). It's a Hugo + Webpack powered static generated website. If you found something that's unclear or needs a fix, feel free to send us a PR!
 
-If you found something that's unclear or needs a fix, feel free to send us a PR!
-
-## Contact us anytime
+### Contact us anytime
 
 We're always willing to improve our docs and services. Let's chat about your use case, business needs or technical issues at [chat.io/docs](https://www.chat.io/docs/).
 
-## Don't know chat.io yet?
+### Don't know chat.io yet?
 
 chat.io is a multichannel messaging platform for customer service and online sales. See how can it level up your business! See chat.io [features](https://www.chat.io/feature).
 
