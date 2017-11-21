@@ -1,8 +1,20 @@
-# Chat.io Website
+# chat.io for developers
 
-Hugo + Webpack powered static generated website.
+Hello 👋!
 
-## Usage
+This is a source repository for [chat.io/docs](https://www.chat.io/docs/). It's a Hugo + Webpack powered static generated website.
+
+If you found something that's unclear or needs a fix, feel free to send us a PR!
+
+## Contact us anytime
+
+We're always willing to improve our docs and services. Let's chat about your use case, business needs or technical issues at [chat.io/docs](https://www.chat.io/docs/).
+
+## Don't know chat.io yet?
+
+chat.io is a multichannel messaging platform for customer service and online sales. See how can it level up your business! See chat.io [features](https://www.chat.io/feature).
+
+## Development
 
 Be sure that you have the node >= 6.0.0 and npm installed. Next, clone this repository and run:
 
@@ -44,15 +56,15 @@ The most useful page there is the one about the available functions:
 
 https://gohugo.io/templates/functions/
 
-For assets that are completely static and don't need to go through the asset pipeline,
+1. For assets that are completely static and don't need to go through the asset pipeline,
 use the `site/static` folder. Font-files, PDFs, etc, all go there.
 
-Files in the static folder ends up in the web root. So a file called `site/static/favicon.ico`
+2. Files in the static folder ends up in the web root. So a file called `site/static/favicon.ico`
 will end up being available as `/favicon.ico` and so on...
 
-The `src/js/app.js` file is the entrypoint for webpack and will be built to `/dist/app.js`.
+3. The `src/js/app.js` file is the entrypoint for webpack and will be built to `/dist/app.js`.
 
-You can use ES6 and use both relative imports or import libraries from npm.
+4. You can use ES6 and use both relative imports or import libraries from npm.
 
-Any CSS file directly under the `src/css/` folder will get compiled with Sass
+5. Any CSS file directly under the `src/css/` folder will get compiled with Sass
 to `/dist/css/{filename}.css`. Import statements will be resolved as part of the build
