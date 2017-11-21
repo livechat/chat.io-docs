@@ -78,7 +78,7 @@ Required headers:
 Client should send query string params in every request to Web API:
 
 | Param | Required | Type | Notes |
-|--|--|--|--|
+| --- | --- | --- | --- |
 | `license_id` | Yes | Integer | LiveChat account ID |
 
 ### Messages format
