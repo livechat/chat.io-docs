@@ -4,7 +4,10 @@
 * [Introduction](#introduction)
   * [Connection](#connection)
   * [Events order](#events-order)
-* [Testing](#testing)
+* [Examples](#examples)
+  * [JavaScript](#javascript)
+  * [Go](#go)
+  * [Python](#python)
 * [Objects](#objects)
   * [Chat](#chat)
   * [Thread](#thread)
@@ -99,7 +102,7 @@ Connection endpoints:
 Client must send query string param when connecting to RTM API:
 
 | Param | Required | Type | Notes |
-|----|----|----|----|
+|--|--|--|--|
 | `license_id` | Yes | Integer | LiveChat account ID |
 
 Example:
@@ -117,7 +120,7 @@ Client should implement server pinging or connection will be closed after about 
 Request
 ```js
 {
-	"id": "<request_id>", // optional
+	"request_id": "<request_id>", // optional
 	"action": "<action>",
 	"payload": {
 		// optional
@@ -128,7 +131,7 @@ Request
 Response
 ```js
 {
-	"id": "<request_id>", // optional
+	"request_id": "<request_id>", // optional
 	"action": "<action>",
 	"type": "response",
 	"success": true,
@@ -152,33 +155,30 @@ Push
 ## Authentication
 Customer authentication is store in cookies. All cookies are secure and http-only .  
 
-| Cookie name | Type |
-|--------|------------------|
-| __lc_cid | Customer ID |
-| __lc_cst | Authentication token |
-
-
 ## Events order
 Chat messages are not guaranteed to be sorted by server. Client should sort them by `order` parameter. Do not use `timestamp` to sort messages because two events can have the same timestamp.
 
+# Examples
+All examples are similar i.e., connects and logins to Agent API and starts chat with sending welcome message via Websocket.
 
-# Testing
+## JavaScript
+Example file: [examples/example.js](./examples/example.js)
 
-This is simple code, that will make you easier to explore our API.
-Quick instruction how to use it:
+## Go
+Example file: [examples/example.go](./examples/example.go)
 
-1. Download all files (copy paste)
-2. Open index.html in browser and open console in developers tools
-3. Type in your license_id
-4. Generate new token (you will be redirected to url, this url has parameter access_token)
-5. Copy access_token to Token field
-6. Click connect
-7. Object proxy has some usefull methods for sending messages, in ex. `proxy.examples.startChatMessage();`
+Remember to install proper lib:
+```
+go get github.com/gorilla/websocket
+```
 
-Example files: 
-- [index.html](./examples/index.html)
-- [app.js](./examples/app.js)
-- [socket-io.js](./examples/socket-io.js)
+## Python
+Example file: [examples/example.py](./examples/example.py)
+
+Remember to install proper lib:
+```
+sudo pip install websocket-client
+```
 
 # Objects
 Objects are standardized data formats that are used in API requests and responses.
@@ -789,7 +789,7 @@ Example response payload
 | --- | :---: | :---: | :---: |
 | `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`](#incoming-chat-thread)* |
 
-* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
+\* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
 Request payload:
 
@@ -816,7 +816,7 @@ Example request payload
 | --- | :---: | :---: | :---: |
 | `send_file` | - | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
 
-* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
+\* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
 Request (with payload):
 
