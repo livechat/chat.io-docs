@@ -1,10 +1,13 @@
 # Changelog
 
-## [v0.3]
+## [v0.3 dev preview]
 
 ### Added
 - Support for uploading images
 - Support for sending messages as bots with `author_id`
+
+### Removed
+- Method `send_message`, use `send_event` instead
 
 ## [v0.2] - 2017-09-01
 
