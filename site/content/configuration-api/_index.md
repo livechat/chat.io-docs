@@ -4,6 +4,6 @@ type: "guide-and-reference"
 latest_version: "0.3"
 section_home: true
 weight: 60
-desc: "Set up webhooks and manage bot agents."
-color: "#8129e2"
+desc: "Set up webhooks or manage bot agents."
+color: "#8129e1"
 ---
