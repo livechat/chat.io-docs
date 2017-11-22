@@ -52,7 +52,7 @@ To better understand the power of this tool, check out following guides. To expl
 
 ### Guide on creating
 
-...
+..
 
 ### Using this tool to
 

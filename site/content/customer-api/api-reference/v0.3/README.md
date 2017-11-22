@@ -1,4 +1,5 @@
 <div class="hide">
+
 # Customer Chat API
 
 * [Introduction](#introduction)
@@ -108,7 +109,7 @@ API endpoints:
 Client must send query string param when connecting to RTM API:
 
 | Param | Required | Type | Notes |
-|--|--|--|--|
+| --- | --- | --- | --- |
 | `license_id` | Yes | Integer | LiveChat account ID |
 
 Example:
@@ -160,7 +161,7 @@ Push
 ```
 
 ## Authentication
-Customer authentication is done with access token. It can be obtained from customer sso.
+Customer authentication is done with access token. See how to obtain the customer access token in [Authorization](../../authorization) article.
 
 ## Events order
 Chat messages are not guaranteed to be sorted by server. Client should sort them by `order` parameter. Do not use `timestamp` to sort messages because two events can have the same timestamp.
