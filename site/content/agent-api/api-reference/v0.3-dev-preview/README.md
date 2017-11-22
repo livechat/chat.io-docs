@@ -1,4 +1,5 @@
 <div class="hide">
+
 # Agent Chat API
 
 * [Introduction](#introduction)
@@ -160,7 +161,7 @@ Push
 ```
 
 ## Authentication
-Agent authentication is done with access token. It can be obtained from agent sso.
+Agent authentication is done with access token. See how to obtain the access token in [Authorization](../../authorization) article.
 
 ## Events order
 Chat messages are not guaranteed to be sorted by server. Client should sort them by `order` parameter. Do not use `timestamp` to sort messages because two events can have the same timestamp.
@@ -227,6 +228,7 @@ Objects are standardized data formats that are used in API requests and response
 ```js
 {
 	"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"timestamp": 1473433500,
 	"active": true,
 	"user_ids": ["john@gmail.com"],
 	"events": [
