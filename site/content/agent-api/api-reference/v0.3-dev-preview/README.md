@@ -648,7 +648,8 @@ Example response payloads
 	"license": {
 		"id": "123",
 		"plan": "enterprise",
-		"expiration_timestamp": 1483433500
+		"expiration_timestamp": 1483433500,
+		"creation_timestamp": 1482433500
 	},
 	"my_profile": {
 		// "User > My profile" object
