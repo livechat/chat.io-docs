@@ -5,6 +5,37 @@ weight: 60
 
 # Changelog
 
+#### [v0.6.0]
+
+##### Changed
+
+* `customId` is added if it was explicitly passed in as part of an event
+* `customId` is not reused as request's id anymore
+* made it impossible to send 2 requests with identical ids until a response
+  comes in
+
+#### [v0.5.0]
+
+##### Added
+
+* `sendFile` method
+
+##### Changed
+
+* UMD export was renamed `CustomerSDK`
+
+#### [v0.4.2]
+
+##### Fixed
+
+* server errors handling - promises should get rejected correctly now
+
+#### [v0.4.1]
+
+##### Fixed
+
+* UMD builds from `dist` directory
+
 #### [v0.4.0]
 
 ##### Added
