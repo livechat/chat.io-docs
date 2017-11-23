@@ -26,7 +26,6 @@
   * [Get archives](#get-archives)
   * [Get filtered chats](#get-filtered-chats)
   * [Get chat threads](#get-chat-threads)
-  * [Supervise chat](#supervise-chat)
   * [Start chat](#start-chat)
   * [Join chat](#join-chat)
   * [Remove from chat](#remove-from-chat)
@@ -289,8 +288,8 @@ Objects are standardized data formats that are used in API requests and response
 			"timezone": "Europe/Warsaw"
 		}
 	},
-	"properties": {
-		"custom property name": "custom property value"
+	"fields": {
+		"custom field name": "custom field value"
 	},
 	"banned": false
 }
@@ -648,7 +647,8 @@ Example response payloads
 	"license": {
 		"id": "123",
 		"plan": "enterprise",
-		"expiration_timestamp": 1483433500
+		"expiration_timestamp": 1483433500,
+		"creation_timestamp": 1482433500
 	},
 	"my_profile": {
 		// "User > My profile" object
@@ -704,7 +704,7 @@ Example response payloads
 
 
 ## Get archives
-Returns active threads that current agent has access to. If the agent is a supervisor in some threads, those threads will be returned as well.
+Returns active threads that current agent has access to.
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -910,30 +910,6 @@ Example response payload
 }
 ```
 
-## Supervise chat
-Adds a supervisor to chat. The supervisor can only send messages to other agents. These messages are not visible to the customer.
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `supervise_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
-
-Request payload:
-
-| Request object | Required | Notes |
-|----------------|----------|---|
-| `chat_id` | Yes | |
-| `agent_ids` | No | If no agent is passed, current user will be used instead. |
-
-Example request payload
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"agent_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
-}
-```
-
-No payload.
-
 ## Start chat
 Starts a chat.
 
@@ -999,7 +975,7 @@ Example response payload
 ```
 
 ## Join chat
-Adds an agent to chat. If the agent was already a supervisor in chat, he/she is changed to an agent.
+Adds an agent to chat.
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1588,12 +1564,6 @@ Example response payload
 				// array of "User > Agent" objects
 			],
 			"removed_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
-		},
-		"supervisors": {
-			"added": [
-				// array of "User > Supervisor" objects
-			],
-			"removed_ids": ["85f3bfc9-06c1-434e-958b-2a5239b07de8"]
 		}
 	}
 }
