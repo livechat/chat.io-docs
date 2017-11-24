@@ -5,7 +5,7 @@
 ### Added
 - Support for uploading images
 - Support for sending messages as bots with `author_id`
-- `creation_date` to `login` response
+- `creation_date` to `license` object in `login` response
 
 ### Changed
 - Replace `properties` with `fields` in `customer` object
