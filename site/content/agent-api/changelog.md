@@ -9,8 +9,6 @@
 
 ### Changed
 - Replace `properties` with `fields` in `customer` object
-
-### Changed
 - Every validation error has user-friendly message with details
 
 ### Removed
