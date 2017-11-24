@@ -13,7 +13,7 @@
 
 ### Removed
 - Method `send_message`, use `send_event` instead
-- Method `supervise_chat` as well as `supervisor` object
+- Method `supervise_chat` as well as `supervisor`/`supervisors` objects
 
 ## [v0.2] - 2017-09-01
 
