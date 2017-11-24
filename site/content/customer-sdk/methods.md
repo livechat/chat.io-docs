@@ -227,6 +227,61 @@ Arguments:
 |           | type  | string | Type of the event     |
 |           | ...   |        | Other properties      |
 
+### sendFile
+
+This method is a little bit special - it returns regular `then`/`catch` methods
+of a Promise **and** a `cancel` method which you can use to abort the upload of
+the file. It also lets you pass `onProgress` callback function. Keep in mind
+that the maximum accepted file size is 10 MB.
+
+```js
+customerSDK
+  .sendFile(
+    'ON0X0R0L67',
+    {
+      file,
+      customId, // optional
+    },
+    {
+      onProgress: progress => console.log(`upload progress: ${progress}`),
+    },
+  )
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+```
+
+Arguments:
+
+| arguments | shape      | type     | description                                                                   |
+| --------- | ---------- | -------- | ----------------------------------------------------------------------------- |
+| chat      |            | string   | Destination chat's id                                                         |
+| data      |            |          |                                                                               |
+|           | file       | Blob     |                                                                               |
+|           | customId   | string   | Optional customId for the event                                               |
+| spec      |            |          |                                                                               |
+|           | onProgress | function | This callback function will receive a progress value - number between 0 and 1 |
+
+Returned value:
+
+| shape   | type    |
+| ------- | ------- |
+| success | boolean |
+
+In React Native instead of passing a blob you need to pass an object of
+[such shape](https://github.com/facebook/react-native/blob/56fef9b6225ffc1ba87f784660eebe842866c57d/Libraries/Network/FormData.js#L34-L38):
+
+```js
+const file = {
+  uri: uriFromCameraRoll,
+  type: 'image/jpeg', // optional
+  name: 'photo.jpg', // optional
+}
+```
+
 ### sendMessage
 
 ```js

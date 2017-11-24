@@ -12,7 +12,7 @@ function can be executed every time a message has been received.
 ### connected
 
 ```js
-api.on('connected', payload => {
+customerSDK.on('connected', payload => {
   console.log('connected')
   console.log(payload.chatsSummary)
   console.log(payload.totalChats)
@@ -33,7 +33,7 @@ Payload:
 ### connection_lost
 
 ```js
-api.on('connection_lost', () => {
+customerSDK.on('connection_lost', () => {
   console.log('connection_lost')
 })
 ```
@@ -43,7 +43,7 @@ This event doesn't carry any additional payload.
 ### connection_restored
 
 ```js
-api.on('connection_restored', payload => {
+customerSDK.on('connection_restored', payload => {
   console.log('connection_restored')
   console.log(payload.chatsSummary)
   console.log(payload.totalChats)
@@ -64,7 +64,7 @@ Payload:
 ### customer_id
 
 ```js
-api.on('customer_id', id => {
+customerSDK.on('customer_id', id => {
   console.log('customer id is', id)
 })
 ```
@@ -78,7 +78,7 @@ Payload:
 ### disconnected
 
 ```js
-api.on('disconnected', reason => {
+customerSDK.on('disconnected', reason => {
   console.log(reason)
 })
 ```
@@ -92,7 +92,7 @@ Payload:
 <!--### chat_properties_updated
 
 ```js
-api.on('chat_properties_updated', payload => {
+customerSDK.on('chat_properties_updated', payload => {
     console.log(payload.chat)
     console.log(payload.properties)
 })
@@ -108,7 +108,7 @@ Payload:
 ### chat_thread_properties_updated
 
 ```js
-api.on('chat_thread_properties_updated', payload => {
+customerSDK.on('chat_thread_properties_updated', payload => {
     console.log(payload.chat)
     console.log(payload.thread)
     console.log(payload.properties)
@@ -126,7 +126,7 @@ Payload:
 ### last_seen_timestamp_updated
 
 ```js
-api.on('last_seen_timestamp_updated', payload => {
+customerSDK.on('last_seen_timestamp_updated', payload => {
   console.log(payload.chat)
   console.log(payload.user)
   console.log(payload.timestamp)
@@ -146,7 +146,7 @@ Payload:
 You should distinguish received events by their types.
 
 ```js
-api.on('new_event', payload => {
+customerSDK.on('new_event', payload => {
   switch (event.type) {
     case 'message':
       console.log('new message - ', event.text)
@@ -167,7 +167,7 @@ Payload:
 ### user_data
 
 ```js
-api.on('user_data', user => {
+customerSDK.on('user_data', user => {
   console.log(user)
 })
 ```
@@ -181,7 +181,7 @@ User:
 ### user_joined_chat
 
 ```js
-api.on('user_joined_chat', ({ user, chat }) => {
+customerSDK.on('user_joined_chat', ({ user, chat }) => {
   console.log({ user, chat })
 })
 ```
@@ -196,7 +196,7 @@ Payload:
 ### user_left_chat
 
 ```js
-api.on('user_left_chat', ({ user, chat }) => {
+customerSDK.on('user_left_chat', ({ user, chat }) => {
   console.log({ user, chat })
 })
 ```
@@ -211,7 +211,7 @@ Payload:
 ### user_is_typing
 
 ```js
-api.on('user_is_typing', payload => {
+customerSDK.on('user_is_typing', payload => {
   console.log(
     'user with ' + payload.user + ' id is writing something in ' + payload.chat,
   )
@@ -228,7 +228,7 @@ Payload:
 ### user_stopped_typing
 
 ```js
-api.on('user_stopped_typing', payload => {
+customerSDK.on('user_stopped_typing', payload => {
   console.log(
     'user with ' + payload.user + ' id stopped writing in ' + payload.chat,
   )
@@ -245,7 +245,7 @@ Payload:
 ### thread_closed
 
 ```js
-api.on('thread_closed', ({ chat }) => {
+customerSDK.on('thread_closed', ({ chat }) => {
   console.log(chat)
 })
 ```
@@ -259,7 +259,7 @@ Payload:
 ### thread_summary
 
 ```js
-api.on('thread_summary', summary => {
+customerSDK.on('thread_summary', summary => {
   console.log(summary)
 })
 ```
