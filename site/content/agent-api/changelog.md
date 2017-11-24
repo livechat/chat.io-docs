@@ -9,6 +9,7 @@
 
 ### Changed
 - Replace `properties` with `fields` in `customer` object
+- Every validation error has user-friendly message with details
 
 ### Removed
 - Method `send_message`, use `send_event` instead
