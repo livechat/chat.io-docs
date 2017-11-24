@@ -853,7 +853,12 @@ Example request (with payload)
 	payload.file=test.png
 ```
 
-No response payload.
+Example response payload
+```js
+{
+	"url": "https://cdn.chatio-static.com/api/file/chatio/att/345678/bhdbfhdbf87348374837483.png"
+}
+```
 
 ## Send sneak peek
 
