@@ -5,9 +5,14 @@
 ### Added
 - Support for uploading images
 - Support for sending messages as bots with `author_id`
+- `creation_date` to `login` response
+
+### Changed
+- Replace `properties` with `fields` in `customer` object
 
 ### Removed
 - Method `send_message`, use `send_event` instead
+- Method `supervise_chat` as well as `supervisor` object
 
 ## [v0.2] - 2017-09-01
 
