@@ -126,7 +126,7 @@ Client should implement server pinging or connection will be closed after about 
 Request
 ```js
 {
-	"id": "<request_id>", // optional
+	"request_id": "<request_id>", // optional
 	"action": "<action>",
 	"payload": {
 		// optional
@@ -138,7 +138,7 @@ Request
 Response
 ```js
 {
-	"id": "<request_id>", // optional
+	"request_id": "<request_id>", // optional
 	"action": "<action>",
 	"type": "response",
 	"success": true,
@@ -151,6 +151,7 @@ Response
 Push
 ```js
 {
+	"request_id": "<request_id>", // optional, applies only to requester
 	"action": "<action>",
 	"type": "push",
 	"payload": {
@@ -737,11 +738,15 @@ Example request payload
 		"date_from": "2016-09-01",
 		"date_to": "2016-10-01",
 		"properties": {
-			"rating.score": {
-				"values": [1]
+			"rating": {
+				"score": {
+					"values": [1]
+				}
 			},
-			"rating.comment": {
-				"exists": true
+			"rating": {
+				"comment": {
+					"exists": true
+				}
 			}
 		}
 	},
@@ -796,11 +801,15 @@ Example request payload
 {
 	"filters": {
 		"properties": {
-			"rating.score": {
-				"values": [1]
+			"rating": {
+				"score": {
+					"values": [1]
+				}
 			},
-			"rating.comment": {
-				"exists": true
+			"rating": {
+				"comment": {
+					"exists": true
+				}
 			}
 		},
 		"include_active": false
