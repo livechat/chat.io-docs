@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.3]
+## [v0.3] - 2017-11-09
 
 ### Added
 - New message `get_chats_summary`
@@ -20,6 +20,9 @@
 ### Removed
 - `last_chats_limit` and `last_threads_limit` params from `login` request
 - Customer's chats in `login` response
+
+### Fixed
+ - `author_id` in `custom` event
 
 ## [v0.2] - 2017-09-01
 
