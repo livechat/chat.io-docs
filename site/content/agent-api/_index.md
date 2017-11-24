@@ -1,9 +1,9 @@
 ---
 title: "Agent API"
 type: "guide-and-reference"
-latest_version: "0.2"
+latest_version: "0.3"
 section_home: true
 weight: 40
-desc: "Interact with your customers by joining the messaging protocol as an agent."
+desc: "Interact with customers by joining the messaging protocol as an agent."
 color: "#ee5201"
 ---
