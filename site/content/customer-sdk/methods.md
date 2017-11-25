@@ -87,17 +87,18 @@ Arguments:
 ### getChatsSummary
 
 ```js
-customerSDK.getChatsSummary({
+customerSDK
+  .getChatsSummary({
     offset: 0,
-    limit: 10,
-})
-    .then({ chatsSummary, totalChats } => {
-        console.log(chatsSummary)
-        console.log(totalChats)
-    })
-    .catch(error => {
-        console.log(error)
-    })
+    limit: 10
+  })
+  .then(({ chatsSummary, totalChats }) => {
+    console.log(chatsSummary);
+    console.log(totalChats);
+  })
+  .catch(error => {
+    console.log(error);
+  });
 ```
 
 Arguments:
