@@ -248,7 +248,7 @@ customerSDK
     },
   )
   .then(response => {
-    console.log(response)
+    console.log(response.url)
   })
   .catch(error => {
     console.log(error)
@@ -268,9 +268,9 @@ Arguments:
 
 Returned value:
 
-| shape   | type    |
-| ------- | ------- |
-| success | boolean |
+| shape | type   |
+| ----- | ------ |
+| url   | string |
 
 In React Native instead of passing a blob you need to pass an object of
 [such shape](https://github.com/facebook/react-native/blob/56fef9b6225ffc1ba87f784660eebe842866c57d/Libraries/Network/FormData.js#L34-L38):
