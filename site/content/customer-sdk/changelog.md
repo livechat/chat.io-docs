@@ -16,7 +16,7 @@ weight: 60
 ##### Fixed
 
 * it's possible now to create 2 independent instances of the SDK
-* `file` events having `url` property
+* `file` events with `url` property
 
 #### [v0.6.0] - 2017-11-23
 
