@@ -557,7 +557,7 @@ Request payload:
 | `customer.email` | No | |
 | `customer.properties` | No | map in `"key": "value"` format |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"customer": {
@@ -570,7 +570,7 @@ Example request payload
 }
 ```
 
-Example response payload
+Sample response payload
 ```js
 {
 	"customer_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -634,7 +634,7 @@ Request payload:
 | `thread_ids` | Yes |
 
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -642,7 +642,7 @@ Example request payload
 }
 ```
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat": {
@@ -679,7 +679,7 @@ Request payload:
 
 
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -690,7 +690,7 @@ Example request payload
 }
 ```
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat": {
@@ -730,7 +730,7 @@ Request payload:
 | `chat.properties` | No | Initial chat properties |
 | `chat.thread.properties` | No | Initial chat thread properties |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat": {
@@ -763,7 +763,7 @@ Example request payload
 }
 ```
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat": {
@@ -799,7 +799,7 @@ Request payload:
 | `chat_id`      | Yes      | Id of the chat that we want to send the message to |
 | `event`        | Yes      | Event object             |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -830,14 +830,14 @@ Request (with payload):
 
 * Content-Type header in form `Content-Type: multipart/form-data; boundary=<boundary>` is required.
 
-Example request (with payload)
+Sample request (with payload)
 ```
   payload.chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
   payload.custom_id=12345-bhdsa
   payload.file=test.png
 ```
 
-Example response payload
+Sample response payload
 ```js
 {
 	"url": "https://cdn.chatio-static.com/api/file/chatio/att/345678/bhdbfhdbf87348374837483.png"
@@ -857,7 +857,7 @@ Request payload:
 | `chat_id` | Yes | Id of the chat that we want to send the sneak peek to |
 | `sneak_peek_text` | Yes | Sneak peek text |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -879,7 +879,7 @@ Request payload:
 |----------------|----------|-------|
 | `chat_id` | Yes ||
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -903,7 +903,7 @@ Request payload:
 | `add_scopes` | No | Chat scopes to add |
 | `remove_scopes` | No | Chat scopes to remove |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -937,7 +937,7 @@ Request payload:
 | `customer.monitoring.timezone` | No | |
 | `customer.properties` | No | Map in `"key": "value"` format|
 
-Example request payload
+Sample request payload
 ```js
 {
 	"customer": {
@@ -957,7 +957,7 @@ Example request payload
 }
 ```
 
-Example response payload
+Sample response payload
 ```js
 {
 	"customer": {
@@ -979,7 +979,7 @@ Request payload:
 | `chat_id`      | Yes      | Id of the chat that we want to set property for |
 | `properties`   | Yes      | Chat properties to set |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1009,7 +1009,7 @@ Request payload:
 | `thread_id`    | Yes      | Id of the thread that we want to set property for  |
 | `properties  ` | Yes      | Chat properties to set                             |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1039,14 +1039,14 @@ Request payload:
 | `timestamp` | No | |
 
 
-Example request payload
+Sample request payload
 ```js
 {
 	"timestamp": 123456789
 }
 ```
 
-Example response payload
+Sample response payload
 ```js
 {
 	"timestamp": 123456789
@@ -1064,7 +1064,7 @@ Server => Client methods are used for keeping application state up-to-date. They
 | `incoming_chat_thread` |
 |  | `chat` |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat": {
@@ -1093,7 +1093,7 @@ Example response payload
 |  | `chat_id` |
 |  | `updated_users` |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat_id": "88888898-f88f-4321-1234-123123",
@@ -1115,7 +1115,7 @@ Example response payload
 |                    | `thread_id` |
 |                    | `event`     |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0a",
@@ -1134,7 +1134,7 @@ Example response payload
 |  | `chat_id` |
 |  | `typing_indicator` |
 
-Example request payload
+Sample request payload
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1151,7 +1151,7 @@ Example request payload
 | `customer_disconnected` |
 |  | `reason` |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"reason": "customer_banned"
@@ -1172,7 +1172,7 @@ Example response payload
 |  | `thread_id` | |
 |  | `user_id` | Missing if thread was closed by router |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1190,7 +1190,7 @@ Example response payload
 |  | `scopes_added` |
 |  | `scopes_removed` |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1211,7 +1211,7 @@ Example response payload
 |  | `chat_id` |
 |  | `customer` |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1229,7 +1229,7 @@ Example response payload
 |  | `chat_id` |
 |  | `properties` |
 
-Example payload
+Sample payload
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1253,7 +1253,7 @@ Example payload
 |  | `thread_id` |
 |  | `properties` |
 
-Example payload
+Sample payload
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1277,7 +1277,7 @@ Example payload
 |  | `chat_id` |
 |  | `timestamp` |
 
-Example response payload
+Sample response payload
 ```js
 {
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
