@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.3]
+## [v0.3] - 2017-11-09
 
 ### Added
 - Support for uploading images
@@ -9,8 +9,6 @@
 
 ### Changed
 - Replace `properties` with `fields` in `customer` object
-
-### Changed
 - Every validation error has user-friendly message with details
 
 ### Removed
