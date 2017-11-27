@@ -22,7 +22,7 @@ weight: 60
 
 ##### Changed
 
-* `customId` is added only if it was explicitly passed in as part of an event
+* `customId` is added only if it has been explicitly passed in as part of an event
 * `customId` is not reused as request's id anymore
 * made it impossible to send 2 requests with identical ids until a response
   comes in
