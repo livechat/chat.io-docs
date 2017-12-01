@@ -414,21 +414,21 @@ Does not create new thread, just adds event to last thread without extending thr
 			"type": "text",
 			"name": "name",
 			"label": "Your name",
-			"required": "true",
+			"required": true,
 			"value": "Jan Kowalski"
 		},
 		{
 			"type": "email",
 			"name": "email",
 			"label": "Your email",
-			"required": "true",
+			"required": true,
 			"value": "jan.kowalski@gmail.com"
 		},
 		{
 			"type": "radio",
 			"name": "purpose",
 			"label": "Chat purpose",
-			"required": "true",
+			"required": true,
 			"options": [{
 					"label": "Support",
 					"value": "support",
@@ -445,7 +445,7 @@ Does not create new thread, just adds event to last thread without extending thr
 			"type": "checkbox",
 			"name": "industry",
 			"label": "Company industry",
-			"required": "true",
+			"required": true,
 			"options": [{
 				"label": "automotive",
 				"value": "automotive",
@@ -460,7 +460,7 @@ Does not create new thread, just adds event to last thread without extending thr
 			"type": "select",
 			"name": "country",
 			"label": "Country",
-			"required": "true",
+			"required": true,
 			"options": [{
 				"label": "USA",
 				"value": "usa",
