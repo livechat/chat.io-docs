@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.4 developers preview]
+
+### Changed
+- `last_event_per_type` object is now map of objects with specific type of event, `thread_order` and `thread_id`
+- `last_event_per_type` object contains last events from chat instead of thread
+
+### Fixed
+- Support for `file` event in `last_event_per_type` for non-active chats
+
 ## [v0.3] - 2017-11-09
 
 ### Added
