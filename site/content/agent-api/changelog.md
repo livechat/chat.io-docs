@@ -1,5 +1,26 @@
 # Changelog
 
+<<<<<<< HEAD
+## [v0.4 developer preview]
+=======
+## [v0.4 developers preview]
+>>>>>>> master
+
+### Added
+- New method `multicast`
+
+### Changed
+- Push message `incoming_broadcast` changed to `incoming_multicast`
+- `last_event_per_type` object is now map of objects with specific type of event, `thread_order` and `thread_id`
+- `last_event_per_type` object contains last events from chat instead of thread
+
+### Removed
+- Method `send_broadcast`, use `multicast` instead
+
+### Fixed
+- Support for `file` event in `last_event_per_type` for non-active chats
+- Include different types of events in `last_event_per_type` for non-active chats
+
 ## [v0.3] - 2017-11-09
 
 ### Added
@@ -14,6 +35,9 @@
 ### Removed
 - Method `send_message`, use `send_event` instead
 - Method `supervise_chat` as well as `supervisor`/`supervisors` objects
+
+### Fixed
+ - `author_id` in `custom` event
 
 ## [v0.2] - 2017-09-01
 
