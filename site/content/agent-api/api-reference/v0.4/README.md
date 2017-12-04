@@ -44,7 +44,9 @@
   * [Remove auto chat scopes](#remove-auto-chat-scopes)
   * [Get auto chat scopes config](#get-auto-chat-scopes-config)
   * [Upload image](#upload-image)
+
 * [Pushes](#pushes)
+
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
@@ -111,10 +113,12 @@ API endpoints:
 | `socket.io` | `https://api.chat.io/agent/v0.4/rtm/sio` |
 | `websocket` | `wss://api.chat.io/agent/v0.4/rtm/ws` |
 
+
 Example:
 
 ```
 https://api.chat.io/agent/v0.4/rtm/ws
+
 ```
 
 Ping:
@@ -149,6 +153,7 @@ Response
 ```
 
 Push
+
 ```js
 {
 	"request_id": "<request_id>", // optional, applies only to requester
@@ -717,6 +722,7 @@ Example response payloads
 ## Get archives
 Returns active threads that current agent has access to.
 
+
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `get_archives` | ✓ | - | - |
@@ -890,6 +896,7 @@ Example response payloads
 ## Get chat threads
 Returns threads that current agent has access to for given chat.
 
+
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `get_chat_threads` | ✓ | - | - |
@@ -941,6 +948,7 @@ Example response payload
 
 ## Start chat
 Starts a chat.
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1006,6 +1014,7 @@ Example response payload
 ## Join chat
 Adds an agent to chat.
 
+
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `join_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
@@ -1029,6 +1038,7 @@ No response payload
 
 ## Remove from chat
 Removes users from chat. If no user is specified, removes current user.
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1054,6 +1064,7 @@ Example request payload
 No response payload
 
 ## Send event
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1804,6 +1815,7 @@ Example response payload
 |  | `chat_id` |
 |  | `properties` |
 
+
 Example response payload
 ```js
 {
@@ -1830,6 +1842,7 @@ Example response payload
 |  | `chat_id` |
 |  | `thread_id` |
 |  | `properties` |
+
 
 Example response payload
 ```js

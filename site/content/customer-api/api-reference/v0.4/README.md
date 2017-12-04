@@ -3,7 +3,9 @@
 # Customer Chat API
 
 * [Introduction](#introduction)
-  * [Connection](#connection)
+  * [Web API](#web-api)
+  * [Real-Time Messaging API](#real-time-messaging-api)
+  * [Authentication](#authentication)
   * [Events order](#events-order)
 * [Examples](#examples)
   * [JavaScript](#javascript)
@@ -23,6 +25,7 @@
   * [Possible errors](#possible-errors)
 * [Methods](#methods)
   * [Login](#login)
+  * [Get chats summary](#get-chats-summary)
   * [Get chat threads](#get-chat-threads)
   * [Get chat threads summary](#get-chat-threads-summary)
   * [Start chat](#start-chat)
@@ -51,7 +54,7 @@
 
 # Introduction
 
-This documentation describes version **v0.2** of customer-api.
+This documentation describes version **v0.4** of customer-api.
 
 ## Web API
 
@@ -63,14 +66,17 @@ API endpoint:
 
 | HTTP method | Endpoint |
 |--------|----------------|
-| `POST` | `https://api.chat.io/customer/v0.3/action/<action>` |
+| `POST` | `https://api.chat.io/customer/v0.4/action/<action>` |
 
-Client should send `Content-Type` header:
+Required headers:
 
-* `multipart/form-data; boundary=<boundary>` for `send_file` action
-* `application/json` for every other action 
+| Header | Value | Notes |
+| --- | --- | --- |
+| `Content-Type` | `multipart/form-data; boundary=<boundary>` | Valid for `send_file` action |
+| | `application/json` | Valid for every action except `send_file` |
+| `Authorization` | `Bearer <token>` | Access token |
 
-Client must also send query string params in every request to Web API:
+Client should send query string params in every request to Web API:
 
 | Param | Required | Type | Notes |
 | --- | --- | --- | --- |
@@ -93,12 +99,12 @@ Real-Time Messaging API (RTM API) is based on connection like websocket. Client 
 
 ### Connection
 
-Connection endpoints:
+API endpoints:
 
 | Transport | Endpoint |
 |--------|----------------|
-| `socket.io` | `https://api.chat.io/customer/v0.2/rtm/sio` |
-| `websocket` | `wss://api.chat.io/customer/v0.2/rtm/ws` |
+| `socket.io` | `https://api.chat.io/customer/v0.4/rtm/sio` |
+| `websocket` | `wss://api.chat.io/customer/v0.4/rtm/ws` |
 
 Client must send query string param when connecting to RTM API:
 
@@ -145,6 +151,7 @@ Response
 Push
 ```js
 {
+	"request_id": "<request_id>", // optional, applies only to requester
 	"action": "<action>",
 	"type": "push",
 	"payload": {
@@ -154,7 +161,7 @@ Push
 ```
 
 ## Authentication
-Customer authentication is store in cookies. All cookies are secure and http-only .  
+Customer authentication is done with access token. See how to obtain the customer access token in [Authorization](../../authorization) article.
 
 ## Events order
 Chat messages are not guaranteed to be sorted by server. Client should sort them by `order` parameter. Do not use `timestamp` to sort messages because two events can have the same timestamp.
@@ -238,8 +245,8 @@ Objects can include other objects. For example, `Chat` object may return `users`
 	"name": "John Smith",
 	"email": "john@gmail.com",
 	"present": true,
-	"properties": {
-		"custom property name": "custom property value"
+	"fields": {
+		"custom field name": "custom field value"
 	},
 	"last_seen_timestamp": 1473433500
 }
@@ -547,19 +554,19 @@ Request payload:
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
-| `last_chats_limit` | No | Default is 1, maximum is 25 |
-| `last_threads_limit` | No | Default is 10, maximum is 25 |
+| `token` | Yes | OAuth token from customer accounts |
 | `customer.monitoring.page.url` | No | |
 | `customer.monitoring.page.title` | No | |
 | `customer.monitoring.page.referrer` | No | |
 | `customer.monitoring.timezone` | No | |
 | `customer.name` | No | |
 | `customer.email` | No | |
-| `customer.properties` | No | map in `"key": "value"` format |
+| `customer.fields` | No | map in `"key": "value"` format |
 
 Example request payload
 ```js
 {
+	"token": "Bearer p-cjQcfhTqego5I48WeAPw",
 	"customer": {
 		"monitoring": {
 			"page": {
@@ -574,50 +581,65 @@ Example response payload
 ```js
 {
 	"customer_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"static_config_path": "s3.amazonaws.com/livechat/license/123/config.json",
-	"last_chats_summary": [{
+	"static_config_path": "s3.amazonaws.com/livechat/license/123/config.json"
+}
+```
+
+## Get chats summary
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `get_chats_summary` | ✓ | - | - |
+
+Request payload:
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `offset` | No | Default is 0, maximum is 100 |
+| `limit` | No | Default is 10, maximum is 25 |
+
+Example request payload
+```js
+{
+	"offset": 0,
+	"limit": 25
+}
+```
+
+Example response payload
+```js
+{
+	"chats_summary": [{
 		"id": "123",
 		"order": 343544565,
-		"users": [{
-			"id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
-			"type": "agent",
-			"name": "Support Team",
-			"email": "john@gmail.com",
-			"avatar": "cdn.livechatinc.com/avatars/1.png",
-			"last_seen_timestamp": 1473433500
-		}],
+		"users": [
+			// array of "User" objects
+		],
 		"properties": {
 			// "Properties" object
 		},
 		"scopes": {
 			// "Scopes" object
 		},
-		"last_event_per_type": { // last event of each type in last thread
-			"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-			"events": {
-				"message": {
+		"last_event_per_type": { // last event of each type in chat
+			"message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
 					// "Event > Message" object
-				},
-				"system_message": {
-					// "Event > System message" object
-				},
-				...
-			}
-		},
-		"last_threads_summary": [{
-				"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-				"order": 129846129847,
-				"events_count": 34
+				}
 			},
-			{
-				"id": "b0c22fdd-fb71-40b5-bfc6-a8a0bc3117f6",
-				"order": 129846129848,
-				"events_count": 12
-			}
-		],
-		"total_threads": 4
+			"system_message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > System message" object
+				}
+			},
+			...
+		}
 	}],
-	"total_chats": 14
+	"total_chats": 20
 }
 ```
 
@@ -634,7 +656,6 @@ Request payload:
 |----------------|----------|
 | `chat_id` | Yes |
 | `thread_ids` | Yes |
-
 
 Example request payload
 ```js
@@ -676,41 +697,33 @@ Request payload:
 | Request object | Required | Notes |
 |----------------|----------|-------|
 | `chat_id` | Yes |
-| `pagination.offset` | No | Default is 0 |
-| `pagination.limit` | No | Default is 25, maximum is 1000 |
-
-
+| `offset` | No | Default is 0 |
+| `limit` | No | Default is 25, maximum is 100 |
 
 Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"pagination": {
-		"offset": 0,
-		"limit": 100
-	}
+	"offset": 0,
+	"limit": 100
 }
 ```
 
 Example response payload
 ```js
 {
-	"chat": {
-		"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-		"threads_summary": [{
-				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-				"order": 129846129847
-			},
-			{
-				"thread_id": "b0c22fdd-fb71-40b5-bfc6-a8a0bc3117f6",
-				"order": 129846129848
-			}
-		]
-	},
-	"pagination": {
-		"offset": 0,
-		"total": 2
-	}
+	"threads_summary": [{
+			"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+			"order": 129846129847,
+			"total_events": 1
+		},
+		{
+			"id": "b0c22fdd-fb71-40b5-bfc6-a8a0bc3117f6",
+			"order": 129846129848,
+			"total_events": 0
+		}
+	],
+	"total_threads": 4
 }
 ```
 
@@ -813,11 +826,21 @@ Example request payload
 }
 ```
 
+Example response payload
+```js
+{
+	"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"event": {
+		// "Event" object
+	}
+}
+```
+
 ## Send file
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `send_file` | - | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
+| `send_file` | - | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`](#incoming-chat-thread)* |
 
 \* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
@@ -829,14 +852,13 @@ Request (with payload):
 | `payload.custom_id`        | Yes      | |
 | `payload.file`      | Yes      | max 10MB |
 
-
 * Content-Type header in form `Content-Type: multipart/form-data; boundary=<boundary>` is required.
 
 Example request (with payload)
 ```
-  payload.chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
-  payload.custom_id=12345-bhdsa
-  payload.file=test.png
+	payload.chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
+	payload.custom_id=12345-bhdsa
+	payload.file=test.png
 ```
 
 Example response payload
@@ -937,7 +959,7 @@ Request payload:
 | `customer.monitoring.page.title` | No | |
 | `customer.monitoring.page.url` | No | |
 | `customer.monitoring.timezone` | No | |
-| `customer.properties` | No | Map in `"key": "value"` format|
+| `customer.fields` | No | Map in `"key": "value"` format|
 
 Example request payload
 ```js
@@ -952,7 +974,7 @@ Example request payload
 			},
 			"timezone": "-2"
 		},
-		"properties": {
+		"fields": {
 			"key1": "val1"
 		}
 	}
@@ -1164,11 +1186,14 @@ Example response payload
 | Type | Notes |
 |--------|----------------|
 | `customer_banned` | Customer has been banned |
+| `too_many_connections` | Customer reached max number of connections |
+| `license_not_found` | License with specified ID doesn't exist |
+| `internal_error` | Internal error |
 
 ## Thread closed
 
 | Action | Payload | Notes |
-|--------|------------------|-----|
+|--------|------------------|----|
 | `thread_closed` | |
 |  | `chat_id` | |
 |  | `thread_id` | |
