@@ -42,7 +42,7 @@
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
-  * [Incoming multicast] (#incoming-multicast)
+  * [Incoming multicast](#incoming-multicast)
   * [Incoming typing indicator](#incoming-typing-indicator)
   * [Customer disconnected](#customer-disconnected)
   * [Thread closed](#thread-closed)
