@@ -42,6 +42,7 @@
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
+  * [Incoming multicast] (#incoming-multicast)
   * [Incoming typing indicator](#incoming-typing-indicator)
   * [Customer disconnected](#customer-disconnected)
   * [Thread closed](#thread-closed)
@@ -115,7 +116,7 @@ Client must send query string param when connecting to RTM API:
 Example:
 
 ```
-https://api.chat.io/customer/v0.2/rtm/ws?license_id=123456789
+https://api.chat.io/customer/v0.4/rtm/ws?license_id=123456789
 ```
 
 Ping:
@@ -1146,6 +1147,32 @@ Example response payload
 	"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 	"event": {
 		// "Event" object
+	}
+}
+```
+
+## Incoming multicast
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_multicast` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `author_id`       |          |
+| `content`       |          |
+
+
+Example response payload
+```js
+{
+	"author_id": "jack@gmail.com",
+	"content": {
+		"example": {
+			"nested": "json"
+		}
 	}
 }
 ```

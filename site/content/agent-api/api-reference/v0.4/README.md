@@ -149,6 +149,7 @@ Response
 ```
 
 Push
+
 ```js
 {
 	"request_id": "<request_id>", // optional, applies only to requester
@@ -1656,7 +1657,6 @@ Push payload:
 | `author_id`       |          |
 | `content`       |          |
 
-
 Example response payload
 ```js
 {
@@ -1865,11 +1865,6 @@ Example response payload
 
 Push payload:
 
-| Object         | Notes    |
-|----------------|----------|
-| `chat_id`       |          |
-| `properties`       |          |
-
 Example response payload
 ```js
 {
@@ -1895,12 +1890,6 @@ Example response payload
 | `chat_thread_properties_updated` | ✓ | ✓ |
 
 Push payload:
-
-| Object         | Notes    |
-|----------------|----------|
-| `chat_id`       |          |
-| `thread_id`       |          |
-| `properties`       |          |
 
 Example response payload
 ```js

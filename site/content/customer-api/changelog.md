@@ -2,6 +2,9 @@
 
 ## [v0.4 developers preview]
 
+### Added
+- New push message `incoming_multicast` 
+
 ### Changed
 - `last_event_per_type` object is now map of objects with specific type of event, `thread_order` and `thread_id`
 - `last_event_per_type` object contains last events from chat instead of thread

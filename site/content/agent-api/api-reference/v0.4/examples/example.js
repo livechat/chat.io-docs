@@ -1,5 +1,5 @@
 var cfg = {
-    apiUrl: "wss://api.chat.io/agent/v0.3/rtm/ws",
+    apiUrl: "wss://api.chat.io/agent/v0.4/rtm/ws",
     accesToken: "Bearer <TOKEN>"
 }
 

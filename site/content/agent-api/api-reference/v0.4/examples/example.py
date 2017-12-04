@@ -7,7 +7,7 @@ import json
 import random
 
 sso_access_token = 'Bearer <ACCESS_TOKEN>'
-api_url = "wss://api.chat.io/agent/v0.3/rtm/ws"
+api_url = "wss://api.chat.io/agent/v0.4/rtm/ws"
 
 #websocket.enableTrace(True)
 

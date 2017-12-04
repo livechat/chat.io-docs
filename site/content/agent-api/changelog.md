@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.4 developers preview]
+## [v0.4 developer preview]
 
 ### Added
 - New method `multicast`
