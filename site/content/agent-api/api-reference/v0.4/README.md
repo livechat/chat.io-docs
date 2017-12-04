@@ -26,13 +26,11 @@
   * [Get archives](#get-archives)
   * [Get filtered chats](#get-filtered-chats)
   * [Get chat threads](#get-chat-threads)
-  * [Supervise chat](#supervise-chat)
   * [Start chat](#start-chat)
   * [Join chat](#join-chat)
   * [Remove from chat](#remove-from-chat)
-  * [Send message](#send-message)
   * [Send event](#send-event)
-  * [Send broadcast](#send-broadcast)
+  * [Multicast](#multicast)
   * [Send typing indicator](#send-typing-indicator)
   * [Ban customer](#ban-customer)
   * [Close thread](#close-thread)
@@ -45,11 +43,14 @@
   * [Add auto chat scopes](#add-auto-chat-scopes)
   * [Remove auto chat scopes](#remove-auto-chat-scopes)
   * [Get auto chat scopes config](#get-auto-chat-scopes-config)
+  * [Upload image](#upload-image)
+
 * [Pushes](#pushes)
+
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
-  * [Incoming broadcast](#incoming-broadcast)  
+  * [Incoming multicast](#incoming-multicast)  
   * [Incoming typing indicator](#incoming-typing-indicator)
   * [Incoming sneak peek](#incoming-sneak-peek)
   * [Customer banned](#customer-banned)
@@ -65,7 +66,7 @@
 
 # Introduction
 
-This documentation describes version **v0.2** of agent-api.
+This documentation describes version **v0.4** of agent-api.
 
 ## Web API
 
@@ -77,7 +78,7 @@ API endpoint:
 
 | HTTP method | Endpoint |
 |--------|----------------|
-| `POST` | `https://api.chat.io/agent/v0.2/action/<action>` |
+| `POST` | `https://api.chat.io/agent/v0.4/action/<action>` |
 
 Required headers:
 
@@ -94,7 +95,8 @@ Request
 {
 	"payload": {
 		// optional
-	}
+	},
+	"author_id": "<author_id>" // optional, applies only to bots
 }
 ```
 
@@ -108,13 +110,15 @@ API endpoints:
 
 | Transport | Endpoint |
 |--------|----------------|
-| `socket.io` | `https://api.chat.io/agent/v0.2/rtm/sio` |
-| `websocket` | `wss://api.chat.io/agent/v0.2/rtm/ws` |
+| `socket.io` | `https://api.chat.io/agent/v0.4/rtm/sio` |
+| `websocket` | `wss://api.chat.io/agent/v0.4/rtm/ws` |
+
 
 Example:
 
 ```
-https://api.chat.io/agent/v0.2/rtm/ws
+https://api.chat.io/agent/v0.4/rtm/ws
+
 ```
 
 Ping:
@@ -130,7 +134,8 @@ Request
 	"action": "<action>",
 	"payload": {
 		// optional
-	}
+	},
+	"author_id": "<author_id>" // optional, applies only to bots
 }
 ```
 
@@ -148,12 +153,14 @@ Response
 ```
 
 Push
+
 ```js
 {
+	"request_id": "<request_id>", // optional, applies only to requester
 	"action": "<action>",
 	"type": "push",
 	"payload": {
-		// optional
+		// optional payload
 	}
 }
 ```
@@ -198,8 +205,9 @@ sudo pip install websocket-client
 | `chats.meta--my:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats I belong to |
 | --- | --- | --- |
 | `customers.ban:write` | `ban_customer` | normal | Access for banning customers |
+| `customers.identity--manage` | - | administrator | Access for use a customer identity | 
 | --- | --- | --- |
-| `broadcast:write` | `send_broadcast` | normal | Access for sending broadcast events to agents |
+| `broadcast:write` | `multicast` | normal | Access for multicast data to agents or customers |
 | `agents--my:write` | `update_agent` | normal | Write access for my agent data |
 | `agents--all:write` | `update_agent` | administrator | Write access for all agents data |
 | --- | --- | --- |
@@ -286,8 +294,8 @@ Objects are standardized data formats that are used in API requests and response
 			"timezone": "Europe/Warsaw"
 		}
 	},
-	"properties": {
-		"custom property name": "custom property value"
+	"fields": {
+		"custom field name": "custom field value"
 	},
 	"banned": false
 }
@@ -645,7 +653,8 @@ Example response payloads
 	"license": {
 		"id": "123",
 		"plan": "enterprise",
-		"expiration_timestamp": 1483433500
+		"expiration_timestamp": 1483433500,
+		"creation_timestamp": 1482433500
 	},
 	"my_profile": {
 		// "User > My profile" object
@@ -655,17 +664,27 @@ Example response payloads
 		"users": [
 			// array of "User" objects
 		],
+		"last_event_per_type": { // last event of each type in chat
+			"message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > Message" object
+				}
+			},
+			"system_message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > System message" object
+				}
+			},
+			...
+		},
 		"last_thread_summary": {
 			"id": "OE070R0W0U",
 			"timestamp": 1473433500,
 			"user_ids": ["john@gmail.com"],
-			"last_event_per_type": [{ // last event of each type in current thread
-					// "Event > Message" object
-				}, {
-					// "Event > System message" object
-				},
-				...
-			],
 			"order": 12417249812721,
 			"properties": {
 				"routing": {
@@ -701,7 +720,8 @@ Example response payloads
 
 
 ## Get archives
-Returns active threads that current agent has access to. If the agent is a supervisor in some threads, those threads will be returned as well.
+Returns active threads that current agent has access to.
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -821,17 +841,27 @@ Example response payloads
 		"users": [
 			// array of "User" objects
 		],
+		"last_event_per_type": { // last event of each type in chat
+			"message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > Message" object
+				}
+			},
+			"system_message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > System message" object
+				}
+			},
+			...
+		},
 		"last_thread_summary": {
 			"id": "OE070R0W0U",
 			"timestamp": 1473433500,
 			"user_ids": ["john@gmail.com"],
-			"last_event_per_type": [{ // last event of each type in current thread
-					// "Event > Message" object
-				}, {
-					// "Event > System message" object
-				},
-				...
-			],
 			"order": 12417249812721,
 			"properties": {
 				"routing": {
@@ -865,6 +895,7 @@ Example response payloads
 
 ## Get chat threads
 Returns threads that current agent has access to for given chat.
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -915,32 +946,9 @@ Example response payload
 }
 ```
 
-## Supervise chat
-Adds a supervisor to chat. The supervisor can only send messages to other agents. These messages are not visible to the customer.
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `supervise_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
-
-Request payload:
-
-| Request object | Required | Notes |
-|----------------|----------|---|
-| `chat_id` | Yes | |
-| `agent_ids` | No | If no agent is passed, current user will be used instead. |
-
-Example request payload
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"agent_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
-}
-```
-
-No payload.
-
 ## Start chat
 Starts a chat.
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1004,7 +1012,8 @@ Example response payload
 ```
 
 ## Join chat
-Adds an agent to chat. If the agent was already a supervisor in chat, he/she is changed to an agent.
+Adds an agent to chat.
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1030,6 +1039,7 @@ No response payload
 ## Remove from chat
 Removes users from chat. If no user is specified, removes current user.
 
+
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `remove_from_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
@@ -1053,46 +1063,8 @@ Example request payload
 
 No response payload
 
-## Send message
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `send_message` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
-
-\* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
-
-Request payload:
-
-| Request object | Required | Notes |
-|----------------|----------|-------|
-| `chat_id` | Yes | Id of the chat that we want to send the message to |
-| `message.text` | Yes | |
-| `message.recipients` | No | `all` (default), `agents` |
-| `message.custom_id` | No |  |
-
-Example request payload
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"message": {
-		"text": "hello world",
-		"recipients": "agents",
-		"custom_id": "12345-bhdsa"
-	}
-}
-```
-
-Example response payload
-```js
-{
-	"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"event": {
-		// "Event" object
-	}
-}
-```
-
 ## Send event
+
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1130,29 +1102,41 @@ Example response payload
 }
 ```
 
-## Send broadcast
+## Multicast
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `send_broadcast` | ✓ | ✓ | [`incoming_broadcast`](#incoming-broadcast) |
+| `multicast` | ✓ | ✓ | [`incoming_multicast`](#incoming-multicast) |
 
 Request payload:
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
-| `scopes` | No | <scope_types> |
-| `content` | Yes | JSON message to be broadcasted |
+| `scopes` | Yes | <scopes> |
+| `content` | Yes | JSON message to be sent |
 
-* `<scope_types>` possible values:
-  * `agents` (`[]string` - array of agent's ids)
-  * `groups` (`[]string` - array of group's ids)
+* `<scopes>` possible values:
+  * `agents` (object) possible values:
+	* `all` (`bool` - include all agents)
+	* `ids` (`[]string` - array of agent's ids)
+	* `groups` (`[]string` - array of group's ids)
+  * `customers` (object) possible values:
+	* `ids` (`[]string` - array of customer's ids)
+
+At least one of `scopes` type(`agents.all`, `agents.ids`, `agents.groups`, `customers.ids`) is required. 
 
 Example request payload
 ```js
 {
 	"scopes": {
-		"agents": ["john@gmail.com", "jane@gmail.com"],
-		"groups": [1, 2]
+		"agents": {
+			"all": true,
+			"ids": ["john@gmail.com", "jane@gmail.com"],
+			"groups": [1, 2]
+		},
+		"customers": {
+			"ids": ["50ce4683-22a5-48bf-5317-340f40bf6dfe"]
+		}
 	},
 	"content": {
 		"example": {
@@ -1545,6 +1529,38 @@ Example response payload
 }
 ```
 
+## Upload image
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `upload_image` | - | ✓ | - |
+
+Request payload:
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `payload.image`      | Yes      | max 10MB |
+
+* Content-Type header in form `Content-Type: multipart/form-data; boundary=<boundary>` is required.
+
+Example request payload
+```
+	payload.image=test.png
+```
+
+Example response payload
+```js
+{
+	"url": "https://cdn.chatio-static.com/api/file/chatio/img/24434343/dmkslfmndsfgds6fsdfsdnfsd.png",
+	"path": "24434343/dmkslfmndsfgds6fsdfsdnfsd.png"
+}
+```
+
+Note:
+* `url` is temporary URL ready to use but can expire in the future
+* `path` should be used for database and must be appended to `base_url`
+* `base_url` is `https://cdn.chatio-static.com/api/file/chatio/img`
+
 
 # Pushes
 Server => Client methods are used for keeping application state up-to-date. They are available only in `websocket` transport.
@@ -1600,12 +1616,6 @@ Example response payload
 				// array of "User > Agent" objects
 			],
 			"removed_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
-		},
-		"supervisors": {
-			"added": [
-				// array of "User > Supervisor" objects
-			],
-			"removed_ids": ["85f3bfc9-06c1-434e-958b-2a5239b07de8"]
 		}
 	}
 }
@@ -1629,11 +1639,11 @@ Example response payload
 }
 ```
 
-## Incoming broadcast
+## Incoming multicast
 
 | Action | Payload |
 |--------|------------------|
-| `incoming_broadcast` |
+| `incoming_multicast` |
 |  | `author_id` |
 |  | `content` |
 
@@ -1805,6 +1815,7 @@ Example response payload
 |  | `chat_id` |
 |  | `properties` |
 
+
 Example response payload
 ```js
 {
@@ -1831,6 +1842,7 @@ Example response payload
 |  | `chat_id` |
 |  | `thread_id` |
 |  | `properties` |
+
 
 Example response payload
 ```js

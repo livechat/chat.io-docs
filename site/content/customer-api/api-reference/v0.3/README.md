@@ -58,7 +58,7 @@ This documentation describes version **v0.3** of customer-api.
 
 ## Web API
 
-Web API is like REST API. A client can send a **request message** that results in getting a **response message**.
+Web API is like REST API. Client can send **request message** that results in getting **response message**.
 
 ### Requests
 
@@ -120,7 +120,7 @@ https://api.chat.io/customer/v0.2/rtm/ws?license_id=123456789
 
 Ping:
 
-Client should implement server pinging or the connection will be closed after about one minute of inactivity. If [control frame ping](https://tools.ietf.org/html/rfc6455#section-5.5.2) is unavailable (web browsers), client should use protocol message with action `ping`.
+Client should implement server pinging or connection will be closed after about one minute of inactivity. If [control frame ping](https://tools.ietf.org/html/rfc6455#section-5.5.2) is unavailable (web browsers), client should use protocol message with action `ping`.
 
 ### Messages format
 
@@ -167,13 +167,13 @@ Customer authentication is done with access token. See how to obtain the custome
 Chat messages are not guaranteed to be sorted by server. Client should sort them by `order` parameter. Do not use `timestamp` to sort messages because two events can have the same timestamp.
 
 # Examples
-All examples are similar, i.e. they connect and log in to Agent API and start a chat by sending a welcome message via Websocket.
+All examples are similar i.e., connects and logins to Agent API and starts chat with sending welcome message via Websocket.
 
 ## JavaScript
-Sample file: [examples/example.js](./examples/example.js)
+Example file: [examples/example.js](./examples/example.js)
 
 ## Go
-Sample file: [examples/example.go](./examples/example.go)
+Example file: [examples/example.go](./examples/example.go)
 
 Remember to install proper lib:
 ```
@@ -181,7 +181,7 @@ go get github.com/gorilla/websocket
 ```
 
 ## Python
-Sample file: [examples/example.py](./examples/example.py)
+Example file: [examples/example.py](./examples/example.py)
 
 Remember to install proper lib:
 ```
@@ -490,7 +490,7 @@ Empty object designates no scope, it means that all agents can see it.
 }
 ```
 
-Sample properties:
+Example properties:
 ```js
 {
 	"properties": {
@@ -563,7 +563,7 @@ Request payload:
 | `customer.email` | No | |
 | `customer.fields` | No | map in `"key": "value"` format |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"token": "Bearer p-cjQcfhTqego5I48WeAPw",
@@ -598,7 +598,7 @@ Request payload:
 | `offset` | No | Default is 0, maximum is 100 |
 | `limit` | No | Default is 10, maximum is 25 |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"offset": 0,
@@ -606,7 +606,7 @@ Sample request payload
 }
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chats_summary": [{
@@ -623,12 +623,15 @@ Sample response payload
 		},
 		"last_event_per_type": { // last event of each type in last thread
 			"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-			"events": [{
+			"events": {
+				"message": {
 					// "Event > Message" object
-				}, {
+				},
+				"system_message": {
 					// "Event > System message" object
-				}
-			]
+				},
+				...
+			}
 		},
 	}],
 	"total_chats": 20
@@ -649,7 +652,7 @@ Request payload:
 | `chat_id` | Yes |
 | `thread_ids` | Yes |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -657,7 +660,7 @@ Sample request payload
 }
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat": {
@@ -692,7 +695,7 @@ Request payload:
 | `offset` | No | Default is 0 |
 | `limit` | No | Default is 25, maximum is 100 |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -701,7 +704,7 @@ Sample request payload
 }
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"threads_summary": [{
@@ -737,7 +740,7 @@ Request payload:
 | `chat.properties` | No | Initial chat properties |
 | `chat.thread.properties` | No | Initial chat thread properties |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat": {
@@ -770,7 +773,7 @@ Sample request payload
 }
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat": {
@@ -806,7 +809,7 @@ Request payload:
 | `chat_id`      | Yes      | Id of the chat that we want to send the message to |
 | `event`        | Yes      | Event object             |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -818,7 +821,7 @@ Sample request payload
 }
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -846,14 +849,14 @@ Request (with payload):
 
 * Content-Type header in form `Content-Type: multipart/form-data; boundary=<boundary>` is required.
 
-Sample request (with payload)
+Example request (with payload)
 ```
 	payload.chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
 	payload.custom_id=12345-bhdsa
 	payload.file=test.png
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"url": "https://cdn.chatio-static.com/api/file/chatio/att/345678/bhdbfhdbf87348374837483.png"
@@ -873,7 +876,7 @@ Request payload:
 | `chat_id` | Yes | Id of the chat that we want to send the sneak peek to |
 | `sneak_peek_text` | Yes | Sneak peek text |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -895,7 +898,7 @@ Request payload:
 |----------------|----------|-------|
 | `chat_id` | Yes ||
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -919,7 +922,7 @@ Request payload:
 | `add_scopes` | No | Chat scopes to add |
 | `remove_scopes` | No | Chat scopes to remove |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -953,7 +956,7 @@ Request payload:
 | `customer.monitoring.timezone` | No | |
 | `customer.fields` | No | Map in `"key": "value"` format|
 
-Sample request payload
+Example request payload
 ```js
 {
 	"customer": {
@@ -973,7 +976,7 @@ Sample request payload
 }
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"customer": {
@@ -995,7 +998,7 @@ Request payload:
 | `chat_id`      | Yes      | Id of the chat that we want to set property for |
 | `properties`   | Yes      | Chat properties to set |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1025,7 +1028,7 @@ Request payload:
 | `thread_id`    | Yes      | Id of the thread that we want to set property for  |
 | `properties  ` | Yes      | Chat properties to set                             |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1055,14 +1058,14 @@ Request payload:
 | `timestamp` | No | |
 
 
-Sample request payload
+Example request payload
 ```js
 {
 	"timestamp": 123456789
 }
 ```
 
-Sample response payload
+Example response payload
 ```js
 {
 	"timestamp": 123456789
@@ -1071,7 +1074,7 @@ Sample response payload
 
 
 # Pushes
-Server => Client methods are used for keeping the application state up-to-date. They are available only in `websocket` transport.
+Server => Client methods are used for keeping application state up-to-date. They are available only in `websocket` transport.
 
 ## Incoming chat thread
 
@@ -1080,7 +1083,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `incoming_chat_thread` |
 |  | `chat` |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat": {
@@ -1109,7 +1112,7 @@ Sample response payload
 |  | `chat_id` |
 |  | `updated_users` |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat_id": "88888898-f88f-4321-1234-123123",
@@ -1131,7 +1134,7 @@ Sample response payload
 |                    | `thread_id` |
 |                    | `event`     |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0a",
@@ -1150,7 +1153,7 @@ Sample response payload
 |  | `chat_id` |
 |  | `typing_indicator` |
 
-Sample request payload
+Example request payload
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1167,7 +1170,7 @@ Sample request payload
 | `customer_disconnected` |
 |  | `reason` |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"reason": "customer_banned"
@@ -1191,7 +1194,7 @@ Sample response payload
 |  | `thread_id` | |
 |  | `user_id` | Missing if thread was closed by router |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1209,7 +1212,7 @@ Sample response payload
 |  | `scopes_added` |
 |  | `scopes_removed` |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1230,7 +1233,7 @@ Sample response payload
 |  | `chat_id` |
 |  | `customer` |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1248,7 +1251,7 @@ Sample response payload
 |  | `chat_id` |
 |  | `properties` |
 
-Sample payload
+Example payload
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1272,7 +1275,7 @@ Sample payload
 |  | `thread_id` |
 |  | `properties` |
 
-Sample payload
+Example payload
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1296,7 +1299,7 @@ Sample payload
 |  | `chat_id` |
 |  | `timestamp` |
 
-Sample response payload
+Example response payload
 ```js
 {
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
