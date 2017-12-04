@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.4 developers preview]
+## [v0.4] - 2017-12-04
 
 ### Added
 - New push message `incoming_multicast` 
