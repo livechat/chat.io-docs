@@ -13,7 +13,8 @@ import (
 )
 
 var (
-	apiURL       string        = "wss://api.chat.io/agent/v0.3/rtm/ws"
+
+	apiURL       string        = "wss://api.chat.io/agent/v0.4/rtm/ws"
 	pingInterval time.Duration = time.Second * 30
 	accessToken  string        = "Bearer <ACCESS_TOKEN>"
 )
