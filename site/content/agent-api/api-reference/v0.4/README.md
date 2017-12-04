@@ -26,13 +26,11 @@
   * [Get archives](#get-archives)
   * [Get filtered chats](#get-filtered-chats)
   * [Get chat threads](#get-chat-threads)
-  * [Supervise chat](#supervise-chat)
   * [Start chat](#start-chat)
   * [Join chat](#join-chat)
   * [Remove from chat](#remove-from-chat)
-  * [Send message](#send-message)
   * [Send event](#send-event)
-  * [Send broadcast](#send-broadcast)
+  * [Multicast](#multicast)
   * [Send typing indicator](#send-typing-indicator)
   * [Ban customer](#ban-customer)
   * [Close thread](#close-thread)
@@ -45,11 +43,12 @@
   * [Add auto chat scopes](#add-auto-chat-scopes)
   * [Remove auto chat scopes](#remove-auto-chat-scopes)
   * [Get auto chat scopes config](#get-auto-chat-scopes-config)
-* [Pushes](#pushes)
+  * [Upload image](#upload-image)
+* [Events](#events)
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
-  * [Incoming broadcast](#incoming-broadcast)  
+  * [Incoming multicast](#incoming-multicast)  
   * [Incoming typing indicator](#incoming-typing-indicator)
   * [Incoming sneak peek](#incoming-sneak-peek)
   * [Customer banned](#customer-banned)
@@ -65,7 +64,7 @@
 
 # Introduction
 
-This documentation describes version **v0.2** of agent-api.
+This documentation describes version **v0.3** of agent-api.
 
 ## Web API
 
@@ -77,7 +76,7 @@ API endpoint:
 
 | HTTP method | Endpoint |
 |--------|----------------|
-| `POST` | `https://api.chat.io/agent/v0.2/action/<action>` |
+| `POST` | `https://api.chat.io/agent/v0.3/action/<action>` |
 
 Required headers:
 
@@ -94,7 +93,8 @@ Request
 {
 	"payload": {
 		// optional
-	}
+	},
+	"author_id": "<author_id>" // optional, applies only to bots
 }
 ```
 
@@ -108,13 +108,13 @@ API endpoints:
 
 | Transport | Endpoint |
 |--------|----------------|
-| `socket.io` | `https://api.chat.io/agent/v0.2/rtm/sio` |
-| `websocket` | `wss://api.chat.io/agent/v0.2/rtm/ws` |
+| `socket.io` | `https://api.chat.io/agent/v0.3/rtm/sio` |
+| `websocket` | `wss://api.chat.io/agent/v0.3/rtm/ws` |
 
 Example:
 
 ```
-https://api.chat.io/agent/v0.2/rtm/ws
+https://api.chat.io/agent/v0.3/rtm/ws
 ```
 
 Ping:
@@ -130,7 +130,8 @@ Request
 	"action": "<action>",
 	"payload": {
 		// optional
-	}
+	},
+	"author_id": "<author_id>" // optional, applies only to bots
 }
 ```
 
@@ -147,13 +148,14 @@ Response
 }
 ```
 
-Push
+Event
 ```js
 {
+	"request_id": "<request_id>", // optional, applies only to requester
 	"action": "<action>",
 	"type": "push",
 	"payload": {
-		// optional
+		// optional payload
 	}
 }
 ```
@@ -198,8 +200,9 @@ sudo pip install websocket-client
 | `chats.meta--my:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats I belong to |
 | --- | --- | --- |
 | `customers.ban:write` | `ban_customer` | normal | Access for banning customers |
+| `customers.identity--manage` | - | administrator | Access for use a customer identity | 
 | --- | --- | --- |
-| `broadcast:write` | `send_broadcast` | normal | Access for sending broadcast events to agents |
+| `broadcast:write` | `multicast` | normal | Access for multicast data to agents or customers |
 | `agents--my:write` | `update_agent` | normal | Write access for my agent data |
 | `agents--all:write` | `update_agent` | administrator | Write access for all agents data |
 | --- | --- | --- |
@@ -286,8 +289,8 @@ Objects are standardized data formats that are used in API requests and response
 			"timezone": "Europe/Warsaw"
 		}
 	},
-	"properties": {
-		"custom property name": "custom property value"
+	"fields": {
+		"custom field name": "custom field value"
 	},
 	"banned": false
 }
@@ -606,7 +609,7 @@ Example properties:
 ## Login
 Returns current agent's initial state.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `login` | ✓ | - | - |
 
@@ -645,7 +648,8 @@ Example response payloads
 	"license": {
 		"id": "123",
 		"plan": "enterprise",
-		"expiration_timestamp": 1483433500
+		"expiration_timestamp": 1483433500,
+		"creation_timestamp": 1482433500
 	},
 	"my_profile": {
 		// "User > My profile" object
@@ -655,17 +659,27 @@ Example response payloads
 		"users": [
 			// array of "User" objects
 		],
+		"last_event_per_type": { // last event of each type in chat
+			"message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > Message" object
+				}
+			},
+			"system_message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > System message" object
+				}
+			},
+			...
+		},
 		"last_thread_summary": {
 			"id": "OE070R0W0U",
 			"timestamp": 1473433500,
 			"user_ids": ["john@gmail.com"],
-			"last_event_per_type": [{ // last event of each type in current thread
-					// "Event > Message" object
-				}, {
-					// "Event > System message" object
-				},
-				...
-			],
 			"order": 12417249812721,
 			"properties": {
 				"routing": {
@@ -701,9 +715,9 @@ Example response payloads
 
 
 ## Get archives
-Returns active threads that current agent has access to. If the agent is a supervisor in some threads, those threads will be returned as well.
+Returns active threads that current agent has access to.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `get_archives` | ✓ | - | - |
 
@@ -776,7 +790,7 @@ Example response payloads
 
 ## Get filtered chats
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `get_filtered_chats` | ✓ | - | - |
 
@@ -821,17 +835,27 @@ Example response payloads
 		"users": [
 			// array of "User" objects
 		],
+		"last_event_per_type": { // last event of each type in chat
+			"message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > Message" object
+				}
+			},
+			"system_message": {
+				"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+				"thread_order": 343544565,
+				"event": {
+					// "Event > System message" object
+				}
+			},
+			...
+		},
 		"last_thread_summary": {
 			"id": "OE070R0W0U",
 			"timestamp": 1473433500,
 			"user_ids": ["john@gmail.com"],
-			"last_event_per_type": [{ // last event of each type in current thread
-					// "Event > Message" object
-				}, {
-					// "Event > System message" object
-				},
-				...
-			],
 			"order": 12417249812721,
 			"properties": {
 				"routing": {
@@ -866,7 +890,7 @@ Example response payloads
 ## Get chat threads
 Returns threads that current agent has access to for given chat.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `get_chat_threads` | ✓ | - | - |
 
@@ -915,34 +939,10 @@ Example response payload
 }
 ```
 
-## Supervise chat
-Adds a supervisor to chat. The supervisor can only send messages to other agents. These messages are not visible to the customer.
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `supervise_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
-
-Request payload:
-
-| Request object | Required | Notes |
-|----------------|----------|---|
-| `chat_id` | Yes | |
-| `agent_ids` | No | If no agent is passed, current user will be used instead. |
-
-Example request payload
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"agent_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
-}
-```
-
-No payload.
-
 ## Start chat
 Starts a chat.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `start_chat` | ✓ | ✓ | [`incoming_chat_thread`](#incoming-chat-thread) |
 
@@ -1004,9 +1004,9 @@ Example response payload
 ```
 
 ## Join chat
-Adds an agent to chat. If the agent was already a supervisor in chat, he/she is changed to an agent.
+Adds an agent to chat.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `join_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
 
@@ -1030,7 +1030,7 @@ No response payload
 ## Remove from chat
 Removes users from chat. If no user is specified, removes current user.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `remove_from_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
 
@@ -1053,48 +1053,9 @@ Example request payload
 
 No response payload
 
-## Send message
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `send_message` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
-
-\* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
-
-Request payload:
-
-| Request object | Required | Notes |
-|----------------|----------|-------|
-| `chat_id` | Yes | Id of the chat that we want to send the message to |
-| `message.text` | Yes | |
-| `message.recipients` | No | `all` (default), `agents` |
-| `message.custom_id` | No |  |
-
-Example request payload
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"message": {
-		"text": "hello world",
-		"recipients": "agents",
-		"custom_id": "12345-bhdsa"
-	}
-}
-```
-
-Example response payload
-```js
-{
-	"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"event": {
-		// "Event" object
-	}
-}
-```
-
 ## Send event
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
 
@@ -1130,29 +1091,39 @@ Example response payload
 }
 ```
 
-## Send broadcast
+## Multicast
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
-| `send_broadcast` | ✓ | ✓ | [`incoming_broadcast`](#incoming-broadcast) |
+| `multicast` | ✓ | ✓ | [`incoming_multicast`](#incoming-multicast) |
 
 Request payload:
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
-| `scopes` | No | <scope_types> |
-| `content` | Yes | JSON message to be broadcasted |
+| `scopes` | No | <scopes> |
+| `content` | Yes | JSON message to be sent |
 
-* `<scope_types>` possible values:
-  * `agents` (`[]string` - array of agent's ids)
-  * `groups` (`[]string` - array of group's ids)
+* `<scopes>` possible values:
+  * `agents` (object) posible values:
+	* `all` (bool - include all agents)
+	* `ids` ([]string - array of agent's ids)
+	* `groups` (`[]string` - array of group's ids)
+  * `customers` (object) possible values:
+	* `ids` ([]string - array of customer's ids)
 
 Example request payload
 ```js
 {
 	"scopes": {
-		"agents": ["john@gmail.com", "jane@gmail.com"],
-		"groups": [1, 2]
+		"agents": {
+			"all": true,
+			"ids": ["john@gmail.com", "jane@gmail.com"],
+			"groups": [1, 2]
+		},
+		"customers": {
+			"ids": ["50ce4683-22a5-48bf-5317-340f40bf6dfe"]
+		}
 	},
 	"content": {
 		"example": {
@@ -1166,7 +1137,7 @@ No response payload
 
 ## Send typing indicator
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `send_typing_indicator` | ✓ | ✓ | - |
 
@@ -1192,7 +1163,7 @@ No response payload
 ## Ban customer
 Bans the customer for a specific period. It immediately disconnects all customer active sessions and does not accept new ones during the ban lifespan.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `ban_customer` | ✓ | ✓ | [`customer_banned`](#customer-banned) |
 
@@ -1218,7 +1189,7 @@ No response payload
 ## Close thread
 Closes the thread. Nobody will be able to send any messages to this thread anymore.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `close_thread` | ✓ | ✓ | [`thread_closed`](#thread-closed) |
 
@@ -1239,7 +1210,7 @@ No response payload
 
 ## Update chat scopes
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `update_chat_scopes` | ✓ | ✓ | [`chat_scopes_updated`](#chat-scopes-updated) |
 
@@ -1270,7 +1241,7 @@ No response payload
 ## Update agent
 Updates agent properties.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `update_agent` | ✓ | - | [`agent_updated`](#agent-updated) |
 
@@ -1293,7 +1264,7 @@ No response payload
 ## Change push notifications
 Change firebase push notifications properties.
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `change_push_notifications` | ✓ | - | - |
 
@@ -1322,7 +1293,7 @@ No response payload
 
 ## Update chat properties
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `update_chat_properties` | ✓ | ✓ | [`chat_properties_updated`](#chat-properties-updated) |
 
@@ -1351,7 +1322,7 @@ No response payload
 
 ## Update chat thread properties
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `update_chat_thread_properties` | ✓ | ✓ | [`chat_thread_properties_updated`](#chat-thread-properties-updated) |
 
@@ -1382,7 +1353,7 @@ No response payload
 
 ## Update last seen timestamp
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `update_last_seen_timestamp` | ✓ | ✓ | [`last_seen_timestamp_updated`](#last-seen-timestamp-updated) |
 
@@ -1410,7 +1381,7 @@ Example response payload
 
 ## Add auto chat scopes
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `add_auto_chat_scopes` | ✓ | - | - |
 
@@ -1485,7 +1456,7 @@ Example response payload
 
 ## Remove auto chat scopes
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `remove_auto_chat_scopes` | ✓ | - | - |
 
@@ -1506,7 +1477,7 @@ No response payload
 
 ## Get auto chat scopes config
 
-| Action | RTM API | Web API | Push message |
+| Action | RTM API | Web API | Event |
 | --- | :---: | :---: | :---: |
 | `get_auto_chat_scopes_config` | ✓ | - | - |
 
@@ -1545,16 +1516,53 @@ Example response payload
 }
 ```
 
+## Upload image
 
-# Pushes
+| Action | RTM API | Web API | Event |
+| --- | :---: | :---: | :---: |
+| `upload_image` | - | ✓ | - |
+
+Request payload:
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `payload.image`      | Yes      | max 10MB |
+
+* Content-Type header in form `Content-Type: multipart/form-data; boundary=<boundary>` is required.
+
+Example request payload
+```
+	payload.image=test.png
+```
+
+Example response payload
+```js
+{
+	"url": "https://cdn.chatio-static.com/api/file/chatio/img/24434343/dmkslfmndsfgds6fsdfsdnfsd.png",
+	"path": "24434343/dmkslfmndsfgds6fsdfsdnfsd.png"
+}
+```
+
+Note:
+* `url` is temporary URL ready to use but can expire in the future
+* `path` should be used for database and must be appended to `base_url`
+* `base_url` is `https://cdn.chatio-static.com/api/file/chatio/img`
+
+
+# Events
 Server => Client methods are used for keeping application state up-to-date. They are available only in `websocket` transport.
 
 ## Incoming chat thread
 
-| Action | Payload |
-|--------|------------------|
-| `incoming_chat_thread` |
-|  | `thread` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_chat_thread` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `thread`       |          |
 
 Example response payload
 ```js
@@ -1579,10 +1587,15 @@ Example response payload
 
 ## Chat users updated
 
-| Action | Payload |
-|--------|------------------|
-| `chat_users_updated` |
-|  | `updated_users` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_users_updated` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `updated_users`       |          |
 
 Example response payload
 ```js
@@ -1600,12 +1613,6 @@ Example response payload
 				// array of "User > Agent" objects
 			],
 			"removed_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
-		},
-		"supervisors": {
-			"added": [
-				// array of "User > Supervisor" objects
-			],
-			"removed_ids": ["85f3bfc9-06c1-434e-958b-2a5239b07de8"]
 		}
 	}
 }
@@ -1613,11 +1620,16 @@ Example response payload
 
 ## Incoming event
 
-| Action | Payload |
-|--------|------------------|
-| `incoming_event` |
-|  | `chat_id` |
-|  | `event` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_event` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `event`       |          |
 
 Example response payload
 ```js
@@ -1629,13 +1641,19 @@ Example response payload
 }
 ```
 
-## Incoming broadcast
+## Incoming multicast
 
-| Action | Payload |
-|--------|------------------|
-| `incoming_broadcast` |
-|  | `author_id` |
-|  | `content` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_multicast` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `author_id`       |          |
+| `content`       |          |
+
 
 Example response payload
 ```js
@@ -1651,11 +1669,16 @@ Example response payload
 
 ## Incoming typing indicator
 
-| Action | Payload |
-|--------|------------------|
-| `incoming_typing_indicator` |
-|  | `chat_id` |
-|  | `typing_indicator` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_typing_indicator` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `typing_indicator`       |          |
 
 Example response payload
 ```js
@@ -1669,11 +1692,16 @@ Example response payload
 
 ## Incoming sneak peek
 
-| Action | Payload |
-|--------|------------------|
-| `incoming_sneak_peek` |
-|  | `chat_id` |
-|  | `sneak_peek` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_sneak_peek` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `sneak_peek`       |          |
 
 Example response payload
 ```js
@@ -1687,11 +1715,16 @@ Example response payload
 
 ## Customer banned
 
-| Action | Payload |
-|--------|------------------|
-| `customer_banned` |
-|  | `customer_id` |
-|  | `ban.days` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_banned` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `customer_id`       |          |
+| `ban.days`       |          |
 
 Example response payload
 ```js
@@ -1705,12 +1738,17 @@ Example response payload
 
 ## Thread closed
 
-| Action | Payload | Notes |
-|--------|------------------|---|
-| `thread_closed` | |
-|  | `chat_id` | |
-|  | `thread_id` | |
-|  | `user_id` | Missing if thread was closed by router |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `thread_closed` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `thread_id`       |          |
+| `user_id`       | Missing if thread was closed by router |
 
 Example response payload
 ```js
@@ -1723,12 +1761,17 @@ Example response payload
 
 ## Chat scopes updated
 
-| Action | Payload |
-|--------|------------------|
-| `chat_scopes_updated` |
-|  | `chat_id` |
-|  | `scopes_added` |
-|  | `scopes_removed` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_scopes_updated` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `scopes_added`       |          |
+| `scopes_removed`       |          |
 
 Example response payload
 ```js
@@ -1745,11 +1788,16 @@ Example response payload
 
 ## Customer updated
 
-| Action | Payload |
-|--------|------------------|
-| `customer_updated` |
-|  | `chat_id` |
-|  | `customer` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_updated` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `customer`       |          |
 
 Example response payload
 ```js
@@ -1763,11 +1811,16 @@ Example response payload
 
 ## Agent updated
 
-| Action | Payload |
-|--------|------------------|
-| `agent_updated` |
-|  | `agent_id` |
-|  | `routing_status` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `agent_updated` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `agent_id`       |          |
+| `routing_status`       |          |
 
 Example response payload
 ```js
@@ -1779,10 +1832,15 @@ Example response payload
 
 ## Agent disconnected
 
-| Action | Payload |
-|--------|------------------|
-| `agent_disconnected` |
-|  | `reason` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `agent_disconnected` | ✓ | - |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `reason`       |          |
 
 Example response payload
 ```js
@@ -1799,11 +1857,16 @@ Example response payload
 
 ## Chat properties updated
 
-| Action | Payload |
-|--------|------------------|
-| `chat_properties_updated` |
-|  | `chat_id` |
-|  | `properties` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_properties_updated` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `properties`       |          |
 
 Example response payload
 ```js
@@ -1825,12 +1888,17 @@ Example response payload
 
 ## Chat thread properties updated
 
-| Action | Payload |
-|--------|------------------|
-| `chat_thread_properties_updated` |
-|  | `chat_id` |
-|  | `thread_id` |
-|  | `properties` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_thread_properties_updated` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `thread_id`       |          |
+| `properties`       |          |
 
 Example response payload
 ```js
@@ -1853,12 +1921,17 @@ Example response payload
 
 ## Last seen timestamp updated
 
-| Action | Payload |
-|--------|------------------|
-| `last_seen_timestamp_updated` |
-|  | `user_id` |
-|  | `chat_id` |
-|  | `timestamp` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `last_seen_timestamp_updated` | ✓ | ✓ |
+
+Event payload:
+
+| Object         | Notes    |
+|----------------|----------|
+| `user_id`       |          |
+| `chat_id`       |          |
+| `timestamp`       |          |
 
 Example response payload
 ```js
