@@ -4,11 +4,11 @@ weight: 10
 
 # Introduction
 
-chat.io uses [OAuth 2.0](https://oauth.net/2/) protocol for **authentication** and **authorization** for all of its services. Before you continue, make sure you understand the following difference:
+Chat.io uses [OAuth 2.0](https://oauth.net/2/) protocol for **authentication** and **authorization** for all of its services. Before you continue, make sure you understand the following difference:
 
-* **Authentication** is making sure that somebody really is who they say they are. <br/>_E.g.: Checking your passport at the security check is authentication._
+* **Authentication** is making sure that somebody really is who they say they are. <br/>_Example: Checking your passport at the security check is authentication._
 
-* **Authorization** is assigning rules about who is allowed to do what. <br/>_E.g.: Allowing you to take first class seat is authorization._
+* **Authorization** is assigning rules about who is allowed to do what. <br/>_Example: Allowing you to take a first class seat is authorization._
 
 ## Overview
 

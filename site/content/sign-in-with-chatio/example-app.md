@@ -2,7 +2,10 @@
 weight: 40
 ---
 
-# Example app
+# Sample app
+
+This sample app will display chat.io user's license number when the user clicks the "Sign in with chat.io" button.
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -29,4 +32,4 @@ AccountsSDK.init({
 </body>
 </html>
 ```
-This example app displays chat.io user's license number when user clicks the "Sign in with chat.io" button.
+

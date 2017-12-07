@@ -7,7 +7,7 @@ weight: 30
 ## Methods
 
 ### **AccountsSDK.init({ ... })**
-> Example `init()` method usage
+> Sample `init()` method usage
 
 ```js
 var instance = AccountsSDK.init({
@@ -18,20 +18,20 @@ var instance = AccountsSDK.init({
 });
 ```
 
-Initiates the SDK and returns AccountsSDK object instance. Accepts an object with the following properties:
+This method initiates the SDK and returns the AccountsSDK object instance. It accepts an object with the following properties:
 
-* **client_id** – obtainted from [Developers Console](https://console.chat.io/) when you create your app.
+* **client_id** – obtainted from the [Developers Console](https://console.chat.io/) when you create your app.
 
 <!--
 * **response_type** – Defines the type of response that you will receive in `onIdentityFetched` callback. Two options are supported:<br><br>**token** (default) – response will include `access_token` that can be immediately used for calling REST API methods. Best suitable for client-side apps.<br><br>**code** – response will include `code` that can be exchanged for `access_token` and `refresh_token`. Best suitable for backend apps that authorize the user only once and refresh `access_token` themselves from now on.<br><br>Read more about client-side and backend apps in <a href="https://developers.google.com/identity/protocols/OAuth2#webserver">Google OAuth tutorial</a>.
 -->
 
-* **onIdentityFetched(error, data)** – callback invoked when user's identity is fetched. Callback will include either `error` or `data` object depending on current user authorization status.<br>You will find detailed documentation in <a href="#response-format">Response format</a> section.
+* **onIdentityFetched(error, data)** – a callback executed when user's identity is fetched. The callback will include either `error` or `data` object depending on the current user authorization status.<br>You will find the detailed documentation in <a href="#response-format">Response format</a> section.
 
 <aside class="notice"><code>AccountsSDK</code> object exposes only one method: <code>init()</code>. All other methods must be called by the object instance returned by the <code>init()</code> method.</aside>
 
 ### **instance.openPopup()**
-> Example `openPopup()` method usage:
+> Sample `openPopup()` method usage:
 
 ```js
 // javascript
@@ -42,10 +42,10 @@ var instance = AccountsSDK.init({ ... });
 <a href="" onclick="instance.openPopup()">Sign in with chat.io</a>
 ```
 
-Binds `onclick` param for custom HTML `<a>` element that replaces the "Sign in with chat.io" button. See the example of custom button in <a href="#3-prepare-button-container">Prepare button container</a> section.
+This method binds the `onclick` param to a custom HTML `<a>` element which replaces the default "Sign in with chat.io" button. See the example of a custom button in <a href="#3-prepare-the-button-container">Prepare the button container</a> section.
 
 ### **instance.signOut(callback)**
-> Example `signOut()` method usage:
+> Sample `signOut()` method usage:
 
 ```js
 // javascript
@@ -63,37 +63,37 @@ function signMeOut(e) {
 <a href="" onclick="signMeOut(event)">Sign out</a>
 ```
 
-Signs the user out and invokes `callback` function (with no arguments) when it's done.
+This method signs out a user and executes a `callback` function (with no arguments) when it's done.
 
 ### **instance.displayButtons()**
-> Example `displayButtons()` method usage:
+> Sample `displayButtons()` method usage:
 
 ```js
 var instance = AccountsSDK.init({ ... });
 
-// some DOM changes which cause buttons to disappear from DOM
+// some DOM changes which cause the buttons to disappear from the DOM
 // (...)
 
 // inject buttons once again
 instance.displayButtons();
 ```
 
-Renders "Sign in with chat.io" buttons once again in the DOM. Helpful when you reload the app's state and DOM is cleared. This method is automatically invoked by the `init` method.
+This method re-renders the "Sign in with chat.io" button the DOM. It's helpful when you reload the app's state and the DOM is cleared. This method is automatically executed by the `init` method.
 
 
 ## Response format
 `onIdentityFetched` callback is the heart of this SDK. It will be fired when user's authorization status is fetched. This is where you pass authorization `access_token` to your app to build what you need.
 
 ### Success
-If the user passes through "Sign in with chat.io" flow, `error` param will be null and `data` param will include authorization data:
+If a user completes the "Sign in with chat.io" flow, the `error` param will be null and the `data` param will include the authorization data:
 
 <!--, depending on `response_code` param value.-->
 
 <!--If `response_code` was set to **access_token**:-->
 
 * **access_token** – used for authorization in API calls,
-* **scopes** – array of scopes that ``access_token`` has access to,
-* **expires_in** – number of seconds from now that ``access_token`` will be valid,
+* **scopes** – an array of scopes that ``access_token`` has access to,
+* **expires_in** – the time (in seconds) when ``access_token`` is valid,
 * **entity_id** – chat.io's user email,
 * **license** – chat.io license number,
 * **client_id** – `client_id` that you passed in the `init` method.
@@ -112,32 +112,33 @@ If `response_code` was set to **code**:
 
 ### Error
 
-If the user is not logged in to chat.io, `data` param will be `null` and `error` param will include the following properties:
+If a user is not logged in to chat.io, the `data` param will be `null` and the `error` param will include the following properties:
 
 #### Authentication errors
 
-* **identity_exception** – error type. Possible values:<br><br>
-  * `invalid_request` – request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once or is otherwise malformed.<br><br>
-  * `unauthorized` – request is valid, but identity data is wrong or identity does not exists. If identity id is known, it's added to querystring as `entity_id`.<br><br>
-  * `server_error` – server encountered an unexpected condition that prevented it from determining identity.<br><br>
-  * `access_denied` – identity is known, but access is denied because of business reasons. For example identity can be banned or has wrong unsupported account version.<br><br>
+| Error type      | Values                      | Description                                                                                                                                                                                                                             | Examples                                                                                                                           |
+|-----------------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `identity_exception` | `invalid_request` | the request has a wrong format| the request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once or is otherwise malformed   |
+|                    | `unauthorized`    | the request is valid, but the identity data is wrong or the identity does not exists. If the identity ID is known, it's added to a querystring as `entity_id`.      |
+|                    | `server_error`    | the server has encountered an unexpected condition that prevented it from determining the identity                                                           |
+|                    | `access_denied`   | the identity is known, but access is denied because of business reasons.|the identity is banned or its account version is wrong or unsupported |
 
 #### Authorization errors
-* **oauth_exception** – error type. Possible values:<br><br>
-  * `invalid_request` – request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once or is otherwise malformed. Examples: wrong HTTP method, invalid HTTP body encoding.<br><br>
-  * `unauthorized_client` – client is not authorized to request a token using this method. Examples: missing `client_id` param, incorrect `client_id` value, `refresh_token` not found, invalid `client_secret`, invalid `redirect_uri`.<br><br>
-  * `access_denied` – resource owner or authorization server denied the request. For example, requested scope includes a scope not originally granted by the resource owner.<br><br>
-  * `unsupported_response_type` – authorization server does not support obtaining a token using this method. For example, `response_type` is not `token`.<br><br>
-  * `invalid_scope` – requested scope is invalid, insufficient, unknown or malformed. Examples: scope not found, scope name not found.<br><br>
-  * `server_error` – authorization server encountered an unexpected condition that prevented it from fulfilling the request. For example, server is not responding.<br><br>
-  * `temporarily_unavailable` – authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.<br><br>
-  * `unsupported_grant_type` – authorization grant type is not supported by the authorization server. For example, user is using disabled authorization grant type, such as <a href="https://tools.ietf.org/html/rfc6749#section-4.4">client credentials grant</a>.<br><br>
-  * `invalid_grant` – provided authorization grant (authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request or was issued to another client. Examples: refresh token expired, access token expires.<br><br>
-  * `invalid_client` client authentication failed (unknown client, no client authentication included, unsupported authentication method). For example, user is using refresh token with wrong `client_id`.<br><br>
-  * `missing_grant` – client is missing granted rights. Examples: grants were rejected, grants were never given, client changed required grants.<br><br>
 
-* **exception_details** – error description. It is returned only in some cases. Possible values:<br><br>
-  * `client_id_not_found` – wrong `client_id`, `client_id` does not exist.<br><br>
-  * `redirect_uri_not_set` – client misconfiguration, client has not set redirect uri.<br><br>
-  * `invalid_redirect_uri` – redirect uri is not one of client's allowed redirects.<br><br>
-  * `too_many_redirects` – server has detected redirect loop, client should not redirect too many times.
+| Error type      | Values                      | Description                                                                                                                                                                                                                             | Examples                                                                                                                           |
+|-----------------|-----------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `oauth_exception` | `invalid_request`           | the request is missing a required parameter, includes an invalid parameter value, includes a parameter more than once or is otherwise malformed                                                                                      | wrong HTTP method, invalid HTTP body encoding                                                                                      |
+|                 | `unauthorized_client`       | client is not authorized to request a token using this method                                                                                                                                                                     | missing `client_id` param, incorrect `client_id` value, `refresh_token` not found, invalid `client_secret`, invalid `redirect_uri` |
+|                 | `access_denied`             | resource owner or authorization server denied the request                                                                                                                                                                         | requested scope includes a scope not originally granted by the resource owner                                                      |
+|                 | `unsupported_response_type` | the authorization server does not support obtaining a token using this method                                                                                                                                                         | `response_type` is not `token`                                                                                                     |
+|                 | `invalid_scope`             | the requested scope is invalid, insufficient, unknown or malformed                                                                                                                                                                    | scope not found, scope name not found                                                                                              |
+|                 | `server_error`              | the authorization server encountered an unexpected condition that prevented it from fulfilling the request                                                                                                                            | server is not responding                                                                                                           |
+|                 | `temporarily_unavailable`   | the authorization server is currently unable to handle the request due to a temporary overloading or maintenance of the server.                                                                                                       |                                                                                                                                    |
+|                 | `unsupported_grant_type`    | authorization grant type is not supported by the authorization server                                                                                                                                                             | user is using disabled authorization grant type, such as client credentials grant                                                  |
+|                 | `invalid_grant`             | provided authorization grant (authorization code, resource owner credentials) or refresh token is invalid, expired, revoked, does not match the redirection URI used in the authorization request or was issued to another client | refresh token expired, access token expires                                                                                        |
+|                 | `invalid_client`            | client authentication failed (unknown client, no client authentication included, unsupported authentication method)                                                                                                               | user is using refresh token with wrong `client_id`                                                                                 |
+|                 | `missing_grant`             | the client is missing granted rights                                                                                                                                                                                                  | the grants were rejected or have never been given, or the client changed required grants    
+| `exception_details` | `client_id_not_found`           | wrong `client_id`, `client_id` does not exist.                                                   |
+|                     | `redirect_uri_not_set`           | client misconfiguration, tyhe client has not set redirect uri                                                  |
+|                     | `invalid_redirect_uri`           | redirect uri is not one of client's allowed redirects                                                  |
+|                     | `too_many_redirects`           | the server has detected redirect loop, the client should not redirect too many times                                                   |
