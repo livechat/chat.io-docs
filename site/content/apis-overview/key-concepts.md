@@ -1,10 +1,34 @@
 ---
-weight: 30
+weight: 10
 ---
 
-# Events
+# Key Concepts
 
-Events are portions of data which can be sent to a chat ([send_event](../agent-api/api-reference/#send-event)). There are different types of events:
+## Chats and threads
+
+A **chat** is a single chat conversation. Each chat is divided into **threads**. Every thread may contain **events**. You can find more about the events in the [Events](#events) section.
+
+Multiple users can participate in a single chat. Every user can have multiple chats at the same time.
+
+New threads within a single chat are created on the server side. To learn more about the creation algorithm, see [Rules and conditions](#rules-and-conditions).
+
+![Chats and Threads](./images/chats.png "chats and threads")
+
+### Rules and conditions
+
+ 1. Only one of the threads within a chat may be the **active thread**. When you send events to a chat, they will be added to the **active thread**. Only the **last thread** can be the active one.
+ 
+ 2. Chats are **not continuous**, which means that there can be time gaps between the threads.
+ 
+ 3. When there is no active thread in the chat, sending an event to that chat will start **a new thread**. For instance, when the last active thread has been closed, sending an event to the same chat will open up a new thread. The [annotation event](#annotation) is an exception here: it will be added at the end of the last thread.
+
+ 4. When a new chat is started, **a new thread** is created within this chat.
+ 
+ 5. The algorithm which decides how the chats are distributed between the agents is called **routing**. It's documented in the [Routing](#routing) section.
+
+## Events
+
+Events are portions of data which can be sent to a chat (via [send_event](../agent-api/api-reference/#send-event)). There are the following event types:
 
  - [message](#message)
  - [annotation](#annotation)
@@ -15,32 +39,32 @@ Events are portions of data which can be sent to a chat ([send_event](../agent-a
 
 [Incoming event](../agent-api/api-reference/#incoming-event) push will inform you about events sent to a chat (on both agent and customer side).
 
-## Pushes (events from server)
+### Pushes
 
-Events coming from the server to the client are called **pushes**. They are used for keeping application state up-to-date and are available only in the websocket transport.
+The events coming **from the server to the client** are called **pushes**. They are used to keep the application state up-to-date. Pushes are available only in the websocket transport.
 
-If a chat or a thread is created or closed when you're logged in, we will send you server push messages (in both Customer and Agent APIs).
+If a chat or a thread is created or closed when you're logged in, server push messages will be sent (in both Customer and Agent APIs).
 
-## Common event fields
+### Common event fields
 
 Here are the fields shared by all events:
 
 | name        | puprose                                        | filled by | type   |
 |-------------|------------------------------------------------|-----------|--------|
-| `id`        | ID of the event                                | server    | string |
-| `custom_id` | is an ID that you can set for your own purpose | client    | string |
+| `id`        | the ID of the event                            | server    | string |
+| `custom_id` | the ID that you can set for your own purposes  | client    | string |
 | `order`     | events with a lower `order` will appear first  | server    | int    |
-| `author_id` | this is the ID of the sender of an event       | server    | string |
-| `text`      | this is payload that you can send whithin event (for example message content) | client | string |
-| `recipients` | posibble values are `"all"`(default) and `"agents"` | client | string |
-| `properties` | event properties, more about this in future properties section | client | properties object |
+| `author_id` | the ID of the sender of an event       		   | server    | string |
+| `text`      | the payload that you can send whithin an event (for example message content) | client | string |
+| `recipients` | the posibble values are `"all"`(default) and `"agents"` | client | string |
+| `properties` | event [properties](#properties) | client | properties object |
 
 
-## Event types
+### Event types
 
-### Message
+#### Message
 
- A message is the most common and self-explanatory event type. It allows you to send textual content to other chat users. Its data format looks like this:
+ A message is the most common event type. It allows you to send textual content to other chat users. Its data format looks like this:
 
 ```js
 {
@@ -59,9 +83,9 @@ Here are the fields shared by all events:
 ```
 
 
-### Annotation
+#### Annotation
 
-Adds an annotation to the last thread. Keep in mind that sending an annotation cannot start a new thread (even if there is no active thread in a chat). It always goes to the latest thread that already exists.
+This event adds an annotation to the last thread. Keep in mind that sending an annotation cannot start a new thread (even if there is no active thread in a chat). It always goes to the latest thread that already exists.
 
 ```js
 {
@@ -71,7 +95,7 @@ Adds an annotation to the last thread. Keep in mind that sending an annotation c
   "type": "annotation",
   "author_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
   "timestamp": 1473433500,
-  "text": "Example annotation",
+  "text": "Sample annotation",
   "annotation_type": "rating",
   "properties": {
     // "Properties" object
@@ -79,16 +103,16 @@ Adds an annotation to the last thread. Keep in mind that sending an annotation c
 }
 ```
 
-`annotation_type` - type of the annotation. This field cannot be empty and is customizable, you can have your own annotation types (i.e. we use "rating" type)
+`annotation_type` - type of the annotation. This field cannot be empty and is customizable, you can have your own annotation types (in the example above we used "rating" type)
 
 
-### Filled form
+#### Filled form
 
-A filled form is an event containing some data from a form. Let's take a look at a practical example. We have this form:
+A filled form is an event containing data from a form. Let's take a look at a practical example:
 
 ![Filled Form](images/filled_form.png "filled form example")
 
-and we want to send its data. You can use filled form event to achieve this (in this example we introduce all currently available field types):
+To send the data from this form, you can use the filled form event. In this example we introduce all currently available field types:
 
 ```js
 {
@@ -129,7 +153,7 @@ and we want to send its data. You can use filled form event to achieve this (in 
 ```
 
 
-### System message
+#### System message
 
 A system message is an event generated by the server. It does not have "author_id", "custom_id" and "properties" fields.
 
@@ -153,7 +177,7 @@ A system message is an event generated by the server. It does not have "author_i
 | `manual_archived`   | `<agent_name> archived the chat` |
 
 
-### File
+#### File
 
 File event indicates that a file has been uploaded. It can be only generated by the server when the [send file](../customer-api/api-reference/#send-file) Customer API method is called.
 
@@ -177,14 +201,14 @@ File event indicates that a file has been uploaded. It can be only generated by 
 }
 ```
 
-The `size` field means the file size in bytes. It is limited to 10 MB. <br>
+The `size` field indicates the file size in bytes. It is limited to 10 MB. <br>
 The `content-type` field can contain any [MIME media type](https://en.wikipedia.org/wiki/Media_type). <br>
-`Width` and `height` Fields are present only for `"image/png"`, `"image/gif"` and `"image/jpg"` content-types. There is no limitations for width and height.
+`Width` and `height` fields are present only for `"image/png"`, `"image/gif"` and `"image/jpg"` content-types. There is no limitations for width and height.
 
 
-### Custom event
+#### Custom event
 
-A custom event is an event that has 100% custom payload. You can send any json within it.
+A custom event is an event with a 100% custom payload. It can be used to send any JSON.
 
 ```js
 {

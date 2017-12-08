@@ -4,22 +4,41 @@ weight: 50
 
 # BOT Agents
 
-* BOT Agent enables writing integrations using agent-api to communicate in chats as a regular Agent.
+<img src="images/bot-agent.jpg" alt-"Chat.io BOT Agent" class="has-border"/>
 
-* Logged in BOT Agent is connected to agent SSO access token that creates/updates the BOT and is being logged out when the access token is revoked.
+BOT Agents are similar to their human counterparts. They can join chats and post messages, but they also have a special feature: you can attach [webhooks](https://www.chat.io/docs/configuration-api/api-reference/v0.4/#webhooks) to them.
 
-* Each BOT Agent is a resource owned by an application in developers platform identified by `client_id`. By "My BOT Agents" the BOTs owned by application with given `client_id` is meant.
+## What can BOT Agents do?
 
-## Differences from regular Agent
+BOT Agents are created with the [Configuration API](https://www.chat.io/docs/configuration-api). Then, BOT Agents communicate with the [Agent API](https://www.chat.io/docs/agent-api) by the [Web API](https://www.chat.io/docs/agent-api/api-reference/v0.4/#web-api) or websocket connection, listening to incoming webhooks (or pushes) and reacting to them.
 
-* you can not log in using BOT Agent account
-* you can not set password for BOT Agent account
-* BOT Agent does not have an email - agent_id is a random hash
+### Post messages and react to keywords
 
-## Configuring bot agents
+BOT Agents can react to specific keywords during chats. For example, if you set the keyword to "pizza", the BOT Agent will join the chat where the keyword was used, send "Pizza is on the way!" to all agents in the chat and then leave the chat.
 
-You can create and manage bot agents using configuration api [here](https://www.chat.io/docs/configuration-api/api-reference/v0.3/#bot-agent)
+## Differences between BOT Agents and regular Agents
 
-## Notes
+* You can't log in to a BOT Agent account.
+* You can't set password for a BOT Agent account.
+* BOT Agents don't have email addresses. Their <code>agent_id</code> is a random hash.
+* You can assign webhooks to BOT Agents as a communication channel for [pushes](https://www.chat.io/docs/agent-api/api-reference/v0.4/#pushes).
 
-We currently don't have chat.io group management. All agents belong to group 0 by default.
+## Technical notes
+
+* BOT Agents use the [Agent API](https://www.chat.io/docs/agent-api) to post messages to chats as Agents, so you can use them to write your own integrations. 
+
+* When logged in, a BOT Agent is connected to the agent SSO access token that creates and updates the BOT. A BOT Agent is logged out when the access token is revoked.
+
+* Each BOT Agent is **a resource** owned by an application (identified by `client_id`) in the [Developers Console](https://www.console.chat.io/). "My BOT Agents" are the BOTs owned by the application with a given `client_id`.
+
+## Configuring BOT agents
+
+You can create and manage BOT agents using the [Configuration API](https://www.chat.io/docs/configuration-api/api-reference/v0.3/#bot-agent).
+
+<div class="callout type-warning">Currently chat.io doesnt's support group management. All agents belong to group 0 by default.</div>
+
+## A sample BOT Agent
+
+We have created a sample Pizza Bot to illustrate the concept of BOT Agents. 
+
+* [Pizza Bot at Github](https://github.com/livechat/chat.io-integrations/tree/master/python/pizzabot_example)

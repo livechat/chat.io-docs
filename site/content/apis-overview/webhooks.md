@@ -4,4 +4,4 @@ weight: 60
 
 # Webhooks
 
-You can manage webhooks via Configuration API [here](https://www.chat.io/docs/configuration-api/api-reference/v0.3/#webhooks).
+Chat.io provides a number of webhooks. You can manage them via the [Configuration API](https://www.chat.io/docs/configuration-api/api-reference/v0.4/#webhooks).
