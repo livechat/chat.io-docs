@@ -31,7 +31,7 @@ or with a node-style `require` call:
 ### Using script tag - UMD module hosted on unpkg's CDN
 
 `<script
-src="https://unpkg.com/@livechat/chat.io-customer-sdk@0.3.1/dist/chat.io-customer-sdk.min.js"></script>`
+src="https://unpkg.com/@livechat/chat.io-customer-sdk@0.7.0/dist/chat.io-customer-sdk.min.js"></script>`
 
 If you just want to look around and play with the SDK, check out our
 [sample chat widget implementation](https://codesandbox.io/s/rm3prxw88n).
@@ -44,8 +44,9 @@ as a "Web app (frontend, eg. JavaScript)" type. Then, you have to pass the confi
 Now run the `init` function with the configuration, replacing `LICENSE_NUMBER` with
 your chat.io license number. The function will return the customerSDK instance:
 
+
 ```js
-const customerSDK = chatIoCustomerSDK.init({
+const customerSDK = CustomerSDK.init({
   license: LICENSE_NUMBER,
   clientId: CLIENT_ID,
 })

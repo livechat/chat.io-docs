@@ -1,4 +1,5 @@
 <div class="hide">
+
 # Customer Chat API
 
 * [Introduction](#introduction)
@@ -72,7 +73,7 @@ Client should send `Content-Type` header:
 Client must also send query string params in every request to Web API:
 
 | Param | Required | Type | Notes |
-|--|--|--|--|
+| --- | --- | --- | --- |
 | `license_id` | Yes | Integer | LiveChat account ID |
 
 ### Messages format
@@ -102,7 +103,7 @@ Connection endpoints:
 Client must send query string param when connecting to RTM API:
 
 | Param | Required | Type | Notes |
-|--|--|--|--|
+| --- | --- | --- | --- |
 | `license_id` | Yes | Integer | LiveChat account ID |
 
 Example:
@@ -593,13 +594,15 @@ Example response payload
 		},
 		"last_event_per_type": { // last event of each type in last thread
 			"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-			"events": [{
+			"events": {
+				"message": {
 					// "Event > Message" object
-				}, {
+				},
+				"system_message": {
 					// "Event > System message" object
 				},
 				...
-			]
+			}
 		},
 		"last_threads_summary": [{
 				"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -836,7 +839,12 @@ Example request (with payload)
   payload.file=test.png
 ```
 
-No response payload.
+Example response payload
+```js
+{
+	"url": "https://cdn.chatio-static.com/api/file/chatio/att/345678/bhdbfhdbf87348374837483.png"
+}
+```
 
 ## Send sneak peek
 
