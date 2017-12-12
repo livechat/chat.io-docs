@@ -78,7 +78,7 @@ customerSDK
 
 ### Using the API in React Native
 
-If you want to use chat.io Customer SDK in React Native, keep in mind that we use cookies to authenticate your sessions we need some sort of browser
+If you want to use chat.io Customer SDK in React Native, keep in mind that we use cookies to authenticate your sessions, so we need some sort of browser
 environment for that. We've prepared a special wrapper for you to use in React
 Native, which opens a WebView component to get an authentication token. All you
 have to do is to import it from our authentication package (no need to install
