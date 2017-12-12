@@ -8,7 +8,7 @@
   <div class="subnav">
     {{ $currentUrl := index ( split $currentPage.URL "/" ) 3}}
     <a class="subnav__link {{if eq $currentUrl "" }} subnav__link--active{{end}}" href="{{$currentSection.URL}}">Guide</a>
-    <a class="subnav__link {{if eq $currentUrl "api-reference" }} subnav__link--active{{end}}" href="{{$currentSection.URL}}api-reference/v{{$currentSectionParams.latest_version}}">API Reference</a>
+    <a class="subnav__link {{if eq $currentUrl "api-reference" }} subnav__link--active{{end}}" href="{{$currentSection.URL}}api-reference/v{{$currentSectionParams.latest_version}}/">API Reference</a>
   </div>
 {{ end }}
 

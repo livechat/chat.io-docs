@@ -1,6 +1,20 @@
 # Changelog
 
-## [v0.3]
+## [v0.5 dev preview]
+
+## [v0.4] - 2017-12-04
+
+### Added
+- New push message `incoming_multicast` 
+
+### Changed
+- `last_event_per_type` object is now map of objects with specific type of event, `thread_order` and `thread_id`
+- `last_event_per_type` object contains last events from chat instead of thread
+
+### Fixed
+- Support for `file` event in `last_event_per_type` for non-active chats
+
+## [v0.3] - 2017-11-09
 
 ### Added
 - New message `get_chats_summary`
@@ -20,6 +34,9 @@
 ### Removed
 - `last_chats_limit` and `last_threads_limit` params from `login` request
 - Customer's chats in `login` response
+
+### Fixed
+ - `author_id` in `custom` event
 
 ## [v0.2] - 2017-09-01
 

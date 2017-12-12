@@ -5,7 +5,51 @@ weight: 60
 
 # Changelog
 
-#### [v0.4.0]
+#### [v0.7.0] - 2017-11-24
+
+##### Changed
+
+* `sendFile` returns `{ url }` now instead of `{ success: true }`
+* events no longer have `order` property
+* users no longer have `present` property
+
+##### Fixed
+
+* it's possible now to create 2 independent instances of the SDK
+* `file` events with `url` property
+
+#### [v0.6.0] - 2017-11-23
+
+##### Changed
+
+* `customId` is added only if it has been explicitly passed in as part of an event
+* `customId` is not reused as request's id anymore
+* made it impossible to send 2 requests with identical ids until a response
+  comes in
+
+#### [v0.5.0] - 2017-11-22
+
+##### Added
+
+* `sendFile` method
+
+##### Changed
+
+* UMD export was renamed `CustomerSDK`
+
+#### [v0.4.2] - 2017-11-18
+
+##### Fixed
+
+* server errors handling - promises should get rejected correctly now
+
+#### [v0.4.1] - 2017-11-18
+
+##### Fixed
+
+* UMD builds from `dist` directory
+
+#### [v0.4.0] - 2017-11-18
 
 ##### Added
 
@@ -24,13 +68,13 @@ weight: 60
 * `AuthWebView` exposed from `@livechat/chat.io-customer-auth` for React Native
   integration no longer needs a license prop
 
-#### [v0.3.1]
+#### [v0.3.1] - 2017-11-16
 
 ##### Fixed
 
 * parsing server events
 
-#### [v0.3.0]
+#### [v0.3.0] - 2017-11-16
 
 ##### Added
 

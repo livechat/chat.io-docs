@@ -7,7 +7,7 @@ weight: 10
 
 ## Overview
 
-With Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](/docs/customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases.
+With the Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](/docs/customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases.
 
 ## Use cases
 
