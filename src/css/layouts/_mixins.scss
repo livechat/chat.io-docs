@@ -17,3 +17,43 @@
     max-width: 1430px;
   }
 }
+
+@mixin transform( $t... ) {
+    -webkit-transform: $t;
+    -moz-transform: $t;
+    -ms-transform: $t;
+    -o-transform: $t;
+    transform: $t;
+}
+
+@mixin center-hor( $offset: 0 ) {
+  left: 50%;
+  @include transform( translate( -50% ) );
+
+  @if( $offset != 0 ) {
+    margin-left: $offset;
+  }
+}
+
+@mixin center-vrt( $offset: 0 ) {
+  top: 50%;
+  @include transform( translate( 0, -50% ) );
+
+  @if( $offset != 0 ) {
+    margin-top: $offset;
+  }
+}
+
+@mixin center( $offset-x: 0, $offset-y: 0 ) {
+  top: 50%;
+  left: 50%;
+  @include transform( translate( -50%, -50% ) );
+
+  @if( $offset-x != 0 ) {
+    margin-left: $offset-x;
+  }
+
+  @if( $offset-y != 0 ) {
+    margin-top: $offset-y;
+  }
+}
