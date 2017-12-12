@@ -31,8 +31,8 @@ Returned value:
 
 ### destroy
 
-This method is supposed to clear any hold resources, remove all listeners and
-disconnect from the network. After using this method you won't be able to use
+This method clears any held resources, removes all listeners and
+disconnects from the network. After using this method you won't be able to use
 the destroyed SDK's instance.
 
 ```js
@@ -47,21 +47,21 @@ customerSDK.disconnect()
 
 ### getChatHistory
 
-Using this method makes loading more history events really simple. You need to
+This method facilitates loading more history events. You need to
 get access to the `history` object for certain chat by calling this method. The
-returned `history` object has only one method, `next`, which gives you promise
+returned `history` object has only one method, `next`, which gives you a promise
 of `{ done, value }` pair.
 
 * `done` - indicates if there is anything more to load
 * `value` - it's an array of loaded events
 
 You can keep calling `history.next()` multiple times to load more and more
-history events (useful for an infinite scroll feature). Keep in mind, though,
-that you generally shouldn'y call `next` while the history is being loaded - we
-queue those requests so the previous must resolve before we proceed with the
+history events (useful for infinite scroll feature). Keep in mind, though,
+that you generally shouldn't call `next` while the history is being loaded - we
+queue those requests so the previous one must resolve before we proceed with the
 next one.
 
-Such structure as our `history` object is called an async iterator.
+Such structure like our `history` object is called an **async iterator**.
 
 ```js
 let wholeChatHistoryLoaded = false
@@ -122,7 +122,7 @@ Returned value:
 ### getChatThreads
 
 In most cases you do not need to use this method directly. If you want to load
-more events consider using [`getChatHistory`](#getchathistory).
+more events, consider using [`getChatHistory`](#getchathistory).
 
 ```js
 const threads = ["OS0C0W0Z1B", "OS0I0M0J0G", "OT01080705", "OT0E02082U", "OT0E08040G"]
@@ -156,7 +156,7 @@ Returned value:
 ### getChatThreadsSummary
 
 In most cases you do not need to use this method directly. If you want to load
-more events consider using [`getChatHistory`](#getchathistory).
+more events, consider using [`getChatHistory`](#getchathistory).
 
 ```js
 customerSDK
@@ -194,11 +194,11 @@ Returned value:
 
 ### off
 
-Used to unsubscribe from emitted events which are described [here](#events).
+This method unsubscribes from emitted events which are described [here](#events).
 
 ### on
 
-Used to subscribe to emitted events which are described [here](#events).
+This method subscribes to emitted events which are described [here](#events).
 
 ### sendEvent
 
