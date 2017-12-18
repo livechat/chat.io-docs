@@ -6,6 +6,7 @@
 
 ### Added
 - New method `multicast`
+- `in_trial` to `license` object in `login` response
 
 ### Changed
 - Push message `incoming_broadcast` changed to `incoming_multicast`
