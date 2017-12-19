@@ -5,12 +5,12 @@ weight: 20
 
 ## Introduction
 
-chat.io for iOS allows you to integrate [chat.io](https://www.chat.io) Chat Window into your iOS app.
+chat.io for allows you to integrate [chat.io](https://chat.io) into your iOS app.
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](#carthage)
-[![Version](https://img.shields.io/cocoapods/v/LiveChat.svg?style=flat)](http://cocoapods.org/pods/LiveChat)
-[![License](https://img.shields.io/cocoapods/l/LiveChat.svg?style=flat)](http://cocoapods.org/pods/LiveChat)
-[![Platform](https://img.shields.io/cocoapods/p/LiveChat.svg?style=flat)](http://cocoapods.org/pods/LiveChat)
+[![Version](https://img.shields.io/cocoapods/v/chatio.svg?style=flat)](http://cocoapods.org/pods/chatio)
+[![License](https://img.shields.io/cocoapods/l/chatio.svg?style=flat)](http://cocoapods.org/pods/chatio)
+[![Platform](https://img.shields.io/cocoapods/p/chatio.svg?style=flat)](http://cocoapods.org/pods/chatio)
 
 ## Requirements
 
@@ -19,52 +19,42 @@ chat.io for iOS allows you to integrate [chat.io](https://www.chat.io) Chat Wind
 
 ## Installation
 
-### Carthage
-
-If you use [Carthage](https://github.com/Carthage/Carthage) to manage your dependencies, simply add the library to your `Cartfile`.
-
-```
-github "livechat/chat-window-ios" ~> 2.0
-```
-
-Make sure you have added `LiveChat.framework` to the "_Linked Frameworks and Libraries_" section of your target, and have include it in your Carthage framework copying build phase.
-
 ### CocoaPods
 
-If you use [CocoaPods](http://cocoapods.org) to manage your dependencies, simply add the library to your `Podfile`.
+If you use [CocoaPods](http://cocoapods.org) to manage your dependencies, simply add chatio to your `Podfile`.
 
 ```
-pod 'LiveChat', '~> 2.0'
+pod 'chatio', '~> 2.0.7'
 ```
 
 ### Manual Installation
 
-You can integrate chat.io into your project manually without using a dependency manager.
+You can integrate iOS chat widget into your project manually without using a dependency manager. 
 
 #### Swift
 
-Just drag all files from the `LiveChat/Classes` directory into your project.
+Just drag all files from the `Sources` directory into your project.
 
 #### Objective-C
 
-Drag all files from the `LiveChat/Classes` directory into your project. When adding first `*.swift` file to Objective-C project, Xcode will ask you to create a Bridging Header. It is not necessary for LiveChat to work, so you can decline unless you plan to call Swift code from Objective-C. More information about bridging headers and Swift and Objective-C interoperability can be found [here](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html). You need to put following import statement: `#import "<Your Project Name>-Swift.h"` at the top of your .m file.
+Drag all files from the `Sources` directory into your project. When adding first `*.swift` file to Objective-C project, Xcode will ask you to create a Bridging Header. It is not necessary for chat widget to work, so you can decline unless you plan to call Swift code from Objective-C. More information about bridging headers and Swift and Objective-C interoperability can be found [here](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html). You need to put following import statement: `#import "<Your Project Name>-Swift.h"` at the top of your .m file.
 
-Also, for Objective-C projects, you need to set the **Embedded Content Contains Swift Code** flag in your project to `Yes` (found under **Build Options** in the **Build Settings** tab).
+Also, for Objective-C projects, you need to set the **Embedded Content Contains Swift Code** flag in your project to `Yes` (found under **Build Options** in the **Build Settings** tab). 
 
 ## Usage
 
 ### Initalization
 
 ```swift
-import LiveChat
+import chatio
 
-LiveChat.licenseId = "YOUR_CHATIO_LICENSE_ID"
+Chatio.licenseId = "YOUR_LICENSE_ID"
 ```
 
 ### Presenting Chat Widget
 
 ```swift
-LiveChat.presentChat()
+Chatio.presentChat()
 ```
 
 ### Setting Custom Variables
@@ -72,30 +62,30 @@ LiveChat.presentChat()
 You can provide customer name or email if they are known, so customer will not need to fill pre-chat survey:
 
 ```swift
-LiveChat.name = "iOS Widget Example"
-LiveChat.email = "example@chat.io"
+Chatio.name = "iOS Widget Example"
+Chatio.email = "example@livechatinc.com"
 ```
 
 If you want to associate some additional info with your customer, you can set Custom Variables:
 
 ```swift
-LiveChat.setVariable(withKey:"Variable name", value:"Some value")
+Chatio.setVariable(withKey:"Variable name", value:"Some value")
 ```
 
 ### Notifying user about agent response
 
-You can notifiy your user about agent response if chat was minimized by the user. To handle incoming messages your class must implement `LiveChatDelegate` protocol and set itself as `LiveChat.delegate`.
+You can notifiy your user about agent response if chat was minimized by the user. To handle incoming messages your class must implement `ChatioDelegate` protocol and set itself as `Chatio.delegate`.
 
 ```swift
-class YOUR_CLASS_NAME : LiveChatDelegate { // Your class need to implement LiveChatDelegate protocol
+class YOUR_CLASS_NAME : ChatioDelegate { // Your class need to implement ChatioDelegate protocol
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		LiveChat.licenseId = "YOUR_CHATIO_LICENSE_ID"
-		LiveChat.delegate = self // Set self as delegate
+		Chatio.licenseId = "YOUR_LICENSE_ID"
+		Chatio.delegate = self // Set self as delegate
 
 		return true
 	}
 
-	func received(message: LiveChatMessage) {
+	func received(message: ChatioMessage) {
 		print("Received message: \(message.text)")
 		// Handle message here
 	}
@@ -104,7 +94,7 @@ class YOUR_CLASS_NAME : LiveChatDelegate { // Your class need to implement LiveC
 
 ### Handling URL
 
-By default, all links in chat messages are opened in Safari browser. To change this behavior you can use the `LiveChatDelegate` to handle URL's yourself.
+By default, all links in chat messages are opened in Safari browser. To change this behavior you can use the `ChatioDelegate` to handle URL's yourself.
 
 ```swift
 func handle(URL: URL) {
@@ -123,8 +113,8 @@ Example apps can be found in the `Examples` folder. Samples for both Swift and O
 
 ## Getting help
 
-Any questions? <a href="#" onclick="LC_API.open_chat_window();return false;">Chat with us!</a>
+Any questions? [Chat with Us!](https://secure-lc.livechatinc.com/licence/8413431/open_chat.cgi)
 
 ## License
 
-chat.io for iOS is available under the MIT license. See the LICENSE file for more info.
+iOS chat widget is available under the MIT license. See the LICENSE file for more info.
