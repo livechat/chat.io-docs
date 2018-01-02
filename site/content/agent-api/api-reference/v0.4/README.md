@@ -649,7 +649,8 @@ Example response payloads
 		"id": "123",
 		"plan": "enterprise",
 		"expiration_timestamp": 1483433500,
-		"creation_timestamp": 1482433500
+		"creation_timestamp": 1482433500,
+		"in_trial": true
 	},
 	"my_profile": {
 		// "User > My profile" object
