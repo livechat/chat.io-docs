@@ -951,7 +951,9 @@ Request payload:
 
 | Request object | Required | Notes |
 |----------------|----------|---|
-| `initial_events` | No | Initial chat events array |
+| `chat.properties` | No | Initial chat properties |
+| `chat.thread.events` | No | Initial chat events array |
+| `chat.thread.properties` | No | Initial chat thread properties |
 
 Example request payload
 ```js
@@ -980,9 +982,6 @@ Example request payload
 					"type": "facebook"
 				},
 				...
-			},
-			"scopes": {
-				// "Scopes" object
 			}
 		}
 	}
