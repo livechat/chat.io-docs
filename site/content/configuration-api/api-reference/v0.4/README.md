@@ -372,10 +372,6 @@ We currently don't support chat.io group management. All agents belong to group
       * `chat_properties`
   * `chat_thread_properties_updated` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-thread-properties-updated)
-  * `agent_status_changed` - triggers when status of some agent is changed
-  * `agent_deleted` - triggers when some agent is deleted
-    * available filters for the action:
-      * `chat_properties`
 * `filters` possible filters:
   * `chat_properties.<namespace>.<name>.<filter_type>`
     * `<filter_type>` possible values (only one is allowed for single property):
@@ -388,10 +384,6 @@ We currently don't support chat.io group management. All agents belong to group
     * `<filter_type>` as above
   * `event_properties.<namespace>.<name>.<filter_type>`
     * `<filter_type>` as above
-  * `chat_member_ids` (only one of above is allowed)
-    * `agents` (`string[]`) - array of agent ids. If all agents from this array are in chat, then webhook will be triggered.
-    * `agents_any` (`string[]`) - array of agent ids. If any agent from this array is in chat, then webhook will be triggered.
-    * `agents_exclude` (`string[]`) - array of agent ids. If any agent from this array is in chat, then webhook will not be triggered.
 
 ##### Example request payload
 
@@ -524,20 +516,3 @@ We currently don't support chat.io group management. All agents belong to group
 * [`chat_scopes_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-scopes-updated)
 * [`chat_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-properties-updated)
 * [`chat_thread_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-thread-properties-updated)
-* `agent_status_changed` 
-  ```js
-  {
-      "agent_id":"5c9871d5372c824cbf22d860a707a578",
-      "status": "accepting chats"
-  }
-  ```
-    possible status values:
-    * `accepting chats`
-    * `not accepting chats`
-    * `offline`
-* `agent_deleted`
-  ```js
-  {
-      "agent_id": "5c9871d5372c824cbf22d860a707a578"
-  }
-  ```
