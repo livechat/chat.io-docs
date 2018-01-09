@@ -1,6 +1,6 @@
 var cfg = {
     apiUrl: "wss://api.chat.io/agent/v0.5/rtm/ws",
-    accesToken: "Bearer <TOKEN>"
+    accessToken: "Bearer <TOKEN>"
 }
 
 var ChatID = null
@@ -32,13 +32,13 @@ var generateID = function() {
 var onMessage = function(d) {
     var msg = JSON.parse(d.data)
 
-    //handle unsuccesed messages
+    //handle unsucceeded messages
     if (msg.success == false) {
         console.error(msg.payload.error)
         return 
     }
 
-    console.log("You have recieved message:", msg.action) 
+    console.log("You have received message:", msg.action)
 
     // handle protocol responses
     switch (msg.action) {
@@ -63,7 +63,7 @@ var onMessageStartChat = function(msg) {
 }
 
 var apiSendLogin = function() {
-    sendMessage("login", {token: cfg.accesToken})
+    sendMessage("login", {token: cfg.accessToken})
 }
 
 var apiSendStartChat = function() {
