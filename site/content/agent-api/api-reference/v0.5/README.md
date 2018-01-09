@@ -574,6 +574,7 @@ Does not create new thread, just adds event to last thread without extending thr
 * `image` properties (expect for `url`) are optional: `name`, `url`, `content_type`, `size`, `width` and `height`
 * `buttons` may contain 1-10 `button` objects
 
+
 * `template_id` describes how the event should be presented in an app
 * `elements.buttons.postback_id` describes the action sent via `send_rich_message_postback` method
 * multiple buttons (even from different elements) can contain the same `postback_id`; calling `send_rich_message_postback` with this id will add user to all these buttons at once.

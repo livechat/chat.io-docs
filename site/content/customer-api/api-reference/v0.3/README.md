@@ -736,8 +736,8 @@ Request payload:
 | Request object | Required | Notes |
 |----------------|----------|---|
 | `chat.scopes` | No | Chat scope to set, defaults to all agents |
-| `chat.events` | No | Initial chat events array |
 | `chat.properties` | No | Initial chat properties |
+| `chat.thread.events` | No | Initial chat events array |
 | `chat.thread.properties` | No | Initial chat thread properties |
 
 Example request payload
