@@ -1,9 +1,16 @@
 # Changelog
 
+## [v0.5 dev preview]
+
+### Added
+- New chat event type - `rich_message`
+- New method `send_rich_message_postback` and push `incoming_rich_message_postback`
+
+
 ## [v0.4] - 2017-12-04
 
 ### Added
-- New push message `incoming_multicast` 
+- New push `incoming_multicast` 
 
 ### Changed
 - `last_event_per_type` object is now map of objects with specific type of event, `thread_order` and `thread_id`
@@ -15,7 +22,7 @@
 ## [v0.3] - 2017-11-09
 
 ### Added
-- New message `get_chats_summary`
+- New method `get_chats_summary`
 - New reasons in `customer_disconnected` push
 - Short guide for RTM API and Web API to docs
 - Total events to `threads_summary` object

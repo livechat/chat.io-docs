@@ -742,8 +742,8 @@ Request payload:
 | Request object | Required | Notes |
 |----------------|----------|---|
 | `chat.scopes` | No | Chat scope to set, defaults to all agents |
-| `chat.events` | No | Initial chat events array |
 | `chat.properties` | No | Initial chat properties |
+| `chat.thread.events` | No | Initial chat events array |
 | `chat.thread.properties` | No | Initial chat thread properties |
 
 Example request payload
@@ -1084,10 +1084,13 @@ Server => Client methods are used for keeping application state up-to-date. They
 
 ## Incoming chat thread
 
-| Action | Payload |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_chat_thread` | ✓ | ✓ |
+
+| Object | Notes |
 |--------|------------------|
-| `incoming_chat_thread` |
-|  | `chat` |
+| `chat` | |
 
 Example response payload
 ```js
@@ -1112,11 +1115,14 @@ Example response payload
 
 ## Chat users updated
 
-| Action | Payload |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_users_updated` | ✓ | ✓ |
+
+| Object | Notes |
 |--------|------------------|
-| `chat_users_updated` |
-|  | `chat_id` |
-|  | `updated_users` |
+| `chat_id` | |
+| `updated_users` | |
 
 Example response payload
 ```js
@@ -1133,12 +1139,15 @@ Example response payload
 
 ## Incoming event
 
-| Action             | Payload     |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_event` | ✓ | ✓ |
+
+| Object | Notes |
 |--------------------|-------------|
-| `incoming_event`   |             |
-|                    | `chat_id`   |
-|                    | `thread_id` |
-|                    | `event`     |
+| `chat_id`   | |
+| `thread_id` | |
+| `event`     | |
 
 Example response payload
 ```js
@@ -1179,11 +1188,14 @@ Example response payload
 
 ## Incoming typing indicator
 
-| Action | Payload |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `incoming_typing_indicator` | ✓ | - |
+
+| Object | Notes |
 |--------|------------------|
-| `incoming_typing_indicator` |
-|  | `chat_id` |
-|  | `typing_indicator` |
+| `chat_id` | |
+| `typing_indicator` | |
 
 Example request payload
 ```js
@@ -1197,10 +1209,13 @@ Example request payload
 
 ## Customer disconnected
 
-| Action | Payload |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_disconnected` | ✓ | - |
+
+| Object | Notes |
 |--------|------------------|
-| `customer_disconnected` |
-|  | `reason` |
+| `reason` | |
 
 Example response payload
 ```js
@@ -1219,14 +1234,17 @@ Example response payload
 
 ## Thread closed
 
-| Action | Payload | Notes |
-|--------|------------------|----|
-| `thread_closed` | |
-|  | `chat_id` | |
-|  | `thread_id` | |
-|  | `user_id` | Missing if thread was closed by router |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `thread_closed` | ✓ | ✓ |
 
-Example response payload
+| Object | Notes |
+|--------|------------------|
+| `chat_id` | |
+| `thread_id` | |
+| `user_id` | Missing if thread was closed by router |
+
+Example payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1237,14 +1255,17 @@ Example response payload
 
 ## Chat scopes updated
 
-| Action | Payload |
-|--------|------------------|
-| `chat_scopes_updated` |
-|  | `chat_id` |
-|  | `scopes_added` |
-|  | `scopes_removed` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_scopes_updated` | ✓ | ✓ |
 
-Example response payload
+| Object | Notes |
+|--------|------------------|
+| `chat_id` | |
+| `scopes_added` | |
+| `scopes_removed` | |
+
+Example payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1259,13 +1280,16 @@ Example response payload
 
 ## Customer updated
 
-| Action | Payload |
-|--------|------------------|
-| `customer_updated` |
-|  | `chat_id` |
-|  | `customer` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_updated` | ✓ | - |
 
-Example response payload
+| Object | Notes |
+|--------|------------------|
+| `chat_id` | |
+| `customer` | |
+
+Example payload
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1277,11 +1301,14 @@ Example response payload
 
 ## Chat properties updated
 
-| Action | Payload |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_properties_updated` | ✓ | ✓ |
+
+| Object | Notes |
 |--------|------------------|
-| `chat_properties_updated` |
-|  | `chat_id` |
-|  | `properties` |
+| `chat_id` | |
+| `properties` | |
 
 Example payload
 ```js
@@ -1300,12 +1327,15 @@ Example payload
 
 ## Chat thread properties updated
 
-| Action | Payload |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_thread_properties_updated` | ✓ | ✓ |
+
+| Object | Notes |
 |--------|------------------|
-| `chat_thread_properties_updated` |
-|  | `chat_id` |
-|  | `thread_id` |
-|  | `properties` |
+| `chat_id` | |
+| `thread_id` | |
+| `properties` | |
 
 Example payload
 ```js
@@ -1324,14 +1354,17 @@ Example payload
 
 ## Last seen timestamp updated
 
-| Action | Payload |
-|--------|------------------|
-| `last_seen_timestamp_updated` |
-|  | `user_id` |
-|  | `chat_id` |
-|  | `timestamp` |
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `last_seen_timestamp_updated` | ✓ | ✓ |
 
-Example response payload
+| Object | Notes |
+|--------|------------------|
+| `user_id` | |
+| `chat_id` | |
+| `timestamp` | |
+
+Example payload
 ```js
 {
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
