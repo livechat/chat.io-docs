@@ -5,6 +5,23 @@ weight: 60
 
 # Changelog
 
+#### [v0.8.0] - 2018-01-05
+
+##### Added
+
+* chatsSummary objects (returned from `getChatsSummary` method and available in
+  payloads of `connected`/`connection_restored` events) got a new property -
+  `lastEventsPerType`, which is an object that maps event types to event objects
+* `updateChatProperties` method and corresponding `chat_properties_updated`
+  event
+* `updateChatThreadProperties` method and corresponding
+  `chat_thread_properties_updated` event
+
+##### Fixed
+
+* using multiple instances in React Native
+* using in React Native on Android
+
 #### [v0.7.0] - 2017-11-24
 
 ##### Changed

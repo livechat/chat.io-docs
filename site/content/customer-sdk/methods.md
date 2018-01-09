@@ -117,6 +117,7 @@ Returned value:
 |              |          | id                 | string   | Chat's id                                          |
 |              |          | users              | string[] | Users' ids                                         |
 |              |          | lastEvent          | object   | Event                                              |
+|              |          | lastEventsPerType  | object   | Map from event types to event objects              |
 |              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
 | totalChats   | number   |                    |          |                                                    |
 
@@ -371,52 +372,56 @@ Arguments:
 |               | scope  |          |                    |
 |               | events | events[] |                    |
 
-<!--### updateChatProperties
+### updateChatProperties
+
 ```js
 const properties = {
-    property_namespace: {
-        sample: 'property',
-    },
+  property_namespace: {
+    sample: 'property',
+  },
 }
-customerSDK.updateChatProperties("ON0X0R0L67", properties)
-    .then((response) => {
-        console.log(response)
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+customerSDK
+  .updateChatProperties('ON0X0R0L67', properties)
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
 ```
 
 Arguments:
 
-| arguments     | shape      | type     | description        |
-| ------------- | ---------- | -------- | ------------------ |
-| chat          |            | string   |                    |
-| properties    |            |          |                    |
+| arguments  | shape | type   | description |
+| ---------- | ----- | ------ | ----------- |
+| chat       |       | string |             |
+| properties |       |        |             |
 
 ### updateChatThreadProperties
+
 ```js
 const properties = {
-    property_namespace: {
-        sample: 'property',
-    },
+  property_namespace: {
+    sample: 'property',
+  },
 }
-customerSDK.updateChatThreadProperties("ON0X0R0L67", "OS0C0W0Z1B", properties)
-    .then((response) => {
-        console.log(response)
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+customerSDK
+  .updateChatThreadProperties('ON0X0R0L67', 'OS0C0W0Z1B', properties)
+  .then(response => {
+    console.log(response)
+  })
+  .catch(error => {
+    console.log(error)
+  })
 ```
 
 Arguments:
 
-| arguments     | shape      | type     | description        |
-| ------------- | ---------- | -------- | ------------------ |
-| chat          |            | string   |                    |
-| thread        |            | string   |                    |
-| properties    |            |          |                    |-->
+| arguments  | shape | type   | description |
+| ---------- | ----- | ------ | ----------- |
+| chat       |       | string |             |
+| thread     |       | string |             |
+| properties |       |        |             |
 
 ### updateCustomer
 

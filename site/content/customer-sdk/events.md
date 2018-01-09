@@ -27,6 +27,7 @@ Payload:
 |              |          | id                 |          | Chat's id                                          |
 |              |          | users              | string[] | Users' ids                                         |
 |              |          | lastEvent          | object   | Event                                              |
+|              |          | lastEventsPerType  | object   | Map from event types to event objects              |
 |              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
 | totalChats   | number   |                    |          |                                                    |
 
@@ -58,6 +59,7 @@ Payload:
 |              |          | id                 |          | Chat's id                                          |
 |              |          | users              | string[] | Users' ids                                         |
 |              |          | lastEvent          | object   | Event                                              |
+|              |          | lastEventsPerType  | object   | Map from event types to event objects              |
 |              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
 | totalChats   | number   |                    |          |                                                    |
 
@@ -89,39 +91,39 @@ Payload:
 | -------- | ------ | ----------- |
 | reason   | string | Optional    |
 
-<!--### chat_properties_updated
+### chat_properties_updated
 
 ```js
 customerSDK.on('chat_properties_updated', payload => {
-    console.log(payload.chat)
-    console.log(payload.properties)
+  console.log(payload.chat)
+  console.log(payload.properties)
 })
 ```
 
 Payload:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| chat       | string  | Chat's id                     |
-| properties | object  | Chat properties               |
+| shape      | type   | description     |
+| ---------- | ------ | --------------- |
+| chat       | string | Chat's id       |
+| properties | object | Chat properties |
 
 ### chat_thread_properties_updated
 
 ```js
 customerSDK.on('chat_thread_properties_updated', payload => {
-    console.log(payload.chat)
-    console.log(payload.thread)
-    console.log(payload.properties)
+  console.log(payload.chat)
+  console.log(payload.thread)
+  console.log(payload.properties)
 })
 ```
 
 Payload:
 
-| shape      | type    | description                   |
-| ---------- | ------- | ----------------------------- |
-| chat       | string  | Chat's id                     |
-| thread     | string  | Thread's id                   |
-| properties | object  | Thread properties             |-->
+| shape      | type   | description       |
+| ---------- | ------ | ----------------- |
+| chat       | string | Chat's id         |
+| thread     | string | Thread's id       |
+| properties | object | Thread properties |
 
 ### last_seen_timestamp_updated
 
