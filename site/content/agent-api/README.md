@@ -7,31 +7,36 @@ weight: 10
 
 ## Overview
 
-With the Agent API you can join the conversation as **an agent**. It has a different set of methods than the [Customer API](/docs/customer-api). The main reason to have separate APIs for both Customer and Agent is their specific use cases.
+Chat.io Agent API allows you to join a chat as **an agent**. It has a different set of methods than the [Customer API](/docs/customer-api). The main reason to have separate APIs for both Customer and Agent are their specific use cases.
 
 ## Use cases
 
-The basic use case for this tool is to post messages as an agent, browse archives or ban customers. This API is used at [chat.io Agent App](https://app.chat.io/).
+With chat.io Agent API you can do the following:
 
-You can use Agent API to build your very own Agent App, perform chats in the name of an agent or just interact with archives.
+- build a custom Agent App
+- interact with a chat as an agent (join a chat, post messages)
+- browse chat archives
+- ban customers
+
+This API is used in [chat.io Agent App](https://app.chat.io/).
 
 ## Important notes
 
-To use this tool you need to have basic knowledge about REST or websocket APIs, OAuth 2.0 protocol and your technology of choice. We've got examples ready in JavaScrip, Go and Pyhon.
+To use this tool you need to have basic knowledge of REST or websocket APIs, OAuth 2.0 protocol and your technology of choice. We've got examples ready in JavaScript, Go and Python.
 
 If you want to perform a chat from the customer perspective, you should use [Customer API](/docs/customer-api).
 
-Keep in mind this API is under heavy development. We introduce changes every month. If you want to stay updated, follow the changelog below.
+<div class="callout type-warning">This API is under <strong>heavy development</strong>. We introduce changes every month. If you want to stay updated, follow the changelog below.</div>
 
 # Getting started
 
 ## Prerequisites
 
-To start off follow these steps:
+To start off with chat.io Agent API, follow these steps:
 
 1. Sign up or sign in to the [Developers Console](https://console.chat.io/).
-2. Create a Backend app.
-3. Copy the Client Secret and Client ID
+2. Create a new app ("Backend" type).
+3. Copy the Client Secret and Client ID.
 
 <!--
 ## Working example
