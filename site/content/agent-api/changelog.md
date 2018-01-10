@@ -5,12 +5,12 @@
 ## [v0.4] - 2017-12-04
 
 ### Added
-- New method `multicast`
+- New method: `multicast`
 
 ### Changed
 - Push message `incoming_broadcast` changed to `incoming_multicast`
-- `last_event_per_type` object is now map of objects with specific type of event, `thread_order` and `thread_id`
-- `last_event_per_type` object contains last events from chat instead of thread
+- `last_event_per_type` object is now a map of objects with a specific type of event, `thread_order` and `thread_id`
+- `last_event_per_type` object contains the last events from a chat instead of a thread
 
 ### Removed
 - Method `send_broadcast`, use `multicast` instead
@@ -55,4 +55,4 @@
 
 ## [v0.1] - 2017-04-24
 
-:sparkles:
+- First release
