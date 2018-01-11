@@ -10,11 +10,11 @@ examples: `v0.1` `v0.2`
 
 ## Endpoints
 
-Our components have different endpoints for every version. For example here is what a URL with a version looks like for the customer API:
+Our components have different endpoints for every version. For example, here is what a URL with a version looks like for the Customer API:
 
 `api.chat.io/customer/v0.2/<req>`
 
-or if you prefer to point always to recent version (not recommended):
+If you prefer to always point to the most recent version of the API (not recommended), use this:
 
 `api.chat.io/customer/<req>`
 
