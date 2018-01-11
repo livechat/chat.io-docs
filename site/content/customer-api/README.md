@@ -7,7 +7,7 @@ weight: 10
 
 ## Overview
 
-Chat.io Customer API allows you to join ta chat as **a customer** (visitor). It has a different set of methods than the [Agent API](/docs/agent-api). The main reason to have separate APIs for both Customer and Agent are their specific use cases.
+Chat.io Customer API allows you to join a chat as **a customer** (visitor). It has a different set of methods than the [Agent API](/docs/agent-api). The main reason to have separate APIs for both Customer and Agent are their specific use cases.
 
 ## Use cases
 

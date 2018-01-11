@@ -7,28 +7,30 @@ weight: 10
 
 ## Overview
 
-Configuration API is a service for storing configuration of the license. 
+Chat.io Configuration API is a service for storing license configuration.
 
 ## Use cases
 
-The basic use case for Configuration API is to set up webhooks and create and manage bot agents.
+With chat.io Configuration API you can:
+
+- set up webhooks
+- create and manage bot agents
 
 ## Important notes
 
-To use this API you need to have basic knowledge about REST or websocket APIs, OAuth 2.0 protocol and your technology of choice.
+To use this tool you need to have basic knowledge of REST or websocket APIs, OAuth 2.0 protocol and your technology of choice.
 
 If you want to perform a chat from the agent perspective, you should use [Agent API](/docs/agent-api).
 
-Keep in mind this API is under heavy development. We introduce changes every month. If you want to stay updated, follow the changelog below.
-
+<div class="callout type-warning">This API is under <strong>heavy development</strong>. We introduce changes every month. If you want to stay updated, follow the changelog below.</div>
 # Getting started
 
 ## Prerequisites
 
-To start off follow these steps:
+To start off with chat.io Configuration API, follow these steps:
 
 1. Sign up or sign in to the [Developers Console](https://console.chat.io/).
-2. Create a Backend app.
+2. Create a new app ("Backend" type).
 3. Copy the Client Secret and Client ID.
 
 <!--
