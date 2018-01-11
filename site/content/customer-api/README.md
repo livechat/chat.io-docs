@@ -15,8 +15,6 @@ With chat.io Customer API you can do the following:
 
 - build a custom chat widget
 - interact with a chat as a customer (join a chat, post messages)
-- browse chat archives
-- ban customers
 
 This API is used in [chat.io chat widget](https://www.chat.io/live-chat/).
 
