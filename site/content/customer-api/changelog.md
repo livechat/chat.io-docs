@@ -57,4 +57,4 @@
 
 ## [v0.1] - 2017-04-24
 
-:sparkles:
+- First release
