@@ -65,13 +65,13 @@ Web API is similar to REST API. A client can send a **request message** that res
 
 ### Requests
 
-#### API endpoint
+**API endpoint**
 
 | HTTP method | Endpoint |
 |--------|----------------|
 | `POST` | `https://api.chat.io/customer/v0.4/action/<action>` |
 
-#### Required headers
+**Required headers**
 
 | Header | Value | Notes |
 | --- | --- | --- |
@@ -87,7 +87,7 @@ A client should send query string params in every request to Web API:
 
 ### Messages format
 
-#### Request
+**Request**
 ```js
 {
 	"payload": {
@@ -102,7 +102,7 @@ Real-Time Messaging API (RTM API) is based on a websocket-like connection. A cli
 
 ### Connection
 
-#### API endpoints
+**API endpoints**
 
 | Transport | Endpoint |
 |--------|----------------|
@@ -115,7 +115,7 @@ Client must send query string param when connecting to RTM API:
 | --- | --- | --- | --- |
 | `license_id` | Yes | Integer | LiveChat account ID |
 
-##### Example
+**Example**
 
 ```
 https://api.chat.io/customer/v0.4/rtm/ws?license_id=123456789
@@ -127,7 +127,7 @@ A client should ping the server each 15 seconds, otherwise the connection will b
 
 ### Messages format
 
-#### Request
+**Request**
 ```js
 {
 	"request_id": "<request_id>", // optional
@@ -138,7 +138,7 @@ A client should ping the server each 15 seconds, otherwise the connection will b
 }
 ```
 
-#### Response
+**Response**
 ```js
 {
 	"request_id": "<request_id>", // optional
@@ -553,7 +553,7 @@ An empty object designates no scope, which means that all agents can see it.
 | --- | :---: | :---: | :---: |
 | `login` | ✓ | - | - |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
@@ -566,7 +566,7 @@ An empty object designates no scope, which means that all agents can see it.
 | `customer.email` | No | |
 | `customer.fields` | No | map in `"key": "value"` format |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"token": "Bearer p-cjQcfhTqego5I48WeAPw",
@@ -580,7 +580,7 @@ An empty object designates no scope, which means that all agents can see it.
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"customer_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -594,14 +594,14 @@ An empty object designates no scope, which means that all agents can see it.
 | --- | :---: | :---: | :---: |
 | `get_chats_summary` | ✓ | - | - |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
 | `offset` | No | Default is 0, maximum is 100 |
 | `limit` | No | Default is 10, maximum is 25 |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"offset": 0,
@@ -609,7 +609,7 @@ An empty object designates no scope, which means that all agents can see it.
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"chats_summary": [{
@@ -653,14 +653,14 @@ An empty object designates no scope, which means that all agents can see it.
 | --- | :---: | :---: | :---: |
 | `get_chat_threads` | ✓ | - | - |
 
-### Request payload
+**Request payload**
 
 | Request object | Required |
 |----------------|----------|
 | `chat_id` | Yes |
 | `thread_ids` | Yes |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -668,7 +668,7 @@ An empty object designates no scope, which means that all agents can see it.
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"chat": {
@@ -695,7 +695,7 @@ An empty object designates no scope, which means that all agents can see it.
 | --- | :---: | :---: | :---: |
 | `get_chat_threads_summary` | ✓ | - | - |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
@@ -703,7 +703,7 @@ An empty object designates no scope, which means that all agents can see it.
 | `offset` | No | Default is 0 |
 | `limit` | No | Default is 25, maximum is 100 |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -712,7 +712,7 @@ An empty object designates no scope, which means that all agents can see it.
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"threads_summary": [{
@@ -739,7 +739,7 @@ An empty object designates no scope, which means that all agents can see it.
 
 Note: customer details must be sent to server before the chat can be started (see [`update customer`](#update-customer) method).
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|---|
@@ -748,7 +748,7 @@ Note: customer details must be sent to server before the chat can be started (se
 | `chat.thread.events` | No | Initial chat events array |
 | `chat.thread.properties` | No | Initial chat thread properties |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat": {
@@ -781,7 +781,7 @@ Note: customer details must be sent to server before the chat can be started (se
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"chat": {
@@ -810,14 +810,14 @@ Note: customer details must be sent to server before the chat can be started (se
 
 \* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes                    |
 |----------------|----------|--------------------------|
 | `chat_id`      | Yes      | Id of the chat that we want to send the message to |
 | `event`        | Yes      | Event object             |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -829,7 +829,7 @@ Note: customer details must be sent to server before the chat can be started (se
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"thread_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -847,7 +847,7 @@ Note: customer details must be sent to server before the chat can be started (se
 
 \* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
-### Sample request (with payload):
+**Sample request (with payload)**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
@@ -857,14 +857,14 @@ Note: customer details must be sent to server before the chat can be started (se
 
 * Content-Type header in form `Content-Type: multipart/form-data; boundary=<boundary>` is required.
 
-### Sample request (with payload)
+**Sample request (with payload)**
 ```
 	payload.chat_id=a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5
 	payload.custom_id=12345-bhdsa
 	payload.file=test.png
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"url": "https://cdn.chatio-static.com/api/file/chatio/att/345678/bhdbfhdbf87348374837483.png"
@@ -877,14 +877,14 @@ Note: customer details must be sent to server before the chat can be started (se
 | --- | :---: | :---: | :---: |
 | `send_sneak_peek` | ✓ | ✓ | - |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
 | `chat_id` | Yes | Id of the chat that we want to send the sneak peek to |
 | `sneak_peek_text` | Yes | Sneak peek text |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -900,13 +900,13 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `close_thread` | ✓ | ✓ | [`thread_closed`](#thread-closed) |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
 | `chat_id` | Yes ||
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -922,7 +922,7 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `update_chat_scopes` | ✓ | ✓ | [`chat_scopes_updated`](#chat-scopes-updated) |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
@@ -930,7 +930,7 @@ No response payload.
 | `add_scopes` | No | Chat scopes to add |
 | `remove_scopes` | No | Chat scopes to remove |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -953,7 +953,7 @@ No response payload.
 
 \* `customer_updated` will be sent as many times as there are active chats
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
@@ -964,7 +964,7 @@ No response payload.
 | `customer.monitoring.timezone` | No | |
 | `customer.fields` | No | Map in `"key": "value"` format|
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"customer": {
@@ -984,7 +984,7 @@ No response payload.
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"customer": {
@@ -999,14 +999,14 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `update_chat_properties` | ✓ | ✓ | [`chat_properties_updated`](#chat-properties-updated) |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
 | `chat_id`      | Yes      | Id of the chat that we want to set property for |
 | `properties`   | Yes      | Chat properties to set |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1028,7 +1028,7 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `update_chat_thread_properties` | ✓ | ✓ | [`chat_thread_properties_updated`](#chat-thread-properties-updated) |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes                                              |
 |----------------|----------|----------------------------------------------------|
@@ -1036,7 +1036,7 @@ No response payload.
 | `thread_id`    | Yes      | Id of the thread that we want to set property for  |
 | `properties  ` | Yes      | Chat properties to set                             |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1059,21 +1059,21 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `update_last_seen_timestamp` | ✓ | - | [`last_seen_timestamp_updated`](#last-seen-timestamp-updated) |
 
-### Request payload
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
 | `timestamp` | No | |
 
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"timestamp": 123456789
 }
 ```
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"timestamp": 123456789
@@ -1094,7 +1094,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 |--------|------------------|
 | `chat` | |
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"chat": {
@@ -1126,7 +1126,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `chat_id` | |
 | `updated_users` | |
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"chat_id": "88888898-f88f-4321-1234-123123",
@@ -1151,7 +1151,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `thread_id` | |
 | `event`     | |
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"chat_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0a",
@@ -1168,7 +1168,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `incoming_multicast` | ✓ | - |
 
-Event payload:
+**Event payload**
 
 | Object         | Notes    |
 |----------------|----------|
@@ -1176,7 +1176,7 @@ Event payload:
 | `content`       |          |
 
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"author_id": "jack@gmail.com",
@@ -1199,7 +1199,7 @@ Event payload:
 | `chat_id` | |
 | `typing_indicator` | |
 
-### Sample request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1219,7 +1219,7 @@ Event payload:
 |--------|------------------|
 | `reason` | |
 
-### Sample response payload
+**Sample response payload**
 ```js
 {
 	"reason": "customer_banned"
@@ -1246,7 +1246,7 @@ Event payload:
 | `thread_id` | |
 | `user_id` | Missing if thread was closed by router |
 
-### Sample payload
+**Sample payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1267,7 +1267,7 @@ Event payload:
 | `scopes_added` | |
 | `scopes_removed` | |
 
-### Sample payload
+**Sample payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1291,7 +1291,7 @@ Event payload:
 | `chat_id` | |
 | `customer` | |
 
-### Sample payload
+**Sample payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1312,7 +1312,7 @@ Event payload:
 | `chat_id` | |
 | `properties` | |
 
-### Sample payload
+**Sample payload**
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1339,7 +1339,7 @@ Event payload:
 | `thread_id` | |
 | `properties` | |
 
-### Sample payload
+**Sample payload**
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1366,7 +1366,7 @@ Event payload:
 | `chat_id` | |
 | `timestamp` | |
 
-### Sample payload
+**Sample payload**
 ```js
 {
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
