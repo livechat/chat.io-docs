@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.5 dev preview]
+## [v0.5]
 
 ### Added
 - New chat event type - `rich_message`
@@ -57,4 +57,4 @@
 
 ## [v0.1] - 2017-04-24
 
-- First release
+:sparkles:
