@@ -652,7 +652,8 @@ It returns current agent's initial state.
 		"id": "123",
 		"plan": "enterprise",
 		"expiration_timestamp": 1483433500,
-		"creation_timestamp": 1482433500
+		"creation_timestamp": 1482433500,
+		"in_trial": true
 	},
 	"my_profile": {
 		// "User > My profile" object
@@ -953,7 +954,9 @@ Starts a chat.
 
 | Request object | Required | Notes |
 |----------------|----------|---|
-| `initial_events` | No | Initial chat events array |
+| `chat.properties` | No | Initial chat properties |
+| `chat.thread.events` | No | Initial chat events array |	
+| `chat.thread.properties` | No | Initial chat thread properties |
 
 **Sample request payload**
 ```js
@@ -982,9 +985,6 @@ Starts a chat.
 					"type": "facebook"
 				},
 				...
-			},
-			"scopes": {
-				// "Scopes" object
 			}
 		}
 	}
@@ -1564,13 +1564,13 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `incoming_chat_thread` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `thread`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat": {
@@ -1597,13 +1597,13 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `chat_users_updated` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `updated_users`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1630,14 +1630,14 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `incoming_event` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `chat_id`       |          |
 | `event`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "85f3bfc9-06c1-434e-958b-2a5239b07de8",
@@ -1653,7 +1653,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `incoming_multicast` | ✓ | - |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
@@ -1661,7 +1661,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `content`       |          |
 
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"author_id": "jack@gmail.com",
@@ -1679,14 +1679,14 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `incoming_typing_indicator` | ✓ | - |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `chat_id`       |          |
 | `typing_indicator`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "85f3bfc9-06c1-434e-958b-2a5239b07de8",
@@ -1702,14 +1702,14 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `incoming_sneak_peek` | ✓ | - |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `chat_id`       |          |
 | `sneak_peek`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "85f3bfc9-06c1-434e-958b-2a5239b07de8",
@@ -1725,14 +1725,14 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `customer_banned` | ✓ | - |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `customer_id`       |          |
 | `ban.days`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"customer_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
@@ -1748,7 +1748,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `thread_closed` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
@@ -1756,7 +1756,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `thread_id`       |          |
 | `user_id`       | Missing if thread was closed by router |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1771,7 +1771,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `chat_scopes_updated` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
@@ -1779,7 +1779,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `scopes_added`       |          |
 | `scopes_removed`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1798,14 +1798,14 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `customer_updated` | ✓ | - |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `chat_id`       |          |
 | `customer`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
@@ -1821,14 +1821,14 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `agent_updated` | ✓ | - |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `agent_id`       |          |
 | `routing_status`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"agent_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
@@ -1842,13 +1842,13 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `agent_disconnected` | ✓ | - |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `reason`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"reason": "access_token_revoked"
@@ -1867,14 +1867,14 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `chat_properties_updated` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
 | `chat_id`       |          |
 | `properties`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1898,7 +1898,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `chat_thread_properties_updated` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
@@ -1906,7 +1906,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `thread_id`       |          |
 | `properties`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"chat_id": "123-123-123-123",
@@ -1931,7 +1931,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | --- | :---: | :---: |
 | `last_seen_timestamp_updated` | ✓ | ✓ |
 
-#### Push payload
+**Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
@@ -1939,7 +1939,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `chat_id`       |          |
 | `timestamp`       |          |
 
-**Sample response payload**
+**Sample push payload**
 ```js
 {
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
