@@ -1157,7 +1157,7 @@ No response payload.
 
 \* `incoming_rich_message_postback` will be sent only for active threads.
 
-Request payload:
+**Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|---|
@@ -1167,7 +1167,7 @@ Request payload:
 | `postback.id` | Yes | Postback name of the button |
 | `postback.toggled` | Yes | Postback toggled true/false |
 
-Example request payload
+**Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
