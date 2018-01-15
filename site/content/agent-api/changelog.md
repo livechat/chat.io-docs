@@ -1,6 +1,6 @@
 # Changelog
 
-## [v0.5 dev preview]
+## [v0.5] - 2018-01-12
 
 ### Added
 - New chat event type - `rich_message`
