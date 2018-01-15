@@ -1145,7 +1145,7 @@ Example response payload
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `send_rich_message_postback` | ✓ | ✓ | [`incoming_rich_message_postback`*](#incoming-rich-message-postback) |
+| `send_rich_message_postback` | ✓ | ✓ | [`incoming_rich_message_postback`](#incoming-rich-message-postback)* |
 
 \* `incoming_rich_message_postback` will be sent only for active threads.
 
