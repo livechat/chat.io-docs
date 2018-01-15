@@ -70,6 +70,8 @@ This documentation describes version **v0.4** of agent-api.
 
 <div class="callout type-info">Throughout the text we will use the term <strong>"client"</strong> to describe a service (an application, a script, an integration, etc.) which uses chat.io Agent API.</div>
 
+<div class="callout type-info">Throughout the text we will use the term <strong>"client"</strong> to describe a service (an application, a script, an integration, etc.) which uses chat.io Agent API.</div>
+
 ## Web API
 
 Web API is similar to REST API. A client can send a **request message** that results in getting a **response message**.
