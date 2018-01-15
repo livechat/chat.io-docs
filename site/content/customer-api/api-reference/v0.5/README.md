@@ -913,7 +913,7 @@ Example response payload
 | --- | :---: | :---: | :---: |
 | `send_rich_message_postback` | ✓ | ✓ | [`incoming_rich_message_postback`*](#incoming-rich-message-postback) |
 
-* `incoming_rich_message_postback` will be sent only for active threads.
+\* `incoming_rich_message_postback` will be sent only for active threads.
 
 Request payload:
 
