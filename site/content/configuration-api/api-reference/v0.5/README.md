@@ -5,7 +5,7 @@ up here different types of features such as properties or webhooks.
 
 ### URL
 
-Configuration API is available under following URL
+Configuration API is available under URL
 `api.chat.io/configuration/<version>/{endpoint}`.
 
 ### Versioning
@@ -20,7 +20,7 @@ Authentication is done via `Authorization` header. In each request you should
 add `Authorization` header with Bearer token.
 
 ```
-curl -v api.chat.io/configuration/v0.2/agents/get_bot_agent_details -H "Authorization: Bearer fra-7XNqYbjTS4ux1uSdp1ig8w" -X POST -d '{"bot_agent_id":"9a1829e224aea210da3a3f46a7074e28"}'
+curl -v api.chat.io/configuration/v0.5/agents/get_bot_agent_details -H "Authorization: Bearer fra-7XNqYbjTS4ux1uSdp1ig8w" -X POST -d '{"bot_agent_id":"9a1829e224aea210da3a3f46a7074e28"}'
 ```
 
 ### Propagation delay
@@ -339,52 +339,63 @@ We currently don't support chat.io group management. All agents belong to group
 
 * `action` possible values:
   * `incoming_chat_thread` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#incoming-chat-thread)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-chat-thread)
+    available filters for the action:
       * `chat_properties`
       * `thread_properties`
   * `chat_users_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-users-updated)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-users-updated)
+    available filters for the action:
       * `chat_properties`
   * `incoming_event` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#incoming-event)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-event)
+    available filters for the action:
+      * `chat_properties`
+      * `event_properties`
+  * `rich_message_postback` - triggers on action
+    [link to change](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-rich-message-postback)
+    available filters for the action:
       * `chat_properties`
       * `event_properties`
   * `last_seen_timestamp_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#last-seen-timestamp-updated)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#last-seen-timestamp-updated)
+    available filters for the action:
       * `chat_properties`
   * `thread_closed` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#thread-closed)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#thread-closed)
+    available filters for the action:
       * `chat_properties`
       * `thread_properties`
   * `chat_scopes_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-scopes-updated)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-scopes-updated)
+    available filters for the action:
       * `chat_properties`
   * `chat_properties_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-properties-updated)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-properties-updated)
+    available filters for the action:
       * `chat_properties`
   * `chat_thread_properties_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-thread-properties-updated)
-    * available filters for the action:
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-thread-properties-updated)
+  * `agent_status_changed` - triggers when status of some agent is changed
+  * `agent_deleted` - triggers when some agent is deleted
+    available filters for the action:
       * `chat_properties`
 * `filters` possible filters:
   * `chat_properties.<namespace>.<name>.<filter_type>`
-    * `<filter_type>` possible values (only one is allowed for single property):
+    `<filter_type>` possible values (only one is allowed for single property):
       * `exists` (`bool`)
       * `values` (`type[]` - array with specific type for property: `string`,
         `int` or `bool`)
       * `exclude_values` (`type[]` - array with specific type for property:
         `string`, `int` or `bool`)
   * `thread_properties.<namespace>.<name>.<filter_type>`
-    * `<filter_type>` as above
+    `<filter_type>` as above
   * `event_properties.<namespace>.<name>.<filter_type>`
-    * `<filter_type>` as above
+    `<filter_type>` as above
+  * `chat_member_ids` (only one of above is allowed)
+      * `agents` (`string[]`) - array of agent ids. If all agents from this array are in chat, then webhook will be triggered.
+      * `agents_any` (`string[]`) - array of agent ids. If any agent from this array is in chat, then webhook will be triggered.
+      * `agents_exclude` (`string[]`) - array of agent ids. If any agent from this array is in chat, then webhook will not be triggered.
 
 ##### Example request payload
 
@@ -406,6 +417,9 @@ We currently don't support chat.io group management. All agents belong to group
           "exists": true
         }
       }
+    },
+    "chat_member_ids": {
+      "agents": ["johndoe@mail.com"]
     }
   }
 }
@@ -466,9 +480,11 @@ We currently don't support chat.io group management. All agents belong to group
 
 #### Unregister webhook
 
-**Endpoint**: `webhooks/unregister_webhook` | Request object | Type | Required |
-Notes | |----------------|------|----------|-------| | `webhook_id` | `string` |
-Yes | Webhook ID |
+**Endpoint**: `webhooks/unregister_webhook`
+
+| Request object | Type     | Required | Notes      |
+| -------------- | -------- | -------- | ---------- |
+| `webhook_id`   | `string` | Yes      | Webhook ID |
 
 ##### Example request payload
 
@@ -504,11 +520,28 @@ Yes | Webhook ID |
 
 ### Payload for actions
 
-* [`incoming_chat_thread`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#incoming-chat-thread)
-* [`chat_users_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-users-updated)
-* [`incoming_event`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#incoming-event)
-* [`last_seen_timestamp_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#last-seen-timestamp-updated)
-* [`thread_closed`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#thread-closed)
-* [`chat_scopes_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-scopes-updated)
-* [`chat_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-properties-updated)
-* [`chat_thread_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.2/#chat-thread-properties-updated)
+* [`incoming_chat_thread`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-chat-thread)
+* [`chat_users_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-users-updated)
+* [`incoming_event`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-event)
+* [`last_seen_timestamp_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#last-seen-timestamp-updated)
+* [`thread_closed`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#thread-closed)
+* [`chat_scopes_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-scopes-updated)
+* [`chat_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-properties-updated)
+* [`chat_thread_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-thread-properties-updated)
+* `agent_status_changed` 
+  ```js
+  {
+      "agent_id":"5c9871d5372c824cbf22d860a707a578",
+      "status": "accepting chats"
+  }
+  ```
+    possible status values:
+    * `accepting chats`
+    * `not accepting chats`
+    * `offline`
+* `agent_deleted`
+  ```js
+  {
+      "agent_id": "5c9871d5372c824cbf22d860a707a578"
+  }
+  ```

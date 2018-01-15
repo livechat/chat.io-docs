@@ -10,8 +10,7 @@ Configuration API is available under URL
 
 ### Versioning
 
-There are three available versions: `v0.2`, `v0.3`, `v0.4`. They work the same but are
-created for plarform api versioning consistency. If you want use latest version
+There are serveral available versions, for example: `v0.3`, `v0.4`. If you want use latest version
 you should use `api.chat.io/configuration/{endpoint}` URL, but it is not
 recommended.
 
@@ -341,47 +340,47 @@ We currently don't support chat.io group management. All agents belong to group
 * `action` possible values:
   * `incoming_chat_thread` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#incoming-chat-thread)
-    * available filters for the action:
+    available filters for the action:
       * `chat_properties`
       * `thread_properties`
   * `chat_users_updated` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-users-updated)
-    * available filters for the action:
+    available filters for the action:
       * `chat_properties`
   * `incoming_event` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#incoming-event)
-    * available filters for the action:
+    available filters for the action:
       * `chat_properties`
       * `event_properties`
   * `last_seen_timestamp_updated` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#last-seen-timestamp-updated)
-    * available filters for the action:
+    available filters for the action:
       * `chat_properties`
   * `thread_closed` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#thread-closed)
-    * available filters for the action:
+    available filters for the action:
       * `chat_properties`
       * `thread_properties`
   * `chat_scopes_updated` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-scopes-updated)
-    * available filters for the action:
+    available filters for the action:
       * `chat_properties`
   * `chat_properties_updated` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-properties-updated)
-    * available filters for the action:
+    available filters for the action:
       * `chat_properties`
   * `chat_thread_properties_updated` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.4/#chat-thread-properties-updated)
 * `filters` possible filters:
   * `chat_properties.<namespace>.<name>.<filter_type>`
-    * `<filter_type>` possible values (only one is allowed for single property):
+    `<filter_type>` possible values (only one is allowed for single property):
       * `exists` (`bool`)
       * `values` (`type[]` - array with specific type for property: `string`,
         `int` or `bool`)
       * `exclude_values` (`type[]` - array with specific type for property:
         `string`, `int` or `bool`)
   * `thread_properties.<namespace>.<name>.<filter_type>`
-    * `<filter_type>` as above
+    `<filter_type>` as above
   * `event_properties.<namespace>.<name>.<filter_type>`
     * `<filter_type>` as above
 
