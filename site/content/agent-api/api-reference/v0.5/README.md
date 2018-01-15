@@ -697,7 +697,8 @@ Example response payloads
 		"id": "123",
 		"plan": "enterprise",
 		"expiration_timestamp": 1483433500,
-		"creation_timestamp": 1482433500
+		"creation_timestamp": 1482433500,
+		"in_trial": true
 	},
 	"my_profile": {
 		// "User > My profile" object
@@ -994,15 +995,15 @@ Starts a chat.
 | --- | :---: | :---: | :---: |
 | `start_chat` | ✓ | ✓ | [`incoming_chat_thread`](#incoming-chat-thread) |
 
-Request payload:
+#### Request payload
 
 | Request object | Required | Notes |
 |----------------|----------|---|
 | `chat.properties` | No | Initial chat properties |
-| `chat.thread.events` | No | Initial chat events array |
+| `chat.thread.events` | No | Initial chat events array |	
 | `chat.thread.properties` | No | Initial chat thread properties |
 
-Example request payload
+#### Sample request payload
 ```js
 {
 	"chat": {
@@ -1029,16 +1030,13 @@ Example request payload
 					"type": "facebook"
 				},
 				...
-			},
-			"scopes": {
-				// "Scopes" object
 			}
 		}
 	}
 }
 ```
 
-Example response payload
+#### Sample response payload
 ```js
 {
 	"chat": {
@@ -1107,7 +1105,7 @@ No response payload
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
+| `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`](#incoming-chat-thread)* |
 
 \* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
 
