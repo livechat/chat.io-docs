@@ -518,7 +518,7 @@ We currently don't support chat.io group management. All agents belong to group
 }
 ```
 
-### Payload for actions
+### Payload for actions derived from agent-api pushes:
 
 * [`incoming_chat_thread`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-chat-thread)
 * [`chat_users_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-users-updated)
@@ -528,20 +528,25 @@ We currently don't support chat.io group management. All agents belong to group
 * [`chat_scopes_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-scopes-updated)
 * [`chat_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-properties-updated)
 * [`chat_thread_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-thread-properties-updated)
-* `agent_status_changed` 
-  ```js
-  {
-      "agent_id":"5c9871d5372c824cbf22d860a707a578",
-      "status": "accepting chats"
-  }
-  ```
-    possible status values:
-    * `accepting chats`
-    * `not accepting chats`
-    * `offline`
-* `agent_deleted`
-  ```js
-  {
-      "agent_id": "5c9871d5372c824cbf22d860a707a578"
-  }
-  ```
+
+
+### Payload for another actions:
+
+#### `agent_status_changed`
+```js
+{
+    "agent_id":"5c9871d5372c824cbf22d860a707a578",
+    "status": "accepting chats"
+}
+```
+possible status values:
+* `accepting chats`
+* `not accepting chats`
+* `offline`
+
+#### `agent_deleted`
+```js
+{
+    "agent_id": "5c9871d5372c824cbf22d860a707a578"
+}
+```
