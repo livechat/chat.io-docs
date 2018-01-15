@@ -533,18 +533,22 @@ We currently don't support chat.io group management. All agents belong to group
 ### Payload for another actions:
 
 #### `agent_status_changed`
+
 ```js
 {
     "agent_id":"5c9871d5372c824cbf22d860a707a578",
     "status": "accepting chats"
 }
 ```
+
 possible status values:
-  * `accepting chats`
-  * `not accepting chats`
-  * `offline`
+
+* `accepting chats`
+* `not accepting chats`
+* `offline`
 
 #### `agent_deleted`
+
 ```js
 {
     "agent_id": "5c9871d5372c824cbf22d860a707a578"
