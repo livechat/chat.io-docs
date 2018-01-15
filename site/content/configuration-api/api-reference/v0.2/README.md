@@ -10,8 +10,7 @@ Configuration API is available under following URL
 
 ### Versioning
 
-There are three available versions: `v0.2`, `v0.3`, `v0.4`. They work the same but are
-created for plarform api versioning consistency. If you want use latest version
+There are serveral available versions, for example: `v0.3`, `v0.4`. If you want use latest version
 you should use `api.chat.io/configuration/{endpoint}` URL, but it is not
 recommended.
 
