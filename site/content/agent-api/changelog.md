@@ -1,10 +1,10 @@
 # Changelog
 
-## [v0.5 dev preview]
+## [v0.5] - 2018-01-12
 
 ### Added
 - New chat event type - `rich_message`
-- New method `send_rich_message_postback` and push `incoming_rich_message_postback`
+- New method: `send_rich_message_postback` and push: `incoming_rich_message_postback`
 
 ## [v0.4] - 2017-12-04
 
