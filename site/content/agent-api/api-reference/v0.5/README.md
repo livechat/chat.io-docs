@@ -66,9 +66,7 @@
 
 # Introduction
 
-This documentation describes version **v0.4** of agent-api.
-
-<div class="callout type-info">Throughout the text we will use the term <strong>"client"</strong> to describe a service (an application, a script, an integration, etc.) which uses chat.io Agent API.</div>
+This documentation describes version **v0.5** of agent-api.
 
 <div class="callout type-info">Throughout the text we will use the term <strong>"client"</strong> to describe a service (an application, a script, an integration, etc.) which uses chat.io Agent API.</div>
 
@@ -82,7 +80,7 @@ Web API is similar to REST API. A client can send a **request message** that res
 
 | HTTP method | Endpoint |
 |--------|----------------|
-| `POST` | `https://api.chat.io/agent/v0.4/action/<action>` |
+| `POST` | `https://api.chat.io/agent/v0.5/action/<action>` |
 
 #### Required headers
 
@@ -114,13 +112,13 @@ Real-Time Messaging API (RTM API) is based on a websocket-like connection. A cli
 
 | Transport | Endpoint |
 |--------|----------------|
-| `socket.io` | `https://api.chat.io/agent/v0.4/rtm/sio` |
-| `websocket` | `wss://api.chat.io/agent/v0.4/rtm/ws` |
+| `socket.io` | `https://api.chat.io/agent/v0.5/rtm/sio` |
+| `websocket` | `wss://api.chat.io/agent/v0.5/rtm/ws` |
 
 ##### Example
 
 ```
-https://api.chat.io/agent/v0.4/rtm/ws
+https://api.chat.io/agent/v0.5/rtm/ws
 ```
 
 #### Ping
