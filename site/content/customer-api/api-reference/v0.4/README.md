@@ -55,7 +55,7 @@
 
 # Introduction
 
-This documentation describes version *v0.4* of customer-api.
+This documentation describes version **v0.4** of customer-api.
 
 <div class="callout type-info">Throughout the text we will use the term <strong>"client"</strong> to describe a service (an application, a script, an integration, etc.) which uses chat.io Agent API.</div>
 
