@@ -1991,7 +1991,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | Object         | Notes    |
 |----------------|----------|
 | `chat_id`       |          |
-| `properties`       |          |
+| `properties`       |     this is not a full properties object, this push shows only the properties which have been recently updated     |
 
 **Sample push payload**
 ```js
@@ -2023,7 +2023,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 |----------------|----------|
 | `chat_id`       |          |
 | `thread_id`       |          |
-| `properties`       |          |
+| `properties`       |     this is not a full properties object, this push shows only the properties which have been recently updated    |
 
 **Sample push payload**
 ```js
