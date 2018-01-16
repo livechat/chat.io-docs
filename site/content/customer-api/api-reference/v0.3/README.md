@@ -54,11 +54,11 @@
 
 # Introduction
 
-This documentation describes version *v0.3* of customer-api.
+This documentation describes version **v0.3** of customer-api.
 
 ## Web API
 
-Web API is like REST API. Client can send *request message* that results in getting *response message*.
+Web API is like REST API. Client can send **request message** that results in getting **response message**.
 
 ### Requests
 
@@ -95,7 +95,7 @@ Request
 
 ## Real-Time Messaging API
 
-Real-Time Messaging API (RTM API) is based on connection like websocket. Client can send *request message* that results in getting *response message*. It can also get *push messages* anytime.
+Real-Time Messaging API (RTM API) is based on connection like websocket. Client can send **request message** that results in getting **response message**. It can also get **push messages** anytime.
 
 ### Connection
 
