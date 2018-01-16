@@ -1768,11 +1768,11 @@ Example response payload
 
 ## Chat properties updated
 
-| Action | Payload |
-|--------|------------------|
-| `chat_properties_updated` |
-|  | `chat_id` |
-|  | `properties` |
+| Action | Payload | Note |
+|--------|------------------|----|
+| `chat_properties_updated` | |
+|  | `chat_id` | |
+|  | `properties` | this is not a full properties object, this push shows only the properties which have been recently updated |
 
 Example response payload
 ```js
@@ -1794,12 +1794,12 @@ Example response payload
 
 ## Chat thread properties updated
 
-| Action | Payload |
-|--------|------------------|
-| `chat_thread_properties_updated` |
-|  | `chat_id` |
-|  | `thread_id` |
-|  | `properties` |
+| Action | Payload | Note |
+|--------|------------------|----|
+| `chat_thread_properties_updated` | |
+|  | `chat_id` | |
+|  | `thread_id` | |
+|  | `properties` | this is not a full properties object, this push shows only the properties which have been recently updated |
 
 Example response payload
 ```js
