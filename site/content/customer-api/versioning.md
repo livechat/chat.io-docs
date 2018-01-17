@@ -6,15 +6,15 @@ All components of this API have a single common version. This document describes
 
 `v<major>.<minor>`
 
-examples: `v0.1` `v0.2`
+examples: `v0.3` `v0.4`
 
 ## Endpoints
 
-Our components have different endpoints for every version. For example, here is what a URL with a version looks like for the Customer API:
+Our components have different endpoints for every version. For example here is what a URL with a version looks like for the customer API:
 
-`api.chat.io/customer/v0.2/<req>`
+`api.chat.io/customer/v0.4/<req>`
 
-If you prefer to always point to the most recent version of the API (not recommended), use this:
+or if you prefer to point always to recent version (not recommended):
 
 `api.chat.io/customer/<req>`
 

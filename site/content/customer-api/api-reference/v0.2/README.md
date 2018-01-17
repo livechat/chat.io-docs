@@ -51,6 +51,10 @@
 
 # Introduction
 
+<div class="callout type-warning">
+This version is no longer supported since January 11, 2018.
+</div>
+
 This documentation describes version **v0.2** of customer-api.
 
 ## Web API
