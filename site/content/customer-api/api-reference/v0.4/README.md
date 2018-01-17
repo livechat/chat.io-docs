@@ -1242,6 +1242,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `customer_banned` | Customer has been banned |
 | `too_many_connections` | Customer reached max number of connections |
 | `license_not_found` | License with specified ID doesn't exist |
+| `unsupported_version` | Connecting to unsupported version of Customer API |
 | `internal_error` | Internal error |
 
 ## Thread closed
