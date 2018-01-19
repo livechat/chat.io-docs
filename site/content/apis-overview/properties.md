@@ -22,7 +22,7 @@ In this example `routing` is a namespace, while `pinned` and `count` are propert
 ## Configuration
 
 Properties are configurable via [Configuration API](https://www.chat.io/docs/configuration-api/). They can be created whithin a license and they are groupped in namespaces, wchich help distinguish wchich property belong to who.
-If you create property namespace, this namespace will be named after your application id.
+Your namespace, will be named after your application id.
 
 There are several things that you can configure
 
@@ -56,48 +56,45 @@ Property allowed value set can be configured in 2 different ways:
 
 ## Example
 
-In this example we want to use properties to create basic chat rating. For this purpose we need property namespace with two properties: rating_score and rating_comment. Those properties should be writable by customer, and readable by agent within chat.
+In this example we want to use properties to create basic chat rating. For this purpose we need two properties: rating_score and rating_comment. Those properties should be writable by customer, and readable by agent within chat.
 
-First we need to create our namespace using Configuration API.
+First we need to create our properties configuration using Configuration API.
 
 ```
-curl -v https://api.chat.io/configuration/properties/create_namespace \
+curl -v https://api.chat.io/configuration/properties/create_properties \
     -H "Content-Type: application/json" \
     -H "Authorization Bearer c5e4f61e1a6c3b1521b541bc5c5a2ac5" \
     -X POST -d '
 {
-    "description": "this is my test namespace"
-    "properties" : {
-        "rating_score" : {
-            "type" : "int",
-            "locations" : {
-                "chat" : {
-                    "access" : {
-                        "agent" : {
-                            "read" : true,
-                            "write" : false
-                        },
-                        "customer" : {
-                            "read" : true,
-                            "write" : true
-                        }
+    "rating_score" : {
+        "type" : "int",
+        "locations" : {
+            "chat" : {
+                "access" : {
+                    "agent" : {
+                        "read" : true,
+                        "write" : false
+                    },
+                    "customer" : {
+                        "read" : true,
+                        "write" : true
                     }
                 }
             }
-        },
-        "rating_comment" : {
-            "type" : "string",
-            "locations" : {
-                "chat" : {
-                    "access" : {
-                        "agent" : {
-                            "read" : true,
-                            "write" : false
-                        },
-                        "customer" : {
-                            "read" : true,
-                            "write" : true
-                        }
+        }
+    },
+    "rating_comment" : {
+        "type" : "string",
+        "locations" : {
+            "chat" : {
+                "access" : {
+                    "agent" : {
+                        "read" : true,
+                        "write" : false
+                    },
+                    "customer" : {
+                        "read" : true,
+                        "write" : true
                     }
                 }
             }
@@ -106,13 +103,20 @@ curl -v https://api.chat.io/configuration/properties/create_namespace \
 }'
 ```
 
-If you already have property namespace you can create those properties with method `add_property`:
-
-```js
+Now you have properties `rating_score` and `rating_comment` in namespace named after your application id. If you don't know your application id you can check it with this request:
 
 ```
+curl https://accounts.labs.chat.io/info -H "Authorization: Bearer c5e4f61e1a6c3b1521b541bc5c5a2ac5"
+{
+    "access_token":"c5e4f61e1a6c3b1521b541bc5c5a2ac5",
+    "client_id":"58737b5829e65621a45d598aa6f2ed8e",
+    ...
+}
+```
 
-Now, you can set those properties whithin existing chat from customer perspective via method [update_chat_properties](https://www.chat.io/docs/customer-api/api-reference/#update-chat-properties)
+`client_id` is your application id.
+
+Now, you can set those properties whithin existing chat from customer perspective via agent/customer api method [update_chat_properties](https://www.chat.io/docs/customer-api/api-reference/#update-chat-properties)
 ```
 curl -v https://api.chat.io/customer/v0.5/action/update_chat_properties \
     -H "Content-Type: application/json" \
@@ -121,7 +125,7 @@ curl -v https://api.chat.io/customer/v0.5/action/update_chat_properties \
     {
         "chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
         "properties": {
-            "my_namespace": {
+            "58737b5829e65621a45d598aa6f2ed8e": {
                 "rating_score": 10,
                 "rating_comment": "This guy is a support hero, he helped me a lot."
             }
@@ -143,7 +147,7 @@ And they will appear from agent perpective either in chat object as return eleme
 				// "Thread" object          
 			}
             "properties": {
-                "my_namespace": {
+                "58737b5829e65621a45d598aa6f2ed8e": {
                     "rating_score": 10,
                     "rating_comment": "This guy is a support hero, he helped me a lot.",
                 }
@@ -162,9 +166,9 @@ And they will appear from agent perpective either in chat object as return eleme
 
  ```js
 {
-    "chat_id": "123-123-123-123",
+    "chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 	"properties": {
-		"my_namespace": {
+		"58737b5829e65621a45d598aa6f2ed8e": {
             "rating_score": 10,
             "rating_comment": "This guy is a support hero, he helped me a lot.",
         }
