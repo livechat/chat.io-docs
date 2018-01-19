@@ -48,6 +48,18 @@ Your application should save `customer_id` and `customer_key` for further use.
 
 3. To generate new `code` for existing customer having only `customer_id`, your application should send `customer_id` (possible only for integration `access_token` with `customers.manage--identity` scope)
 
+### Customer chat url
+
+It's possible to create customer direct chat url using `license_id`, `customer_id` and `customer_key`.
+
+**Example URL**
+```https://accounts.chat.io/customer?
+  license_id=1234&
+  customer_id=ae19bb31-803a-46f3-53ac-3b7d2564fe7e&
+  customer_key=77008b0ac8bdb43f056913d8a7cd20fc&
+  redirect_uri=https://chat.io/direct/1234"
+```
+
 ## Obtaining customer access token
 
 Once you have the `code` assigned to a specific customer, you need to exchange it for a `access_token`. The flow is almost identical as for the [Server-side apps](#server-side-apps). The only differences are the exact endpoint address and the lack of refresh token.
