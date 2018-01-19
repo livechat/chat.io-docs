@@ -53,7 +53,8 @@ Your application should save `customer_id` and `customer_key` for further use.
 It's possible to create customer direct chat url using `license_id`, `customer_id` and `customer_key`.
 
 **Example URL**
-```https://accounts.chat.io/customer?
+```
+https://accounts.chat.io/customer?
   license_id=1234&
   customer_id=ae19bb31-803a-46f3-53ac-3b7d2564fe7e&
   customer_key=77008b0ac8bdb43f056913d8a7cd20fc&
