@@ -50,7 +50,7 @@ You can configure access to properties within those locations. You can, for exam
 
 ### Property domain
 
-<div class=“callout type-info”>Property domain is a set of values that property can be set to.</div>
+<div class=“callout type-info”>Property domain is a set of values that property can be assigned to.</div>
 
 Property domain can be configured in 2 different ways:
 * by defining a set of values allowed in this property explicitly (for example `[1, 2, 3]`)
