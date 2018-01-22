@@ -147,11 +147,11 @@ And they will appear from the agent's perspective either in chat object as a ret
 			],
 			"thread": {
 				// "Thread" object          
-			}
+			},
             "properties": {
                 "58737b5829e65621a45d598aa6f2ed8e": {
                     "rating_score": 10,
-                    "rating_comment": "This guy is a support hero, he helped me a lot.",
+                    "rating_comment": "This guy is a support hero, he helped me a lot."
                 }
                 //other namespaces
             }
