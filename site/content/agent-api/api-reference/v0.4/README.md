@@ -198,7 +198,7 @@ sudo pip install websocket-client
 | `chats--my:read` | `get_archives`, `get_filtered_chats`, `get_chat_threads` | normal | Read access for the chats I belong to |
 | `chats.conversation--chat_scopes:write` | `join_chat`(joining by myself), `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties` | normal | Write access for conversation data of chats with chat scopes matching me |
 | `chats.conversation--my:write` | `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties` | normal | Write access for conversation data of chats I belong to |
-| `chats.meta--chat_scopes:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes`, `start_chat` | normal | Write access for meta data of chats with chat scopes matching me |
+| `chats.meta--chat_scopes:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats with chat scopes matching me |
 | `chats.meta--my:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats I belong to |
 | --- | --- | --- |
 | `customers.ban:write` | `ban_customer` | normal | Access for banning customers |
@@ -208,18 +208,17 @@ sudo pip install websocket-client
 | `agents--my:write` | `update_agent` | normal | Write access for my agent data |
 | `agents--all:write` | `update_agent` | administrator | Write access for all agents data |
 | --- | --- | --- |
-| `configurations.auto_chat_scopes:read` | `get_auto_chat_scopes_config` | administrator | Read access for auto chat scopes configuration |
-| `configurations.auto_chat_scopes:write` | `add_auto_chat_scopes`, `remove_auto_chat_scopes` | administrator | Write access for auto chat scopes configuration |
+| `auto_chat_scopes:read` | `get_auto_chat_scopes_config` | administrator | Read access for auto chat scopes configuration |
+| `auto_chat_scopes:write` | `add_auto_chat_scopes`, `remove_auto_chat_scopes` | administrator | Write access for auto chat scopes configuration |
 | --- | --- | --- |
-| `configurations.properties--my:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (my namespace) |
-| `configurations.properties--my:write` | - | administrator | Write access for chat/thread/events/... properties validator configuration (my namespace) |
-| `configurations.properties--all:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (all license) |
-| `configurations.properties--all:write` | - | administrator | Write access for chat/thread/events/... properties validator configuration (all license) |
+| `properties--my:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (my namespace) |
+| `properties--my:write` | - | administrator | Write access for chat/thread/events/... properties validator configuration (my namespace) |
+| `properties--all:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (all license) |
 | --- | --- | --- |
-| `configurations.webhooks--my:read` | - | administrator | Read access for webhooks configuration (my webhooks) |
-| `configurations.webhooks--my:write` | - | administrator | Write access for webhooks configuration |
-| `configurations.webhooks--all:read` | - | administrator | Read access for webhooks configuration (all license) |
-| `configurations.webhooks--all:write` | - | administrator | write access for webhooks configuration (all license, for deletion only) |
+| `webhooks--my:read` | - | administrator | Read access for webhooks configuration (my webhooks) |
+| `webhooks--my:write` | - | administrator | Write access for webhooks configuration |
+| `webhooks--all:read` | - | administrator | Read access for webhooks configuration (all license) |
+| `webhooks--all:write` | - | administrator | write access for webhooks configuration (all license, for deletion only) |
 
 
 
