@@ -21,10 +21,10 @@ In this example `routing` is a namespace, while `pinned` and `count` are propert
 
 ## Configuration
 
-Properties are configurable via [Configuration API](https://www.chat.io/docs/configuration-api/). They can be created whithin a license and they are groupped in namespaces, wchich help distinguish wchich property belong to who.
-Your namespace, will be named after your application id.
+Properties are configurable via [Configuration API](https://www.chat.io/docs/configuration-api/). They can be created whithin a license and they are grouped in namespaces, which help distinguish which property belongs to a given integration.
+Your namespace will be named after your application id.
 
-There are several things that you can configure
+There are several things that you can configure:
 
 ### Property types
 
@@ -37,26 +37,28 @@ There are three property types:
 
 #### Note about tokenized_string
 
-`tokenized_string` is string that is splited to tokens before indexing in our search engine. This can be usefull if you want to use that property as filter in methods like [get_archives](https://www.chat.io/docs/agent-api/api-reference/#get-archives).
+`tokenized_string` is string that is split to tokens before indexing in our search engine. This can be useful if you want to use that property as a filter in the methods like [get_archives](https://www.chat.io/docs/agent-api/api-reference/#get-archives).
 
 ### Property locations
 
-Properties can be set whithin three locations:
+Properties can be set within three locations:
 * chat
 * thread
 * event
 
-You can configure access to properties whithin those locations. You can for example create property that is visible for agents whithin chat and thread, and not visible within event. (for more see [Configuration API docs](https://www.chat.io/docs/configuration-api/api-reference/#properties))
+You can configure access to properties within those locations. You can, for example, create a property that is visible for agents within a chat and a thread, and not visible within an event. For more details, see [Configuration API docs](https://www.chat.io/docs/configuration-api/api-reference/#properties).
 
-### Property allowed value set
+### Property domain
 
-Property allowed value set can be configured in 2 different ways:
+<div class=“callout type-info”>Property domain is a set of values that property can be set to.</div>
+
+Property domain can be configured in 2 different ways:
 * by defining a set of values allowed in this property explicitly (for example `[1, 2, 3]`)
 * by defining a range, all values in this range are allowed in this property (for example range from `1` to `3`)
 
 ## Example
 
-In this example we want to use properties to create basic chat rating. For this purpose we need two properties: rating_score and rating_comment. Those properties should be writable by customer, and readable by agent within chat.
+In this example we want to use properties to create a basic chat rating. For this purpose we need two properties: rating_score and rating_comment. Those properties should be writable by customer, and readable by agent within a chat.
 
 First we need to create our properties configuration using Configuration API.
 
@@ -116,7 +118,7 @@ curl https://accounts.labs.chat.io/info -H "Authorization: Bearer c5e4f61e1a6c3b
 
 `client_id` is your application id.
 
-Now, you can set those properties whithin existing chat from customer perspective via agent/customer api method [update_chat_properties](https://www.chat.io/docs/customer-api/api-reference/#update-chat-properties)
+Now, you can set those properties within the existing chat from customer perspective via agent/customer api method [update_chat_properties](https://www.chat.io/docs/customer-api/api-reference/#update-chat-properties)
 ```
 curl -v https://api.chat.io/customer/v0.5/action/update_chat_properties \
     -H "Content-Type: application/json" \
@@ -133,7 +135,7 @@ curl -v https://api.chat.io/customer/v0.5/action/update_chat_properties \
     }'
 ```
 
-And they will appear from agent perpective either in chat object as return element (in example response from [get_archives](https://www.chat.io/docs/agent-api/api-reference/#get-archives) method)
+And they will appear from the agent's perspective either in chat object as a return element (in the sample response from [get_archives](https://www.chat.io/docs/agent-api/api-reference/#get-archives) method)
 
 ```js
 {
