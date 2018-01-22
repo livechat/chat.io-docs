@@ -692,7 +692,6 @@ Note: for more information about properties see [Properties Guide](https://www.c
       "from": 0,
       "to": 10
     }
-  }
     //...
   },
   "other_namespace": {
