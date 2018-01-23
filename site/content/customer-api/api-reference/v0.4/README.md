@@ -483,6 +483,9 @@ An empty object designates no scope, which means that all agents can see it.
 ```
 
 ## Properties
+
+<div class="callout type-info">This section describes properties object format only, to read more about properties click [here](https://www.chat.io/docs/apis-overview/#properties).</div>
+
 ```js
 {
 	"<property_namespace>": {
