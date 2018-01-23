@@ -42,6 +42,7 @@ There are three property types:
 ### Property locations
 
 Properties can be set within three locations:
+
 * chat
 * thread
 * event
@@ -53,6 +54,7 @@ You can configure access to properties within those locations. You can, for exam
 <div class=“callout type-info”>Property domain is a set of values that property can be assigned to.</div>
 
 Property domain can be configured in 2 different ways:
+
 * by defining a set of values allowed in this property explicitly (for example `[1, 2, 3]`)
 * by defining a range, all values in this range are allowed in this property (for example range from `1` to `3`)
 
