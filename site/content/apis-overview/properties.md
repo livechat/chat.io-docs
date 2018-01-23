@@ -67,7 +67,7 @@ First we need to create our properties configuration using Configuration API.
 ```
 curl -v https://api.chat.io/configuration/properties/create_properties \
     -H "Content-Type: application/json" \
-    -H "Authorization Bearer c5e4f61e1a6c3b1521b541bc5c5a2ac5" \
+    -H "Authorization: Bearer c5e4f61e1a6c3b1521b541bc5c5a2ac5" \
     -X POST -d '
 {
     "rating_score" : {
@@ -124,7 +124,7 @@ Now, you can set those properties within the existing chat from customer perspec
 ```
 curl -v https://api.chat.io/customer/v0.5/action/update_chat_properties \
     -H "Content-Type: application/json" \
-    -H "Authorization Bearer c5e4f61e1a6c3b1521b541bc5c5a2ac5" \
+    -H "Authorization: Bearer c5e4f61e1a6c3b1521b541bc5c5a2ac5" \
     -X POST -d ' \
     {
         "chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
