@@ -62,7 +62,7 @@ minutes. This delay will be removed in future.
 | `groups`                     | `object[]` | No       | groups the agent belongs to                                          |
 | `groups[].id`                | `uint`     | Yes      | group ID                                                             |
 | `groups[].priority`          | `string`   | Yes      | agent priority in group                                              |
-| `webhooks`                   | `object`   | Yes      | webhooks sent to the agent                                           |
+| `webhooks`                   | `object`   | No      | webhooks sent to the agent                                           |
 | `webhooks.url`               | `string`   | Yes      | destination URL for webhooks                                         |
 | `webhooks.secret_key`        | `string`   | Yes      | secret sent in webhooks to verify webhook source                     |
 | `webhooks.actions`           | `object[]` | Yes      | triggering actions                                                   |
