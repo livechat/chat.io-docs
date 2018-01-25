@@ -56,7 +56,7 @@ You can configure access to properties within those locations. You can, for exam
 Property domain can be configured in 2 different ways:
 
 * by defining a set of values allowed in this property explicitly (for example `[1, 2, 3]`)
-* by defining a range, all values in this range are allowed in this property (for example range from `1` to `3`)
+* by defining a range, all values in this range are allowed in this property, this setting works only for numeric types (for example range from `1` to `3`)
 
 ## Example
 
@@ -145,10 +145,10 @@ And they will appear from the agent's perspective either in chat object as a ret
 		"chat": {
 			"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 			"users": [
-				// array of "User" objects          
+				// array of "User" objects
 			],
 			"thread": {
-				// "Thread" object          
+				// "Thread" object
 			},
             "properties": {
                 "58737b5829e65621a45d598aa6f2ed8e": {
