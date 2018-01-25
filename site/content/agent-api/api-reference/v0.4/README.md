@@ -194,17 +194,16 @@ sudo pip install websocket-client
 | Scope | API methods | permission | Description |
 |-------|-------------|------------|-------------|
 | `chats--all:read` | `get_archives`, `get_filtered_chats`, `get_chat_threads`, `update_last_seen_timestamp` | administrator | Read access for all license chats |
-| `chats--chat_scopes:read` | `get_archives`, `get_filtered_chats`, `get_chat_threads` | normal | Read access for the chats with chat scopes matching me |
-| `chats--my:read` | `get_archives`, `get_filtered_chats`, `get_chat_threads` | normal | Read access for the chats I belong to |
-| `chats.conversation--chat_scopes:write` | `join_chat`(joining by myself), `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties` | normal | Write access for conversation data of chats with chat scopes matching me |
-| `chats.conversation--my:write` | `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties` | normal | Write access for conversation data of chats I belong to |
-| `chats.meta--chat_scopes:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats with chat scopes matching me |
+| `chats--my:read` | `get_filtered_chats`, `get_chat_threads`, `update_last_seen_timestamp` | normal | Read access for the chats I belong to |
+| `chats.conversation--all:write` | `join_chat`(joining by myself), `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties`, `send_rich_message_postback` | normal | Write access for conversation data of chats with chat scopes matching me |
+| `chats.conversation--my:write` | `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties`, `send_rich_message_postback` | normal | Write access for conversation data of chats I belong to |
+| `chats.meta--all:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats with chat scopes matching me |
 | `chats.meta--my:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats I belong to |
 | --- | --- | --- |
 | `customers.ban:write` | `ban_customer` | normal | Access for banning customers |
 | `customers.identity--manage` | - | administrator | Access for use a customer identity | 
 | --- | --- | --- |
-| `broadcast:write` | `multicast` | normal | Access for multicast data to agents or customers |
+| `multicast:write` | `multicast` | normal | Access for multicast data to agents or customers |
 | `agents--my:write` | `update_agent` | normal | Write access for my agent data |
 | `agents--all:write` | `update_agent` | administrator | Write access for all agents data |
 | --- | --- | --- |
