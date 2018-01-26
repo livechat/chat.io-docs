@@ -11,7 +11,6 @@
   * [JavaScript](#javascript)
   * [Go](#go)
   * [Python](#python)
-* [SSO scopes for resources](#sso-scopes-for-resources)
 * [Objects](#objects)
   * [Thread](#thread)
   * [User](#user)
@@ -185,35 +184,6 @@ Remember to install proper lib:
 ```
 sudo pip install websocket-client
 ```
-
-# SSO scopes for resources
-| Scope | API methods | permission | Description |
-|-------|-------------|------------|-------------|
-| `chats--all:read` | `get_archives`, `get_filtered_chats`, `get_chat_threads`, `update_last_seen_timestamp` | administrator | Read access for all license chats |
-| `chats--my:read` | `get_filtered_chats`, `get_chat_threads`, `update_last_seen_timestamp` | normal | Read access for the chats I belong to |
-| `chats.conversation--all:write` | `join_chat`(joining by myself), `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties`, `send_rich_message_postback` | normal | Write access for conversation data of chats with chat scopes matching me |
-| `chats.conversation--my:write` | `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties`, `send_rich_message_postback` | normal | Write access for conversation data of chats I belong to |
-| `chats.meta--all:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats with chat scopes matching me |
-| `chats.meta--my:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats I belong to |
-| --- | --- | --- |
-| `customers.ban:write` | `ban_customer` | normal | Access for banning customers |
-| `customers.identity--manage` | - | administrator | Access for use a customer identity | 
-| --- | --- | --- |
-| `multicast:write` | `multicast` | normal | Access for multicast data to agents or customers |
-| `agents--my:write` | `update_agent` | normal | Write access for my agent data |
-| `agents--all:write` | `update_agent` | administrator | Write access for all agents data |
-| --- | --- | --- |
-| `auto_chat_scopes:read` | `get_auto_chat_scopes_config` | administrator | Read access for auto chat scopes configuration |
-| `auto_chat_scopes:write` | `add_auto_chat_scopes`, `remove_auto_chat_scopes` | administrator | Write access for auto chat scopes configuration |
-| --- | --- | --- |
-| `properties--my:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (my namespace) |
-| `properties--my:write` | - | administrator | Write access for chat/thread/events/... properties validator configuration (my namespace) |
-| `properties--all:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (all license) |
-| --- | --- | --- |
-| `webhooks--my:read` | - | administrator | Read access for webhooks configuration (my webhooks) |
-| `webhooks--my:write` | - | administrator | Write access for webhooks configuration |
-| `webhooks--all:read` | - | administrator | Read access for webhooks configuration (all license) |
-| `webhooks--all:write` | - | administrator | write access for webhooks configuration (all license, for deletion only) |
 
 
 

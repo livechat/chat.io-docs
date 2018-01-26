@@ -11,7 +11,6 @@
   * [JavaScript](#javascript)
   * [Go](#go)
   * [Python](#python)
-* [SSO scopes for resources](#sso-scopes-for-resources)
 * [Objects](#objects)
   * [Thread](#thread)
   * [User](#user)
@@ -167,6 +166,8 @@ A client should ping the server each 15 seconds, otherwise the connection will b
 ## Authentication
 Agent authentication is handled by access tokens. See how to obtain an access token in [Authorization](https://www.chat.io/docs/authorization/) section.
 
+All authorization scopes are defined [here](https://www.chat.io/docs/authorization/#scopes-list). Each action in Agent API describes required scopes.
+
 ## Events order
 Chat messages are not guaranteed to be sorted by server. A client should sort them by `order` parameter. Do not use `timestamp` to sort messages because two events can have the same timestamp.
 
@@ -191,37 +192,6 @@ Remember to install the proper lib:
 ```
 sudo pip install websocket-client
 ```
-
-# SSO scopes for resources
-| Scope | API methods | permission | Description |
-|-------|-------------|------------|-------------|
-| `chats--all:read` | `get_archives`, `get_filtered_chats`, `get_chat_threads`, `update_last_seen_timestamp` | administrator | Read access for all license chats |
-| `chats--my:read` | `get_filtered_chats`, `get_chat_threads`, `update_last_seen_timestamp` | normal | Read access for the chats I belong to |
-| `chats.conversation--all:write` | `join_chat`(joining by myself), `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties`, `send_rich_message_postback` | normal | Write access for conversation data of chats with chat scopes matching me |
-| `chats.conversation--my:write` | `remove_from_chat`(leaving by myself), `send_event`, `send_typing_indicator`, `update_chat_properties`, `update_chat_thread_properties`, `send_rich_message_postback` | normal | Write access for conversation data of chats I belong to |
-| `chats.meta--all:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats with chat scopes matching me |
-| `chats.meta--my:write` | `join_chat`, `remove_from_chat`, `close_thread`, `update_chat_scopes` | normal | Write access for meta data of chats I belong to |
-| --- | --- | --- |
-| `customers.ban:write` | `ban_customer` | normal | Access for banning customers |
-| `customers.identity--manage` | - | administrator | Access for use a customer identity | 
-| --- | --- | --- |
-| `multicast:write` | `multicast` | normal | Access for multicast data to agents or customers |
-| `agents--my:write` | `update_agent` | normal | Write access for my agent data |
-| `agents--all:write` | `update_agent` | administrator | Write access for all agents data |
-| --- | --- | --- |
-| `auto_chat_scopes:read` | `get_auto_chat_scopes_config` | administrator | Read access for auto chat scopes configuration |
-| `auto_chat_scopes:write` | `add_auto_chat_scopes`, `remove_auto_chat_scopes` | administrator | Write access for auto chat scopes configuration |
-| --- | --- | --- |
-| `properties--my:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (my namespace) |
-| `properties--my:write` | - | administrator | Write access for chat/thread/events/... properties validator configuration (my namespace) |
-| `properties--all:read` | - | administrator | Read access for chat/thread/events/... properties validator configuration (all license) |
-| --- | --- | --- |
-| `webhooks--my:read` | - | administrator | Read access for webhooks configuration (my webhooks) |
-| `webhooks--my:write` | - | administrator | Write access for webhooks configuration |
-| `webhooks--all:read` | - | administrator | Read access for webhooks configuration (all license) |
-| `webhooks--all:write` | - | administrator | write access for webhooks configuration (all license, for deletion only) |
-
-
 
 # Objects
 Objects are standardized data formats that are used in API requests and responses.
@@ -671,6 +641,8 @@ It returns current agent's initial state.
 | --- | :---: | :---: | :---: |
 | `login` | ✓ | - | - |
 
+No persmission is required to perform this action.
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -780,6 +752,10 @@ It returns active threads that the current agent has access to.
 | --- | :---: | :---: | :---: |
 | `get_archives` | ✓ | - | - |
 
+**Permissions**
+
+* `chats--all:read` - read access for all license chats
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -852,6 +828,11 @@ It returns active threads that the current agent has access to.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `get_filtered_chats` | ✓ | - | - |
+
+**Permissions**
+
+* `chats--all:read` - read access for all license chats
+* `chats--my:read` - read access for the chats requester belong to
 
 **Request payload**
 
@@ -953,6 +934,11 @@ It returns threads that the current agent has access to in a given chat.
 | --- | :---: | :---: | :---: |
 | `get_chat_threads` | ✓ | - | - |
 
+**Permissions**
+
+* `chats--all:read` - read access for all license chats
+* `chats--my:read` - read access for the chats requester belong to
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -1004,6 +990,8 @@ Starts a chat.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `start_chat` | ✓ | ✓ | [`incoming_chat_thread`](#incoming-chat-thread) |
+
+No persmission is required to perform this action.
 
 **Request payload**
 
@@ -1068,6 +1056,12 @@ Adds an agent to chat.
 | --- | :---: | :---: | :---: |
 | `join_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
 
+**Permissions**
+
+* `chats.conversation--all:write` - write access for conversation data of all license chats (joining by myself)
+* `chats.meta--all:write` - write access for meta data of all license chats
+* `chats.meta--my:write` - write access for meta data of chats requester belong to
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -1091,6 +1085,13 @@ Removes users from chat. If no user is specified, it removes the current user.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `remove_from_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
+
+**Permissions**
+
+* `chats.conversation--all:write` - write access for conversation data of all license chats (removing myself)
+* `chats.conversation--my:write` - write access for conversation data of chats requester belong to (removing myself)
+* `chats.meta--all:write` - write access for meta data of all license chats
+* `chats.meta--my:write` - write access for meta data of chats I belong to
 
 **Request payload**
 
@@ -1118,6 +1119,11 @@ No response payload.
 | `send_event` | ✓ | ✓ | [`incoming_event`](#incoming-event) <br> or <br> [`incoming_chat_thread`*](#incoming-chat-thread) |
 
 \* `incoming_chat_thread` will be sent instead of `incoming_event` only if the event starts a new thread
+
+**Permissions**
+
+* `chats.conversation--all:write` - write access for conversation data of all license chats
+* `chats.conversation--my:write` - write access for conversation data of chats requester belong to
 
 **Request payload**
 
@@ -1157,6 +1163,11 @@ No response payload.
 
 \* `incoming_rich_message_postback` will be sent only for active threads.
 
+**Permissions**
+
+* `chats.conversation--all:write` - write access for conversation data of all license chats
+* `chats.conversation--my:write` - write access for conversation data of chats requester belong to
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -1187,6 +1198,10 @@ No response payload.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `multicast` | ✓ | ✓ | [`incoming_multicast`](#incoming-multicast) |
+
+**Permissions**
+
+* `multicast:write` - access for multicast data to agents or customers
 
 **Request payload**
 
@@ -1234,6 +1249,11 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `send_typing_indicator` | ✓ | ✓ | - |
 
+**Permissions**
+
+* `chats.conversation--all:write` - write access for conversation data of all license chats
+* `chats.conversation--my:write` - write access for conversation data of chats requester belong to
+
 **Request payload**
 
 | Request object | Required | Notes  |
@@ -1259,6 +1279,10 @@ Bans the customer for a specific period of time. It immediately disconnects all 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `ban_customer` | ✓ | ✓ | [`customer_banned`](#customer-banned) |
+
+**Permissions**
+
+* `customers.ban:write` - access for banning customers
 
 **Request payload**
 
@@ -1286,6 +1310,11 @@ Closes the thread. Nobody will be able to send any messages to this thread anymo
 | --- | :---: | :---: | :---: |
 | `close_thread` | ✓ | ✓ | [`thread_closed`](#thread-closed) |
 
+**Permissions**
+
+* `chats.meta--all:write` - write access for meta data of all license chats
+* `chats.meta--my:write` - write access for meta data of chats I belong to
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -1306,6 +1335,11 @@ No response payload.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `update_chat_scopes` | ✓ | ✓ | [`chat_scopes_updated`](#chat-scopes-updated) |
+
+**Permissions**
+
+* `chats.meta--all:write` - write access for meta data of all license chats
+* `chats.meta--my:write` - write access for meta data of chats I belong to
 
 **Request payload**
 
@@ -1338,6 +1372,11 @@ Updates agent properties.
 | --- | :---: | :---: | :---: |
 | `update_agent` | ✓ | - | [`agent_updated`](#agent-updated) |
 
+**Permissions**
+
+* `agents--my:write` - write access for my profile configuration
+* `agents--all:write` - write access for all agents profiles configuration
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -1360,6 +1399,8 @@ Change firebase push notifications properties.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `change_push_notifications` | ✓ | - | - |
+
+No persmission is required to perform this action.
 
 **Request payload**
 
@@ -1390,6 +1431,11 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `update_chat_properties` | ✓ | ✓ | [`chat_properties_updated`](#chat-properties-updated) |
 
+**Permissions**
+
+* `chats.conversation--all:write` - write access for conversation data of all license chats
+* `chats.conversation--my:write` - write access for conversation data of chats requester belong to
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -1418,6 +1464,11 @@ No response payload.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `update_chat_thread_properties` | ✓ | ✓ | [`chat_thread_properties_updated`](#chat-thread-properties-updated) |
+
+**Permissions**
+
+* `chats.conversation--all:write` - write access for conversation data of all license chats
+* `chats.conversation--my:write` - write access for conversation data of chats requester belong to
 
 **Request payload**
 
@@ -1450,6 +1501,11 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `update_last_seen_timestamp` | ✓ | ✓ | [`last_seen_timestamp_updated`](#last-seen-timestamp-updated) |
 
+**Permissions**
+
+* `chats--all:read` - read access for all license chats
+* `chats--my:read` - read access for the chats requester belong to
+
 **Request payload**
 
 | Request object | Required | Notes |
@@ -1477,6 +1533,10 @@ No response payload.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `add_auto_chat_scopes` | ✓ | - | - |
+
+**Permissions**
+
+* `auto_chat_scopes:write` - write access for auto chat scopes configuration
 
 **Request payload**
 
@@ -1553,6 +1613,10 @@ No response payload.
 | --- | :---: | :---: | :---: |
 | `remove_auto_chat_scopes` | ✓ | - | - |
 
+**Permissions**
+
+* `auto_chat_scopes:write` - write access for auto chat scopes configuration
+
 **Request payload**
 
 | Request object | Type | Required | Notes |
@@ -1573,6 +1637,10 @@ No response payload.
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `get_auto_chat_scopes_config` | ✓ | - | - |
+
+**Permissions**
+
+* `auto_chat_scopes:read` - read access for auto chat scopes configuration
 
 No request payload
 
@@ -1614,6 +1682,8 @@ No request payload
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
 | `upload_image` | - | ✓ | - |
+
+No persmission is required to perform this action.
 
 **Request payload**
 
