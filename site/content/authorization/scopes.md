@@ -8,7 +8,7 @@ weight: 40
 
 | Scope | permission | Description |
 |-------|-------------|------------|
-| `chats--all:read` | administrator | Read access for all license chats |
+| `chats--all:read` | normal | Read access for all license chats |
 | `chats--my:read` | normal | Read access for the chats I belong to |
 | `chats.conversation--all:write`| normal | Write access for conversation data of all license chats |
 | `chats.conversation--my:write` | normal | Write access for conversation data of chats I belong to |
