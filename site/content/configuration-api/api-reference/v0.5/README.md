@@ -190,12 +190,14 @@ We currently don't support chat.io group management. All agents belong to group
       "secret_key": "JSauw0Aks8l-asAa",
       "actions": [{
         "name": "incoming_chat_thread",
-        "chat_properties": {
-          "source": {
-            "type": {
-              "values": ["facebook", "twitter"]
+        "filters": {
+            "chat_properties": {
+                "source": {
+                    "type": {
+                         "values": ["facebook", "twitter"]
+                     }
+                }
             }
-          }
         }
       },{
         "name": "incoming_event"
@@ -308,12 +310,14 @@ We currently don't support chat.io group management. All agents belong to group
             "secret_key": "JSauw0Aks8l-asAa",
             "actions": [{
                 "name": "incoming_chat_thread",
-                "chat_properties": {
-                    "source": {
+                "filters": {
+                  "chat_properties": {
+                     "source": {
                         "type": {
-                            "values": ["facebook", "twitter"]
+                           "values": ["facebook", "twitter"]
                         }
-                    }
+                      }
+                  }
                 }
             },{
                 "name": "incoming_event"
