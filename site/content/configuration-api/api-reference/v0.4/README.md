@@ -53,6 +53,9 @@ minutes. This delay will be removed in future.
 
 **Endpoint**: `/agents/create_bot_agent`
 
+**Permissions**:
+* `agents-bot--my:write` - to create my bot agents
+
 | Request object               | Type       | Required | Notes                                                                |
 | ---------------------------- | ---------- | -------- | -------------------------------------------------------------------- |
 | `name`                       | `string`   | Yes      | display name                                                         |
@@ -136,6 +139,10 @@ We currently don't support chat.io group management. All agents belong to group
 
 **Endpoint**: `agents/remove_bot_agent`
 
+**Permissions**:
+* `agents-bot--my:write` - to remove my bot agent
+* `agents-bot--all:write` - to remove any bot agent
+
 | Request object | Type     | Required | Notes        |
 | -------------- | -------- | -------- | ------------ |
 | `bot_agent_id` | `string` | Yes      | BOT agent ID |
@@ -160,6 +167,9 @@ We currently don't support chat.io group management. All agents belong to group
 #### Update BOT Agent
 
 **Endpoint**: `agents/update_bot_agent`
+
+**Permissions**:
+* `agents-bot--my:write` - to update my bot agent
 
 | Request object               | Type       | Required | Notes                                                  |
 | ---------------------------- | ---------- | -------- | ------------------------------------------------------ |
@@ -237,6 +247,10 @@ We currently don't support chat.io group management. All agents belong to group
 
 **Endpoint**: `agents/get_bot_agents`
 
+**Permissions**:
+* `agents-bot--my:read` - to get my bot agent
+* `agents-bot--all:read` - to get all bot agents
+
 | Request object | Type   | Required | Notes                                                                                     |
 | -------------- | ------ | -------- | ----------------------------------------------------------------------------------------- |
 | `all`          | `bool` | No       | Get all BOT Agents, if `false` returns only caller's BOT Agents, default value is `false` |
@@ -267,6 +281,10 @@ We currently don't support chat.io group management. All agents belong to group
 #### Get BOT Agent details
 
 **Endpoint**: `agents/get_bot_agent_details`
+
+**Permissions**:
+* `agents-bot--my:read` - to get my bot agent details
+* `agents-bot--all:read` - to get any bot agent details
 
 | Request object | Type     | Required | Notes        |
 | -------------- | -------- | -------- | ------------ |
@@ -332,6 +350,9 @@ We currently don't support chat.io group management. All agents belong to group
 #### Register webhook
 
 **Endpoint**: `webhooks/register_webhook`
+
+**Permissions**:
+* `webhooks--my:write` - to register my webhook
 
 | Request object | Type     | Required | Notes                                            |
 | -------------- | -------- | -------- | ------------------------------------------------ |
@@ -430,6 +451,10 @@ We currently don't support chat.io group management. All agents belong to group
 
 **Endpoint**: `webhooks/get_webhooks_config`
 
+**Permissions**:
+* `webhooks--my:read` - to get my webhooks config
+* `webhooks--all:read` - to get all webhooks config
+
 ##### Example request payload
 
 ```js
@@ -472,6 +497,10 @@ We currently don't support chat.io group management. All agents belong to group
 #### Unregister webhook
 
 **Endpoint**: `webhooks/unregister_webhook`
+
+**Permissions**:
+* `webhooks--my:write` - to unregister my webhook
+* `webhooks--all:write` - to unregister any webhook
 
 | Request object | Type     | Required | Notes      |
 | -------------- | -------- | -------- | ---------- |
