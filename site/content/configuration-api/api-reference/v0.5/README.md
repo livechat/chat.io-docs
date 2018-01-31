@@ -71,6 +71,7 @@ minutes. This delay will be removed in future.
 | `webhooks.actions`           | `object[]` | Yes      | triggering actions                                                   |
 | `webhooks.actions[].name`    | `string`   | Yes      | triggering action name                                               |
 | `webhooks.actions[].filters` | `object`   | No       | filters to check if webhook should be triggered                      |
+| `webhooks.actions[].additional_data` | `string[]` | No | Additional data that will arrive with webhook |
 
 ##### Note about groups
 
@@ -101,7 +102,8 @@ We currently don't support chat.io group management. All agents belong to group
       "actions": [{
         "name": "incoming_chat_thread"
       },{
-        "name": "incoming_event"
+        "name": "incoming_event",
+        "additional_data": ["chat_properties"]
       }]
     }
 }
@@ -187,6 +189,7 @@ We currently don't support chat.io group management. All agents belong to group
 | `webhooks.actions`           | `object[]` | Yes      | triggering actions                                     |
 | `webhooks.actions[].name`    | `string`   | Yes      | triggering action name                                 |
 | `webhooks.actions[].filters` | `object`   | No       | filters to check if webhook should be triggered        |
+| `webhooks.actions[].additional_data` | `string[]` | No | Additional data that will arrive with webhook |
 
 ##### Example request payload
 
@@ -338,7 +341,8 @@ We currently don't support chat.io group management. All agents belong to group
                   }
                 }
             },{
-                "name": "incoming_event"
+                "name": "incoming_event",
+                "additional_data": ["chat_properties"]
             }]
         }
     }
@@ -361,6 +365,7 @@ We currently don't support chat.io group management. All agents belong to group
 | `action`       | `string` | Yes      | Triggerring action                               |
 | `secret_key`   | `string` | Yes      | Secret sent in webhooks to verify webhook source |
 | `filters`      | `object` | No       | Filters to check if webhook should be triggered  |
+| `additional_data` | `[string]` | No | Additional data that will arrive with webhook |
 
 * `action` possible values:
   * `incoming_chat_thread` - triggers on action
@@ -421,6 +426,9 @@ We currently don't support chat.io group management. All agents belong to group
       * `agents` (`string[]`) - array of agent ids. If all agents from this array are in chat, then webhook will be triggered.
       * `agents_any` (`string[]`) - array of agent ids. If any agent from this array is in chat, then webhook will be triggered.
       * `agents_exclude` (`string[]`) - array of agent ids. If any agent from this array is in chat, then webhook will not be triggered.
+  * `author_type` - `customer` or `agent`, allowed only for `incoming_event` action
+* `additional_data` possible values in array:
+  * `chat_properties`
 
 ##### Example request payload
 
@@ -446,7 +454,8 @@ We currently don't support chat.io group management. All agents belong to group
     "chat_member_ids": {
       "agents": ["johndoe@mail.com"]
     }
-  }
+  },
+  "additional_data": ["chat_properties"]
 }
 ```
 
