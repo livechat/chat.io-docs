@@ -1,7 +1,7 @@
 ---
 title: "Agent API"
 type: "api-reference"
-version: "0.6"
+version: "0.6 dev preview"
 dev_preview: true
 desc: "Interact with customers by joining the messaging protocol as an agent."
 color: "#ee5201"
