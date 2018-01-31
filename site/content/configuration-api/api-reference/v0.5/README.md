@@ -377,7 +377,7 @@ We currently don't support chat.io group management. All agents belong to group
     available filters for the action:
       * `chat_properties`
       * `event_properties`
-  * `rich_message_postback` - triggers on action
+  * `incoming_rich_message_postback` - triggers on action
     [link to change](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-rich-message-postback)
     available filters for the action:
       * `chat_properties`
