@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.6] - 2018-01-30
+### Added
+- Attach to last thread flag in `send_event` message
+
 ## [v0.5] - 2018-01-12
 
 ### Added
