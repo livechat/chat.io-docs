@@ -998,7 +998,7 @@ No persmission is required to perform this action.
 | Request object | Required | Notes |
 |----------------|----------|---|
 | `chat.properties` | No | Initial chat properties |
-| `chat.thread.events` | No | Initial chat events array |	
+| `chat.thread.events` | No | Initial chat events array |
 | `chat.thread.properties` | No | Initial chat thread properties |
 
 **Sample request payload**
@@ -1131,11 +1131,13 @@ No response payload.
 |----------------|----------|-------|
 | `chat_id` | Yes | Id of the chat that we want to send the message to |
 | `event` | Yes | Event object |
+| `attach_to_last_thread` | No | If `true`, adds event to last thread, otherwise creates new one, default `false` |
 
 **Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"attach_to_last_thread": false,
 	"event": {
 		"type": "message",
 		"text": "hello world",
@@ -1218,7 +1220,7 @@ No response payload.
   * `customers` (object) can take the following values:
 	* `ids` (`[]string` - array of customer's ids)
 
-At least one of `scopes` type (`agents.all`, `agents.ids`, `agents.groups`, `customers.ids`) is required. 
+At least one of `scopes` type (`agents.all`, `agents.ids`, `agents.groups`, `customers.ids`) is required.
 
 **Sample request payload**
 ```js
@@ -1569,7 +1571,7 @@ No response payload.
     * `<match_object>` structure:
       * `value` - value to match (`string`)
       * `exact_match` - if exact match, if set to `false` a `match_object.value` will be matched as substring of `customer_url`
-  
+
 **Sample request payload**
 ```js
 {
