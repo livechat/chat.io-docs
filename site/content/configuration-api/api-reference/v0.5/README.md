@@ -556,6 +556,11 @@ We currently don't support chat.io group management. All agents belong to group
   "action": "<action>",
   "data": {
     // payload from push action
+  },
+  "additional_data": {
+    "chat_properties": { //optional
+        // chat properties
+    }
   }
 }
 ```
