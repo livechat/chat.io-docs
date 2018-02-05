@@ -870,6 +870,7 @@ Note: customer details must be sent to server before the chat can be started (se
 |----------------|----------|--------------------------|
 | `chat_id`      | Yes      | Id of the chat that we want to send the message to |
 | `event`        | Yes      | Event object             |
+| `attach_to_last_thread`| No| If `true`, adds event to last thread, otherwise creates new one, default `false`|
 
 **Sample request payload**
 ```js
