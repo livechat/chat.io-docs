@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.6] - 2018-01-30
+
+### Added
+- Attach to last thread flag in `send_event` message
+
 ## [v0.5] - 2018-01-12
 
 ### Added
@@ -10,7 +15,7 @@
 ## [v0.4] - 2017-12-04
 
 ### Added
-- New push `incoming_multicast` 
+- New push `incoming_multicast`
 
 ### Changed
 - `last_event_per_type` object is now map of objects with specific type of event, `thread_order` and `thread_id`
