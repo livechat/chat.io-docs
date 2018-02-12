@@ -26,7 +26,9 @@ weight: 40
 | Scope | permission | Description |
 |-------|-------------|------------|
 | `customers.ban:write` | normal | Access for banning customers |
-| `customers.identity--manage` | administrator | Access for managing customers identities | 
+| `customers.identity--manage` | administrator | Access for managing customers identities |
+| `customers:read` | normal | Read access for customers |
+| `customers:write` | normal | Write access for customers |
 
 ## Agents scopes
 
