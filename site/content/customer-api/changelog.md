@@ -1,9 +1,14 @@
 # Changelog
 
-## [v0.6] - 2018-01-30
+## [v0.6] - dev preview
 
 ### Added
 - Attach to last thread flag in `send_event` message
+- Added `update_customer_page` message
+
+### Changed
+- format of push message `customer_updated` and method `update_customer` has changed
+- number of chats no longer affects how many push messages `customer_updated` are sent
 
 ## [v0.5] - 2018-01-12
 
