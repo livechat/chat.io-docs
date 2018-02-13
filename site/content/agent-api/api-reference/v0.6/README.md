@@ -44,6 +44,9 @@
   * [Remove auto chat scopes](#remove-auto-chat-scopes)
   * [Get auto chat scopes config](#get-auto-chat-scopes-config)
   * [Upload image](#upload-image)
+  * [Get customers](#get-customers)
+  * [Create customer](#create-customer)
+  * [Update customer](#update-customer)
 * [Pushes](#pushes)
   * [Incoming chat thread](#incoming-chat-thread)
   * [Chat users updated](#chat-users-updated)
@@ -55,12 +58,16 @@
   * [Customer banned](#customer-banned)
   * [Thread closed](#thread-closed)
   * [Chat scopes updated](#chat-scopes-updated)
-  * [Customer updated](#customer-updated)
   * [Agent updated](#agent-updated)
   * [Agent disconnected](#agent-disconnected)
   * [Chat properties updated](#chat-properties-updated)
   * [Chat thread properties updated](#chat-thread-properties-updated)
   * [Last seen timestamp updated](#last-seen-timestamp-updated)
+  * [Customer created](#customer-created)
+  * [Customer updated](#customer-updated)
+  * [Customer visit started](#customer-visit-started)
+  * [Customer visit ended](#customer-visit-ended)
+  * [Customer page updated](#customer-page-updated)
 </div>
 
 # Introduction
@@ -226,32 +233,10 @@ Objects are standardized data formats that are used in API requests and response
 	"type": "customer",
 	"name": "John Smith",
 	"email": "john@gmail.com",
-	"present": true,
-	"last_seen_timestamp": 1473433500,
-	"monitoring": {
-		"current_visit": {
-			"start": 1474659379,
-			"pages": [{
-					"start": 1474659379,
-					"url": "https://www.livechatinc.com/",
-					"title": "LiveChat - Homepage"
-				},
-				{
-					"start": 1474659393,
-					"url": "https://www.livechatinc.com/tour",
-					"title": "LiveChat - Tour"
-				}
-			]
-		},
-		"stats": {
-			"visits": 16,
-			"threads": 7,
-			"page_views": 29,
-			"last_visit": 1474636646
-		},
+	"last_visit": {
+		"start_timestamp": 1474659379, // optional, applies only to customer list in get_customers response
 		"referrer": "http://www.google.com/",
 		"ip": "194.181.146.130",
-		"host": "87-99-47-205.internetia.net.pl",
 		"user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36",
 		"geolocation": {
 			"country": "Poland",
@@ -259,22 +244,27 @@ Objects are standardized data formats that are used in API requests and response
 			"region": "Dolnoslaskie",
 			"city": "Wroclaw",
 			"timezone": "Europe/Warsaw"
-		}
+		},
+		"last_pages": [{ // optional, applies only to customer list in get_customers response
+			"timestamp": 1474659379,
+			"url": "https://www.livechatinc.com/",
+			"title": "LiveChat - Homepage"
+		}, {
+			"timestamp": 1474659393,
+			"url": "https://www.livechatinc.com/tour",
+			"title": "LiveChat - Tour"
+		}]
 	},
 	"fields": {
 		"custom field name": "custom field value"
 	},
-	"banned": false
+	"creation_timestamp_us": "1474659379.019223", // optional, applies only to customer list in get_customers response
+	"present": true, // optional, applies only to customer located in chat object
+	"last_seen_timestamp": 1473433500 // optional, applies only to customer located in chat object
 }
 ```
 
-Optional properties:
-
-* `name`
-* `email`
-* `last_seen_timestamp`
-* `monitoring`
-* `properties`
+Optional properties: `name`, `email`, `last_visit`, `fields`, `creation_timestamp_us`, `last_seen_timestamp` and `present`
 
 ### Agent
 ```js
@@ -1714,6 +1704,130 @@ Notes:
 * `path` should be used for database and must be appended to `base_url`
 * `base_url` is `https://cdn.chatio-static.com/api/file/chatio/img`
 
+## Get customers
+It returns customers list.
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `get_customers` | ✓ | - | - |
+
+**Permissions**
+
+* `customers:read` - read access for all license customers
+
+**Request payload**
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `page_id` | No | |
+| `limit` | No | Default is 10, maximum is 100 |
+| `order` | No | Default is `desc`  |
+| `filters.country.<filter_type>` | No | |
+| `filters.email.<filter_type>` | No |  |
+| `filters.customer_id.<filter_type>` | No |  |
+
+* `order` can take the following values:
+  * `asc` - oldest customers first
+  * `desc` - newest customers first
+* `<filter_type>` can take the following values (only one is allowed for single filter):
+  * `values` (`string[]` - array of strings)
+  * `exclude_values` (`string[]` - array of strings)
+
+**Sample request payload**
+```js
+{
+	"filters": {
+		"country": {
+			"values": ["United States", "Poland"]
+		}
+	},
+	"page_id": "MTUxNzM5ODEzMTQ5Ng=="
+}
+```
+
+**Sample response payload**
+```js
+{
+	"customers": [
+		// array of "User > Customer" objects
+	],
+	"total_customers": 2340,
+	"next_page_id": "MTUxNzM5ODEzMTQ5Ng==", // optional
+	"previous_page_id": "MTUxNzM5ODEzMTQ5Ng==" // optional
+}
+```
+
+## Create customer
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `create_customer` | ✓ | ✓ | [`customer_created`](#customer-created) |
+
+**Permissions**
+
+* `customers:write` - write access for all license customers
+
+**Request payload**
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `name` | No |  |
+| `email` | No |  |
+| `fields` | No | Map in `"key": "value"` format |
+
+**Sample request payload**
+```js
+{
+	"email": "j.doe@domain.com",
+	"fields": {
+		"some_key": "some_value"
+	}
+}
+```
+
+**Sample response payload**
+```js
+{
+	// "User > Customer" object
+}
+```
+
+## Update customer
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `update_customer` | ✓ | ✓ | [`customer_updated`](#customer-updated) | |
+
+**Permissions**
+
+`customers:write` - write access for all license customers
+
+**Request payload**
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `customer_id`      | Yes      | UUID v4 format is required |
+| `name`      | No      |  |
+| `email`      | No      |  |
+| `fields`      | No      | Map in `"key": "value"` format |
+
+**Sample request payload**
+```js
+{
+	"customer_id": "d4efab70-984f-40ee-aa09-c9cc3c4b0882",
+	"name": "morus12",
+	"fields": {
+		"size": "large"
+	}
+}
+```
+
+**Sample response payload**
+```js
+{
+	// "User > Customer" object
+}
+```
 
 # Pushes
 Server => Client methods are used for keeping the application state up-to-date. They are available only in `websocket` transport.
@@ -1983,28 +2097,6 @@ Server => Client methods are used for keeping the application state up-to-date. 
 }
 ```
 
-## Customer updated
-
-| Action | RTM API | Webhook |
-| --- | :---: | :---: |
-| `customer_updated` | ✓ | - |
-
-**Push payload**
-
-| Object         | Notes    |
-|----------------|----------|
-| `chat_id`       |          |
-| `customer`       |          |
-
-**Sample push payload**
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"customer": {
-		// "User > Customer" object
-	}
-}
-```
 
 ## Agent updated
 
@@ -2136,5 +2228,112 @@ Server => Client methods are used for keeping the application state up-to-date. 
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
 	"chat_id": "123-123-123-123",
 	"timestamp": 123456789
+}
+```
+
+## Customer created
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_created` | ✓ | ✓ |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `customer`       |          |
+
+**Sample push payload**
+```js
+{
+	"customer": {
+		// "User > Customer" object
+	}
+}
+```
+
+## Customer updated
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_updated` | ✓ | - |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `customer`       |          |
+
+**Sample push payload**
+```js
+{
+	"id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
+	"name": "John Doe",
+	"email": "john@doe.me", // optional
+	"type": "customer",
+	"present": false,
+	"banned": false,
+	"fields": {
+		"custom field name": "custom field value"
+	}
+}
+```
+
+## Customer visit started
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_visit_started` | ✓ | - |
+
+**Sample push payload**
+```js
+{
+	"customer_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
+	"visit_id": 42,
+	"start_timestamp": 1474659379,
+	"ip": "194.181.146.130",
+	"user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36",
+	"geolocation": {
+		"latitude": "51.0805",
+		"longitude": "17.0211",
+		"country": "Poland",
+		"country_code": "PL",
+		"region": "Dolnoslaskie",
+		"city": "Wroclaw",
+		"timezone": "Europe/Warsaw"
+	}
+}
+```
+
+## Customer visit ended
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_visit_ended` | ✓ | - |
+
+**Sample push payload**
+```js
+{
+	"customer_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
+	"visit_id": 42,
+	"end_timestamp": 1474669782
+}
+```
+
+## Customer page updated
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_page_updated` | ✓ | - |
+
+**Sample push payload**
+```js
+{
+	"customer_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
+	"visit_id": 42,
+	"timestamp": 1474659379,
+	"url": "https://www.livechatinc.com/",
+	"title": "LiveChat - Homepage",
+	"referrer": "http://www.google.com/"
 }
 ```
