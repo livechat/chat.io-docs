@@ -36,6 +36,7 @@
   * [Close thread](#close-thread)
   * [Update chat scopes](#update-chat-scopes)
   * [Update customer](#update-customer)
+  * [Update customer page](#update-customer-page)
   * [Update chat properties](#update-chat-properties)
   * [Update chat thread properties](#update-chat-thread-properties)
   * [Update last seen timestamp](#update-last-seen-timestamp)
@@ -249,10 +250,10 @@ Objects can include other objects. For example, `Chat` object may return `users`
 	"type": "customer",
 	"name": "John Smith",
 	"email": "john@gmail.com",
-	"present": true,
 	"fields": {
 		"custom field name": "custom field value"
 	},
+	"present": true,
 	"last_seen_timestamp": 1473433500
 }
 ```
@@ -1033,54 +1034,6 @@ No response payload.
 
 No response payload.
 
-## Update customer
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `update_customer` | ✓ | ✓ | [`customer_updated`](#customer-updated)* |
-
-\* `customer_updated` will be sent as many times as there are active chats
-
-**Request payload**
-
-| Request object | Required | Notes |
-|----------------|----------|-------|
-| `customer.name` | No | |
-| `customer.email` | No | |
-| `customer.monitoring.page.title` | No | |
-| `customer.monitoring.page.url` | No | |
-| `customer.monitoring.timezone` | No | |
-| `customer.fields` | No | Map in `"key": "value"` format|
-
-**Sample request payload**
-```js
-{
-	"customer": {
-		"name": "Mary Brown",
-		"email": "mary.brown@gmail.com",
-		"monitoring": {
-			"page": {
-				"url": "https://www.livechatinc.com/",
-				"title": "LiveChat - Homepage"
-			},
-			"timezone": "-2"
-		},
-		"fields": {
-			"key1": "val1"
-		}
-	}
-}
-```
-
-**Sample response payload**
-```js
-{
-	"customer": {
-		// "User > Customer" object
-	}
-}
-```
-
 ## Update chat properties
 
 | Action | RTM API | Web API | Push message |
@@ -1168,6 +1121,70 @@ No response payload.
 }
 ```
 
+## Update customer
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `update_customer` | ✓ | ✓ | - |
+
+
+**Request payload**
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `name`      | No      |  |
+| `email`      | No      |  |
+| `fields`      | No      | key value object |
+
+**Sample request payload**
+```js
+{
+	"name": "morus12",
+	"fields": {
+		"size": "large"
+	}
+}
+```
+
+**Sample response payload**
+```js
+{
+	"customer": {
+		"id": "d4efab70-984f-40ee-aa09-c9cc3c4b0882",
+		"name": "morus12",
+		"type": "customer",
+		"fields": {
+			"size": "large"
+		}
+	}
+}
+```
+
+
+## Update customer page
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `update_customer_page` | ✓ | ✓ | - |
+
+
+**Request payload**
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `url`      | No      |  |
+| `title`      | No      |  |
+| `user_agent`      | No      | |
+| `referrer`      | No      | |
+
+**Sample request payload**
+```js
+{
+	"title": "master blaster",
+}
+```
+
+No response payload.
 
 # Pushes
 Server => Client methods are used for keeping the application state up-to-date. They are available only in `websocket` transport.
@@ -1514,5 +1531,25 @@ Server => Client methods are used for keeping the application state up-to-date. 
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
 	"chat_id": "123-123-123-123",
 	"timestamp": 123456789
+}
+```
+
+## Customer updated
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_updated` | ✓ | - |
+
+**Sample push payload**
+```js
+{
+	"id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
+	"name": "John Doe",
+	"type": "customer",
+	"present": false,
+	"email": "dont@send.pl", // optional
+	"fields": {
+		"custom field name": "custom field value"
+	}
 }
 ```
