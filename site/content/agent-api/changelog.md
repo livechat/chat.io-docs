@@ -1,8 +1,17 @@
 # Changelog
 
-## [v0.6] - 2018-01-30
+## [v0.6] - dev preview
+
 ### Added
-- Attach to last thread flag in `send_event` message
+- Attach to last thread flag in `send_event` method
+- New methods: `create_customer` and `get_customers`
+- New push messages: `customer_created`, `customer_visit_started`, `customer_visit_ended` and `customer_page_updated`
+
+### Changed
+- `update_customer` - requires valid UUID v4 customer id, new request format
+- format of push message `customer_updated` has changed
+- number of chats no longer affects how many push messages `customer_updated` are sent
+- `monitoring` object in `customer` changed to `last_visit` and has new format
 
 ## [v0.5] - 2018-01-12
 
