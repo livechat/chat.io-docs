@@ -13,6 +13,9 @@
 - number of chats no longer affects how many push messages `customer_updated` are sent
 - `monitoring` object in `customer` changed to `last_visit` and has new format
 
+### Fixed
+- Sending `incoming_typing_indicator` push
+
 ## [v0.5] - 2018-01-12
 
 ### Added
