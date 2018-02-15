@@ -20,6 +20,9 @@
   * [Ban](#ban)
   * [Scopes](#scopes)
   * [Properties](#properties)
+* [Errors handling](#errors-handling)
+  * [Format](#format)
+  * [Possible errors](#possible-errors)
 * [Methods](#methods)
   * [Login](#login)
   * [Get archives](#get-archives)
@@ -631,6 +634,33 @@ An empty object designates no scope, which means that all agents can see it.
 	}
 }
 ```
+
+# Errors handling
+
+## Format
+
+### Error payload
+
+```
+{
+	"error": {
+		"type": "authentication",
+		"message": "Authentication error"
+	}
+}
+```
+
+## Possible errors
+
+| Type | Default Message | Notes |
+|--------|----------------|---|
+| `internal` | Internal server error | |
+| `validation` | Wrong format of request | |
+| `authorization` | Authorization error | Agent is not allowed to perform action |
+| `authentication` | Authentication error | Invalid / expired access token |
+| `request_timeout` | Request timeouted | Timeout threshold is 15 seconds |
+| `license_expired` | License expired | |
+| `unsupported_version` | Unsupported version | Unsupported version of protocol |
 
 # Methods
 
@@ -2049,6 +2079,9 @@ Server => Client methods are used for keeping the application state up-to-date. 
 |--------|----------------|
 | `access_token_revoked` | Agent access token has been revoked |
 | `license_expired` | License has expired |
+| `agent_deleted` | Agent account has ben deleted |
+| `logged_out_remotely` | Agent has been logged out remotely |
+| `unsupported_version` | Connecting to unsupported version of Agent API |
 
 ## Chat properties updated
 
