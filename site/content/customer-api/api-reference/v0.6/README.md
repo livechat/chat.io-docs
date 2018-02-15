@@ -598,6 +598,7 @@ An empty object designates no scope, which means that all agents can see it.
 | `authentication` | Authentication error | Invalid / expired access token |
 | `license_expired` | License expired | |
 | `request_timeout` | Request timeouted | Timeout threshold is 15 seconds |
+| `unsupported_version` | Unsupported version | Unsupported version of protocol |
 
 
 # Methods
@@ -1172,7 +1173,7 @@ No response payload.
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
-| `url`      | No      |  |
+| `url`      | Yes      |  |
 | `title`      | No      |  |
 | `user_agent`      | No      | |
 | `referrer`      | No      | |
@@ -1443,6 +1444,32 @@ Server => Client methods are used for keeping the application state up-to-date. 
 |--------|------------------|
 | `chat_id` | |
 | `customer` | |
+
+**Sample payload**
+```js
+{
+	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"customer": {
+		// "User > Customer" object
+	}
+}
+```
+
+## Customer page updated
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `customer_updated` | ✓ | - |
+
+**Push payload**
+
+| Object | Notes |
+|--------|------------------|
+| `url` |  |
+| `title` |  |
+| `user_agent` |  |
+| `referrer` |  |
+| `timestamp` | |
 
 **Sample payload**
 ```js
