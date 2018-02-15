@@ -543,6 +543,7 @@ Error payload has format:
 | `authentication` | Authentication error | Invalid / expired access token |
 | `license_expired` | License expired | |
 | `request_timeout` | Request timeouted | Timeout threshold is 15 seconds |
+| `unsupported_version` | Unsupported version | Unsupported version of protocol |
 
 
 # Methods
