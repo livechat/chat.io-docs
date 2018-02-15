@@ -5,6 +5,7 @@
 ### Added
 - Attach to last thread flag in `send_event` message
 - Added `update_customer_page` message
+- Added `customer_page_updated` push
 
 ### Changed
 - format of push message `customer_updated` and method `update_customer` has changed
