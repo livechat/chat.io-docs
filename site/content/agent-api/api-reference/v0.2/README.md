@@ -64,6 +64,10 @@
 
 # Introduction
 
+<div class="callout type-warning">
+This version is no longer supported since February 12, 2018.
+</div>
+
 This documentation describes version **v0.2** of agent-api.
 
 ## Web API
