@@ -1,3 +1,7 @@
+<div class="callout type-warning">
+This version is no longer supported since January 11, 2018.
+</div>
+
 ## Introduction
 
 Configuration API is a service for storing configuration of license. You can set
