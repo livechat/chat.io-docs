@@ -1111,6 +1111,7 @@ No response payload.
 
 ## Remove from chat
 Removes users from chat. If no user is specified, it removes the current user.
+It's forbidden to remove customer from chat.
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
@@ -1128,14 +1129,12 @@ Removes users from chat. If no user is specified, it removes the current user.
 | Request object | Required | Notes |
 |----------------|----------|---|
 | `chat_id` | Yes | |
-| `customer_ids` | No | |
 | `agent_ids` | No | |
 
 **Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"customer_ids": ["b7eff798-f8df-4364-8059-649c35c9ed0c"],
 	"agent_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
 }
 ```
