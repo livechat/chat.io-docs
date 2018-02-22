@@ -42,7 +42,6 @@
   * [Update last seen timestamp](#update-last-seen-timestamp)
 * [Pushes](#pushes)
   * [Incoming chat thread](#incoming-chat-thread)
-  * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
   * [Incoming rich message postback](#incoming-rich-message-postback)
   * [Incoming multicast](#incoming-multicast)
@@ -51,9 +50,12 @@
   * [Thread closed](#thread-closed)
   * [Chat scopes updated](#chat-scopes-updated)
   * [Customer updated](#customer-updated)
+  * [Customer page updated](#customer-page-updated)
   * [Chat properties updated](#chat-properties-updated)
   * [Chat thread properties updated](#chat-thread-properties-updated)
   * [Last seen timestamp updated](#last-seen-timestamp-updated)
+  * [Chat user added](#chat-user-added)
+  * [Chat user removed](#chat-user-removed)
 </div>
 
 # Introduction
@@ -1115,18 +1117,11 @@ No response payload.
 }
 ```
 
-**Sample response payload**
-```js
-{
-	"timestamp": 123456789
-}
-```
-
 ## Update customer
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `update_customer` | ✓ | ✓ | - |
+| `update_customer` | ✓ | ✓ | [`customer_updated`](#customer-updated) |
 
 
 **Request payload**
@@ -1140,9 +1135,9 @@ No response payload.
 **Sample request payload**
 ```js
 {
-	"name": "morus12",
+	"name": "John Doe",
 	"fields": {
-		"size": "large"
+		"company_size": "10-100"
 	}
 }
 ```
@@ -1151,12 +1146,7 @@ No response payload.
 ```js
 {
 	"customer": {
-		"id": "d4efab70-984f-40ee-aa09-c9cc3c4b0882",
-		"name": "morus12",
-		"type": "customer",
-		"fields": {
-			"size": "large"
-		}
+		// "User > Customer" object
 	}
 }
 ```
@@ -1166,8 +1156,9 @@ No response payload.
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `update_customer_page` | ✓ | ✓ | - |
+| `update_customer_page` | ✓ | - | [`customer_page_updated`](#customer-page-updated) |
 
+User agent and referrer is updated by default using the browser’s headers.
 
 **Request payload**
 
@@ -1175,13 +1166,12 @@ No response payload.
 |----------------|----------|-------|
 | `url`      | Yes      |  |
 | `title`      | No      |  |
-| `user_agent`      | No      | |
-| `referrer`      | No      | |
 
 **Sample request payload**
 ```js
 {
-	"title": "master blaster",
+	"url": "https://livechatinc.com/pricing"
+	"title": "Livechat - Pricing",
 }
 ```
 
@@ -1219,32 +1209,6 @@ Server => Client methods are used for keeping the application state up-to-date. 
 		"thread": {
 			// "Thread" object
 		}
-	}
-}
-```
-
-## Chat users updated
-
-| Action | RTM API | Webhook |
-| --- | :---: | :---: |
-| `chat_users_updated` | ✓ | ✓ |
-
-**Push payload**
-
-| Object | Notes |
-|--------|------------------|
-| `chat_id` | |
-| `updated_users` | |
-
-**Sample push payload**
-```js
-{
-	"chat_id": "88888898-f88f-4321-1234-123123",
-	"updated_users": {
-		"added": [
-			// User
-		],
-		"removed_ids": ["123", "1234"]
 	}
 }
 ```
@@ -1442,13 +1406,12 @@ Server => Client methods are used for keeping the application state up-to-date. 
 
 | Object | Notes |
 |--------|------------------|
-| `chat_id` | |
 | `customer` | |
 
-**Sample payload**
+
+**Sample push payload**
 ```js
 {
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 	"customer": {
 		// "User > Customer" object
 	}
@@ -1459,7 +1422,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 
 | Action | RTM API | Webhook |
 | --- | :---: | :---: |
-| `customer_updated` | ✓ | - |
+| `customer_page_updated` | ✓ | - |
 
 **Push payload**
 
@@ -1474,10 +1437,9 @@ Server => Client methods are used for keeping the application state up-to-date. 
 **Sample payload**
 ```js
 {
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"customer": {
-		// "User > Customer" object
-	}
+	"url": "https://livechatinc.com/pricing",
+	"title": "pricing",
+	"timestamp": 123456789
 }
 ```
 
@@ -1561,22 +1523,50 @@ Server => Client methods are used for keeping the application state up-to-date. 
 }
 ```
 
-## Customer updated
+## Chat user added
 
 | Action | RTM API | Webhook |
 | --- | :---: | :---: |
-| `customer_updated` | ✓ | - |
+| `chat_user_added` | ✓ | ✓ |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `user`       |          |
+| `user_type`       | possible values are `agent`, `customer`          |
 
 **Sample push payload**
 ```js
 {
-	"id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
-	"name": "John Doe",
-	"type": "customer",
-	"present": false,
-	"email": "dont@send.pl", // optional
-	"fields": {
-		"custom field name": "custom field value"
-	}
+	"chat_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
+	"user": {
+		// "User > Customer" or "User > Agent" object
+	},
+	"user_type": "agent"
+}
+```
+
+## Chat user removed
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_user_removed` | ✓ | ✓ |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `user_id`       |          |
+| `user_type`       | possible values are `agent`, `customer`          |
+
+**Sample push payload**
+```js
+{
+	"chat_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
+	"user_id": "cb531744-e6a4-4ded-b3eb-b3eb4ded4ded",
+	"user_type": "agent"
 }
 ```
