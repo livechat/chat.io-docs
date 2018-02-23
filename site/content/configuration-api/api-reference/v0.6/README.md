@@ -369,47 +369,39 @@ We currently don't support chat.io group management. All agents belong to group
 
 * `action` possible values:
   * `incoming_chat_thread` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-chat-thread)
-    available filters for the action:
-      * `chat_properties`
-      * `thread_properties`
-  * `chat_users_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-users-updated)
-    available filters for the action:
-      * `chat_properties`
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-chat-thread), 
+    available filters for the action: `chat_properties`, `thread_properties` and `chat_member_ids`
   * `incoming_event` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-event)
-    available filters for the action:
-      * `chat_properties`
-      * `event_properties`
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-event),
+    available filters for the action: `chat_properties`, `event_properties`, `chat_member_ids` and `author_type`
   * `incoming_rich_message_postback` - triggers on action
-    [link to change](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-rich-message-postback)
-    available filters for the action:
-      * `chat_properties`
-      * `event_properties`
+    [link to change](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-rich-message-postback),
+    available filters for the action: `chat_properties`, `event_properties` and `chat_member_ids`
   * `last_seen_timestamp_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#last-seen-timestamp-updated)
-    available filters for the action:
-      * `chat_properties`
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#last-seen-timestamp-updated),
+    available filters for the action: `chat_properties` and `chat_member_ids`
   * `thread_closed` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#thread-closed)
-    available filters for the action:
-      * `chat_properties`
-      * `thread_properties`
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#thread-closed),
+    available filters for the action: `chat_properties`, `thread_properties` and `chat_member_ids`
   * `chat_scopes_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-scopes-updated)
-    available filters for the action:
-      * `chat_properties`
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-scopes-updated),
+    available filters for the action: `chat_properties` and `chat_member_ids`
   * `chat_properties_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-properties-updated)
-    available filters for the action:
-      * `chat_properties`
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-properties-updated),
+    available filters for the action: `chat_properties` and `chat_member_ids`
   * `chat_thread_properties_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-thread-properties-updated)
-  * `agent_status_changed` - triggers when status of some agent is changed
-  * `agent_deleted` - triggers when some agent is deleted
-    available filters for the action:
-      * `chat_properties`
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-thread-properties-updated),
+    available filters for the action: `chat_properties` and `chat_member_ids`
+  * `chat_user_added` - triggers on action
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-user-added),
+    available filters for the action: `chat_properties` and `chat_member_ids`
+  * `chat_user_removed` - triggers on action
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-user-removed),
+    available filters for the action: `chat_properties` and `chat_member_ids`
+  * `agent_status_changed` - triggers when status of some agent is changed,
+    available filters for the action: `chat_member_ids`
+  * `agent_deleted` - triggers when some agent is deleted,
+    available filters for the action: `chat_member_ids`
 * `filters` possible filters:
   * `chat_properties.<namespace>.<name>.<filter_type>`
     `<filter_type>` possible values (only one is allowed for single property):
@@ -428,7 +420,7 @@ We currently don't support chat.io group management. All agents belong to group
       * `agents_exclude` (`string[]`) - array of agent ids. If any agent from this array is in chat, then webhook will not be triggered.
   * `author_type` - `customer` or `agent`, allowed only for `incoming_event` action
 * `additional_data` possible values in array:
-  * `chat_properties`
+  * `chat_properties` (available for every action except `agent_status_changed` and `agent_deleted`)
 
 ##### Example request payload
 
@@ -568,13 +560,14 @@ We currently don't support chat.io group management. All agents belong to group
 ### Payload for actions derived from agent-api pushes:
 
 * [`incoming_chat_thread`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-chat-thread)
-* [`chat_users_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-users-updated)
 * [`incoming_event`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-event)
 * [`last_seen_timestamp_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#last-seen-timestamp-updated)
 * [`thread_closed`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#thread-closed)
 * [`chat_scopes_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-scopes-updated)
 * [`chat_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-properties-updated)
 * [`chat_thread_properties_updated`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-thread-properties-updated)
+* [`chat_user_added`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-user-added)
+* [`chat_user_removed`](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-chat-user-removed)
 
 
 ### Payload for another actions:
