@@ -369,28 +369,28 @@ We currently don't support chat.io group management. All agents belong to group
 
 * `action` possible values:
   * `incoming_chat_thread` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-chat-thread), 
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-chat-thread), 
     available filters for the action: `chat_properties`, `thread_properties` and `chat_member_ids`
   * `incoming_event` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-event),
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-event),
     available filters for the action: `chat_properties`, `event_properties`, `chat_member_ids` and `author_type`
   * `incoming_rich_message_postback` - triggers on action
-    [link to change](https://www.chat.io/docs/agent-api/api-reference/v0.6/#incoming-rich-message-postback),
+    [link to change](https://www.chat.io/docs/agent-api/api-reference/v0.5/#incoming-rich-message-postback),
     available filters for the action: `chat_properties`, `event_properties` and `chat_member_ids`
   * `last_seen_timestamp_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#last-seen-timestamp-updated),
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#last-seen-timestamp-updated),
     available filters for the action: `chat_properties` and `chat_member_ids`
   * `thread_closed` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#thread-closed),
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#thread-closed),
     available filters for the action: `chat_properties`, `thread_properties` and `chat_member_ids`
   * `chat_scopes_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-scopes-updated),
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-scopes-updated),
     available filters for the action: `chat_properties` and `chat_member_ids`
   * `chat_properties_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-properties-updated),
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-properties-updated),
     available filters for the action: `chat_properties` and `chat_member_ids`
   * `chat_thread_properties_updated` - triggers on action
-    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.6/#chat-thread-properties-updated),
+    [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-thread-properties-updated),
     available filters for the action: `chat_properties` and `chat_member_ids`
   * `chat_users_updated` - triggers on action
     [agent-api push](https://www.chat.io/docs/agent-api/api-reference/v0.5/#chat-users-updated),
