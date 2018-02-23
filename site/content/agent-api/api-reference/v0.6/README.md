@@ -29,8 +29,8 @@
   * [Get filtered chats](#get-filtered-chats)
   * [Get chat threads](#get-chat-threads)
   * [Start chat](#start-chat)
-  * [Join chat](#join-chat)
-  * [Remove from chat](#remove-from-chat)
+  * [Add user to chat](#add-user-to-chat)
+  * [Remove user from chat](#remove-user-from-chat)
   * [Send event](#send-event)
   * [Send rich message postback](#send-rich-message-postback)
   * [Multicast](#multicast)
@@ -52,7 +52,6 @@
   * [Update customer](#update-customer)
 * [Pushes](#pushes)
   * [Incoming chat thread](#incoming-chat-thread)
-  * [Chat users updated](#chat-users-updated)
   * [Incoming event](#incoming-event)
   * [Incoming rich message postback](#incoming-rich-message-postback)
   * [Incoming multicast](#incoming-multicast)  
@@ -71,6 +70,8 @@
   * [Customer visit started](#customer-visit-started)
   * [Customer visit ended](#customer-visit-ended)
   * [Customer page updated](#customer-page-updated)
+  * [Chat user added](#chat-user-added)
+  * [Chat user removed](#chat-user-removed)
 </div>
 
 # Introduction
@@ -1069,12 +1070,12 @@ No persmission is required to perform this action.
 }
 ```
 
-## Join chat
-Adds an agent to chat.
+## Add user to chat
+Adds user to chat. Is't forbidden to add more than one `customer` user type to chat.
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `join_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
+| `add_user_to_chat` | ✓ | ✓ | [`chat_user_added`](#chat-user-added) |
 
 **Permissions**
 
@@ -1087,46 +1088,47 @@ Adds an agent to chat.
 | Request object | Required | Notes |
 |----------------|----------|---|
 | `chat_id` | Yes | |
-| `agent_ids` | Yes | |
+| `user_id` | Yes | |
+| `user_type` | Yes | possible values are `agent` or `customer` |
 
 **Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"agent_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
+	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
+	"type": "agent"
 }
 ```
 
 No response payload.
 
-## Remove from chat
-Removes users from chat. If no user is specified, it removes the current user.
+## Remove user from chat
+Removes user from chat. Removing `customer` user type is forbidden.
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `remove_from_chat` | ✓ | ✓ | [`chat_users_updated`](#chat-users-updated) |
+| `remove_user_from_chat` | ✓ | ✓ | [`chat_user_removed`](#chat-user-removed) |
 
 **Permissions**
 
-* `chats.conversation--all:write` - write access for conversation data of all license chats (removing myself)
-* `chats.conversation--my:write` - write access for conversation data of chats requester belong to (removing myself)
+* `chats.conversation--all:write` - write access for conversation data of all license chats (joining by myself)
 * `chats.meta--all:write` - write access for meta data of all license chats
-* `chats.meta--my:write` - write access for meta data of chats I belong to
+* `chats.meta--my:write` - write access for meta data of chats requester belong to
 
 **Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|---|
 | `chat_id` | Yes | |
-| `customer_ids` | No | |
-| `agent_ids` | No | |
+| `user_id` | Yes | |
+| `user_type` | Yes | possible values are `agent` or `customer` |
 
 **Sample request payload**
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"customer_ids": ["b7eff798-f8df-4364-8059-649c35c9ed0c"],
-	"agent_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
+	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
+	"type": "agent"
 }
 ```
 
@@ -1895,39 +1897,6 @@ Server => Client methods are used for keeping the application state up-to-date. 
 }
 ```
 
-## Chat users updated
-
-| Action | RTM API | Webhook |
-| --- | :---: | :---: |
-| `chat_users_updated` | ✓ | ✓ |
-
-**Push payload**
-
-| Object         | Notes    |
-|----------------|----------|
-| `updated_users`       |          |
-
-**Sample push payload**
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"updated_users": {
-		"customers": {
-			"added": [
-				// array of "User > Customer" objects
-			],
-			"removed_ids": []
-		},
-		"agents": {
-			"added": [
-				// array of "User > Agent" objects
-			],
-			"removed_ids": ["75a90b82-e6a4-4ded-b3eb-cb531741ee0d"]
-		}
-	}
-}
-```
-
 ## Incoming event
 
 | Action | RTM API | Webhook |
@@ -2368,5 +2337,53 @@ Server => Client methods are used for keeping the application state up-to-date. 
 	"url": "https://www.livechatinc.com/",
 	"title": "LiveChat - Homepage",
 	"referrer": "http://www.google.com/"
+}
+```
+
+## Chat user added
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_user_added` | ✓ | ✓ |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `user`       |          |
+| `user_type`       | possible values are `agent`, `customer`          |
+
+**Sample push payload**
+```js
+{
+	"chat_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
+	"user": {
+		// "User > Customer" or "User > Agent" object
+	},
+	"user_type": "agent"
+}
+```
+
+## Chat user removed
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_user_removed` | ✓ | ✓ |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `user_id`       |          |
+| `user_type`       | possible values are `agent`, `customer`          |
+
+**Sample push payload**
+```js
+{
+	"chat_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d",
+	"user_id": "cb531744-e6a4-4ded-b3eb-b3eb4ded4ded",
+	"user_type": "agent"
 }
 ```
