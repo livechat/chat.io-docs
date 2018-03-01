@@ -148,7 +148,7 @@ Payload:
 You should distinguish received events by their types.
 
 ```js
-customerSDK.on('new_event', payload => {
+customerSDK.on('new_event', ({ chat, event }) => {
   switch (event.type) {
     case 'message':
       console.log('new message - ', event.text)
