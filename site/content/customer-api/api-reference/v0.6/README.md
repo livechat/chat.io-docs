@@ -1107,10 +1107,19 @@ No response payload.
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
+| `chat_id`      | Yes      |       |
 | `timestamp` | No | |
 
 
 **Sample request payload**
+```js
+{
+	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"timestamp": 123456789
+}
+```
+
+**Sample response payload**
 ```js
 {
 	"timestamp": 123456789
