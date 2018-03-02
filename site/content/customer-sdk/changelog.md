@@ -5,6 +5,14 @@ weight: 60
 
 # Changelog
 
+#### [v0.9.0] - 2018-03-02
+
+##### Changed
+
+* internal change: upgraded to 0.5 version of server protocol
+
+##### Changed
+
 #### [v0.8.0] - 2018-01-05
 
 ##### Added
@@ -79,8 +87,7 @@ weight: 60
 * `init` now accepts configuration object (`{ license, clientId }`) instead of
   just a license number (in React Native the configuration object expects
   additionally `redirectUri`)
-* `getChatThreads` now returns an array of `threads` instead of `{ threads,
-  users }` object
+* `getChatThreads` now returns an array of `threads` instead of `{ threads, users }` object
 * removed `lastSeenTimestamp` from user objects
 * `AuthWebView` exposed from `@livechat/chat.io-customer-auth` for React Native
   integration no longer needs a license prop
