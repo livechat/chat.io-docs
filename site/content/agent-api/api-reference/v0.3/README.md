@@ -66,6 +66,10 @@
 
 # Introduction
 
+<div class="callout type-warning">
+This version is no longer supported since April 30, 2018.
+</div>
+
 This documentation describes version **v0.3** of agent-api.
 
 ## Web API
@@ -536,8 +540,7 @@ Empty object designates no scope, it means that all agents can see it.
  ```js
  {
 	"scopes": {
-		"groups": [1, 2],
-		"agents": ["john@doe.com"]
+		"groups": [1, 2]
 	}
 }
  ```
