@@ -55,6 +55,10 @@
 
 # Introduction
 
+<div class="callout type-warning">
+This version is no longer supported since April 30, 2018.
+</div>
+
 This documentation describes version **v0.4** of customer-api.
 
 <div class="callout type-info">Throughout the text we will use the term <strong>"client"</strong> to describe a service (an application, a script, an integration, etc.) which uses chat.io Agent API.</div>
