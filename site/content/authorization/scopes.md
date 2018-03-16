@@ -22,6 +22,8 @@ weight: 40
 * `chats.meta` applies to:
   * chat users
 
+*NOTICE: currently `chats.conversation--all:write` allows joining chats too because you have to join the chat to be able to write to it*
+
 ## Multicast scopes
 
 | Scope | permission | Description |
