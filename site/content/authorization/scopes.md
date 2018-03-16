@@ -15,6 +15,15 @@ weight: 40
 | `chats.meta--all:write` | administrator | Write access for meta data of all license chats |
 | `chats.meta--my:write` | normal | Write access for meta data of chats I belong to |
 
+* `chats.conversation` applies to:
+  * chat events
+  * chat properties
+  * thread properties
+* `chats.meta` applies to:
+  * chat users
+
+*NOTICE: currently `chats.conversation--all:write` allows joining chats too because you have to join the chat to be able to write to it*
+
 ## Multicast scopes
 
 | Scope | permission | Description |
