@@ -66,6 +66,10 @@
 
 # Introduction
 
+<div class="callout type-warning">
+This version is no longer supported since April 30, 2018.
+</div>
+
 This documentation describes version **v0.4** of agent-api.
 
 <div class="callout type-info">Throughout the text we will use the term <strong>"client"</strong> to describe a service (an application, a script, an integration, etc.) which uses chat.io Agent API.</div>
@@ -538,8 +542,7 @@ An empty object designates no scope, which means that all agents can see it.
  ```js
  {
 	"scopes": {
-		"groups": [1, 2],
-		"agents": ["john@doe.com"]
+		"groups": [1, 2]
 	}
 }
  ```
@@ -1290,8 +1293,7 @@ No response payload.
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 	"add_scopes": {
-		"groups": [1, 2],
-		"agents": ["john@doe.com"]
+		"groups": [1, 2]
 	},
 	"remove_scopes": {
 		"groups": [3]
@@ -1486,8 +1488,7 @@ No response payload.
 ```js
 {
 	"scopes": {
-		"groups": [1, 2],
-		"agents": ["john@doe.com"]
+		"groups": [1, 2]
 	}
 }
 ```

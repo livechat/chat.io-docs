@@ -584,8 +584,7 @@ An empty object designates no scope, which means that all agents can see it.
  ```js
  {
 	"scopes": {
-		"groups": [1, 2],
-		"agents": ["john@doe.com"]
+		"groups": [1, 2]
 	}
 }
  ```
@@ -1378,8 +1377,7 @@ No response payload.
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 	"add_scopes": {
-		"groups": [1, 2],
-		"agents": ["john@doe.com"]
+		"groups": [1, 2]
 	},
 	"remove_scopes": {
 		"groups": [3]
@@ -1574,8 +1572,7 @@ No response payload.
 ```js
 {
 	"scopes": {
-		"groups": [1, 2],
-		"agents": ["john@doe.com"]
+		"groups": [1, 2]
 	}
 }
 ```
