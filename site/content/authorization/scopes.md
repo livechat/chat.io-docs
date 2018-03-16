@@ -16,11 +16,11 @@ weight: 40
 | `chats.meta--my:write` | normal | Write access for meta data of chats I belong to |
 
 * `chats.conversation` applies to:
-  * `chat events`
-  * `chat properties`
-  * `thread properties`
+  * chat events
+  * chat properties
+  * thread properties
 * `chats.meta` applies to:
-  * `chat users`
+  * chat users
 
 ## Multicast scopes
 
