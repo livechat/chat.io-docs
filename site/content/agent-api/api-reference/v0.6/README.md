@@ -2138,6 +2138,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | Type | Notes |
 |--------|----------------|
 | `access_token_revoked` | Agent access token has been revoked |
+| `access_token_expired` | Access token life time has elapsed  |
 | `license_expired` | License has expired |
 | `agent_deleted` | Agent account has ben deleted |
 | `logged_out_remotely` | Agent has been logged out remotely |
