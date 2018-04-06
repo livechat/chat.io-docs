@@ -238,7 +238,7 @@ Objects are standardized data formats that are used in API requests and response
 	"name": "John Smith",
 	"email": "john@gmail.com",
 	"last_visit": {
-		"start_timestamp": 1474659379, // optional, applies only to customer list in get_customers response
+		"started_at": "2017-10-12T15:19:21.010200Z",
 		"referrer": "http://www.google.com/",
 		"ip": "194.181.146.130",
 		"user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36",
@@ -249,12 +249,12 @@ Objects are standardized data formats that are used in API requests and response
 			"city": "Wroclaw",
 			"timezone": "Europe/Warsaw"
 		},
-		"last_pages": [{ // optional, applies only to customer list in get_customers response
-			"timestamp": 1474659379,
+		"last_pages": [{
+			"opened_at": "2017-10-12T15:19:21.010200Z",
 			"url": "https://www.livechatinc.com/",
 			"title": "LiveChat - Homepage"
 		}, {
-			"timestamp": 1474659393,
+			"opened_at": "2017-10-12T15:19:21.010200Z",
 			"url": "https://www.livechatinc.com/tour",
 			"title": "LiveChat - Tour"
 		}]
@@ -262,13 +262,20 @@ Objects are standardized data formats that are used in API requests and response
 	"fields": {
 		"custom field name": "custom field value"
 	},
-	"creation_timestamp_us": "1474659379.019223", // optional, applies only to customer list in get_customers response
+	"statistics": {
+		"chats_count": 3,
+		"threads_count": 9,
+		"visits_count": 5
+	},
+	"agent_last_event_created_at": "2017-10-12T15:19:21.010200Z",
+	"customer_last_event_created_at": "2017-10-12T15:19:21.010200Z",
+	"created_at": "2017-10-11T15:19:21.010200Z",
 	"present": true, // optional, applies only to customer located in chat object
 	"last_seen_timestamp": 1473433500 // optional, applies only to customer located in chat object
 }
 ```
 
-Optional properties: `name`, `email`, `last_visit`, `fields`, `creation_timestamp_us`, `last_seen_timestamp` and `present`
+Optional properties: `name`, `email`, `last_visit`, `fields`, `statistics`, `created_at`, `agent_last_event_created_at`, `customer_last_event_created_at`, `last_seen_timestamp` and `present`
 
 ### Agent
 ```js
@@ -1751,16 +1758,38 @@ It returns customers list.
 | `page_id` | No | |
 | `limit` | No | Default is 10, maximum is 100 |
 | `order` | No | Default is `desc`  |
-| `filters.country.<filter_type>` | No | |
-| `filters.email.<filter_type>` | No |  |
-| `filters.customer_id.<filter_type>` | No |  |
+| `filters.country.<string_filter_type>` | No | |
+| `filters.email.<string_filter_type>` | No |  |
+| `filters.name.<string_filter_type>` | No |  |
+| `filters.customer_id.<string_filter_type>` | No |  |
+| `filters.chats_count.<range_filter_type>` | No |  |
+| `filters.threads_count.<range_filter_type>` | No |  |
+| `filters.visits_count.<range_filter_type>` | No |  |
+| `filters.created_at.<date_range_filter_type>` | No |  |
+| `filters.agent_last_event_created_at.<date_range_filter_type>` | No |  |
+| `filters.customer_last_event_created_at.<date_range_filter_type>` | No |  |
+
 
 * `order` can take the following values:
   * `asc` - oldest customers first
   * `desc` - newest customers first
-* `<filter_type>` can take the following values (only one is allowed for single filter):
+* `<string_filter_type>` can take the following values (only one is allowed for single filter):
   * `values` (`string[]` - array of strings)
   * `exclude_values` (`string[]` - array of strings)
+* `<range_filter_type>` can take the following values:
+  * `lte` (`int` - less than or equal to given value)
+  * `lt` (`int` - less than given value)
+  * `gte` (`int` - greater than or equal to given value)
+  * `gt` (`int` - greater than given value)
+  * `eq` (`int` - equal to given value)
+* `<date_range_filter_type>` can take the following values:
+  * `lte` ( `string` - less than or equal to given value)
+  * `lt` (`string` - less than given value)
+  * `gte` (`string` - greater than or equal to given value)
+  * `gt` (`string` - greater than given value)
+  * `eq` (`string` - equal to given value)
+* dates are represented in ISO 8601 format with microseconds resolution, e.g. `2017-10-12T15:19:21.010200+01:00` in specific timezone or `2017-10-12T14:19:21.010200Z` in UTC.
+  
 
 **Sample request payload**
 ```js
@@ -1768,6 +1797,12 @@ It returns customers list.
 	"filters": {
 		"country": {
 			"values": ["United States", "Poland"]
+		},
+		"visits_count": {
+			"gte": 20
+		},
+		"created_at": {
+			"gte": "2017-10-12T15:19:21.010200+01:00"
 		}
 	},
 	"page_id": "MTUxNzM5ODEzMTQ5Ng=="
@@ -2290,7 +2325,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 {
 	"customer_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
 	"visit_id": 42,
-	"start_timestamp": 1474659379,
+	"started_at": "2017-10-12T15:19:21.010200Z",
 	"ip": "194.181.146.130",
 	"user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36",
 	"geolocation": {
@@ -2316,7 +2351,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 {
 	"customer_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
 	"visit_id": 42,
-	"end_timestamp": 1474669782
+	"ended_at": "2017-10-12T15:19:21.010200Z"
 }
 ```
 
@@ -2331,7 +2366,7 @@ Server => Client methods are used for keeping the application state up-to-date. 
 {
 	"customer_id": "b7eff798-f8df-4364-8059-649c35c9ed0c",
 	"visit_id": 42,
-	"timestamp": 1474659379,
+	"opened_at": "2017-10-12T15:19:21.010200Z",
 	"url": "https://www.livechatinc.com/",
 	"title": "LiveChat - Homepage",
 	"referrer": "http://www.google.com/"
