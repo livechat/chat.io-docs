@@ -2178,6 +2178,9 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `agent_deleted` | Agent account has ben deleted |
 | `logged_out_remotely` | Agent has been logged out remotely |
 | `unsupported_version` | Connecting to unsupported version of Agent API |
+| `ping_timeout` | Not receiving ping for some time from customer |
+| `internal_error` | Internal error |
+| `too_many_connections` | Agent reached max number of connections |
 
 ## Chat properties updated
 
