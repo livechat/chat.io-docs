@@ -37,7 +37,8 @@
   * [Send typing indicator](#send-typing-indicator)
   * [Ban customer](#ban-customer)
   * [Close thread](#close-thread)
-  * [Update chat scopes](#update-chat-scopes)
+  * [Grant access](#grant-access)
+  * [Revoke access](#revoke-access)  
   * [Update agent](#update-agent)
   * [Change push notifications](#change-push-notifications)
   * [Update chat properties](#update-chat-properties)
@@ -59,7 +60,8 @@
   * [Incoming sneak peek](#incoming-sneak-peek)
   * [Customer banned](#customer-banned)
   * [Thread closed](#thread-closed)
-  * [Chat scopes updated](#chat-scopes-updated)
+  * [Access granted](#access-granted)
+  * [Access revoked](#access-revoked)  
   * [Agent updated](#agent-updated)
   * [Agent disconnected](#agent-disconnected)
   * [Chat properties updated](#chat-properties-updated)
@@ -1239,6 +1241,7 @@ No response payload.
 |----------------|----------|-------|
 | `scopes` | Yes | <scopes> |
 | `content` | Yes | JSON message to be sent |
+| `type` | No | Type of multicast message |
 
 * `<scopes>` can take the following values:
   * `agents` (object) can take the following values:
@@ -1267,7 +1270,8 @@ At least one of `scopes` type (`agents.all`, `agents.ids`, `agents.groups`, `cus
 		"example": {
 			"nested": "json"
 		}
-	}
+	},
+	"type": "type1"
 }
 ```
 
@@ -1360,39 +1364,64 @@ Closes the thread. Nobody will be able to send any messages to this thread anymo
 
 No response payload.
 
-## Update chat scopes
+## Grant access
 
 | Action | RTM API | Web API | Push message |
 | --- | :---: | :---: | :---: |
-| `update_chat_scopes` | ✓ | ✓ | [`chat_scopes_updated`](#chat-scopes-updated) |
-
-**Permissions**
-
-* `chats.meta--all:write` - write access for meta data of all license chats
-* `chats.meta--my:write` - write access for meta data of chats I belong to
+| `grant_access` | ✓ | ✓ | [`access_granted`](#access-granted) |
 
 **Request payload**
 
 | Request object | Required | Notes |
 |----------------|----------|-------|
-| `chat_id` | Yes ||
-| `add_scopes` | No | Chat scopes to add |
-| `remove_scopes` | No | Chat scopes to remove |
+| `resource` | Yes |`chat` or `customer`|
+| `id` | Yes | id of resource |
+| `access.type` | Yes | `group` or `agent`|
+| `access.id` | Yes | |
 
 **Sample request payload**
 ```js
 {
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"add_scopes": {
-		"groups": [1, 2]
-	},
-	"remove_scopes": {
-		"groups": [3]
+	"resource": "chat",
+	"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"access": {
+		"type": "group",
+		"id": 1
 	}
 }
 ```
 
 No response payload.
+
+## Revoke access
+
+| Action | RTM API | Web API | Push message |
+| --- | :---: | :---: | :---: |
+| `revoke_access` | ✓ | ✓ | [`access_revoked`](#access-revoked) |
+
+**Request payload**
+
+| Request object | Required | Notes |
+|----------------|----------|-------|
+| `resource` | Yes |`chat` or `customer`|
+| `id` | Yes | id of resource |
+| `access.type` | Yes | `group` or `agent`|
+| `access.id` | Yes | |
+
+**Sample request payload**
+```js
+{
+	"resource": "chat",
+	"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"access": {
+		"type": "group",
+		"id": 1
+	}
+}
+```
+
+No response payload.
+
 
 ## Update agent
 Updates agent properties.
@@ -1991,10 +2020,11 @@ Server => Client methods are used for keeping the application state up-to-date. 
 
 **Push payload**
 
-| Object         | Notes    |
-|----------------|----------|
-| `author_id`       |          |
-| `content`       |          |
+| Object         | Required | Notes    |
+|----------------|----------|----------|
+| `author_id` | No | |
+| `content` | Yes | |
+| `type` | No | |
 
 
 **Sample push payload**
@@ -2005,7 +2035,8 @@ Server => Client methods are used for keeping the application state up-to-date. 
 		"example": {
 			"nested": "json"
 		}
-	}
+	},
+	"type": "type1"
 }
 ```
 
@@ -2101,29 +2132,56 @@ Server => Client methods are used for keeping the application state up-to-date. 
 }
 ```
 
-## Chat scopes updated
+## Access granted
 
 | Action | RTM API | Webhook |
 | --- | :---: | :---: |
-| `chat_scopes_updated` | ✓ | ✓ |
+| `access_granted` | ✓ | ✓ |
 
 **Push payload**
 
 | Object         | Notes    |
 |----------------|----------|
-| `chat_id`       |          |
-| `scopes_added`       |          |
-| `scopes_removed`       |          |
+| `resource` | Resource type         |
+| `id`       | Resource id         |
+| `access`   |          |
 
 **Sample push payload**
 ```js
 {
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"scopes_added": {
-		// "Scopes" object
-	},
-	"scopes_removed": {
-		// "Scopes" object
+	"resource": "chat",
+	"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"access": {
+		"group_ids": [
+			1
+		]
+	}
+}
+```
+
+## Access revoked
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `access_revoked` | ✓ | ✓ |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `resource` | Resource type         |
+| `id`       | Resource id         |
+| `access`   |          |
+
+**Sample push payload**
+```js
+{
+	"resource": "chat",
+	"id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"access": {
+		"group_ids": [
+			1
+		]
 	}
 }
 ```
@@ -2178,6 +2236,9 @@ Server => Client methods are used for keeping the application state up-to-date. 
 | `agent_deleted` | Agent account has ben deleted |
 | `logged_out_remotely` | Agent has been logged out remotely |
 | `unsupported_version` | Connecting to unsupported version of Agent API |
+| `ping_timeout` | Not receiving ping for some time from customer |
+| `internal_error` | Internal error |
+| `too_many_connections` | Agent reached max number of connections |
 
 ## Chat properties updated
 
