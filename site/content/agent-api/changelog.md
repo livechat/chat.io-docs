@@ -1,27 +1,5 @@
 # Changelog
 
-## [v0.6] - 2018-01-30
-
-### Added
-- Attach to last thread flag in `send_event` method
-- New methods: `create_customer`, `get_customers`, `add_user_to_chat`,`remove_user_from_chat`, `grant_access` and `revoke_access`
-- New push messages: `customer_created`, `customer_visit_started`, `customer_visit_ended`, `customer_page_updated`, `chat_user_added`, `chat_user_removed`, `access_granted` and  `access_revoked`
-- optional `type` to `multicast` method and `incoming_multicast` push message
-
-### Changed
-- `update_customer` - requires valid UUID v4 customer id, new request format
-- format of push message `customer_updated` has changed
-- number of chats no longer affects how many push messages `customer_updated` are sent
-- `monitoring` object in `customer` changed to `last_visit` and has new format
-- `author_id` in `incoming_multicast` push message is optional
-
-### Removed
-- Removed `join_chat`, `remove_from_chat`, `update_chat_scopes` method
-- Removed `chat_users_updated`, `chat_scopes_updated` push
-
-### Fixed
-- Sending `incoming_typing_indicator` push
-
 ## [v0.5] - 2018-01-12
 
 ### Added
