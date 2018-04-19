@@ -1,13 +1,5 @@
 # Changelog
 
-## [v0.6] - dev preview
-
-### Added
-- New webhook actions `chat_user_added` and `chat_user_removed`
-
-### Removed
-- webhook action `chat_users_updated`
-
 ## [v0.5]
 
 ### Added
