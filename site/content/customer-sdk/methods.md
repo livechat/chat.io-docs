@@ -52,8 +52,8 @@ get access to the `history` object for certain chat by calling this method. The
 returned `history` object has only one method, `next`, which gives you a promise
 of `{ done, value }` pair.
 
-* `done` - indicates if there is anything more to load
-* `value` - it's an array of loaded events
+- `done` - indicates if there is anything more to load
+- `value` - it's an array of loaded events
 
 You can keep calling `history.next()` multiple times to load more and more
 history events (useful for infinite scroll feature). Keep in mind, though,
@@ -90,15 +90,15 @@ Arguments:
 customerSDK
   .getChatsSummary({
     offset: 0,
-    limit: 10
+    limit: 10,
   })
   .then(({ chatsSummary, totalChats }) => {
-    console.log(chatsSummary);
-    console.log(totalChats);
+    console.log(chatsSummary)
+    console.log(totalChats)
   })
   .catch(error => {
-    console.log(error);
-  });
+    console.log(error)
+  })
 ```
 
 Arguments:
@@ -306,6 +306,33 @@ Arguments:
 | chat      |       | string | Destination chat's id |
 | message   |       |        |                       |
 |           | text  | string | Customer's message    |
+
+### sendPostback
+
+```js
+customerSDK
+  .sendPostback('ON0X0R0L67', 'OS0C0W0Z1B', 'OS0C0W0Z1B01', {
+    id: 'OS0C0W0Z1B01002',
+    toggled: true,
+  })
+  .then(rating => {
+    console.log('success')
+  })
+  .catch(error => {
+    console.log(error)
+  })
+```
+
+Arguments:
+
+| arguments | shape   | type    | description          |
+| --------- | ------- | ------- | -------------------- |
+| chat      |         | string  | Postback chat's id   |
+| thread    |         | string  | Postback thread's id |
+| event     |         | string  | Postback event's id  |
+| postback  |         |         |                      |
+|           | id      | string  | Postback button's id |
+|           | toggled | boolean | Postback toggled     |
 
 ### sendRating - not implemented yet
 
