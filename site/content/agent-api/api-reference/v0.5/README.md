@@ -586,6 +586,8 @@ An annotation does not create a new thread. It just adds an event to the last th
 ## Scopes
 An empty object designates no scope, which means that all agents can see it.
 
+Note: Groups are not implemented yet.
+
  ```js
  {
 	"scopes": {
@@ -1241,7 +1243,7 @@ No response payload.
   * `customers` (object) can take the following values:
 	* `ids` (`[]string` - array of customer's ids)
 
-At least one of `scopes` type (`agents.all`, `agents.ids`, `agents.groups`, `customers.ids`) is required. 
+At least one of `scopes` type (`agents.all`, `agents.ids`, `customers.ids`) is required. 
 
 **Sample request payload**
 ```js
