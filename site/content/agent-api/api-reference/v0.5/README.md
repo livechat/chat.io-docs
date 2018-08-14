@@ -1794,6 +1794,33 @@ Server => Client methods are used for keeping the application state up-to-date. 
 }
 ```
 
+## Chat scopes updated
+
+| Action | RTM API | Webhook |
+| --- | :---: | :---: |
+| `chat_scopes_updated` | ✓ | ✓ |
+
+**Push payload**
+
+| Object         | Notes    |
+|----------------|----------|
+| `chat_id`       |          |
+| `scopes_added`       |          |
+| `scopes_removed`       |          |
+
+**Sample push payload**
+```js
+{
+	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
+	"scopes_added": {
+		// "Scopes" object
+	},
+	"scopes_removed": {
+		// "Scopes" object
+	}
+}
+```
+
 ## Customer updated
 
 | Action | RTM API | Webhook |
