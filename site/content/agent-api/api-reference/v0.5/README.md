@@ -37,15 +37,11 @@
   * [Send typing indicator](#send-typing-indicator)
   * [Ban customer](#ban-customer)
   * [Close thread](#close-thread)
-  * [Update chat scopes](#update-chat-scopes)
   * [Update agent](#update-agent)
   * [Change push notifications](#change-push-notifications)
   * [Update chat properties](#update-chat-properties)
   * [Update chat thread properties](#update-chat-thread-properties)
   * [Update last seen timestamp](#update-last-seen-timestamp)
-  * [Add auto chat scopes](#add-auto-chat-scopes)
-  * [Remove auto chat scopes](#remove-auto-chat-scopes)
-  * [Get auto chat scopes config](#get-auto-chat-scopes-config)
   * [Upload image](#upload-image)
 * [Pushes](#pushes)
   * [Incoming chat thread](#incoming-chat-thread)
@@ -1242,7 +1238,6 @@ No response payload.
   * `agents` (object) can take the following values:
 	* `all` (`bool` - include all agents)
 	* `ids` (`[]string` - array of agent's ids)
-	* `groups` (`[]string` - array of group's ids)
   * `customers` (object) can take the following values:
 	* `ids` (`[]string` - array of customer's ids)
 
@@ -1254,8 +1249,7 @@ At least one of `scopes` type (`agents.all`, `agents.ids`, `agents.groups`, `cus
 	"scopes": {
 		"agents": {
 			"all": true,
-			"ids": ["john@gmail.com", "jane@gmail.com"],
-			"groups": [1, 2]
+			"ids": ["john@gmail.com", "jane@gmail.com"]
 		},
 		"customers": {
 			"ids": ["50ce4683-22a5-48bf-5317-340f40bf6dfe"]
@@ -1353,40 +1347,6 @@ Closes the thread. Nobody will be able to send any messages to this thread anymo
 ```js
 {
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5"
-}
-```
-
-No response payload.
-
-## Update chat scopes
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `update_chat_scopes` | ✓ | ✓ | [`chat_scopes_updated`](#chat-scopes-updated) |
-
-**Permissions**
-
-* `chats.meta--all:write` - write access for meta data of all license chats
-* `chats.meta--my:write` - write access for meta data of chats I belong to
-
-**Request payload**
-
-| Request object | Required | Notes |
-|----------------|----------|-------|
-| `chat_id` | Yes ||
-| `add_scopes` | No | Chat scopes to add |
-| `remove_scopes` | No | Chat scopes to remove |
-
-**Sample request payload**
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"add_scopes": {
-		"groups": [1, 2]
-	},
-	"remove_scopes": {
-		"groups": [3]
-	}
 }
 ```
 
@@ -1552,154 +1512,6 @@ No response payload.
 ```js
 {
 	"timestamp": 123456789
-}
-```
-
-## Add auto chat scopes
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `add_auto_chat_scopes` | ✓ | - | - |
-
-**Permissions**
-
-* `auto_chat_scopes:write` - write access for auto chat scopes configuration
-
-**Request payload**
-
-| Request object | Type | Required | Notes |
-|----------------|------|----------|-------|
-| `scopes` | `object` | Yes | Destination scope |
-| `rules` | `object` | Yes | Rules to check for scope auto |
-| `description` | `string` | No | Auto chat scopes description |
-
-* `scopes` object:
-```js
-{
-	"scopes": {
-		"groups": [1, 2]
-	}
-}
-```
-
-* `rules` possible rules:
-  * `chat_properties.<namespace>.<name>.<filter_type>`
-    * `<filter_type>` can take the following values (only one is allowed for single property):
-      * `exists` (`bool`)
-      * `values` (`type[]` - array with specific type for property: `string`, `int` or `bool`)
-      * `exclude_values` (`type[]` - array with specific type for property: `string`, `int` or `bool`)
-  * `customer_url.<string_filter_type>`
-    * `<string_filter_type>` can take the following values (only one is allowed for single customer_url):
-      * `values` (`match_object[]`)
-      * `exclude_values` (`match_object[]`)
-    * `<match_object>` structure:
-      * `value` - value to match (`string`)
-      * `exact_match` - if exact match, if set to `false` a `match_object.value` will be matched as substring of `customer_url`
-  
-**Sample request payload**
-```js
-{
-	"description": "Chats from Facebook or Twitter",
-	"scopes": {
-		"groups": [1]
-	},
-	"rules": {
-		"chat_properties": {
-			"source": {
-				"type": {
-					"values": ["facebook", "twitter"]
-				}
-			},
-			"facebook": {
-				"page_id": {
-					"values": ["63121487121"]
-				}
-			}
-		},
-		"customer_url": {
-			"values": [{
-				"value": "livechatinc.com",
-				"exact_match": false
-			}]
-		}
-	}
-}
-```
-
-**Sample response payload**
-```js
-{
-	"auto_chat_scopes_id": "pqi8oasdjahuakndw9nsad9na"
-}
-```
-
-## Remove auto chat scopes
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `remove_auto_chat_scopes` | ✓ | - | - |
-
-**Permissions**
-
-* `auto_chat_scopes:write` - write access for auto chat scopes configuration
-
-**Request payload**
-
-| Request object | Type | Required | Notes |
-|----------------|------|----------|-------|
-| `auto_chat_scopes_id` | `string` | Yes | auto chat scopes ID  |
-
-**Sample request payload**
-```js
-{
-	"auto_chat_scopes_id": "pqi8oasdjahuakndw9nsad9na"
-}
-```
-
-No response payload.
-
-## Get auto chat scopes config
-
-| Action | RTM API | Web API | Push message |
-| --- | :---: | :---: | :---: |
-| `get_auto_chat_scopes_config` | ✓ | - | - |
-
-**Permissions**
-
-* `auto_chat_scopes:read` - read access for auto chat scopes configuration
-
-No request payload
-
-**Sample response payload**
-```js
-{
-	"auto_chat_scopes_config": [{
-		"id": "pqi8oasdjahuakndw9nsad9na",
-		"description": "Chats from Facebook or Twitter",
-		"scopes": {
-			"groups": [1]
-		},
-		"rules": {
-			"chat_properties": {
-				"source": {
-					"type": {
-						"values": ["facebook", "twitter"]
-					}
-				},
-				"facebook": {
-					"page_id": {
-						"values": ["63121487121"]
-					}
-				}
-			},
-			"customer_url": {
-				"values": [{
-					"value": "livechatinc.com",
-					"exact_match": false
-				}]
-			}
-		}
-	}]
 }
 ```
 
@@ -1977,33 +1789,6 @@ Server => Client methods are used for keeping the application state up-to-date. 
 	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
 	"thread_id": "b0c22fdd-fb71-40b5-bfc6-a8a0bc3117f6",
 	"user_id": "75a90b82-e6a4-4ded-b3eb-cb531741ee0d" // optional
-}
-```
-
-## Chat scopes updated
-
-| Action | RTM API | Webhook |
-| --- | :---: | :---: |
-| `chat_scopes_updated` | ✓ | ✓ |
-
-**Push payload**
-
-| Object         | Notes    |
-|----------------|----------|
-| `chat_id`       |          |
-| `scopes_added`       |          |
-| `scopes_removed`       |          |
-
-**Sample push payload**
-```js
-{
-	"chat_id": "a0c22fdd-fb71-40b5-bfc6-a8a0bc3117f5",
-	"scopes_added": {
-		// "Scopes" object
-	},
-	"scopes_removed": {
-		// "Scopes" object
-	}
 }
 ```
 
