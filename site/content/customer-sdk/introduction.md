@@ -4,21 +4,20 @@ weight: 10
 
 # Introduction
 
-Chat.io Customer JS SDK is a set of tools to build a custom chat widget. It allows you to manage multiple chats via chat.io as a
+LiveChat Customer JS SDK is a set of tools to build a custom chat widget. It allows you to manage multiple chats via LiveChat as a
 customer using JavaScript.
-
 
 ## Is it for me?
 
-If you need to customize the chat.io widget, using chat.io Customer JS SDK is
+If you need to customize the LiveChat widget, using LiveChat Customer JS SDK is
 one of the options to do this. If you need a fully custom solution and you feel
-brave, dive into chat.io Customer JS SDK: we provide [methods](#methods) and
-[events](#events) for deep integration with the chat.io environment.
+brave, dive into LiveChat Customer JS SDK: we provide [methods](#methods) and
+[events](#events) for deep integration with the LiveChat environment.
 
 Keep in mind, however, that interacting with this API requires **some
 development skills**.
 
-## About chat.io Customer JS SDK
+## About LiveChat Customer JS SDK
 
 We provide an asynchronous API, where most methods interacting with a server
 return **promises**. To get the promise's fulfillment result, subscribe your handler to
@@ -29,7 +28,7 @@ method. You can also subscribe to the emitted events with `on` and `off` methods
 <div class="callout type-info">Not familiar with promises? Read <a href="https://developer.mozilla.org/pl/docs/Web/JavaScript/Reference/Global_Objects/Promise">this article</a> to learn more.</div>
 
 We authenticate your sessions by using
-[chat.io-customer-auth package](https://www.npmjs.com/package/@livechat/chat.io-customer-auth)
+[customer-auth package](https://www.npmjs.com/package/@livechat/customer-auth)
 and expose the created `auth` object on the returned SDK's instance. In general,
 you don't have to worry about it nor use the exposed object, but if you need to
 get the authentication token you can get it through the SDK like this:
@@ -40,6 +39,6 @@ customerSDK.auth.getToken().then(token => console.log(token))
 
 ## Examples
 
-We have prepared a sample chat widget implementation to present the features of chat.io Customer JS SDK:
+We have prepared a sample chat widget implementation to present the features of LiveChat Customer JS SDK:
 
-* [Sample chat.io widget at CodeSandbox](https://codesandbox.io/s/rm3prxw88n)
+- [Sample widget at CodeSandbox](https://codesandbox.io/s/rm3prxw88n)

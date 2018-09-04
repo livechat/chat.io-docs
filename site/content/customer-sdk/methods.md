@@ -52,8 +52,8 @@ get access to the `history` object for certain chat by calling this method. The
 returned `history` object has only one method, `next`, which gives you a promise
 of `{ done, value }` pair.
 
-* `done` - indicates if there is anything more to load
-* `value` - it's an array of loaded events
+- `done` - indicates if there is anything more to load
+- `value` - it's an array of loaded events
 
 You can keep calling `history.next()` multiple times to load more and more
 history events (useful for infinite scroll feature). Keep in mind, though,
@@ -90,15 +90,15 @@ Arguments:
 customerSDK
   .getChatsSummary({
     offset: 0,
-    limit: 10
+    limit: 10,
   })
   .then(({ chatsSummary, totalChats }) => {
-    console.log(chatsSummary);
-    console.log(totalChats);
+    console.log(chatsSummary)
+    console.log(totalChats)
   })
   .catch(error => {
-    console.log(error);
-  });
+    console.log(error)
+  })
 ```
 
 Arguments:
@@ -114,11 +114,13 @@ Returned value:
 | shape        | type     | shape              | type     | description                                        |
 | ------------ | -------- | ------------------ | -------- | -------------------------------------------------- |
 | chatsSummary | object[] |                    |          |                                                    |
-|              |          | id                 | string   | Chat's id                                          |
+|              |          | id                 |          | Chat's id                                          |
+|              |          | active             | boolean  |                                                    |
 |              |          | users              | string[] | Users' ids                                         |
 |              |          | lastEvent          | object   | Event                                              |
 |              |          | lastEventsPerType  | object   | Map from event types to event objects              |
 |              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
+|              |          | lastThread         | string   | Thread's id                                        |
 | totalChats   | number   |                    |          |                                                    |
 
 ### getChatThreads
@@ -194,6 +196,19 @@ Returned value:
 |                |          | totalEvents | number |
 | totalThreads   | number   |             |        |
 
+### getPredictedAgent
+
+```js
+customerSDK
+  .getPredictedAgent()
+  .then(agent => {
+    console.log(agent)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+```
+
 ### off
 
 This method unsubscribes from emitted events which are described [here](#events).
@@ -201,6 +216,41 @@ This method unsubscribes from emitted events which are described [here](#events)
 ### on
 
 This method subscribes to emitted events which are described [here](#events).
+
+### once
+
+This method subscribes to emitted events which are described [here](#events) and unsubscribes immediately after the callback gets called.
+
+### rateChat
+
+```js
+customerSDK
+  .rateChat('ON0X0R0L67', {
+    value: 'good',
+    comment: 'Agent helped me a lot!',
+  })
+  .then(rating => {
+    console.log(rating)
+  })
+  .catch(error => {
+    console.log(error)
+  })
+```
+
+Arguments:
+
+| arguments | shape   | type   | description           |
+| --------- | ------- | ------ | --------------------- |
+| chat      |         |        | Destination chat's id |
+| rating    |         |        |                       |
+|           | score   | 0 or 1 | Rating value          |
+|           | comment | string | Optional comment      |
+
+Returned value:
+
+| shape | type   |                    |
+| ----- | ------ | ------------------ |
+| id    | string | Created event's id |
 
 ### sendEvent
 
@@ -222,12 +272,14 @@ customerSDK
 
 Arguments:
 
-| arguments | shape | type   | description           |
-| --------- | ----- | ------ | --------------------- |
-| chat      |       | string | Destination chat's id |
-| event     |       |        |                       |
-|           | type  | string | Type of the event     |
-|           | ...   |        | Other properties      |
+| arguments | shape              | type    | description           |
+| --------- | ------------------ | ------- | --------------------- |
+| chat      |                    | string  | Destination chat's id |
+| event     |                    |         |                       |
+|           | type               | string  | Type of the event     |
+|           | ...                |         | Other properties      |
+| meta      |                    |         |                       | optional |
+|           | attachToLastThread | boolean | optional              |
 
 ### sendFile
 
@@ -284,39 +336,16 @@ const file = {
 }
 ```
 
-### sendMessage
-
-```js
-const message = { text: 'Hello' }
-
-customerSDK
-  .sendMessage('ON0X0R0L67', message)
-  .then(message => {
-    console.log(message)
-  })
-  .catch(error => {
-    console.log(error)
-  })
-```
-
-Arguments:
-
-| arguments | shape | type   | description           |
-| --------- | ----- | ------ | --------------------- |
-| chat      |       | string | Destination chat's id |
-| message   |       |        |                       |
-|           | text  | string | Customer's message    |
-
-### sendRating - not implemented yet
+### sendPostback
 
 ```js
 customerSDK
-  .sendRating('ON0X0R0L67', {
-    value: 'good',
-    comment: 'Agent helped me a lot!',
+  .sendPostback('ON0X0R0L67', 'OS0C0W0Z1B', 'OS0C0W0Z1B01', {
+    id: 'OS0C0W0Z1B01002',
+    toggled: true,
   })
   .then(rating => {
-    console.log(rating)
+    console.log('success')
   })
   .catch(error => {
     console.log(error)
@@ -325,12 +354,14 @@ customerSDK
 
 Arguments:
 
-| arguments | shape   | type           | description           |
-| --------- | ------- | -------------- | --------------------- |
-| chat      |         |                | Destination chat's id |
-| rating    |         |                |                       |
-|           | value   | 'good' / 'bad' | Rating value          |
-|           | comment | string         | Optional comment      |
+| arguments | shape   | type    | description                     |
+| --------- | ------- | ------- | ------------------------------- |
+| chat      |         | string  | Postback chat's id              |
+| thread    |         | string  | Postback thread's id            |
+| event     |         | string  | Postback event's id             |
+| postback  |         |         |                                 |
+|           | id      | string  | Postback button's id            |
+|           | toggled | boolean | Postback toggled (default true) |
 
 ### setSneakPeek
 
@@ -434,14 +465,7 @@ const properties = {
     any_key_is_ok: 'sample custom field',
   },
 }
-customerSDK
-  .updateCustomer(properties)
-  .then(response => {
-    console.log(response)
-  })
-  .catch(error => {
-    console.log(error)
-  })
+customerSDK.updateCustomer(properties)
 ```
 
 Arguments:
@@ -453,11 +477,22 @@ Arguments:
 |            | email  | string | Optional email                           |
 |            | fields | object | Optionl custom fields with string values |
 
-Returned value:
+### updateCustomerPage
 
-| shape   | type    |
-| ------- | ------- |
-| success | boolean |
+```js
+customerSDK.updateCustomerPage({
+  url: 'https://developers.livechatinc.com/',
+  title: 'LiveChat for Developers',
+})
+```
+
+Arguments:
+
+| arguments | shape | type   | description |
+| --------- | ----- | ------ | ----------- |
+| page      |       |        |             |
+|           | url   | string |             |
+|           | title | string |             |
 
 ### updateLastSeenTimestamp
 
