@@ -1,5 +1,5 @@
 ---
-title: "Events"
+title: 'Events'
 weight: 50
 ---
 
@@ -25,10 +25,12 @@ Payload:
 | ------------ | -------- | ------------------ | -------- | -------------------------------------------------- |
 | chatsSummary | object[] |                    |          |                                                    |
 |              |          | id                 |          | Chat's id                                          |
+|              |          | active             | boolean  |                                                    |
 |              |          | users              | string[] | Users' ids                                         |
 |              |          | lastEvent          | object   | Event                                              |
 |              |          | lastEventsPerType  | object   | Map from event types to event objects              |
 |              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
+|              |          | lastThread         | string   | Thread's id                                        |
 | totalChats   | number   |                    |          |                                                    |
 
 ### connection_lost
@@ -57,10 +59,12 @@ Payload:
 | ------------ | -------- | ------------------ | -------- | -------------------------------------------------- |
 | chatsSummary | object[] |                    |          |                                                    |
 |              |          | id                 |          | Chat's id                                          |
+|              |          | active             | boolean  |                                                    |
 |              |          | users              | string[] | Users' ids                                         |
 |              |          | lastEvent          | object   | Event                                              |
 |              |          | lastEventsPerType  | object   | Map from event types to event objects              |
 |              |          | lastSeenTimestamps | object   | Map from Users' ids to optional lastSeenTimestamps |
+|              |          | lastThread         | string   | Thread's id                                        |
 | totalChats   | number   |                    |          |                                                    |
 
 ### customer_id
