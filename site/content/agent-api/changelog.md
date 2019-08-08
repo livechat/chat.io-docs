@@ -1,5 +1,42 @@
 # Changelog
 
+## [v3.1] - dev preview
+
+### Changed
+- Web-API: allow sending payload explicit in request body instead of wrapping it in `payload` object
+- Web-API: when using bots in requests a new header `X-Author-Id` must be included instead of sending `author_id` in request body
+- methods changing access result now in success when nothing changes after processing request
+
+## [v3.0] - 2018-04-19
+
+### Added
+- Optional `timezone` to `login` request method
+- Attach to last thread flag in `send_event` method
+- New methods: `create_customer`, `get_customers`, `add_user_to_chat`,`remove_user_from_chat`, `grant_access`, `revoke_access`, `transfer_chat`, `set_access`, `logout` and `send_file`
+- New push messages: `customer_created`, `customer_visit_started`, `customer_visit_ended`, `customer_page_updated`, `chat_user_added`, `chat_user_removed`, `access_granted`, `access_revoked`, `chat_transfered` and `event_properties_updated`
+- optional `type` to `multicast` method and `incoming_multicast` push message
+- New field `__priv_lc2_customer_id` to `customer` object
+- New fields `thumbnail_url` and `thumbnail2x_url` in `file` event for images
+- Support for `users` in `start_chat` request method
+- Optional `website_last_activity` to `login` response method
+- Fields `type` and `value` to `rich_message` button
+- `text_vars` values added to `system_message` event
+
+### Changed
+- `update_customer` - requires valid UUID v4 customer id, new request format
+- format of push message `customer_updated` has changed
+- number of chats no longer affects how many push messages `customer_updated` are sent
+- `monitoring` object in `customer` changed to `last_visit` and has new format
+- `author_id` in `incoming_multicast` push message is optional
+- format of `filled_form` event object
+
+### Removed
+- Removed `join_chat`, `remove_from_chat`, `update_chat_scopes` method
+- Removed `chat_users_updated`, `chat_scopes_updated` push
+
+### Fixed
+- Sending `incoming_typing_indicator` push
+
 ## [v0.5] - 2018-01-12
 
 ### Added
