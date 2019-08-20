@@ -1,5 +1,37 @@
 # Changelog
 
+## [v3.1] - dev preview
+
+### Changed
+- Web-API: allow sending payload explicit in request body instead of wrapping it in `payload` object
+
+## [v3.0] - 2018-04-19
+
+### Added
+- New fields `has_active_thread` to `login` response
+- Attach to last thread flag in `send_event` method
+- New push messages: `customer_page_updated`, `chat_user_added`, `chat_user_removed` and `event_properties_updated`
+- New methods: `update_customer_page`, `get_groups_status`, `get_predicted_agent`, `get_url_details` and `update_event_properties`
+- New fields `thumbnail_url` and `thumbnail2x_url` to `file` event for images
+- New field `customer_side_storage` to `login` method and new push `customer_side_storage_updated`
+- Added `__priv_lc2_customer_id` field to customer object
+- New private object `__priv_dynamic_config` to `login` response
+- Added `job_title` to `User > Agent` object
+- `text_vars` values added to `system_message` event
+- Fields `type` and `value` to `rich_message` button
+
+### Changed
+- format of push message `customer_updated` and method `update_customer`
+- number of chats no longer affects how many push messages `customer_updated` are sent
+- format of login request message
+- format of `filled_form` event object
+- `scopes` (part of `chat` and `thread` object) changed to `access`
+
+### Removed
+- `chat_users_updated`, `chat_scopes_updated` push
+-  `update_chat_scopes` method
+- `static_config_path` from `login` response
+
 ## [v0.5] - 2018-01-12
 
 ### Added
