@@ -12,7 +12,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-preset-react": "^6.24.1",
-    "browser-sync": "^2.18.12",
+    "browser-sync": "^2.27.10",
     "browser-sync-webpack-plugin": "^1.2.0",
     "concurrently": "^3.5.0",
     "download-git-repo": "^1.0.1",
